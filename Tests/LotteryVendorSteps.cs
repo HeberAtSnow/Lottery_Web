@@ -20,8 +20,8 @@ namespace Tests
             context = scenarioContext;
         }
 
-        [Given(@"a new period with (.*) tickets sold")]
-        public void GivenANewPeriodWithTicketsSold(int qty)
+        [Given(@"a new period")]
+        public void GivenANewPeriodWithTicketsSold()
         {
             var program = new LotteryProgram();
             context.Add("period", program.p);
@@ -49,12 +49,7 @@ namespace Tests
             vendor.SellTicket("bob");
         }
 
-        //[Then(@"the period should have (.*) ticket on the stack")]
-        //public void ThenThePeriodShouldHaveTicketOnTheStack(int qty)
-        //{
-        //    var p = context.Get<LotteryPeriod>("period");
-        //    p.soldTickets.Count.Should().Be(qty);
-        //}
+
 
 
     }

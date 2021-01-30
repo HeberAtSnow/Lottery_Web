@@ -1,5 +1,6 @@
 ﻿Feature: Period
-	Simple calculator for adding two numbers
+	Prove 1) winning ticket can be chosen
+	Prove 2) tickets can be graded correctly (isGraded=true, winLevel=0-9, winAmtDollars=0-GrandPrize)
 
 @mytag
 Scenario Outline: Winning ticket counts verified
