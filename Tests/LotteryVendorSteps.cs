@@ -20,13 +20,7 @@ namespace Tests
             context = scenarioContext;
         }
 
-        [Given(@"a new period")]
-        public void GivenANewPeriodWithTicketsSold()
-        {
-            var program = new LotteryProgram();
-            context.Add("period", program.p);
-            context.Add("vendor", program.lv);
-        }
+
 
         [When(@"vendor sells (.*) quickPick tickets")]
         public void WhenVendorSellsNQuickPickTickets(int qty)

@@ -11,7 +11,10 @@ namespace ClassLib
         int[] winTicket = { 1, 2, 3, 4, 5, 6 }; //Winning Ticket Values
         public Stack<LotteryTicket> soldTickets = new Stack<LotteryTicket>();
         public Stack<LotteryTicket> winningTickets = new Stack<LotteryTicket>();
-        public Stack<LotteryTicket> loosingTickets = new Stack<LotteryTicket>();
+        public Stack<LotteryTicket> losingTickets = new Stack<LotteryTicket>();
+        public List<LotteryTicket> winningTicketsL = new List<LotteryTicket>();
+        public List<LotteryTicket> losingTicketsL = new List<LotteryTicket>();
+
         public int numGrandPrizeWinners = 0;
         public object flagGrandPrizeWinners = new object();
         public object flagWin1 = new object();
@@ -51,9 +54,15 @@ namespace ClassLib
                     lt = soldTickets.Pop();
                     CheckWinningTicket(lt);
                     if (lt.winLevel > 0)
+                    {
                         winningTickets.Push(lt);
+                        winningTicketsL.Add(lt);
+                    }
                     else
-                        loosingTickets.Push(lt);
+                    {
+                        losingTickets.Push(lt);
+                        losingTicketsL.Add(lt);
+                    }
                     //each ticket is moved from soldTickets to ( winningTickets or loosingTickets )
                 }
                 catch (System.InvalidOperationException) { break; }//leave the while 

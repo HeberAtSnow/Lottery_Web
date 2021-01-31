@@ -35,7 +35,8 @@ namespace Tests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Period", "\tSimple calculator for adding two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Period", "\tProve 1) winning ticket can be chosen\r\n\tProve 2) tickets can be graded correctly" +
+                    " (isGraded=true, winLevel=0-9, winAmtDollars=0-GrandPrize)", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -101,7 +102,7 @@ namespace Tests
             argumentsOfScenario.Add("winAmtDollars", winAmtDollars);
             argumentsOfScenario.Add("reason", reason);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Winning ticket counts verified", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 5
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -121,16 +122,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
+#line 7
  testRunner.Given("a new period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 7
+#line 8
  testRunner.And(string.Format("a ticket was sold with the numbers {0}", numbers), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 8
+#line 9
  testRunner.When("the winning ticket is 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 9
+#line 10
  testRunner.Then(string.Format("the sold ticket wins at level {0} and prize amt is {1}", winLevel, winAmtDollars), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

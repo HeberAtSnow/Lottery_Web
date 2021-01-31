@@ -1,6 +1,7 @@
 ﻿using ClassLib;
 using FluentAssertions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -16,6 +17,15 @@ namespace Tests
             this.context = context;
         }
 
+
+        [Given(@"the winning ticket is (.*)")]
+        public void GivenTheWinningTicketIsX(string numbers)
+        {
+            var nums = numbers.Split(',').Select(n => int.Parse(n)).ToArray();
+            var t = new LotteryTicket("WinningTicket", nums);
+            var period = context.Get<LotteryPeriod>("period");
+            period.WinningTicket = t;
+        }
 
         [Given(@"a ticket was sold to (.*) with the numbers (.*)")]
         public void GivenATicketWasSoldToPlayerNameWithTheNumbersNumbers(string playerName, string numbers )
@@ -44,26 +54,25 @@ namespace Tests
         public void ThenTheCountOfLosingTicketsShouldBe(int p0)
         {
             var p = context.Get<LotteryPeriod>("period");
-            p.loosingTickets.Count().Should().Be(p0);
+            p.losingTickets.Count().Should().Be(p0);
         }
         
         [Then(@"(.*) should have (.*) winning tickets")]
-        public void ThenPlayerNameShouldHaveNWinningTickets(string playerName, int qty)
+        public void ThenPlayerNameShouldHaveNWinningTickets(string inPlayerName, int qty)
         {
             var p = context.Get<LotteryPeriod>("period");
-            //Well, here's a problem
-            //I have a stack (p.winningTickets) that I need to query (preferrably with Linq)
-            //problem is, a stack data structure can only be read from without peek/pop
-            //this means I will not be able to traverse it without destroying it.
-            ///grrrr.
-            ///Option 1:  Goto the period.ComputeWinners() and change the winningTicket and loosingTicket to lists
-            ///Option 2:  Keep crying
+            var filtered = p.winningTicketsL.Where(t => t.Player == inPlayerName);
+            filtered.Count().Should().Be(qty);
+
         }
 
         [Then(@"(.*) should have (.*) losing tickets")]
-        public void ThenPlayerNameShouldHaveNLosingTickets(string playerName, int qty)
+        public void ThenPlayerNameShouldHaveNLosingTickets(string inPlayerName, int qty)
         {
             var p = context.Get<LotteryPeriod>("period");
+            var filtered = p.losingTicketsL.Where(t=> t.Player == inPlayerName );
+            filtered.Count().Should().Be(qty);
+
         }
     }
 }

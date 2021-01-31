@@ -7,23 +7,23 @@
 @mytag
 Scenario: Can tally a grand prize winning ticket
 	Given a new period
-	And a ticket was sold to playerName with the numbers {numbers}
-	And a ticket was sold to playerName with the numbers {numbers}
-	And a ticket was sold to playerName with the numbers {numbers}
+	And a ticket was sold to Bob with the numbers 1,2,3,4,5,6
+	And a ticket was sold to Sally with the numbers 1,2,3,4,5,6
+	And a ticket was sold to Sue with the numbers 8,9,10,11,12,13
 	And the winning ticket is 1,2,3,4,5,6
 	When statistics are computed
-	Then the count of winning tickets should be WTcount
-	And the count of losing tickets should be LTcount
+	Then the count of winning tickets should be 2
+	And the count of losing tickets should be 1
 
 Scenario: Getting player stats by playerName
 	Given a new period
-	And a ticket was sold to playerName with the numbers {numbers}
-	And a ticket was sold to playerName with the numbers {numbers}
-	And a ticket was sold to playerName with the numbers {numbers}
-	And a ticket was sold to playerName with the numbers {numbers}
+	And a ticket was sold to Bob with the numbers 1,2,3,4,5,6
+	And a ticket was sold to Bob with the numbers 7,8,9,10,11,12
+	And a ticket was sold to Sue with the numbers 13,14,15,16,17,18
+	And a ticket was sold to Sally with the numbers 19,20,21,22,23,24
 	And the winning ticket is 1,2,3,4,5,6
 	When statistics are computed
-	Then playerName should have N winning tickets
-	And playerName should have N losing tickets
-	And playerName should have N losing tickets
-	And playerName should have N winning tickets
+	Then Bob should have 1 winning tickets
+	And Sue should have 1 losing tickets
+	And Sally should have 1 losing tickets
+	And Bob should have 1 losing tickets

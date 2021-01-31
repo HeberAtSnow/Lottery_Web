@@ -20,22 +20,24 @@ namespace Tests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.6.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("LotteryVendor")]
-    public partial class LotteryVendorFeature
+    [NUnit.Framework.DescriptionAttribute("LotteryComputeStats")]
+    public partial class LotteryComputeStatsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "LotteryVendor.feature"
+#line 1 "LotteryComputeStats.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "LotteryVendor", "\tProve 1) manual tickets can be sold\r\n\tProve 2) quickPick tickets can be sold", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "LotteryComputeStats", "    Prove 1) ability to \'tally\' the winning tickets\r\n\tProve 2) ability to \'tally\'" +
+                    " the loosing tickets\r\n\tProve 3) ability to extract winning tickets for a given p" +
+                    "layer\r\n\tProve 4) ability to extract loosing tickets for a given player", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,15 +76,15 @@ namespace Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Vendor sells 10 quickTickets")]
+        [NUnit.Framework.DescriptionAttribute("Can tally a grand prize winning ticket")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void VendorSells10QuickTickets()
+        public virtual void CanTallyAGrandPrizeWinningTicket()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Vendor sells 10 quickTickets", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Can tally a grand prize winning ticket", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -102,27 +104,42 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
+#line 9
  testRunner.Given("a new period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 8
- testRunner.When("vendor sells 10 quickPick tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 10
+ testRunner.And("a ticket was sold to Bob with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 9
- testRunner.Then("the period should have another 10 tickets added to stack", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 11
+ testRunner.And("a ticket was sold to Sally with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 12
+ testRunner.And("a ticket was sold to Sue with the numbers 8,9,10,11,12,13", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 13
+ testRunner.And("the winning ticket is 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 14
+ testRunner.When("statistics are computed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 15
+ testRunner.Then("the count of winning tickets should be 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 16
+ testRunner.And("the count of losing tickets should be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Vendor sells 1 manual ticket")]
-        public virtual void VendorSells1ManualTicket()
+        [NUnit.Framework.DescriptionAttribute("Getting player stats by playerName")]
+        public virtual void GettingPlayerStatsByPlayerName()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Vendor sells 1 manual ticket", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 11
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Getting player stats by playerName", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -142,14 +159,38 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 12
+#line 19
  testRunner.Given("a new period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 13
- testRunner.When("vendor sells 1 custom ticket", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+ testRunner.And("a ticket was sold to Bob with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 14
- testRunner.Then("the period should have another 1 tickets added to stack", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 21
+ testRunner.And("a ticket was sold to Bob with the numbers 7,8,9,10,11,12", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 22
+ testRunner.And("a ticket was sold to Sue with the numbers 13,14,15,16,17,18", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 23
+ testRunner.And("a ticket was sold to Sally with the numbers 19,20,21,22,23,24", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 24
+ testRunner.And("the winning ticket is 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 25
+ testRunner.When("statistics are computed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 26
+ testRunner.Then("Bob should have 1 winning tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 27
+ testRunner.And("Sue should have 1 losing tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 28
+ testRunner.And("Sally should have 1 losing tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 29
+ testRunner.And("Bob should have 1 losing tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
