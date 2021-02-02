@@ -47,14 +47,14 @@ namespace Tests
         public void ThenTheCountOfWinningTicketsShouldBe(int p0)
         {
             var p = context.Get<LotteryPeriod>("period");
-            p.winningTickets.Count().Should().Be(p0);
+            p.winningTicketsL.Count().Should().Be(p0);
         }
 
         [Then(@"the count of losing tickets should be (.*)")]
         public void ThenTheCountOfLosingTicketsShouldBe(int p0)
         {
             var p = context.Get<LotteryPeriod>("period");
-            p.losingTickets.Count().Should().Be(p0);
+            p.losingTicketsL.Count().Should().Be(p0);
         }
         
         [Then(@"(.*) should have (.*) winning tickets")]
@@ -74,5 +74,36 @@ namespace Tests
             filtered.Count().Should().Be(qty);
 
         }
+
+
+
+        [Then(@"the results for (.*) should be")]
+        public void ThenTheResultsForBobShouldBe(string inPlayerName, Table table)
+        {
+            //WORK NEEDED
+            //TODO:  I don't like the constructor making a dirty ticket record.
+            //       won't have grading, etc
+            var p = context.Get<LotteryPeriod>("period");
+            var actualTickets = p.ResultsByPlayer(inPlayerName);
+
+            var expectedTickets = new List<LotteryTicket>();
+            foreach ( var row in table.Rows)
+            {
+                var ticket = new LotteryTicket();
+                ticket.balls[0] = int.Parse(row["b0"]);
+                ticket.balls[1] = int.Parse(row["b1"]);
+                ticket.balls[2] = int.Parse(row["b2"]);
+                ticket.balls[3] = int.Parse(row["b3"]);
+                ticket.balls[4] = int.Parse(row["b4"]);
+                ticket.powerBall = int.Parse(row["pb"]);
+                ticket.isGraded = true;
+                ticket.Player = inPlayerName;
+                ticket.winLevel = int.Parse(row["winLevel"]);
+                ticket.winAmtDollars = int.Parse(row["winAmt"]);
+                expectedTickets.Add(ticket);
+            }
+            actualTickets.Should().BeEquivalentTo(expectedTickets);
+        }
+
     }
 }

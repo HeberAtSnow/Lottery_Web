@@ -75,17 +75,27 @@ namespace Tests
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 7
+  #line hidden
+#line 8
+    testRunner.Given("a new period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 9
+ testRunner.And("the winning ticket is 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Can tally a grand prize winning ticket")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
         public virtual void CanTallyAGrandPrizeWinningTicket()
         {
-            string[] tagsOfScenario = new string[] {
-                    "mytag"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Can tally a grand prize winning ticket", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 8
-this.ScenarioInitialize(scenarioInfo);
+#line 11
+  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -104,29 +114,87 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 9
- testRunner.Given("a new period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 10
- testRunner.And("a ticket was sold to Bob with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 11
- testRunner.And("a ticket was sold to Sally with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 7
+  this.FeatureBackground();
 #line hidden
 #line 12
- testRunner.And("a ticket was sold to Sue with the numbers 8,9,10,11,12,13", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a ticket was sold to Bob with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 13
- testRunner.And("the winning ticket is 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a ticket was sold to Sally with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.When("statistics are computed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("a ticket was sold to Sue with the numbers 8,9,10,11,12,13", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
- testRunner.Then("the count of winning tickets should be 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("statistics are computed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
+ testRunner.Then("the count of winning tickets should be 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 17
  testRunner.And("the count of losing tickets should be 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Balls purchased out of order are still stored in order")]
+        public virtual void BallsPurchasedOutOfOrderAreStillStoredInOrder()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Balls purchased out of order are still stored in order", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 19
+  this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+  this.FeatureBackground();
+#line hidden
+#line 20
+    testRunner.Given("a ticket was sold to Bob with the numbers 5,2,4,1,3,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 21
+ testRunner.When("statistics are computed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "b0",
+                            "b1",
+                            "b2",
+                            "b3",
+                            "b4",
+                            "pb",
+                            "winLevel",
+                            "winAmt"});
+                table1.AddRow(new string[] {
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "1",
+                            "40000000"});
+#line 22
+ testRunner.Then("the results for Bob should be", ((string)(null)), table1, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -139,8 +207,8 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Getting player stats by playerName", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 18
-this.ScenarioInitialize(scenarioInfo);
+#line 27
+  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -159,38 +227,86 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 19
- testRunner.Given("a new period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 20
- testRunner.And("a ticket was sold to Bob with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 21
- testRunner.And("a ticket was sold to Bob with the numbers 7,8,9,10,11,12", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 22
- testRunner.And("a ticket was sold to Sue with the numbers 13,14,15,16,17,18", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 23
- testRunner.And("a ticket was sold to Sally with the numbers 19,20,21,22,23,24", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 24
- testRunner.And("the winning ticket is 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 25
- testRunner.When("statistics are computed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 26
- testRunner.Then("Bob should have 1 winning tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 27
- testRunner.And("Sue should have 1 losing tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 7
+  this.FeatureBackground();
 #line hidden
 #line 28
- testRunner.And("Sally should have 1 losing tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a ticket was sold to Bob with the numbers 1,2,3,4,5,6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 29
+ testRunner.And("a ticket was sold to Bob with the numbers 7,8,9,10,11,12", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 30
+ testRunner.And("a ticket was sold to Sally with the numbers 1,2,3,4,5,26", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 31
+ testRunner.And("a ticket was sold to Sue with the numbers 19,20,21,22,23,24", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 32
+ testRunner.When("statistics are computed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 33
+ testRunner.Then("Bob should have 1 winning tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 34
+ testRunner.And("Sue should have 1 losing tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 35
+ testRunner.And("Sally should have 1 winning tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 36
  testRunner.And("Bob should have 1 losing tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "b0",
+                            "b1",
+                            "b2",
+                            "b3",
+                            "b4",
+                            "pb",
+                            "winLevel",
+                            "winAmt"});
+                table2.AddRow(new string[] {
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "1",
+                            "40000000"});
+                table2.AddRow(new string[] {
+                            "7",
+                            "8",
+                            "9",
+                            "10",
+                            "11",
+                            "12",
+                            "0",
+                            "0"});
+#line 37
+ testRunner.And("the results for Bob should be", ((string)(null)), table2, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "b0",
+                            "b1",
+                            "b2",
+                            "b3",
+                            "b4",
+                            "pb",
+                            "winLevel",
+                            "winAmt"});
+                table3.AddRow(new string[] {
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "26",
+                            "2",
+                            "1000000"});
+#line 41
+ testRunner.And("the results for Sally should be", ((string)(null)), table3, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

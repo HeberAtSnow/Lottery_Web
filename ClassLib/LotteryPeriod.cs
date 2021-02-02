@@ -15,21 +15,6 @@ namespace ClassLib
         public List<LotteryTicket> winningTicketsL = new List<LotteryTicket>();
         public List<LotteryTicket> losingTicketsL = new List<LotteryTicket>();
 
-        public int numGrandPrizeWinners = 0;
-        public object flagGrandPrizeWinners = new object();
-        public object flagWin1 = new object();
-        public object flagWin2 = new object();
-        public object flagWin3 = new object();
-        public object flagWin4 = new object();
-        public object flagWin5 = new object();
-        public object flagWin6 = new object();
-        public object flagWin7 = new object();
-        public object flagWin8 = new object();
-
-        //TODO:  remove the following stats - put in LotteryStatistics
-        public int numAlt1Winners = 0; public int numAlt2Winners = 0; public int numAlt3Winners = 0;
-        public int numAlt4Winners = 0; public int numAlt5Winners = 0; public int numAlt6Winners = 0;
-        public int numAlt7Winners = 0; public int numAlt8Winners = 0;
 
         public decimal GrandPrizeAmount { get; set; }
 
@@ -43,6 +28,37 @@ namespace ClassLib
             WinningTicket = new LotteryTicket("WinningTicket");
         }
 
+        public IEnumerable<LotteryTicket> ResultsByPlayer(string playerName)
+        {
+            var winners =
+                from w in winningTicketsL
+                where w.Player == playerName
+                orderby w.winLevel ascending
+                orderby w.balls.OrderBy(b => b)
+                select w;
+            var losers =
+                from l in losingTicketsL
+                where l.Player == playerName
+                orderby l.winLevel ascending
+                orderby l.balls.OrderBy(b => b)
+                select l;
+            return winners.Union(losers);
+            
+        }
+        public IEnumerable<LotteryTicket> ResultsBuyWinLevel()
+        {
+            var winners =
+                from w in winningTicketsL
+                orderby w.winLevel ascending
+                orderby w.balls.OrderBy(b => b)
+                select w;
+            var losers =
+                from l in losingTicketsL
+                orderby l.winLevel ascending
+                orderby l.balls.OrderBy(b => b)
+                select l;
+            return winners.Union(losers);
+        }
         public void ComputeWinners()
         {
             //TODO: ensure the state is set to ONLY let this work if drawing has started/ended
@@ -55,12 +71,10 @@ namespace ClassLib
                     CheckWinningTicket(lt);
                     if (lt.winLevel > 0)
                     {
-                        winningTickets.Push(lt);
                         winningTicketsL.Add(lt);
                     }
                     else
                     {
-                        losingTickets.Push(lt);
                         losingTicketsL.Add(lt);
                     }
                     //each ticket is moved from soldTickets to ( winningTickets or loosingTickets )

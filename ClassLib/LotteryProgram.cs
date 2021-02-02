@@ -45,7 +45,7 @@ namespace ClassLib
             lv = new LotteryVendor(p); //starting with one Vendor 
 
         }
-        public bool resetPeriod()
+        public bool ResetPeriod()
         {
             p = new LotteryPeriod();
             return true;
