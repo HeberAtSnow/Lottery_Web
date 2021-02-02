@@ -1,20 +1,44 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace ClassLib
 {
+    public enum TicketSales
+    {
+        OK, 
+        CLOSED
+    }
     public class LotteryPeriod
     {
         int[] winTicket = { 1, 2, 3, 4, 5, 6 }; //Winning Ticket Values
-        public Stack<LotteryTicket> soldTickets = new Stack<LotteryTicket>();
-        public Stack<LotteryTicket> winningTickets = new Stack<LotteryTicket>();
-        public Stack<LotteryTicket> losingTickets = new Stack<LotteryTicket>();
+        public ConcurrentStack<LotteryTicket> soldTickets = new ConcurrentStack<LotteryTicket>();
         public List<LotteryTicket> winningTicketsL = new List<LotteryTicket>();
         public List<LotteryTicket> losingTicketsL = new List<LotteryTicket>();
+        private int _salesState;  //change to int
+        public ReaderWriterLockSlim soldTicketsLock = new ReaderWriterLockSlim();
 
+        public TicketSales SalesState
+        {
+            get { return (TicketSales)_salesState; }
+            set 
+            {
+                soldTicketsLock.EnterWriteLock();
+                try
+                {
+                System.Threading.Interlocked.Exchange(ref _salesState, (int)value); 
+                }
+                finally
+                {
+                    soldTicketsLock.ExitWriteLock();
+                }
+            }
+        }
 
         public decimal GrandPrizeAmount { get; set; }
 
@@ -67,15 +91,17 @@ namespace ClassLib
             {
                 try
                 {
-                    lt = soldTickets.Pop();
-                    CheckWinningTicket(lt);
-                    if (lt.winLevel > 0)
+                    if (soldTickets.TryPop(out lt))
                     {
-                        winningTicketsL.Add(lt);
-                    }
-                    else
-                    {
-                        losingTicketsL.Add(lt);
+                        CheckWinningTicket(lt);
+                        if (lt.winLevel > 0)
+                        {
+                            winningTicketsL.Add(lt);
+                        }
+                        else
+                        {
+                            losingTicketsL.Add(lt);
+                        }
                     }
                     //each ticket is moved from soldTickets to ( winningTickets or loosingTickets )
                 }

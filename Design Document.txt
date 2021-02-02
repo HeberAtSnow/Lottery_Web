@@ -1,0 +1,37 @@
+This program is a Web-App that simulates PowerBall Lottery sales
+
+The solution will require students to demonstrate:
+- SpecFlow for test cases
+- Thread-Safe concurrency for multi-threaded responses
+- Linq for sorting/aggregating
+- SeriLog for application logging
+
+Class purposes:
+- LotteryProgram
+	Main container for holding
+		LotteryPeriod p
+		LotteryVendor v
+		ResetPeriod() -> method for re-initializing a Period
+		tLotteryVendor() -> Thread start for vendor mass-purchasing tickets
+		tStatsCompilers() -> Thread start for calculating winning
+- LotteryPeriod
+		DrawWinningTicket()
+		ResultsByPlayer(s)
+		ResultsByWinLevel()
+		ComputeWinners()
+		NumberMatchingWhiteBalls(l)
+		CheckWinningTicket(l);
+- LotteryVendor
+		SellTicket(s,balls)
+		SellTicket(s)
+		SellQuickTicket(s,num)
+		purchaseTickets(p,int)  --ThreadSafe way of purchasing mass tickets
+- LotteryTicket
+		
+
+		flag for threads to sell tickets ->   if that is OK
+			then ticket sales are OK  (push ahoy!)
+			else  -  if thread doing mass sales - he dies 
+			      - if http request - returns 408...  in wrong state
+
+		ResetPeriod (...after stats.  set flat to sellisOK)	 

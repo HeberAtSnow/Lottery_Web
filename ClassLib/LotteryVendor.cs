@@ -18,15 +18,34 @@ namespace ClassLib
         public LotteryTicket SellTicket(string playerName, int [] sixnums)
         {
             var lt = new LotteryTicket(playerName, sixnums);
-            p.soldTickets.Push(lt);
-            return lt;
+            return processSale(lt);
+
         }
         public LotteryTicket SellTicket(string playerName)
         {
             var lt = new LotteryTicket(playerName);
-            p.soldTickets.Push(lt);
-            return lt;
+            //better concurrency option
+            return processSale(lt);
         }
+
+        private LotteryTicket processSale(LotteryTicket lt)
+        {
+            p.soldTicketsLock.EnterReadLock();
+            try
+            {
+                if (p.SalesState == TicketSales.OK)
+                {
+                    p.soldTickets.Push(lt);
+                    return lt;
+                }
+                throw new TicketSalesClosedException();
+            }
+            finally
+            {
+                p.soldTicketsLock.ExitReadLock();
+            }
+        }
+
         public bool SellQuickTickets(string playerName, int qty)
         {
             for(int i = 0; i < qty; i++)
@@ -42,10 +61,7 @@ namespace ClassLib
             {
                 //need to buy/sell at least one more ticket
                 LotteryTicket t1 = new LotteryTicket();
-                lock (period.soldTickets)
-                {
-                    period.soldTickets.Push(t1);
-                }
+                processSale(t1);
             }
             System.Console.WriteLine("Done selling {0} tickets.", sellLimit);
         }

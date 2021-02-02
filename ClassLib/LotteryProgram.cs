@@ -44,11 +44,29 @@ namespace ClassLib
             p.GrandPrizeAmount = 40000000;//$40M
             lv = new LotteryVendor(p); //starting with one Vendor 
 
+
         }
-        public bool ResetPeriod()
+        public void ClosePeriodSales()
         {
-            p = new LotteryPeriod();
-            return true;
+            if (p.SalesState == TicketSales.OK)
+            {
+                p.SalesState = TicketSales.CLOSED;
+                //TODO: kickoff stats?
+
+            }
+        }
+        public void ResetPeriod()
+        {
+            if (p.SalesState==TicketSales.CLOSED)
+            {
+                //TODO:  Save stats
+                //TODO:  Write stats to DB
+                //TODO:  increment GrandPrize Amt 
+                //Ready to allow sales again
+                p.SalesState = TicketSales.OK;
+
+            }
+            //p = new LotteryPeriod();
         }
         //static void tLotteryVendor()
         //{
