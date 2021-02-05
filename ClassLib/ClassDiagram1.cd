@@ -3,14 +3,14 @@
   <Class Name="ClassLib.LotteryPeriod">
     <Position X="3.75" Y="0.75" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AUABAAAAAAAAABACAAAIAAAAAABAEAAgAAEQAAAAAAA=</HashCode>
+      <HashCode>CUABAAAAAQgAABACAAAIAAAAAAhBEAAgAAEAAAAAAAA=</HashCode>
       <FileName>LotteryPeriod.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ClassLib.LotteryProgram">
     <Position X="7.75" Y="1.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAAAAAAAAAgAAAAAAAAAAAABEAAAAAAAAE=</HashCode>
+      <HashCode>ACAAAAAAAAAAAAAAAAAgAAAAAIgAAAAABEAAAAAAAAE=</HashCode>
       <FileName>LotteryProgram.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -29,9 +29,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ClassLib.LotteryVendor">
-    <Position X="12" Y="3.75" Width="4" />
+    <Position X="10.25" Y="2" Width="4" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAACAAAIAE=</HashCode>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAICAAAAAAAECAAAAAIAk=</HashCode>
       <FileName>LotteryVendor.cs</FileName>
     </TypeIdentifier>
   </Class>

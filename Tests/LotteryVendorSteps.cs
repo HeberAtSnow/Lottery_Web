@@ -26,7 +26,7 @@ namespace Tests
         public void WhenVendorSellsNQuickPickTickets(int qty)
         {
             var vendor = context.Get<LotteryVendor>("vendor");
-            vendor.SellQuickTickets("bob",qty);
+            vendor.SellQuickTickets("bob", qty);
         }
 
         [Then(@"the period should have another (.*) tickets added to stack")]
@@ -43,6 +43,12 @@ namespace Tests
             vendor.SellTicket("bob");
         }
 
+        [When(@"Three background threads sell (.*) tickets each")]
+        public void WhenThreeBackgroundThreadsSellTicketsEach(int numToSell)
+        {
+            var vendor = context.Get<LotteryVendor>("vendor");
+            vendor.StartSimulatedTicketSales(numToSell);
+        }
 
 
 

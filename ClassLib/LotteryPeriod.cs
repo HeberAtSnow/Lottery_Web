@@ -11,12 +11,13 @@ namespace ClassLib
 {
     public enum TicketSales
     {
-        OK, 
+        OK,
         CLOSED
     }
     public class LotteryPeriod
     {
         int[] winTicket = { 1, 2, 3, 4, 5, 6 }; //Winning Ticket Values
+        //public Stack<LotteryTicket> soldTickets = new Stack<LotteryTicket>();
         public ConcurrentStack<LotteryTicket> soldTickets = new ConcurrentStack<LotteryTicket>();
         public List<LotteryTicket> winningTicketsL = new List<LotteryTicket>();
         public List<LotteryTicket> losingTicketsL = new List<LotteryTicket>();
@@ -26,12 +27,12 @@ namespace ClassLib
         public TicketSales SalesState
         {
             get { return (TicketSales)_salesState; }
-            set 
+            set
             {
                 soldTicketsLock.EnterWriteLock();
                 try
                 {
-                System.Threading.Interlocked.Exchange(ref _salesState, (int)value); 
+                    System.Threading.Interlocked.Exchange(ref _salesState, (int)value);
                 }
                 finally
                 {
@@ -67,7 +68,7 @@ namespace ClassLib
                 orderby l.balls.OrderBy(b => b)
                 select l;
             return winners.Union(losers);
-            
+
         }
         public IEnumerable<LotteryTicket> ResultsBuyWinLevel()
         {
@@ -87,25 +88,37 @@ namespace ClassLib
         {
             //TODO: ensure the state is set to ONLY let this work if drawing has started/ended
             LotteryTicket lt;
-            while (soldTickets.Count > 0)
+            if (SalesState == TicketSales.CLOSED)
             {
-                try
+                while (soldTickets.Count > 0)
                 {
-                    if (soldTickets.TryPop(out lt))
+                    try
                     {
-                        CheckWinningTicket(lt);
-                        if (lt.winLevel > 0)
+                        if (soldTickets.TryPop(out lt))
                         {
-                            winningTicketsL.Add(lt);
+                            CheckWinningTicket(lt);
+                            if (lt.winLevel > 0)
+                            {
+                                winningTicketsL.Add(lt);
+                            }
+                            else
+                            {
+                                losingTicketsL.Add(lt);
+                            }
                         }
-                        else
-                        {
-                            losingTicketsL.Add(lt);
-                        }
+                        //each ticket is moved from soldTickets to ( winningTickets or loosingTickets )
                     }
-                    //each ticket is moved from soldTickets to ( winningTickets or loosingTickets )
+                    catch (System.InvalidOperationException)
+                    {
+                        Heberlogger.Write("All sold tickets have been 'computed'");
+                        break;
+                    }//leave the while 
                 }
-                catch (System.InvalidOperationException) { break; }//leave the while 
+
+            }
+            else
+            {
+                throw new ApplicationException("Period must be closed before winners can be computed");
             }
         }
 

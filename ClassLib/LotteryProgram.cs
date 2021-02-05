@@ -20,12 +20,6 @@ namespace ClassLib
             ////Stopwatch to measure how long N threads take to sell _____ tickets
             //System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             //timer.Start();
-
-            //Thread thr = new Thread(tLotteryVendor); thr.Start();
-            //Thread thr2 = new Thread(tLotteryVendor); thr2.Start();
-            //Thread thr3 = new Thread(tLotteryVendor); thr3.Start();
-            //thr.Join(); thr2.Join(); thr3.Join();
-
             ////Stopwatch stop
             //timer.Stop();
             //Console.WriteLine("Elapsed time for {0} threads is: {1}", vThreadCount, timer.Elapsed);
@@ -46,6 +40,15 @@ namespace ClassLib
 
 
         }
+
+        public int Baloo
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public void ClosePeriodSales()
         {
             if (p.SalesState == TicketSales.OK)
@@ -68,13 +71,7 @@ namespace ClassLib
             }
             //p = new LotteryPeriod();
         }
-        //static void tLotteryVendor()
-        //{
-        //    LotteryVendor lv = new LotteryVendor();
-        //    int ticketLimit = vTicketsToSell / vThreadCount;
-        //    lv.purchaseTickets(p, ticketLimit);
-        //    Console.WriteLine($"Thread finished with {ticketLimit:n0} tickets.");
-        //}
+        
 
         //static void tStatsCompilers()
         //{
