@@ -20,7 +20,7 @@ namespace ClassLib
 
 
 
-        public LotteryTicket() : this("Player Name Anonymous")
+        public LotteryTicket() : this("Player Name Anonymous  ")
         {
         }
         public LotteryTicket(String PlayerName)
