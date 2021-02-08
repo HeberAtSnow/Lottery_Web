@@ -38,6 +38,8 @@ namespace Tests
         [When(@"statistics are computed")]
         public void WhenStatisticsAreComputed()
         {
+            var prg = context.Get<LotteryProgram>("program");
+            prg.ClosePeriodSales();
             var p = context.Get<LotteryPeriod>("period");
             p.ComputeWinners();
 

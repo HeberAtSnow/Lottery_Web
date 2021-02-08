@@ -70,7 +70,7 @@ namespace ClassLib
             return winners.Union(losers);
 
         }
-        public IEnumerable<LotteryTicket> ResultsBuyWinLevel()
+        public IEnumerable<LotteryTicket> ResultsByWinLevel()
         {
             var winners =
                 from w in winningTicketsL
@@ -110,7 +110,7 @@ namespace ClassLib
                     }
                     catch (System.InvalidOperationException)
                     {
-                        Heberlogger.Write("All sold tickets have been 'computed'");
+                        //"All sold tickets have been 'computed'"
                         break;
                     }//leave the while 
                 }

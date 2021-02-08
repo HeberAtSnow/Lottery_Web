@@ -26,6 +26,7 @@ namespace Tests
             var program = new LotteryProgram();
             context.Add("period", program.p);
             context.Add("vendor", program.lv);
+            context.Add("program", program);
         }
 
         [Given(@"a ticket was sold with the numbers (.*)")]

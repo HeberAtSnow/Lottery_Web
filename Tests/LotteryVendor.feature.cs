@@ -75,11 +75,11 @@ namespace Tests
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Vendor sells 30000 quickTickets")]
-        [NUnit.Framework.CategoryAttribute("10quickTickets")]
+        [NUnit.Framework.CategoryAttribute("30KquickTickets")]
         public virtual void VendorSells30000QuickTickets()
         {
             string[] tagsOfScenario = new string[] {
-                    "10quickTickets"};
+                    "30KquickTickets"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Vendor sells 30000 quickTickets", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 6
@@ -190,10 +190,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("a new period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 20
- testRunner.When("Three background threads sell 1000 tickets each", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Three background threads sell 10 tickets each", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 21
- testRunner.Then("the period should have another 3000 tickets added to stack", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the period should have another 30 tickets added to stack", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
