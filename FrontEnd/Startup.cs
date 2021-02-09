@@ -46,10 +46,6 @@ namespace FrontEnd
                 endpoints.MapRazorPages();
             });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
     }
 }

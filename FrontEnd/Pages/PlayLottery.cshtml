@@ -1,7 +1,114 @@
 ﻿@page "/PlayLottery"
 @model FrontEnd.Pages.PlayLotteryModel
 @{
+    ViewData["Title"] = "Lottery Page";
 }
 
 
-<h1>You are in the Lottery page.</h1>
+
+
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #00ccff;
+        color: #fff;
+        font-size: 125%;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #name {
+        width: 150px;
+        
+    }
+
+    #guess1, #guess2, #guess3, #guess4, #guess5, #guess6, #guess7 {
+        width: 50px;
+        margin-right: 4px;
+        text-align:center;
+    }
+
+    #guess7 {
+        border: 3px solid red;
+    }
+
+    #container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: -20px;
+    }
+
+    #container2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #container3 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+
+    #test1, #test2, #test3, #test4, #test5, #test6, #test7 {
+        float: left;
+        margin-right: 1%;
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #000;
+        text-decoration: none;
+    }
+
+    #test7 {
+        background-color: red;
+        color: #fff;
+    }
+
+
+        
+</style>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Powerball Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>You are in the Lottery page.</h1>
+
+    <form asp-page="PlayLottery" asp-page-handler="GetData" method="post">
+        <div>
+            <label>Name: </label>
+            <input id="name" type="text" name="name" />
+        </div>
+
+        <div id="container2">
+            <input id="guess1" type="number" min="1" max="69" name="num1">
+            <input id="guess2" type="number" min="1" max="69" name="num2">
+            <input id="guess3" type="number" min="1" max="69" name="num3">
+            <input id="guess4" type="number" min="1" max="69" name="num4">
+            <input id="guess5" type="number" min="1" max="69" name="num5">
+            <input id="guess6" type="number" min="1" max="69" name="num6">
+            <input id="guess7" type="number" min="1" max="26" name="powerball">
+        </div>
+        <br>
+        <br>
+
+        <div id="container3">
+            <button type="submit" class="btn btn-outline-primary bg-dark">Purchase</button>
+        </div>
+    </form>
+
+
+</body>
+</html>
