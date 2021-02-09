@@ -9,7 +9,10 @@ namespace FrontEnd.Pages
 {
     public class PlayLotteryModel : PageModel
     {
-      
+
+        public void OnGet()
+        {
+        }
         public IActionResult OnPostGetData(String name, int num1, int num2, int num3, int num4, int num5, int num6, int powerball )
         {
 
@@ -22,6 +25,9 @@ namespace FrontEnd.Pages
              aCookie.Values["lastVisit"] = DateTime.Now.ToString();
              aCookie.Expires = DateTime.Now.AddDays(1);
              Response.Cookies.Add(aCookie);*/
+
+
+
 
 
             return RedirectToPage();
