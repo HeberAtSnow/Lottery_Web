@@ -1,0 +1,121 @@
+﻿@page
+@model FrontEnd.Pages.LotteryResultsModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            top: 7em;
+            position: relative;
+        }
+
+        header {
+            background-color: cornflowerblue;
+            padding: 1px;
+            box-shadow: 1px 5px #000000;
+            position: fixed;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .title {
+            text-align: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .center {
+            position: relative;
+            margin: 0;
+            left: 25%;
+            right: 25%;
+        }
+
+        .ball {
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+            border: .5px solid;
+        }
+
+        div {
+            margin-bottom: 25px;
+            margin-left: 10px;
+        }
+
+        span {
+            margin-right: 10px;
+        }
+
+        .submit {
+            height: 30px;
+            width: 60px;
+            background-color: cornflowerblue;
+            border-radius: 15px 15px 15px 15px;
+            font-weight: bold;
+        }
+
+        .display {
+            position: relative;
+            margin: 0;
+            left: 43%;
+            height: 50px;
+            width: 100px;
+            background-color: cornflowerblue;
+            border-radius: 15px 15px 15px 15px;
+            font-weight: bold;
+        }
+
+        .submit:hover {
+            box-shadow: 1px 3px #000000;
+            height: 30px;
+            width: 64px;
+            position: fixed;
+            transition-duration: .5s;
+        }
+
+        .display:hover {
+            box-shadow: 1px 3px #000000;
+            height: 50px;
+            width: 110px;
+            transition-duration: .5s;
+        }
+
+        .quickpicks {
+            width: 200px;
+        }
+    </style>
+    <title>Lottery Results</title>
+</head>
+
+<header class="sticky">
+    <h1 class="title">Lottery Results</h1>
+</header>
+
+<body>
+    <div style="position:relative;">
+        <h4 class="title">
+            This will show all the tickets you have purchased from the lottery. If the drawing has already been held,
+            it will show you your Winnings too!!
+        </h4>
+        <button class="display">Display Results</button>
+    </div>
+    <div class="center">
+        <span><button>Reset Lottery</button></span>
+        <span><button>Process Drawing</button></span>
+        <span><button>Lottery Results</button></span>
+        <span><button>Historical Stats</button></span>
+    </div>
+
+</body>
+</html>

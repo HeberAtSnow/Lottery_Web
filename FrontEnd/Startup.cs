@@ -28,6 +28,11 @@ namespace FrontEnd
         {
 
             services.AddControllers();
+            services.AddRazorPages()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.RootDirectory = "/";
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FrontEnd", Version = "v1" });
@@ -40,8 +45,8 @@ namespace FrontEnd
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FrontEnd v1"));
+                //app.UseSwagger();
+               // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FrontEnd v1"));
             }
 
             app.UseHttpsRedirection();
@@ -53,6 +58,7 @@ namespace FrontEnd
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
