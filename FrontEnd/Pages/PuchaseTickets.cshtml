@@ -1,0 +1,83 @@
+﻿@page
+@model FrontEnd.Pages.PuchaseTicketsModel
+@{
+}
+<body>
+    <div class="page">
+        <h1>Welcome to the Powerball</h1>
+        <form>
+            <label>Your Name</label>
+            <input type="text" />
+        </form>
+        <h2>
+            You have two ways to buy tickets
+            <ol>
+                <li>You can pick your own numbers</li>
+                <li>Or you can have the computer choose the numbers for you, Quick Picks</li>
+            </ol>
+        </h2>
+        <form>
+            <h3>Pick your own numbers</h3>
+            <input class="lotterBall" type="number" min="1" max="69" value="number1" />
+            <input class="lotterBall" type="number" min="1" max="69" value="number2" />
+            <input class="lotterBall" type="number" min="1" max="69" value="number3" />
+            <input class="lotterBall" type="number" min="1" max="69" value="number4" />
+            <input class="lotterBall" type="number" min="1" max="69" value="number5" />
+            <input class="PowerBall" type="number" min="1" max="26" value="PowerBall" />
+        </form>
+        <form>
+            <h3>Quick Picks</h3>
+            <label>How Many Quick Pick Tickets do you want?</label>
+            <input type="number" min="0" />
+            <button type="submit">Puchcase QuickPick Tickets</button>
+        </form>
+        <h2>Your Results</h2>
+        <button>Your Lottery Results</button>
+    </div>
+</body>
+<style>
+    .page {
+        background-color: rgba(128, 128, 128,.7);
+        margin: auto;
+        max-width: 75%;
+    }
+    li {
+        list-style: none;
+    }
+
+    .lotterBall {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        font-size: 25px;
+        background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(1,0,0,.2));
+        text-decoration: underline;
+    }
+
+        .lotterBall:active {
+            all: unset;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            font-size: 25px;
+            text-decoration: underline;
+        }
+
+    .PowerBall {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        font-size: 30px;
+        background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+        text-decoration: underline;
+    }
+
+    body {
+        text-align: center;
+        vertical-align: middle;
+        margin: auto;
+        padding: 5%;
+        color: darkblue;
+        background-image: url('https://images.pexels.com/photos/730564/pexels-photo-730564.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+    }
+</style>
