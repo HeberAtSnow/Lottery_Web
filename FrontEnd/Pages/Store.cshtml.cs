@@ -13,10 +13,12 @@ namespace FrontEnd.Pages
         private IMemoryCache _cache;
         private string cacheKey = "Selection";
         private string cacheValue;
+        public int[] Ticket;
         public string Selection => cacheValue ?? "";
 
         public StoreModel(IMemoryCache cache)
         {
+            Ticket = new int[6];
             _cache = cache;
         }
 
@@ -38,5 +40,14 @@ namespace FrontEnd.Pages
             return RedirectToPage();
         }
 
+        public IActionResult OnPostQuickPickPurchase(int numTickets)
+        {
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostNumberPickPurchase(int [] ticket)
+        {
+            return RedirectToPage();
+        }
     }
 }
