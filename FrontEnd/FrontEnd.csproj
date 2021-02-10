@@ -12,4 +12,8 @@
     <ProjectReference Include="..\ClassLib\ClassLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
+
 </Project>
