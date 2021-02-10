@@ -1,0 +1,369 @@
+﻿@page
+@model FrontEnd.Pages.IndexModel
+@{
+    ViewData["Title"] = "Let's Play the Lottery";
+}
+<style>
+    html {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative;
+    }
+        html::after {
+            content: "";
+            background: url("https://static.www.calottery.com/-/media/Project/calottery/PWS/Hero/PowerBall---Landing-Page-Banner-Mobile-768x819_R1.jpg?mw=992&sc=1&rev=e7fc8b27551740f69944d346ed16e12c&hash=98FFF89383AE0582267EA1D351B10D7E");
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+        }
+@@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+.number.powerball{
+  color:white;
+  background-color:red;
+}
+.ball {
+  display: inline-block;
+  width: 75%;
+  height: 75%;
+  margin: 0;
+  border-radius: 50%;
+  position: relative;
+  background: radial-gradient(circle at 50% 40%, #fcfcfc, #efeff1 66%, #9b5050 100%);
+  overflow: hidden;
+  animation: ballGrow 2s ease-out forwards;
+  transform: scale(0.5);
+}
+.ball:after {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) 14%, rgba(255, 255, 255, 0) 24%);
+  -webkit-transform: translateX(-80px) translateY(-90px) skewX(-20deg);
+  -moz-transform: translateX(-80px) translateY(-90px) skewX(-20deg);
+  -ms-transform: translateX(-80px) translateY(-90px) skewX(-20deg);
+  -o-transform: translateX(-80px) translateY(-90px) skewX(-20deg);
+  transform: translateX(-80px) translateY(-90px) skewX(-20deg);
+}
+
+.stage {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  margin: 20px;
+  -webkit-perspective: 1200px;
+  -moz-perspective: 1200px;
+  -ms-perspective: 1200px;
+  -o-perspective: 1200px;
+  perspective: 1200px;
+  -webkit-perspective-origin: 50% 50%;
+  -moz-perspective-origin: 50% 50%;
+  -ms-perspective-origin: 50% 50%;
+  -o-perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
+}
+
+.number {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 115px;
+  font-size: 80px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  animation: ballRoll 2s ease-out;
+}
+
+.number:after {
+  content: attr(data-number);
+  position: absolute;
+  transform: translateX(-75%);
+  opacity: 0;
+  animation: numberReveal 0.1s 1.5s reverse forwards;
+}
+
+.number:before {
+  content: '?';
+  position: absolute;
+  transform: translateX(-25%);
+  animation: numberReveal 0.1s 1.5s forwards;
+}
+
+@@keyframes ballRoll {
+  0%, 20%, 50% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+  10%, 35%, 75% {
+    transform: translateY(100%) rotateX(170deg) scale(0.4);
+  }
+  11%, 36%, 76% {
+    transform: translateY(-100%) rotateX(-170deg) scale(0.3);
+    opacity: 0;
+  }
+
+}
+
+@@keyframes ballGrow {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@@keyframes numberReveal {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+.stage:nth-child(2) .ball,
+.stage:nth-child(2) .number {
+  animation-delay: 0.3s;
+}
+
+.stage:nth-child(2) .number:after,
+.stage:nth-child(2) .number:before {
+  animation-delay: 1.8s;
+}
+
+.stage:nth-child(3) .ball,
+.stage:nth-child(3) .number {
+  animation-delay: 0.6s;
+}
+
+.stage:nth-child(3) .number:after,
+.stage:nth-child(3) .number:before {
+  animation-delay: 2.1s;
+}
+
+.stage:nth-child(4) .ball,
+.stage:nth-child(4) .number {
+  animation-delay: 0.9s;
+}
+
+.stage:nth-child(4) .number:after,
+.stage:nth-child(4) .number:before {
+  animation-delay: 2.4s;
+}
+@@import url('https://fonts.googleapis.com/css?family=Inconsolata|Lato:300,400,700');
+html, body, h1, h2, h3, h4, h5, h6, p, li, ol, ul, pre {
+	margin: 0;
+	padding: 0;
+}
+html, body { min-height: 100%; }
+
+code {
+	background: #fff1;
+	font-family: 'Inconsolata', monospace;
+	padding: .2em .4em;
+}
+
+
+
+
+#footer {
+	background-color: #246c;
+	background-image: linear-gradient(to bottom, transparent, #0009);
+	border-top: 1px solid #fff3;
+	box-shadow: inset 0 1px 0 #fff3, 0 0 32px #000;
+	overflow: hidden;
+	padding: 8px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 9001;
+}
+#footer a {
+	color: #85c6f6;
+	padding: 1em 0;
+	text-decoration: none;
+}
+#footer ul {
+	display: flex;
+	list-style: none;
+	justify-content: center;
+	font-size: 2em;
+	font-weight: 300;
+}
+#footer ul li {
+	padding: 0 .5em;
+}
+
+/* Appearance */
+.links {
+	background-color: black;
+	background-image: linear-gradient(to bottom, #0003, transparent);
+	border-bottom: 1px solid #0003;
+	box-shadow: 0 0 32px #0003;
+	font-size: 2em;
+	font-weight: 300;
+}
+.links > a {
+	color: #9ab;
+	padding: .75em;
+	text-align: center;
+	text-decoration: none;
+	transition: all .5s;
+}
+.links > a:hover {
+	background: #ffffff06;
+	color: #adf;
+}
+.links > .line {
+	background: #68a;
+	height: 1px;
+	pointer-events: none;
+}
+
+/* The Magic */
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+.links {
+	display: grid;
+	grid-template-columns: repeat(var(--items), 1fr);
+	position: relative;
+}
+.links > .line {
+	opacity: 0;
+	transition: all .5s;
+	position: absolute;
+	bottom: 0;
+	left: var(--left, calc(100% / var(--items) * (var(--index) - 1)));
+	width: var(--width, calc(100% / var(--items)));
+	--index: 0;
+}
+.links > a:hover ~ .line {
+	opacity: 1;
+}
+
+.links > a:nth-of-type(1):hover ~ .line { --index: 1; }
+.links > a:nth-of-type(2):hover ~ .line { --index: 2; }
+.links > a:nth-of-type(3):hover ~ .line { --index: 3; }
+.links > a:nth-of-type(4):hover ~ .line { --index: 4; }
+.links > a:nth-of-type(5):hover ~ .line { --index: 5; }
+.links > a:nth-of-type(6):hover ~ .line { --index: 6; }
+.links > a:nth-of-type(7):hover ~ .line { --index: 7; }
+.links > a:nth-of-type(8):hover ~ .line { --index: 8; }
+.links > a:nth-of-type(9):hover ~ .line { --index: 9; }
+.links > a:nth-of-type(10):hover ~ .line { --index: 10; }
+.links > a:last-of-type:hover ~ .line { --index: var(--items); }
+</style>
+
+<head>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<html>
+
+<body>
+    <header id="header">
+        <nav class="links" style="--items: 5;">
+            <a href="/Index">Home</a>
+            <a href="/Results">Results</a>
+            <a href="/Administration">Administration</a>
+            <a href="/AboutUs">About Us</a>
+            
+            <a href="#"></a>
+            <span class="line"></span>
+        </nav>
+    </header>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <h1> Welcome to the Lottery!</h1>
+    <div class="text-center">
+
+        <div class="wrap">
+            <section class="stage">
+                <figure class="ball">
+                    <span class="number" data-number="8">&nbsp;</span>
+                </figure>
+            </section>
+            <section class="stage">
+                <figure class="ball">
+                    <span class="number" data-number="2">&nbsp;</span>
+                </figure>
+            </section>
+            <section class="stage">
+                <figure class="ball">
+                    <span class="number" data-number="4">&nbsp;</span>
+                </figure>
+            </section>
+            <section class="stage">
+                <figure class="ball">
+                    <span class="number" data-number="5">&nbsp;</span>
+                </figure>
+            </section>
+            <section class="stage">
+                <figure class="ball">
+                    <span class="number" data-number="9">&nbsp;</span>
+                </figure>
+            </section>
+            <section class="stage powerball">
+                <figure class="ball powerball">
+                    <span class="number powerball" data-number="3">&nbsp;</span>
+                </figure>
+            </section>
+        </div>
+        <form method="post">
+            <label for="fname">Name:</label>
+            <input type="text" id="fname" name="fname" /><br><br>
+        </form>
+        <h3>Pick your numbers</h3>
+        <form method="post">
+            <p>Please enter your numbers</p>
+            <lable for="num1">Number 1:</lable>
+            <input type="number" id="num1" name="num1" min="1" max="69" size="2" maxlength="3" />
+            <lable for="num2">Number 2:</lable>
+            <input type="number" id="num2" name="num2" min="1" max="69" size="2" maxlength="3" />
+            <lable for="num3">Number 3:</lable>
+            <input type="number" id="num3" name="num3" min="1" max="69" size="2" maxlength="3" />
+            <lable for="num4">Number 4:</lable>
+            <input type="number" id="num4" name="num4" min="1" max="69" size="2" maxlength="3" />
+            <lable for="num5">Number 5:</lable>
+            <input type="number" id="num5" name="num5" min="1" max="69" size="2" maxlength="3" />
+            <lable for="powerball">POWERBALL:</lable>
+            <input type="number" id="powerball" name="powerball" min="1" max="26" size="2" maxlength="3" />
+            <button>Purchase Ticket</button>
+        </form> <br />
+        <h2>OR</h2><br />
+        <h3>Let the computer QuickPick numbers for you</h3>
+        <form method="post">
+            <label for="qpick">How many QuickPicks tickets?</label>
+            <input type="number" id="qpick" name="qpick">
+            <button>Purchase QuickPicks</button>
+        </form>
+
+      
+    </div>
+</body>
+
+
+</html>

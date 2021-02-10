@@ -26,7 +26,7 @@ namespace FrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddRazorPages();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -44,7 +44,7 @@ namespace FrontEnd
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FrontEnd v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -52,6 +52,12 @@ namespace FrontEnd
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+
                 endpoints.MapControllers();
             });
         }
