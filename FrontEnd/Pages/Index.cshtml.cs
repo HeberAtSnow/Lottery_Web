@@ -9,6 +9,12 @@ namespace FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
+        private string _userName;
+
+        public void OnPostSubmitName(string name)
+        {
+            _userName = name;
+        }
         public void OnGet()
         {
         }
