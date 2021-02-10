@@ -12,7 +12,7 @@
     Who Are you?
 </h2>
 
-<ul>
-    <li><a asp-page="Store">Powerball Player</a></li>
-    <li><a asp-page="Settings">Company Associate</a></li>
-</ul>
+<form method="post">
+    <button type="submit" asp-page-handler="GoToStore">Powerball Player</button>
+    <button type="submit" asp-page-handler="GoToSettings">Company Associate</button>
+</form>

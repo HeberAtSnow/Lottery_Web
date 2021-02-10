@@ -13,6 +13,13 @@ namespace FrontEnd.Pages
         {
         }
 
-
+        public IActionResult OnPostGoToStore()
+        {
+            return RedirectToPage("./Store");
+        }
+        public IActionResult OnPostGoToSettings()
+        {
+            return RedirectToPage("./Settings");
+        }
     }
 }

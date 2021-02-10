@@ -1,8 +1,22 @@
 ﻿@page
 @model FrontEnd.Pages.StoreModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
 }
 
 <h1>
-    Welcome to the main store!
+    Welcome to the ticket store!
 </h1>
+
+<label for="name">Lucky Participant Name:</label>
+<input name="name" type="text" placeholder="Name"/>
+
+<h2>
+    How do you want to buy your tickets?
+</h2>
+<form method="post">
+    <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
+    <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+</form>
+
+<p>@Model.Selection</p>
