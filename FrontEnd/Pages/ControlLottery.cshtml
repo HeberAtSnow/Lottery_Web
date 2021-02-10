@@ -1,5 +1,5 @@
-﻿@page "/index"
-@model FrontEnd.Pages.IndexModel
+﻿@page "/ControlLottery"
+@model FrontEnd.Pages.ControlLotteryModel
 @{
 }
 
@@ -90,19 +90,42 @@
         width: 150px;
     }
 
-    .playBtn:hover {
-        background-color: red;
-        color: white;
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    }
+        .playBtn:hover {
+            background-color: red;
+            color: white;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
 </style>
 
+
 <body>
-    <h1>Hi there welcome to Lottery Game</h1>
+
+    <h1>Control the Lottery</h1>
+
+    <div class="logo">
+        <img src="http://u.cubeupload.com/Transgirlgogo/download1.jpeg" alt="powerball" width="350">
+    </div>
+    <br>
+    <br>
 
     <div id="container3">
-        <form method="get" action="/PlayLottery">
-            <button class="playBtn" type="submit">Join Now</button>
+        <form method="get" action="">
+            <button class="playBtn" type="submit">Reset Lottery</button>
+        </form>
+
+
+        <form method="get" action="">
+            <button class="playBtn" type="submit">Process Draw</button>
+        </form>
+
+
+        <form method="get" action="">
+            <button class="playBtn" type="submit">Lottery Results</button>
+        </form>
+
+
+        <form method="get" action="">
+            <button class="playBtn" type="submit">Historical Stats</button>
         </form>
     </div>
 </body>
