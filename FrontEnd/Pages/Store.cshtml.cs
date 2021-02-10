@@ -53,8 +53,11 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostNumberPickPurchase(int [] ticket)
         {
-            _cache.Set(cacheRecentPurchaseKey, true);
-            _cache.Set(cacheLastTicketKey, ticket);
+            if (ticket.Length == 6)
+            {
+                _cache.Set(cacheRecentPurchaseKey, true);
+                _cache.Set(cacheLastTicketKey, ticket);
+            }
             return RedirectToPage();
         }
     }

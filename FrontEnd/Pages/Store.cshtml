@@ -2,66 +2,127 @@
 @model FrontEnd.Pages.StoreModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    Layout = "_Layout";
 }
 
-<h1>
-    Welcome to the ticket store!
-</h1>
-
-<label for="name">Lucky Participant Name:</label>
-<input name="name" type="text" placeholder="Name"/>
-
-<h2>
-    How do you want to acquire your winner tickets?
-</h2>
-<form method="post">
-    <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
-    <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
-</form>
-
-@if (Model.Selection == "NumberPick")
-{
-    <h2>
-        Number Pick
-    </h2>
-    <p>
-        I don't trust computers! If you want something done right, do it yourself.
-    </p>
-
-    <form method="post" asp-page-handler="NumberPickPurchase">
-        @for (int i = 0; i < 5; i++)
-        {
-            <label for="ticket">Number @(i + 1) :</label>
-            <input type="number" name="ticket" min="0" max="69" />
+<html>
+<head>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
-        <label for="ticket">Powerball:</label>
-        <input type="number" name="ticket" min="0" max="26" /><br />
-        <button type="submit">Let's win that price!</button>
-    </form>
-
-    @if (Model.RecentPurchase == true)
-    {
-        <h2>Last Ticket bought</h2>
-        @for (int i = 0; i < 6; i++)
-        {
-            <p>Number @i: @Model.LastTicket[i]</p>
+        body {
+            margin: 2em;
+            background-color: #ffffc4;
         }
-    }
-}
+        h1, h2, p, td, label {
+            font-family: sans-serif;
+        }
+        button {
+            margin: .5em;
+            background-color: #b8b8b8;
+            border-style: solid;
+            border-radius: 5px;
+            border-color: black;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+        input[type=number] {
+            padding: 10px;
+            border-radius: 100px;
+            border-color: black;
+            width: 5%;
+        }
+        #powerball {
+            background-color: red;
+        }
+        td {
+            margin: .25em;
+            padding: 10px;
+            background-color: white;
+            border-collapse: collapse;
+            border: 1px solid black;
+            border-radius: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+            Welcome to the ticket store!
+        </h1>
+    </header>
+    <main>
+        <label for="name">Lucky Participant Name:</label>
+        <input name="name" type="text" placeholder="Name" />
 
-@if (Model.Selection == "QuickPick")
-{
-    <h2>
-        Quick Pick
-    </h2>
-    <p>
-        Let the computer do it for me!
-    </p>
+        <h2>
+            How do you want to acquire your winner tickets?
+        </h2>
+        <form method="post">
+            <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
+            <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+        </form>
 
-    <form method="post" asp-page-handler="QuickPickPurchase">
-        <label for="numTickets">Purchase 1-1000 random tickets</label>
-        <input name="numTickets" type="number" min="0" max="1000"/>
-        <button type="submit">Give me them Tickets!</button>
-    </form>
-}
+        @if (Model.Selection == "NumberPick")
+        {
+            <h2>
+                Number Pick
+            </h2>
+            <p>
+                I don't trust computers! If you want something done right, do it yourself.
+            </p>
+
+            <form method="post" asp-page-handler="NumberPickPurchase">
+                @for (int i = 0; i < 5; i++)
+                {
+                    <label for="ticket">Number @(i + 1) :</label>
+                    <input type="number" name="ticket" min="0" max="69" />
+                }
+                <label for="ticket">Powerball:</label>
+                <input id="powerball" type="number" name="ticket" min="0" max="26" />
+                <br />
+                <button type="submit">Let's win that price!</button>
+            </form>
+
+            @if (Model.RecentPurchase == true)
+            {
+                <h2>Last Ticket bought</h2>
+                <table>
+                    <tr>
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <td>@Model.LastTicket[i]</td>
+                        }
+                        <td id="powerball">@Model.LastTicket[5]</td>
+                    </tr>
+                </table>
+            }
+        }
+
+        @if (Model.Selection == "QuickPick")
+        {
+            <h2>
+                Quick Pick
+            </h2>
+            <p>
+                Let the computer do it for me!
+            </p>
+
+            <form method="post" asp-page-handler="QuickPickPurchase">
+                <label for="numTickets">Purchase 1-1000 random tickets</label>
+                <input name="numTickets" type="number" min="0" max="1000" />
+                <br />
+                <button type="submit">Give me them Tickets!</button>
+            </form>
+        }
+    </main>
+</body>
+</html>
