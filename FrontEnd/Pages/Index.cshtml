@@ -1,4 +1,4 @@
-﻿@page "/index"
+﻿@page "{handler?}"
 @model FrontEnd.Pages.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -6,13 +6,130 @@
 }
 
 <style>
+    #head1 {
+        grid-area: Header;
+        justify-self: center;
+        font-style: italic;
+    }
+    #form1 {
+        grid-area: choice1;
+        justify-self: center;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 50% 50%;
+        grid-template-areas: "input" "button";
+    }
+
+    #namebox {
+        grid-area: input;
+        justify-self: center stretch;
+        align-self: center stretch;
+    }
+
+    #namebutton {
+        grid-area: button;
+        justify-self: center stretch;
+        align-self: center stretch;
+    }
+
+    #head2 {
+        grid-area: Header;
+        justify-self: center;
+        align-self: start;
+        padding: 20px;
+    }
+
+    #descriptor1 {
+        grid-area: Header;
+        justify-self: center;
+        align-self: end;
+    }
+
+    #lotterychoices {
+        grid-area: choice1;
+        justify-self: center;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 50% 50%;
+        grid-template-areas: "form1" "form2";
+    }
+
+    #userpickbutton {
+        grid-area: form1;
+        justify-self: center;
+    }
+
+    #computerpickbutton {
+        grid-area: form2;
+        justify-self: center;
+    }
+
+    #head3{
+        grid-area: choice1;
+        justify-self:center;
+        align-self: center;
+    }
+    #howmanyform {
+        grid-area: choice1;
+        justify-self: center;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 50% 50%;
+        grid-template-areas: "input" "button";
+    }
+    #ticketbox {
+        grid-area: input;
+        justify-self: center stretch;
+        align-self: center stretch;
+        padding: 5px;
+    }
+    #ticketnumbutton {
+        grid-area: button;
+        justify-self: center stretch;
+        align-self: center stretch;
+    }
 </style>
 
-<h1>Welcome to Lotto Magic!</h1>
 
-<form asp-page="/Index" asp-page-handler="NameSubmit" method="post">
-    <label>What is your name?</label>
-    <input type="text"/>
-    <button type="submit">Continue</button>
-</form>
+@if (Model.userName == null && Model.autoTicket == false)
+{
+    <h1 id="head1">Welcome to Lotto Magic!</h1>
+    <form id="form1" asp-page="/Index" asp-page-handler="Name" method="post">
+        <input id="namebox" asp-for="userName" placeholder="What is your name?" />
+        <button id="namebutton" type="submit">Continue</button>
+    </form>
 
+}
+
+@if (Model.userName != null && Model.autoTicket == false)
+{
+
+    <h1 id="head2">Hello @Model.userName!</h1>
+    <p id="descriptor1">What kind of ticket would you like to purchase?</p>
+    <div id="lotterychoices">
+        <form id="userpickbutton" asp-page="/ChooseYourNumbers" method="post">
+            <button type="submit">Pick my own numbers!</button>
+        </form>
+        <form id="computerpickbutton" asp-page="/Index" asp-page-handler="AutoNumber" method="post">
+            <button type="submit">Pick my numbers for me!</button>
+        </form>
+    </div>
+    <div id="backbuttongrid">
+        <input id="backbutton" type='button' onclick='history.back();' value='Go Back' />
+    </div>
+
+}
+
+@if (Model.autoTicket == true && TempData["userName"] != null)
+{
+    <div id="head3">
+        <form id="howmanyform" asp-page="/Results" asp-page-handler="AutoNumber" method="post">
+            <input id="ticketbox" name="ticketAmount" placeholder="How many?" />
+            <input name="userName" type="hidden" value="@TempData["userName"]" />
+            <button id="ticketnumbutton" type="submit">That Many!</button>
+        </form>
+    </div>
+    <div id="backbuttongrid">
+        <input id="backbutton" type='button' onclick='history.go(-2);' value='Go Back' />
+    </div>
+}

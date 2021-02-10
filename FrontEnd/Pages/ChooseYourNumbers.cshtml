@@ -1,4 +1,9 @@
-﻿@page
+﻿@page "{handler?}"
 @model FrontEnd.Pages.ChooseYourNumbersModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
+<h1>Pick your numbers!</h1>
+

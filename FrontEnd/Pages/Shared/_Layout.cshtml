@@ -5,8 +5,32 @@
     <meta name="viewport" content="width=device-width" />
     <title>LottoMagic</title>
 </head>
+
 <body>
-    <div>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 25% auto 25%;
+            grid-template-rows: 25% 100px auto;
+            grid-template-areas: "back Header ."
+                                ". choice1 tickets";
+        }
+
+        #backbuttongrid{
+            grid-area: back;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-areas: "bba . . . .";
+            justify-content:center;
+        }
+        #backbutton {
+            grid-area: bba;
+            justify-content: center;
+        }
+        body {
+            background-color: dimgrey;
+        }
+    </style>
+    <div class="container">
         @RenderBody()
     </div>
 </body>

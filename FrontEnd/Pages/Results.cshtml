@@ -1,4 +1,27 @@
-﻿@page
+﻿@page "{handler?}"
 @model FrontEnd.Pages.ResultsModel
 @{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<style>
+    #resultheader{
+        grid-area: Header;
+        justify-self: center;
+    }
+    #ticketnumber{
+        grid-area: tickets;
+        justify-self: center;
+    }
+    #resultsplaceholder{
+        grid-area: choice1;
+        justify-self: center;
+    }
+</style>
+<div id="backbuttongrid">
+    <input id="backbutton" type='button' onclick='history.go(-3);' value='Go Back' />
+</div>
+<h4 id="resultheader">@Model._userName</h4>
+
+<p id="ticketnumber">Number of tickets: @Model._ticketAmount</pid="">
+
+<p id="resultsplaceholder">Results will go here</p>

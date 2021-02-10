@@ -9,8 +9,14 @@ namespace FrontEnd.Pages
 {
     public class ResultsModel : PageModel
     {
-        public void OnGet()
+        [BindProperty]
+        public string _userName { get; set; }
+        public int _ticketAmount { get; set; }
+        public void OnPostAutoNumber(int ticketAmount, string userName)
         {
+            _userName = userName;
+            _ticketAmount = ticketAmount;
         }
+
     }
 }

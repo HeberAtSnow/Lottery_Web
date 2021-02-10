@@ -9,14 +9,22 @@ namespace FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
-        private string _userName;
-
-        public void OnPostSubmitName(string name)
+        [BindProperty] public string userName { get; set; }
+        [BindProperty] public bool autoTicket { get; set; }
+        public void OnPostName()
         {
-            _userName = name;
+            TempData["userName"] = userName;
         }
-        public void OnGet()
+        public void OnPostAutoNumber()
         {
+            if(autoTicket == true)
+            {
+                autoTicket = false;
+            }
+            else
+            {
+                autoTicket = true;
+            }
         }
     }
 }
