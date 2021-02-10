@@ -15,6 +15,7 @@ Scenario: creating a valid ticket, but no username is specified
 	When I create a ticket
 	Then the ticket is valid
 
+@BobValidTicket
 Scenario: creating a valid ticket
 	Given username is Bob
 	And my six numbers are 1,2,3,4,5,6
