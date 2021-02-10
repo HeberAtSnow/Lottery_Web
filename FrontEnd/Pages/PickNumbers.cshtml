@@ -23,12 +23,12 @@
     <h1>Ok @Model.Name</h1>
     <h2>This should be simple.</h2>
     <form method="post">
-        <input name="number1" type="text" placeholder="number 1" />
-        <input name="number2" type="text" placeholder="number 2" />
-        <input name="number3" type="text" placeholder="number 3" />
-        <input name="number4" type="text" placeholder="number 4" />
-        <input name="number5" type="text" placeholder="number 5" />
-        <input name="powerBall" type="text" placeholder="PowerBall" />
+        <input name="number1" type="number" min="1" max="99" step="1" required="required" placeholder="number 1" />
+        <input name="number2" type="number" min="1" max="99" step="1" required="required" placeholder="number 2" />
+        <input name="number3" type="number" min="1" max="99" step="1" required="required" placeholder="number 3" />
+        <input name="number4" type="number" min="1" max="99" step="1" required="required" placeholder="number 4" />
+        <input name="number5" type="number" min="1" max="99" step="1" required="required" placeholder="number 5" />
+        <input name="powerBall" type="number" min="1" max="99" step="1" required="required" placeholder="PowerBall" />
         <input class="btn btn-primary" type="submit" value="PurchaseTicket" >
     </form>
 </div>

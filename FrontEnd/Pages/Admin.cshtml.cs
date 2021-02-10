@@ -12,5 +12,29 @@ namespace FrontEnd.Pages
         public void OnGet()
         {
         }
+        public IActionResult OnPostResetLottery()
+        {
+            //TODO: Execute code here.
+            return RedirectToPage("/Index");
+        }
+        public IActionResult OnPostProcessDrawing()
+        {
+
+            //TODO: Execute code here.
+            return RedirectToPage("/Index");
+        }
+        public IActionResult OnPostLotteryResults()
+        {
+
+            //TODO: Execute code here.
+            return RedirectToPage("/Index");
+        }
+        public IActionResult OnPostHistorialStats()
+        {
+
+            //TODO: Execute code here.
+            return RedirectToPage("/Index");
+        }
+
     }
 }

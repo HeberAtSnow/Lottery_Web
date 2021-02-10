@@ -2,3 +2,43 @@
 @model FrontEnd.Pages.AdminModel
 @{
 }
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        .vhcenter {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+    <title>🍀 Heber's Cash Luck!</title>
+</head>
+<div class="vhcenter">
+    <h1 class="font-weight-bolder">Admin Settings</h1>
+    <form asp-page-handler="ResetLottery" method="post">
+        <h2>Reset Lottery for next drawing.</h2>
+        <input class="btn btn-primary" type="submit" value="Reset Lottery."/>
+    </form>
+    <form asp-page-handler="ProcessDrawing" method="post">
+        <p> </p>
+        <h2>Draw Winning Numbers.</h2>
+        <input class="btn btn-primary" type="submit" value="Process Drawing."/>
+    </form>
+    <form asp-page-handler="LotteryResults" method="post">
+        <p> </p>
+        <h2>Overall results from this lottery.</h2>
+        <input class="btn btn-primary" type="submit" value="Lottery Results."/>
+    </form>
+    <form asp-page-handler="HistorialStats" method="post">
+        <p> </p>
+        <h2>Statistics from ALL lottery history.</h2>
+        <input class="btn btn-primary" type="submit" value="Historial Stats."/>
+    </form>
+
+</div>

@@ -9,7 +9,6 @@ namespace FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
-        public string name;
         public void OnGet()
         {
         }

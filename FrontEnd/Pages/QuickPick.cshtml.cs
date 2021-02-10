@@ -16,7 +16,7 @@ namespace FrontEnd.Pages
             Name = TempData["Name"].ToString();
             TempData.Keep();
         }
-        public IActionResult OnPost()
+        public IActionResult OnPost(int numTickets)
         {
            return RedirectToPage("/Results", new { name = Name });
         }
