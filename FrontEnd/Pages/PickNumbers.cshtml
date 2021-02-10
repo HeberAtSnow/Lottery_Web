@@ -1,0 +1,34 @@
+﻿@page
+@model FrontEnd.Pages.PickNumbersModel
+@{
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        .vhcenter {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+    <title>🍀 Heber's Cash Luck!</title>
+</head>
+<div class="vhcenter">
+    <h1>Ok @Model.Name</h1>
+    <h2>This should be simple.</h2>
+    <form method="post">
+        <input name="number1" type="text" placeholder="number 1" />
+        <input name="number2" type="text" placeholder="number 2" />
+        <input name="number3" type="text" placeholder="number 3" />
+        <input name="number4" type="text" placeholder="number 4" />
+        <input name="number5" type="text" placeholder="number 5" />
+        <input name="powerBall" type="text" placeholder="PowerBall" />
+        <input class="btn btn-primary" type="submit" value="PurchaseTicket" >
+    </form>
+</div>

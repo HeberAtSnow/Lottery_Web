@@ -1,0 +1,38 @@
+﻿@page
+@model FrontEnd.Pages.PickChoiceModel;
+@{
+    ViewData["Title"] = "PickChoice";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        .vhcenter {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+    <title>🍀 Heber's Cash Luck!</title>
+</head>
+<div class="vhcenter">
+    <h1>Thank you @Model.Name</h1>
+    <h1>We have two choices for you to choice your tickes:</h1>
+    <p> </p>
+    <form asp-page-handler="PickNumbers" method="post">
+        <h2>Pick your numbers by yourself!</h2>
+        <p>Do you have lucky numbers? Make sure to include them in your ticket!</p>
+        <input class="btn btn-primary" type="submit" value="Pick your own."/>
+    </form>
+    <form asp-page-handler="QuickPick" method="post">
+        <p> </p>
+        <h2>Let the computer choose the numbers for you</h2>
+        <p>Believe in randomness? Let our advanced QuickPick™ system choose a perfect number for you!(also perfect for buying in bulk)</p>
+        <input class="btn btn-primary" type="submit" value="QuickPick™."/>
+    </form>
+</div>

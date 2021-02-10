@@ -1,0 +1,36 @@
+﻿@page
+@model FrontEnd.Pages.IndexModel
+@{
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        .vhcenter {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+     
+    <title>🍀 Heber's Cash Luck!</title>
+</head>
+<div class="vhcenter">
+    <h1 class="font-weight-bolder">🍀 Heber's Cash Luck!™</h1>
+    <h3 class=" font-weight-light">Try your luck in the biggest, most luxurious lottery in 50 states!</h3>
+    <h4 class="font-weight-lighter">(we still cant beat California)</h4>
+    <p></p>
+    <p>Want to join the thousands of americans wasting their hard earned money on impossible odds?</p>
+    
+    <form method="post">
+        <div class="form-text">
+            <label for="name">Just enter your name and get started! @Model.name</label>
+            <input name="name" type="text" placeholder="Input your full name"  />
+        </div>
+        <input class="btn btn-primary" type="submit">
+    </form>
+</div>

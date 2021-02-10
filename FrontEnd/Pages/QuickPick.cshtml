@@ -1,0 +1,30 @@
+﻿@page
+@model FrontEnd.Pages.QuickPickModel
+@{
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        .vhcenter {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+    <title>🍀 Heber's Cash Luck!</title>
+</head>
+<div class="vhcenter">
+    <h1>Ok @Model.Name</h1>
+    <h2>This should be simple.</h2>
+    <form method="post">
+        <label for="ticketNum">How many QuickPick™ tickets would you like to purchase?</label>
+        <input name="number1" type="number" placeholder="number 1" />
+        <input class="btn btn-primary" type="submit" value="PurchaseTickets">
+    </form>
+</div>
