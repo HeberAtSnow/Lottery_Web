@@ -2,6 +2,7 @@
 @model FrontEnd.Pages.StoreModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+    Layout = "_Layout";
 }
 
 <h1>
@@ -38,6 +39,15 @@
         <input type="number" name="ticket" min="0" max="26" /><br />
         <button type="submit">Let's win that price!</button>
     </form>
+
+    @if (Model.RecentPurchase == true)
+    {
+        <h2>Last Ticket bought</h2>
+        @for (int i = 0; i < 6; i++)
+        {
+            <p>Number @i: @Model.LastTicket[i]</p>
+        }
+    }
 }
 
 @if (Model.Selection == "QuickPick")
