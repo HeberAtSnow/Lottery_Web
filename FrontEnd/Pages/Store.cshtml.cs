@@ -13,6 +13,9 @@ namespace FrontEnd.Pages
     {
         private IMemoryCache _cache;
         private LotteryProgram lp;
+        public IEnumerable<LotteryTicket> PurchasedTickets;
+        public string PlayerNombre;
+        public int NumQuickPicks;
         private const string cacheSelectionKey = "Selection";
         private const string cacheLastTicketKey = "LastTicket";
         private const string cacheRecentPurchaseKey = "RecentPurchase";
@@ -36,24 +39,37 @@ namespace FrontEnd.Pages
             _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
         }
 
-        public IActionResult OnPostQuickPick()
+        public IActionResult OnPostQuickPick(string name)
         {
+            PlayerNombre = name;
             cacheSelectionValue = "QuickPick";
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
-            return RedirectToPage();
+            return Page();
         }
         public IActionResult OnPostNumberPick()
         {
             cacheSelectionValue = "NumberPick";
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
-            return RedirectToPage();
+            return Page();
         }
 
-        public IActionResult OnPostQuickPickPurchase(int numTickets)
+        public IActionResult OnPostQuickPickPurchase(string name,int numTickets)
         {
             //START HERE
             //lp.lv.SellQuickTickets(____playername_____, ____qty____);
-            return RedirectToPage();
+
+            //TODO: need to read the html variable "name"
+            //      and save it to Model's private string playerNombre
+            //      ensure not null
+            PlayerNombre = name;
+            NumQuickPicks = numTickets;
+
+            //Doh! I first tried to get just this ticket sales.  Wrong!
+            //What is needed is to get all ticket sales for this player-name
+            //PurchasedTickets = lp.lv.SellQuickTickets(name, numTickets);//TODO: replace "x" with playerNobmre
+            lp.lv.SellQuickTickets(name, numTickets);
+            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            return Page();
         }
 
         public IActionResult OnPostNumberPickPurchase(int [] ticket)
@@ -63,7 +79,7 @@ namespace FrontEnd.Pages
                 _cache.Set(cacheRecentPurchaseKey, true);
                 _cache.Set(cacheLastTicketKey, ticket);
             }
-            return RedirectToPage();
+            return Page();
         }
     }
 }

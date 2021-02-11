@@ -55,6 +55,12 @@ namespace ClassLib
 
         public IEnumerable<LotteryTicket> ResultsByPlayer(string playerName)
         {
+            if (SalesState == TicketSales.OK)
+            {
+                return soldTickets.ToArray()
+                    .Where(t => t.Player == playerName)
+                    .OrderBy(t => string.Join("", t.balls.Select(b => b.ToString("00"))));
+            }
             var winners =
                 from w in winningTicketsL
                 where w.Player == playerName
@@ -68,7 +74,6 @@ namespace ClassLib
                 orderby l.balls.OrderBy(b => b)
                 select l;
             return winners.Union(losers);
-
         }
         public IEnumerable<LotteryTicket> ResultsByWinLevel()
         {
