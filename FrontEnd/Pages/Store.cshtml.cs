@@ -16,12 +16,18 @@ namespace FrontEnd.Pages
         private const string cacheSelectionKey = "Selection";
         private const string cacheLastTicketKey = "LastTicket";
         private const string cacheRecentPurchaseKey = "RecentPurchase";
+        private const string cacheNameSubmittedKey = "NameSubmitted";
+        private const string cacheNameKey = "Name";
         private string cacheSelectionValue;
         private int[] _lastTicket;
         private bool recentPurcahse;
+        private bool nameSubmitted;
+        private string playerName;
         public string Selection => cacheSelectionValue ?? "";
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurcahse;
+        public bool NameSubmitted => nameSubmitted;
+        public string PlayerName => playerName;
 
         public StoreModel(IMemoryCache cache,LotteryProgram prog)
         {
@@ -31,28 +37,32 @@ namespace FrontEnd.Pages
 
         public void OnGet()
         {
+            _cache.TryGetValue(cacheNameKey, out playerName);
+            _cache.TryGetValue(cacheNameSubmittedKey, out nameSubmitted);
             _cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse);
             _cache.TryGetValue(cacheLastTicketKey, out _lastTicket);
             _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
         }
 
-        public IActionResult OnPostQuickPick()
+        public IActionResult OnPostSubmitName(string name)
         {
-            cacheSelectionValue = "QuickPick";
-            _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
-            return RedirectToPage();
-        }
-        public IActionResult OnPostNumberPick()
-        {
-            cacheSelectionValue = "NumberPick";
-            _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
+            if (!(name is null))
+            {
+                _cache.Set(cacheNameSubmittedKey, true);
+                _cache.Set(cacheNameKey, name);
+            }
             return RedirectToPage();
         }
 
-        public IActionResult OnPostQuickPickPurchase(int numTickets)
+        public IActionResult OnPostPurchaseMethod(string selection)
         {
-            //START HERE
-            //lp.lv.SellQuickTickets(____playername_____, ____qty____);
+            _cache.Set(cacheSelectionKey, selection, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostQuickPickPurchase(string name, int numTickets)
+        {
+            var validPurchase = lp.lv.SellQuickTickets(name, numTickets);
             return RedirectToPage();
         }
 

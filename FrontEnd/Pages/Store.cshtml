@@ -60,16 +60,22 @@
         </h1>
     </header>
     <main>
-        <label for="name">Lucky Participant Name:</label>
-        <input name="name" type="text" placeholder="Name" />
-
-        <h2>
-            How do you want to acquire your winner tickets?
-        </h2>
-        <form method="post">
-            <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
-            <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+        <form method="post" asp-page-handler="SubmitName">
+            <label for="name">Lucky Participant Name:</label>
+            <input name="name" type="text" placeholder="Name" value="@Model.PlayerName" />
+            <button type="submit">Submit Name</button>
         </form>
+
+        @if (Model.NameSubmitted == true)
+        {
+            <h2>
+                Hi @Model.PlayerName! How do you want to acquire your winner tickets?
+            </h2>
+            <form method="post" asp-page-handler="PurchaseMethod">
+                <button type="submit" name="selection" value="NumberPick">Pick By Number</button>
+                <button type="submit" name="selection" value="QuickPick">Quick Pick</button>
+            </form>
+        }
 
         @if (Model.Selection == "NumberPick")
         {
@@ -119,6 +125,7 @@
             <form method="post" asp-page-handler="QuickPickPurchase">
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
                 <input name="numTickets" type="number" min="0" max="1000" />
+                <input name="name" value="@Model.PlayerName" hidden />
                 <br />
                 <button type="submit">Give me them Tickets!</button>
             </form>
