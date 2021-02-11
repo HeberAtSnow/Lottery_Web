@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
@@ -11,6 +12,7 @@ namespace FrontEnd.Pages
     public class StoreModel : PageModel
     {
         private IMemoryCache _cache;
+        private LotteryProgram lp;
         private const string cacheSelectionKey = "Selection";
         private const string cacheLastTicketKey = "LastTicket";
         private const string cacheRecentPurchaseKey = "RecentPurchase";
@@ -21,9 +23,10 @@ namespace FrontEnd.Pages
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurcahse;
 
-        public StoreModel(IMemoryCache cache)
+        public StoreModel(IMemoryCache cache,LotteryProgram prog)
         {
             _cache = cache;
+            lp = prog;
         }
 
         public void OnGet()
@@ -48,6 +51,8 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostQuickPickPurchase(int numTickets)
         {
+            //START HERE
+            //lp.lv.SellQuickTickets(____playername_____, ____qty____);
             return RedirectToPage();
         }
 
