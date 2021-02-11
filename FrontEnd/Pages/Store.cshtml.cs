@@ -23,6 +23,8 @@ namespace FrontEnd.Pages
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurcahse;
 
+        public string playerName { get; private set; }
+
         public StoreModel(IMemoryCache cache,LotteryProgram prog)
         {
             _cache = cache;
@@ -52,7 +54,7 @@ namespace FrontEnd.Pages
         public IActionResult OnPostQuickPickPurchase(int numTickets)
         {
             //START HERE
-            //lp.lv.SellQuickTickets(____playername_____, ____qty____);
+            lp.lv.SellQuickTickets(playerName, numTickets);
             return RedirectToPage();
         }
 

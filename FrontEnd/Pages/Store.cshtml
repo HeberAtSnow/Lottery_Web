@@ -52,6 +52,8 @@
             border-radius: 100px;
         }
     </style>
+
+
 </head>
 <body>
     <header>
@@ -60,8 +62,7 @@
         </h1>
     </header>
     <main>
-        <label for="name">Lucky Participant Name:</label>
-        <input name="name" type="text" placeholder="Name" />
+        
 
         <h2>
             How do you want to acquire your winner tickets?
@@ -81,6 +82,9 @@
             </p>
 
             <form method="post" asp-page-handler="NumberPickPurchase">
+
+
+
                 @for (int i = 0; i < 5; i++)
                 {
                     <label for="ticket">Number @(i + 1) :</label>
@@ -89,6 +93,12 @@
                 <label for="ticket">Powerball:</label>
                 <input id="powerball" type="number" name="ticket" min="0" max="26" />
                 <br />
+                <br />
+                <label for="name">Lucky Participant Name:</label>
+                <input name="name" type="text" placeholder="Name" />
+
+                <br />
+
                 <button type="submit">Let's win that price!</button>
             </form>
 
