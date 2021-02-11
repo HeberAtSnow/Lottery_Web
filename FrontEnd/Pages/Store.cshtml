@@ -60,13 +60,17 @@
         </h1>
     </header>
     <main>
-        <label for="name">Lucky Participant Name:</label>
-        <input name="name" type="text" placeholder="Name" />
+
 
         <h2>
+            @if (Model.Name != null)
+            {
+                @Model.Name
+            }
             How do you want to acquire your winner tickets?
         </h2>
         <form method="post">
+
             <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
             <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
         </form>
@@ -81,6 +85,8 @@
             </p>
 
             <form method="post" asp-page-handler="NumberPickPurchase">
+                <label for="name">Lucky Participant Name:</label>
+                <input name="name" type="text" placeholder="Your Name" name="name" required />
                 @for (int i = 0; i < 5; i++)
                 {
                     <label for="ticket">Number @(i + 1) :</label>
@@ -117,6 +123,8 @@
             </p>
 
             <form method="post" asp-page-handler="QuickPickPurchase">
+                <label for="name">Lucky Participant Name:</label>
+                <input name="name" type="text" placeholder="Your Name" name="name" required />
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
                 <input name="numTickets" type="number" min="0" max="1000" />
                 <br />
