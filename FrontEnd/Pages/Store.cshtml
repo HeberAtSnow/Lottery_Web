@@ -46,10 +46,14 @@
         td {
             margin: .25em;
             padding: 10px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
             background-color: white;
             border-collapse: collapse;
             border: 1px solid black;
-            border-radius: 100px;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -60,8 +64,7 @@
         </h1>
     </header>
     <main>
-        <label for="name">Lucky Participant Name:</label>
-        <input name="name" type="text" placeholder="Name" />
+
 
         <h2>
             How do you want to acquire your winner tickets?
@@ -117,11 +120,30 @@
             </p>
 
             <form method="post" asp-page-handler="QuickPickPurchase">
+                <label for="name">Lucky Participant Name:</label>
+                <input name="name" type="text" placeholder="Name" />
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
                 <input name="numTickets" type="number" min="0" max="1000" />
                 <br />
                 <button type="submit">Give me them Tickets!</button>
             </form>
+        }
+
+        @if (Model.RecentPurchase == true)
+        {
+            <p>recently purchased by @Model.name</p>
+            foreach (ClassLib.LotteryTicket ticket in Model.lp.p.soldTickets.Where(ticket => ticket.Player == Model.name))
+            {
+                <table>
+                    <tr>
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <td>@ticket.balls[i]</td>
+                        }
+                        <td id="powerball">@ticket.powerBall</td>
+                    </tr>
+                </table>
+            }
         }
     </main>
 </body>

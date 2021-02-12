@@ -12,10 +12,14 @@ namespace FrontEnd.Pages
     public class StoreModel : PageModel
     {
         private IMemoryCache _cache;
-        private LotteryProgram lp;
+        public LotteryProgram lp;
+        public string name;
+        //keys
         private const string cacheSelectionKey = "Selection";
         private const string cacheLastTicketKey = "LastTicket";
         private const string cacheRecentPurchaseKey = "RecentPurchase";
+        private const string lotteryProgramKey = "LotteryProgram";
+        private const string playerNameKey = "playerName";
         private string cacheSelectionValue;
         private int[] _lastTicket;
         private bool recentPurcahse;
@@ -34,6 +38,8 @@ namespace FrontEnd.Pages
             _cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse);
             _cache.TryGetValue(cacheLastTicketKey, out _lastTicket);
             _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
+            _cache.TryGetValue(lotteryProgramKey, out lp);
+            _cache.TryGetValue(playerNameKey, out name);
         }
 
         public IActionResult OnPostQuickPick()
@@ -49,11 +55,21 @@ namespace FrontEnd.Pages
             return RedirectToPage();
         }
 
-        public IActionResult OnPostQuickPickPurchase(int numTickets)
+        public IActionResult OnPostQuickPickPurchase(string name, int numTickets)
         {
-            //START HERE
-            //lp.lv.SellQuickTickets(____playername_____, ____qty____);
-            return RedirectToPage();
+            if (String.IsNullOrEmpty(name) || numTickets < 1 || numTickets > 1000)
+            {
+                return RedirectToPage();
+            }
+            else
+            {
+                lp.lv.SellQuickTickets(name, numTickets);
+                _cache.Set(cacheRecentPurchaseKey,true , new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
+                _cache.Set(playerNameKey, name, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
+                _cache.Set(lotteryProgramKey, lp);
+                return RedirectToPage();
+            }
+            
         }
 
         public IActionResult OnPostNumberPickPurchase(int [] ticket)
