@@ -49,10 +49,12 @@ namespace FrontEnd.Pages
             return RedirectToPage();
         }
 
-        public IActionResult OnPostQuickPickPurchase(int numTickets)
+        public IActionResult OnPostQuickPickPurchase(int numTickets, string name)
         {
             //START HERE
-            //lp.lv.SellQuickTickets(____playername_____, ____qty____);
+
+            var templp = lp.lv.SellQuickTickets(name, numTickets);
+            lp.p.ResultsByPlayer(name);
             return RedirectToPage();
         }
 
