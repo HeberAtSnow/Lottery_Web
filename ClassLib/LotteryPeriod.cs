@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-
 namespace ClassLib
 {
     public enum TicketSales
@@ -51,6 +50,21 @@ namespace ClassLib
             //      by changing the state
 
             WinningTicket = new LotteryTicket("WinningTicket");
+        }
+
+        public IEnumerable<LotteryTicket> GetSoldTicketsByPlayer(string playerName)
+        {
+            List<LotteryTicket> playerTickets = new List<LotteryTicket>();
+
+            foreach(var ticket in soldTickets)
+            {
+                if(ticket.Player == playerName)
+                {
+                    playerTickets.Add(ticket);
+                }
+            }
+
+            return playerTickets;
         }
 
         public IEnumerable<LotteryTicket> ResultsByPlayer(string playerName)

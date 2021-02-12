@@ -60,8 +60,6 @@
         </h1>
     </header>
     <main>
-        <label for="name">Lucky Participant Name:</label>
-        <input name="name" type="text" placeholder="Name" />
 
         <h2>
             How do you want to acquire your winner tickets?
@@ -81,6 +79,9 @@
             </p>
 
             <form method="post" asp-page-handler="NumberPickPurchase">
+                <label for="playerName">Lucky Participant Name:</label>
+                <input name="playerName" type="text" placeholder="Name" required="required" />
+                <br />
                 @for (int i = 0; i < 5; i++)
                 {
                     <label for="ticket">Number @(i + 1) :</label>
@@ -89,7 +90,7 @@
                 <label for="ticket">Powerball:</label>
                 <input id="powerball" type="number" name="ticket" min="0" max="26" />
                 <br />
-                <button type="submit">Let's win that price!</button>
+                <button type="submit">Let's win that prize!</button>
             </form>
 
             @if (Model.RecentPurchase == true)
@@ -117,11 +118,43 @@
             </p>
 
             <form method="post" asp-page-handler="QuickPickPurchase">
+                <label for="playerName">Lucky Participant Name:</label>
+                <input name="playerName" type="text" placeholder="Name" required="required" />
+                <br />
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
                 <input name="numTickets" type="number" min="0" max="1000" />
                 <br />
                 <button type="submit">Give me them Tickets!</button>
             </form>
+
+            @if(Model.RecentPurchase == true)
+            {
+                <h2>All Ticket Purchases for @Model.PlayerName:</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Ball 1</td>
+                            <td>Ball 2</td>
+                            <td>Ball 3</td>
+                            <td>Ball 4</td>
+                            <td>Ball 5</td>
+                            <td id="powerball">Powerball</td>
+                        </tr>
+                    </thead>
+                  
+                    @foreach(var lt in Model.playerTickets)
+                    {
+                        <tr>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <td>@lt.balls[i]</td>
+                            }
+                            <td id="powerball">@lt.powerBall</td>
+                        </tr>                        
+                    }                 
+                </table>
+            }
         }
     </main>
 </body>
