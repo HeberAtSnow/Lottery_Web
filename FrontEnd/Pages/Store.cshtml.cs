@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using ClassLib;
@@ -18,10 +19,12 @@ namespace FrontEnd.Pages
         private const string cacheRecentPurchaseKey = "RecentPurchase";
         private string cacheSelectionValue;
         private int[] _lastTicket;
-        private bool recentPurcahse;
+        private bool recentPurchase;
         public string Selection => cacheSelectionValue ?? "";
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
-        public bool RecentPurchase => recentPurcahse;
+        public bool RecentPurchase => recentPurchase;
+        [Required]
+        public string Name { get; set; }
 
         public StoreModel(IMemoryCache cache,LotteryProgram prog)
         {
@@ -31,7 +34,7 @@ namespace FrontEnd.Pages
 
         public void OnGet()
         {
-            _cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse);
+            _cache.TryGetValue(cacheRecentPurchaseKey, out recentPurchase);
             _cache.TryGetValue(cacheLastTicketKey, out _lastTicket);
             _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
         }
@@ -51,17 +54,22 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostQuickPickPurchase(int numTickets)
         {
-            //START HERE
-            //lp.lv.SellQuickTickets(____playername_____, ____qty____);
+            Name = Request.Form["name"];
+            if(lp.lv.SellQuickTickets(Name, numTickets))
+            {
+                return RedirectToPage();
+            }
             return RedirectToPage();
         }
 
         public IActionResult OnPostNumberPickPurchase(int [] ticket)
         {
+            Name = Request.Form["name"];
             if (ticket.Length == 6)
             {
                 _cache.Set(cacheRecentPurchaseKey, true);
                 _cache.Set(cacheLastTicketKey, ticket);
+                lp.lv.SellTicket(Name, ticket);
             }
             return RedirectToPage();
         }
