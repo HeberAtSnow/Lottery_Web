@@ -62,7 +62,7 @@
         </h1>
     </header>
     <main>
-        
+
 
         <h2>
             How do you want to acquire your winner tickets?
@@ -81,9 +81,16 @@
                 I don't trust computers! If you want something done right, do it yourself.
             </p>
 
+            @if (Model.incorrectName)
+            {
+                <p style="color:red;">Name is required!</p>
+            }
+            @if (Model.incorrectTicket)
+            {
+                <p style="color:red;">Error in the ticket field. Please try again</p>
+            }
+
             <form method="post" asp-page-handler="NumberPickPurchase">
-
-
 
                 @for (int i = 0; i < 5; i++)
                 {
@@ -104,14 +111,21 @@
 
             @if (Model.RecentPurchase == true)
             {
-                <h2>Last Ticket bought</h2>
+                <h2>Tickets bought</h2>
                 <table>
+
                     <tr>
-                        @for (int i = 0; i < 5; i++)
+                        @foreach (var ticket in @Model.lotteryTickets)
                         {
-                            <td>@Model.LastTicket[i]</td>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <td>@ticket.balls[i]</td>
+
+                            }
+
+                            <td id="powerball">@ticket.powerBall</td>
                         }
-                        <td id="powerball">@Model.LastTicket[5]</td>
+                        
                     </tr>
                 </table>
             }
@@ -130,6 +144,13 @@
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
                 <input name="numTickets" type="number" min="0" max="1000" />
                 <br />
+                <br />
+                <br />
+                <label for="name">Lucky Participant Name:</label>
+                <input name="name" type="text" placeholder="Name" />
+
+                <br />
+
                 <button type="submit">Give me them Tickets!</button>
             </form>
         }
