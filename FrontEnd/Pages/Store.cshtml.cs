@@ -97,20 +97,24 @@ namespace FrontEnd.Pages
             if (name == null)
             {
                 _cache.Set("incorrectname", true, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
                 return RedirectToPage();
             }
             if (ticket.Length != 6)
             {
                 _cache.Set("incorrectticket", true, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
                 return RedirectToPage();
             }
             if (ticket.Length == 6)
             {
-                
-                /*if (_cache.TryGetValue("lotterytickets", out lotteryTickets))
+                if (_cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse))
                 {
                     lotteryTickets = (List<LotteryTicket>)_cache.Get("lotterytickets");
-                }*/
+                }
+               
+                _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
 
                 _cache.Set(cacheRecentPurchaseKey, true);
                 lotteryTicket= lp.lv.SellTicket(name, ticket);

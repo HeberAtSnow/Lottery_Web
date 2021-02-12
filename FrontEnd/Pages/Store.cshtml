@@ -117,15 +117,16 @@
                     <tr>
                         @foreach (var ticket in @Model.lotteryTickets)
                         {
-                            @for (int i = 0; i < 5; i++)
-                            {
-                                <td>@ticket.balls[i]</td>
+                            <tr>
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <td>@ticket.balls[i]</td>
 
-                            }
+                                }
 
-                            <td id="powerball">@ticket.powerBall</td>
+                                <td id="powerball">@ticket.powerBall</td>
+                            </tr>
                         }
-                        
                     </tr>
                 </table>
             }
