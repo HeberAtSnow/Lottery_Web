@@ -73,13 +73,15 @@ namespace ClassLib
                 throw new TicketSalesClosedException();
         }
 
-        public bool SellQuickTickets(string playerName, int qty)
+        public List<LotteryTicket> SellQuickTickets(string playerName, int qty)
         {
+            var lotterytickets = new List<LotteryTicket>();
+
             for(int i = 0; i < qty; i++)
             {
-                SellTicket(playerName);
+                lotterytickets.Add(SellTicket(playerName));
             }
-            return true;
+            return lotterytickets;
         }
 
     }

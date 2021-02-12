@@ -15,18 +15,21 @@ namespace FrontEnd.Pages
         private LotteryProgram lp;
 
         private LotteryTicket lotteryTicket = new LotteryTicket();
-        public List<LotteryTicket> lotteryTickets = new List<LotteryTicket>();
+        public List<LotteryTicket> numlotteryTickets = new List<LotteryTicket>();
+
+        public List<LotteryTicket> randlotteryTickets = new List<LotteryTicket>();
 
         private const string cacheSelectionKey = "Selection";
         private const string cacheLastTicketKey = "LastTicket";
         private const string cacheRecentPurchaseKey = "RecentPurchase";
         private string cacheSelectionValue;
         private int[] _lastTicket;
-        private bool recentPurcahse;
+        //private bool numrecentPurcahse;
         public string Selection = "";
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
-        public bool RecentPurchase = false;
 
+        public bool NumRecentPurchase = false;
+        public bool RandRecentPurchase = false;
 
         public bool incorrectName = false;
         
@@ -59,15 +62,25 @@ namespace FrontEnd.Pages
             }
 
 
-            if (_cache.TryGetValue("lotterytickets", out lotteryTickets))
+            if (_cache.TryGetValue("numlotterytickets", out numlotteryTickets))
             {
-                lotteryTickets = (List<LotteryTicket>) _cache.Get("lotterytickets");
+                numlotteryTickets = (List<LotteryTicket>) _cache.Get("numlotterytickets");
+            }
+
+            if (_cache.TryGetValue("randlotterytickets", out randlotteryTickets))
+            {
+                randlotteryTickets = (List<LotteryTicket>)_cache.Get("randlotterytickets");
             }
 
 
-            if (_cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse))
+            if (_cache.TryGetValue("numticketssold", out NumRecentPurchase))
             {
-                RecentPurchase = (bool)_cache.Get(cacheRecentPurchaseKey);
+                NumRecentPurchase = (bool)_cache.Get("numticketssold");
+            }
+
+            if (_cache.TryGetValue("randticketssold", out RandRecentPurchase))
+            {
+                RandRecentPurchase = (bool)_cache.Get("randticketssold");
             }
 
         }
@@ -88,7 +101,40 @@ namespace FrontEnd.Pages
         public IActionResult OnPostQuickPickPurchase(string name, int numTickets)
         {
             //START HERE
-            lp.lv.SellQuickTickets(name, numTickets);
+            if (name == null)
+            {
+                _cache.Set("incorrectname", true, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                return RedirectToPage();
+            }
+            if (numTickets <= 0)
+            {
+                _cache.Set("incorrectticket", true, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                return RedirectToPage();
+            }
+
+
+
+            if (_cache.TryGetValue("randticketssold", out RandRecentPurchase))
+            {
+                randlotteryTickets = (List<LotteryTicket>)_cache.Get("randlotterytickets");
+            }
+
+            _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+            _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+
+            _cache.Set("randticketssold", true);
+
+            var newlotteryTickets = lp.lv.SellQuickTickets(name, numTickets);
+
+            foreach (var ticket in newlotteryTickets)
+            {
+                randlotteryTickets.Add(ticket);
+            }
+
+
+            _cache.Set("randlotterytickets", randlotteryTickets, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(300)));
             return RedirectToPage();
         }
 
@@ -106,24 +152,23 @@ namespace FrontEnd.Pages
                 _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
                 return RedirectToPage();
             }
-            if (ticket.Length == 6)
+          
+            if (_cache.TryGetValue("numticketssold", out NumRecentPurchase))
             {
-                if (_cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse))
-                {
-                    lotteryTickets = (List<LotteryTicket>)_cache.Get("lotterytickets");
-                }
-               
-                _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
-                _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
-
-                _cache.Set(cacheRecentPurchaseKey, true);
-                lotteryTicket= lp.lv.SellTicket(name, ticket);
-                lotteryTickets.Add(lotteryTicket);
-
-
-
-                _cache.Set("lotterytickets", lotteryTickets, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(300)));
+                numlotteryTickets = (List<LotteryTicket>)_cache.Get("numlotterytickets");
             }
+               
+            _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+            _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+
+            _cache.Set("numticketssold", true);
+            lotteryTicket= lp.lv.SellTicket(name, ticket);
+            numlotteryTickets.Add(lotteryTicket);
+
+
+
+            _cache.Set("numlotterytickets", numlotteryTickets, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(300)));
+            
             return RedirectToPage();
         }
     }
