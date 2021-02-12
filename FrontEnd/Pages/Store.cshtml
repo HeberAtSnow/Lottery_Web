@@ -56,17 +56,18 @@
 <body>
     <header>
         <h1>
-            Welcome to the ticket store!
+            Welcome to the ticket store!;
         </h1>
     </header>
     <main>
-        <label for="name">Lucky Participant Name:</label>
-        <input name="name" type="text" placeholder="Name" />
-
-        <h2>
-            How do you want to acquire your winner tickets?
-        </h2>
         <form method="post">
+            <label >Lucky Participant Name:</label>
+            <input asp-for="name" type="text" placeholder="Name" />
+
+            <h2>
+                How do you want to acquire your winner tickets?
+            </h2>
+
             <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
             <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
         </form>
@@ -118,9 +119,9 @@
 
             <form method="post" asp-page-handler="QuickPickPurchase">
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
-                <input name="numTickets" type="number" min="0" max="1000" />
+                <input  type="number" min="1" max="1000" />
                 <br />
-                <button type="submit">Give me them Tickets!</button>
+                <button type="submit" asp-page-handler="GiveMeThemTickets">Give me them Tickets!</button>
             </form>
         }
     </main>

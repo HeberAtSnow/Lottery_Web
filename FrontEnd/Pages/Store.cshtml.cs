@@ -7,12 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
 
+
 namespace FrontEnd.Pages
 {
+    
     public class StoreModel : PageModel
     {
+
+        [BindProperty]
+        public string name { get; set; }
+        private string _name;
         private IMemoryCache _cache;
         private LotteryProgram lp;
+        private const string cacheNameKey = "Name";
         private const string cacheSelectionKey = "Selection";
         private const string cacheLastTicketKey = "LastTicket";
         private const string cacheRecentPurchaseKey = "RecentPurchase";
@@ -24,6 +31,7 @@ namespace FrontEnd.Pages
         public bool RecentPurchase => recentPurcahse;
 
         public StoreModel(IMemoryCache cache,LotteryProgram prog)
+
         {
             _cache = cache;
             lp = prog;
@@ -31,14 +39,17 @@ namespace FrontEnd.Pages
 
         public void OnGet()
         {
+            _cache.TryGetValue(cacheNameKey, out _name);
             _cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse);
             _cache.TryGetValue(cacheLastTicketKey, out _lastTicket);
             _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
+           
         }
 
         public IActionResult OnPostQuickPick()
         {
             cacheSelectionValue = "QuickPick";
+            _cache.Set(cacheNameKey, name, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(180)));
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
             return RedirectToPage();
         }
@@ -48,12 +59,15 @@ namespace FrontEnd.Pages
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
             return RedirectToPage();
         }
-
+        
         public IActionResult OnPostQuickPickPurchase(int numTickets)
         {
-            //START HERE
-            //lp.lv.SellQuickTickets(____playername_____, ____qty____);
-            return RedirectToPage();
+            if (_name == null) { return RedirectToPage(); }
+            else
+            {
+                lp.lv.SellQuickTickets(_name, numTickets);
+                return RedirectToPage();
+            }
         }
 
         public IActionResult OnPostNumberPickPurchase(int [] ticket)
@@ -65,5 +79,8 @@ namespace FrontEnd.Pages
             }
             return RedirectToPage();
         }
+   
+
+      
     }
 }
