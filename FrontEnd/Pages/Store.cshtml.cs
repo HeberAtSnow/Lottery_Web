@@ -23,13 +23,17 @@ namespace FrontEnd.Pages
         private bool recentPurcahse;
         private bool nameSubmitted;
         private string playerName;
+        private IEnumerable<LotteryTicket> playerTickets;
+        public int NumTicketsBought { get; private set; }
+
+        public IEnumerable<LotteryTicket> PlayerTickets => playerTickets ?? (playerTickets = new List<LotteryTicket>());
         public string Selection => cacheSelectionValue ?? "";
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurcahse;
         public bool NameSubmitted => nameSubmitted;
         public string PlayerName => playerName;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(IMemoryCache cache, LotteryProgram prog)
         {
             _cache = cache;
             lp = prog;
@@ -42,6 +46,8 @@ namespace FrontEnd.Pages
             _cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse);
             _cache.TryGetValue(cacheLastTicketKey, out _lastTicket);
             _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
+            playerTickets = lp.p.SoldTicketsByName(PlayerName);
+            NumTicketsBought = playerTickets.Count();
         }
 
         public IActionResult OnPostSubmitName(string name)

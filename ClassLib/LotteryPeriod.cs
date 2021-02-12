@@ -84,6 +84,12 @@ namespace ClassLib
                 select l;
             return winners.Union(losers);
         }
+
+        public IEnumerable<LotteryTicket> SoldTicketsByName(string name)
+        {
+            return soldTickets.Where(t => t.Player == name);
+        }
+
         public void ComputeWinners()
         {
             //TODO: ensure the state is set to ONLY let this work if drawing has started/ended

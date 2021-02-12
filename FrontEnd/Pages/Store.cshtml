@@ -130,6 +130,29 @@
                 <button type="submit">Give me them Tickets!</button>
             </form>
         }
+        <section id="results">
+            @if (Model.NumTicketsBought != 0)
+            {
+                <h2>
+                    You have bought a total of @Model.NumTicketsBought tickets!
+                </h2>
+                <h2>
+                    This is your ticket history:
+                </h2>
+                <table>
+                    @foreach (var ticket in Model.PlayerTickets)
+                    {
+                        <tr>
+                            @foreach (var num in ticket.balls)
+                            {
+                                <td>@num</td>
+                            }
+                            <td id="powerball">@ticket.powerBall</td>
+                        </tr>
+                    }
+                </table>
+            }
+        </section>
     </main>
 </body>
 </html>
