@@ -64,10 +64,10 @@
         <h2>
 
             How do you want to acquire your winning ticket(s)?
-            @if (Model.Name != null)
+            @if (Model.playerName != null)
             {
                 @:, 
-                @Model.Name
+                @Model.playerName
 
 
             }?
@@ -135,9 +135,29 @@
                 <button type="submit">Give me them Tickets!</button>
             </form>
         }
-        <p>
-            @Model.
-        </p>
+        @if (Model.PlayerTickets.Count() > 0)
+        {
+            <div>
+                <h2>Here are all of the tickets you purchased @Model.playerName, you purchased @Model.PlayerTickets.Count() tickets!</h2>
+                <table>
+
+                    @foreach (var ticket in Model.PlayerTickets)
+                    {
+                        <tr>
+                            @foreach (var number in ticket.balls)
+                            {
+                                <td>@number</td>
+                            }
+                            <td id="powerball">@ticket.powerBall</td>
+                        </tr>
+
+                    }
+
+                </table>
+
+            </div>
+        }
+        
     </main>
 </body>
 </html>

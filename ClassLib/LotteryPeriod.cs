@@ -70,6 +70,10 @@ namespace ClassLib
             return winners.Union(losers);
 
         }
+        public IEnumerable<LotteryTicket> SoldTicketsByName(String playerName)
+        {
+            return soldTickets.Where(t => t.Player == playerName);
+        }
         public IEnumerable<LotteryTicket> ResultsByWinLevel()
         {
             var winners =
