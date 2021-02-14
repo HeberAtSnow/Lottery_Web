@@ -13,20 +13,32 @@ namespace FrontEnd.Pages
     {
         private IMemoryCache _cache;
         private LotteryProgram lp;
-        public IEnumerable<LotteryTicket> PurchasedTickets;
-        public string PlayerNombre;
-        public int NumQuickPicks;
+
+        
+        public IEnumerable<LotteryTicket> numlotteryTickets;
+
+        public IEnumerable<LotteryTicket> randlotteryTickets;
+
+
         private const string cacheSelectionKey = "Selection";
         private const string cacheLastTicketKey = "LastTicket";
         private const string cacheRecentPurchaseKey = "RecentPurchase";
         private string cacheSelectionValue;
         private int[] _lastTicket;
-        private bool recentPurcahse;
-        public string Selection => cacheSelectionValue ?? "";
+        //private bool numrecentPurcahse;
+        public string Selection = "";
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
-        public bool RecentPurchase => recentPurcahse;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public bool NumRecentPurchase = false;
+        public bool RandRecentPurchase = false;
+
+        public bool incorrectName = false;
+
+        public bool incorrectTicket = false;
+
+        public string playerName { get; private set; }
+
+        public StoreModel(IMemoryCache cache, LotteryProgram prog)
         {
             _cache = cache;
             lp = prog;
@@ -34,52 +46,131 @@ namespace FrontEnd.Pages
 
         public void OnGet()
         {
-            _cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse);
-            _cache.TryGetValue(cacheLastTicketKey, out _lastTicket);
-            _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
+
+
+            if (_cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue))
+            {
+                Selection = _cache.Get(cacheSelectionKey).ToString();
+            }
+
+            if (_cache.TryGetValue("incorrectname", out incorrectName))
+            {
+                incorrectName = (bool)_cache.Get("incorrectname");
+            }
+            if (_cache.TryGetValue("incorrectticket", out incorrectTicket))
+            {
+                incorrectTicket = (bool)_cache.Get("incorrectticket");
+            }
+
+
+            if (_cache.TryGetValue("numlotterytickets", out numlotteryTickets))
+            {
+                numlotteryTickets = (IEnumerable<LotteryTicket>)_cache.Get("numlotterytickets");
+            }
+
+            if (_cache.TryGetValue("randlotterytickets", out randlotteryTickets))
+            {
+                randlotteryTickets = (IEnumerable<LotteryTicket>)_cache.Get("randlotterytickets");
+            }
+
+
+            if (_cache.TryGetValue("numticketssold", out NumRecentPurchase))
+            {
+                NumRecentPurchase = (bool)_cache.Get("numticketssold");
+            }
+
+            if (_cache.TryGetValue("randticketssold", out RandRecentPurchase))
+            {
+                RandRecentPurchase = (bool)_cache.Get("randticketssold");
+            }
+
         }
 
-        public IActionResult OnPostQuickPick(string name)
+        public IActionResult OnPostQuickPick()
         {
-            PlayerNombre = name;
             cacheSelectionValue = "QuickPick";
-            _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
-            return Page();
+            _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+            return RedirectToPage();
         }
         public IActionResult OnPostNumberPick()
         {
             cacheSelectionValue = "NumberPick";
-            _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
-            return Page();
+            _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+            return RedirectToPage();
         }
 
-        public IActionResult OnPostQuickPickPurchase(string name,int numTickets)
+        public IActionResult OnPostQuickPickPurchase(string name, int numTickets)
         {
             //START HERE
-            //lp.lv.SellQuickTickets(____playername_____, ____qty____);
+            if (name == null)
+            {
+                _cache.Set("incorrectname", true, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                return RedirectToPage();
+            }
+            if (numTickets <= 0)
+            {
+                _cache.Set("incorrectticket", true, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                return RedirectToPage();
+            }
 
-            //TODO: need to read the html variable "name"
-            //      and save it to Model's private string playerNombre
-            //      ensure not null
-            PlayerNombre = name;
-            NumQuickPicks = numTickets;
 
-            //Doh! I first tried to get just this ticket sales.  Wrong!
-            //What is needed is to get all ticket sales for this player-name
-            //PurchasedTickets = lp.lv.SellQuickTickets(name, numTickets);//TODO: replace "x" with playerNobmre
+
+            if (_cache.TryGetValue("randticketssold", out RandRecentPurchase))
+            {
+                randlotteryTickets = (IEnumerable<LotteryTicket>)_cache.Get("randlotterytickets");
+            }
+
+            _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+            _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+
+            _cache.Set("randticketssold", true);
+
             lp.lv.SellQuickTickets(name, numTickets);
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
-            return Page();
+
+            randlotteryTickets = lp.p.ResultsByPlayer(name);
+
+           
+            
+            _cache.Set("randlotterytickets", randlotteryTickets, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(300)));
+            return RedirectToPage();
         }
 
-        public IActionResult OnPostNumberPickPurchase(int [] ticket)
+        public IActionResult OnPostNumberPickPurchase(string name, int[] ticket)
         {
-            if (ticket.Length == 6)
+            if (name == null)
             {
-                _cache.Set(cacheRecentPurchaseKey, true);
-                _cache.Set(cacheLastTicketKey, ticket);
+                _cache.Set("incorrectname", true, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                return RedirectToPage();
             }
-            return Page();
+            if (ticket.Length != 6)
+            {
+                _cache.Set("incorrectticket", true, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+                return RedirectToPage();
+            }
+
+            if (_cache.TryGetValue("numticketssold", out NumRecentPurchase))
+            {
+                numlotteryTickets = (IEnumerable<LotteryTicket>)_cache.Get("numlotterytickets");
+            }
+
+            _cache.Set("incorrectname", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+            _cache.Set("incorrectticket", false, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(600)));
+
+            _cache.Set("numticketssold", true);
+
+            lp.lv.SellTicket(name, ticket);
+
+            numlotteryTickets = lp.p.ResultsByPlayer(name);
+
+
+
+            _cache.Set("numlotterytickets", numlotteryTickets, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(300)));
+
+            return RedirectToPage();
         }
     }
 }
