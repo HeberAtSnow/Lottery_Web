@@ -38,7 +38,7 @@ Layout = "_Layout";
         <label for="ticket">Powerball:</label>
         <input id="powerball" type="number" name="ticket" min="0" max="26" />
         <br />
-        <button type="submit">Let's win that price!</button>
+        <button class="wiggle purchase" type="submit">Let's win that price!</button>
     </form>
 
     @if (Model.RecentPurchase == true)
@@ -70,11 +70,14 @@ Layout = "_Layout";
         <input name="numTickets" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
         <input type="hidden" value="@Model.PlayerNombre" name="name" />
         <br />
-        <button type="submit">Give me them Tickets!</button>
+        <button class="wiggle purchase" type="submit">Give me them Tickets!</button>
     </form>
 }
 @if (Model.PurchasedTickets?.Any() ?? false)
 {
+    <h3>
+        Ticket History for @Model.PlayerNombre:
+    </h3>
     <table>
         <thead>
             <tr>

@@ -1,1 +1,22 @@
-﻿
+﻿nav {
+    background-color: black;
+    overflow: hidden;
+}
+
+nav a {
+    margin: 10px;
+    color: white;
+    float: right;
+    text-decoration: none;
+    text-align: center;
+    padding: 14px 16px;
+    border-radius: 30px;
+}
+
+nav a#home {
+    float: left;
+}
+
+nav a:hover {
+    background-color: #535353;
+}

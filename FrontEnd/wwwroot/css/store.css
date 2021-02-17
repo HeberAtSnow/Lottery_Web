@@ -1,4 +1,21 @@
-﻿input::-webkit-outer-spin-button,
+﻿@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    80% { transform: rotate(0deg); }
+    85% { transform: rotate(2.5deg); }
+    95% { transform: rotate(-2.5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.wiggle {
+    display: inline-block;
+    animation: wiggle 1.5s infinite;
+}
+
+.wiggle:hover {
+    animation: none;
+}
+
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -6,11 +23,16 @@ input::-webkit-inner-spin-button {
 
 body {
     text-align: center;
-    margin: 2em;
-    background-color: #ffffc4;
+    margin: 0;
+    background-color: #f7f7f7;
 }
 
-h1, h2, p, td, input, label {
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+* {
     font-family: sans-serif;
 }
 
@@ -26,10 +48,19 @@ button {
     font-size: 16px;
 }
 
-    button:hover {
-        background-color: black;
-        color: white;
-    }
+button.purchase {
+    background-color: #FFD700;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+button.purchase:hover {
+    background-color: black;
+    color: #FFD700;
+}
 
 input[type=text] {
     text-align: center;
