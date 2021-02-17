@@ -1,0 +1,39 @@
+﻿body
+{
+}
+#title {
+    border: 3px solid black;
+    border-radius: 50%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    text-align: center;
+}
+
+#powerballTitle {
+    border: 3px solid black;
+    border-radius: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    background-color: red;
+}
+
+#powerPlay1 {
+    background-color: black;
+    margin-left: 30%;
+    border: 1px solid black;
+
+}
+
+#powerPlay2 {
+    margin-left: -4px;
+    border: 1px solid black;
+}
+
+.powerPlay{
+}

@@ -19,8 +19,17 @@
             background-color: #ffffc4;
         }
 
-        h1, h2, p, td, label {
+        h1, h2, h3, h4, p, td, label {
             font-family: sans-serif;
+        }
+
+        #tempt{
+            padding-bottom: 10px;
+            border-bottom: 1px dashed black;
+        }
+
+        h3{
+            text-align: center;
         }
 
         button {
@@ -52,33 +61,88 @@
         }
 
         td {
-            margin: .25em;
-            padding: 10px;
-            background-color: white;
-            border-collapse: collapse;
+            margin-right: 25px;
+            text-align: center;
+        }
+
+        #title {
+            border: 3px solid black;
+            border-radius: 50%;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-align: center;
+        }
+
+        #powerballTitle {
+            border: 3px solid black;
+            border-radius: 50%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: center;
+            background-color: red;
+        }
+        #powerPlay1 {
+            background-color: black;
+            margin-left: 260px;
+            margin-top: -4px;
             border: 1px solid black;
-            border-radius: 100px;
+        }
+
+        #powerPlay2 {
+            margin-left: -4px;
+            border: 1px solid black;
+        }
+
+        header{
+            margin: 10px;
+        }
+
+        .ticket{
+            border: 2px dashed black;
+            width: 17%;
+            padding: 1em;
+        }
+
+        .center{
+            margin-left: auto;
+            margin-right: auto;
+            width: 25%;
+        }
+
+        #picks{
+            padding-right: 20px;
         }
     </style>
 </head>
 <body>
     <header>
+        <div>
+            <h4>Snow College Lottery</h4>
+        </div>
         <h1>
-            Welcome to the ticket store!
+            <span id="title">P</span> <span id="title">O</span> <span id="title">W</span> <span id="title">E</span> <span id="title">R</span> <span id="powerballTitle"><font color="white">Ball</font></span>
         </h1>
+        <div>
+            <span id="powerPlay1"><font color="white">POWER</font></span> <span id="powerPlay2">PLAY</span>
+        </div>
     </header>
     <main>
-        <form method="post">
-            <label for="name">Lucky Participant Name:</label>
-            <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
+        <div>
+            <form method="post">
+                <label for="name">Lucky Participant Name:</label>
+                <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
 
-            <h2>
-                How do you want to acquire your winner tickets?
-            </h2>
-            <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
-            <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
-        </form>
-
+                <h2>
+                    How do you want to acquire your winner tickets?
+                </h2>
+                <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
+                <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+            </form>
+        </div>
         @if (Model.Selection == "NumberPick")
         {
             <h2>
@@ -134,39 +198,47 @@
         }
         @if (Model.PurchasedTickets?.Any() ?? false)
         {
-            <table>
-                <tr>
-                    <td>Ball1</td>
-                    <td>Ball2</td>
-                    <td>Ball3</td>
-                    <td>Ball4</td>
-                    <td>Ball5</td>
-                    <td>PowerBall</td>
-                    <td>WinLevel</td>
-                    <td>WinAmt$</td>
-                </tr>
-                @foreach (var x in Model.PurchasedTickets)
-                {
+            <h2>@Model.PlayerNombre's: Ticket Picks</h2>
+            <div class="ticket">
+
+                <h3>Printed @Model.timePurchased</h3>
+
+                <p id="tempt">
+                    Don't miss your chance to win the the Jackpot!!! Buy your tickets today!
+                </p>
+
+                <table class="center">
                     <tr>
-                        <td>@x.balls[0]</td>
-                        <td>@x.balls[1]</td>
-                        <td>@x.balls[2]</td>
-                        <td>@x.balls[3]</td>
-                        <td>@x.balls[4]</td>
-                        <td>@x.powerBall</td>
-                        @if (x.isGraded)
-                        {
-                            <td>@x.winLevel</td>
-                            <td>@x.winAmtDollars.ToString("c")</td>
-                        }
-                        else
-                        {
-                            <td />
-                            <td />
-                        }
+                        <td id="picks"></td>
+                        <td id="picks"></td>
+                        <td id="picks"></td>
+                        <td id="picks"></td>
+                        <td id="picks"></td>
+                        <td>PWR</td>
                     </tr>
-                }
-            </table>
+                    @foreach (var x in Model.PurchasedTickets)
+                    {
+                        <tr>
+                            <td id="picks">@x.balls[0]</td>
+                            <td id="picks">@x.balls[1]</td>
+                            <td id="picks">@x.balls[2]</td>
+                            <td id="picks">@x.balls[3]</td>
+                            <td id="picks">@x.balls[4]</td>
+                            <td id="powerBall"><font color="white">@x.powerBall</font></td>
+                            @if (x.isGraded)
+                            {
+                                <td>@x.winLevel</td>
+                                <td>@x.winAmtDollars.ToString("c")</td>
+                            }
+                            else
+                            {
+                                <td />
+                                <td />
+                            }
+                        </tr>
+                    }
+                </table>
+            </div>
             <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
         }
     </main>

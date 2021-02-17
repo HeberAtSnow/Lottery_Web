@@ -12,6 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{80EBEB30-414E-4FD3-BE5D-2519A5778F41}"
 	ProjectSection(SolutionItems) = preProject
 		Design Document.txt = Design Document.txt
+		HTMLPage1.html = HTMLPage1.html
+		StyleSheet1.css = StyleSheet1.css
 	EndProjectSection
 EndProject
 Global

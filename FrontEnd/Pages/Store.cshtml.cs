@@ -25,6 +25,7 @@ namespace FrontEnd.Pages
         public string Selection => cacheSelectionValue ?? "";
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurcahse;
+        public DateTime timePurchased;
 
         public StoreModel(IMemoryCache cache,LotteryProgram prog)
         {
@@ -63,6 +64,7 @@ namespace FrontEnd.Pages
             //      ensure not null
             PlayerNombre = name;
             NumQuickPicks = numTickets;
+            timePurchased = DateTime.Now;
 
             //Doh! I first tried to get just this ticket sales.  Wrong!
             //What is needed is to get all ticket sales for this player-name
