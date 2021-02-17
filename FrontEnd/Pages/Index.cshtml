@@ -2,17 +2,197 @@
 @model FrontEnd.Pages.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+   
 }
+<head>  
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" >
+        <link rel="stylesheet" href="~/Pages/Styles/LotteryStyleSheet.css" type="text/css" />
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Snow Lotto</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link"  href="~/Store?handler=NumberPick">Buy Tickets<span class="sr-only">Store</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" asp-page-handler="GoToStore">Employees</a>
+            </li>
+           
+        </ul>
+    </div>
+</nav>
+<body>
+    <div class="PowerBallHandler">
+        <h1 style="text-align:center; font-size:10vw;">
+            Welcome to PowerBall!
+        </h1>
+        <h2 style="text-align:center;">Ready to Play and Win?</h2>
+        <form method="post">
+            <div class="flip">
+                <button type="submit" id="flipButton" asp-page-handler="GoToStore">
+                    <div class="front">Play Ball</div>
+                    <div class="back">Win!</div>
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
 
-<h1>
-    This is the index page.
-</h1>
+<style>
+   
+    #ClickHere{
+        text-align:center;
+    }
+    #flipButton{
+        background-color: white;
+        border: none;
+    }
+    body {
+        font-family: Montserrat, sans-serif;
+        font-weight: 400;
+    }
 
-<h2>
-    Who Are you?
-</h2>
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 
-<form method="post">
-    <button type="submit" asp-page-handler="GoToStore">Powerball Player</button>
-    <button type="submit" asp-page-handler="GoToSettings">Company Associate</button>
-</form>
+    .flip {
+        position: absolute;
+        width: 160px;
+        height: 48px;
+        -webkit-perspective: 500px;
+        -moz-perspective: 500px;
+        -ms-perspective: 500px;
+        perspective: 500px;
+        top: 50%;
+        left: 50%;
+        margin: -24px 0 0 -80px;
+    }
+
+        .flip button {
+            font-weight: 400;
+            text-transform: uppercase;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            -webkit-transform-style: preserve-3d;
+            -moz-transform-style: preserve-3d;
+            -o-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform: translateZ(-25px);
+            -moz-transform: translateZ(-25px);
+            -o-transform: translateZ(-25px);
+            -ms-transform: translateZ(-25px);
+            transform: translateZ(-25px);
+            -webkit-transition: -webkit-transform 0.3s;
+            -moz-transition: -moz-transform 0.3s;
+            -o-transition: -o-transform 0.3s;
+            -ms-transition: -ms-transform 0.3s;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+            .flip button .front,
+            .flip button .back {
+                margin: 0;
+                width: 160px;
+                height: 48px;
+                line-height: 48px;
+                position: absolute;
+                text-align: center;
+                letter-spacing: 0.4em;
+            }
+
+            .flip button .front {
+                background-color: #222;
+                color: #fff;
+                -webkit-transform: rotateY(0) translateZ(24px);
+                -moz-transform: rotateY(0) translateZ(24px);
+                -o-transform: rotateY(0) translateZ(24px);
+                -ms-transform: rotateY(0) translateZ(24px);
+                transform: rotateY(0) translateZ(24px);
+            }
+
+            .flip button .back {
+                background-color: orangered;
+                color: #fff;
+                -webkit-transform: rotateX(90deg) translateZ(24px);
+                -moz-transform: rotateX(90deg) translateZ(24px);
+                -o-transform: rotateX(90deg) translateZ(24px);
+                -ms-transform: rotateX(90deg) translateZ(24px);
+                transform: rotateX(90deg) translateZ(24px);
+                overflow: hidden;
+            }
+
+                .flip button .back:after {
+                    content: '';
+                    position: absolute;
+                    top: -32%;
+                    left: -10%;
+                    width: 120%;
+                    height: 50%;
+                    background: orangered;
+                    -webkit-transform: rotate(8deg);
+                    -moz-transform: rotate(8deg);
+                    -o-transform: rotate(8deg);
+                    -ms-transform: rotate(8deg);
+                    transform: rotate(8deg);
+                    -webkit-transition: all 0.5s ease;
+                    -moz-transition: all 0.5s ease;
+                    -o-transition: all 0.5s ease;
+                    -ms-transition: all 0.5s ease;
+                    transition: all 0.5s ease;
+                    -webkit-transition-delay: 0.15s;
+                    -moz-transition-delay: 0.15s;
+                    -o-transition-delay: 0.15s;
+                    -ms-transition-delay: 0.15s;
+                    transition-delay: 0.15s;
+                }
+
+            .flip button:hover {
+                -webkit-transform: translateZ(-24px) rotateX(-90deg);
+                -moz-transform: translateZ(-24px) rotateX(-90deg);
+                -o-transform: translateZ(-24px) rotateX(-90deg);
+                -ms-transform: translateZ(-24px) rotateX(-90deg);
+                transform: translateZ(-24px) rotateX(-90deg);
+            }
+
+                .flip button:hover .front {
+                    background: #000;
+                    -webkit-transition: all 0.8s ease;
+                    -moz-transition: all 0.8s ease;
+                    -o-transition: all 0.8s ease;
+                    -ms-transition: all 0.8s ease;
+                    transition: all 0.8s ease;
+                }
+
+                .flip button:hover .back {
+                    color: #222;
+                    font-weight:bold;
+                    -webkit-transition: color 0.4s linear;
+                    -moz-transition: color 0.4s linear;
+                    -o-transition: color 0.4s linear;
+                    -ms-transition: color 0.4s linear;
+                    transition: color 0.4s linear;
+                    background: orangered;
+                }
+
+                    .flip button:hover .back:after {
+                        -webkit-transform: rotate(6deg) translate(100px, -18px);
+                        -moz-transform: rotate(6deg) translate(100px, -18px);
+                        -o-transform: rotate(6deg) translate(100px, -18px);
+                        -ms-transform: rotate(6deg) translate(100px, -18px);
+                        transform: rotate(6deg) translate(100px, -18px);
+                    }
+
+
+</style>

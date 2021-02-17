@@ -8,6 +8,13 @@
 <html>
 <head>
     <style>
+        .centerMe {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          
+        }
+
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -15,7 +22,7 @@
         }
 
         body {
-            margin: 2em;
+            margin:15%;
             background-color: #ffffc4;
         }
 
@@ -23,22 +30,6 @@
             font-family: sans-serif;
         }
 
-        button {
-            margin: .5em;
-            background-color: #b8b8b8;
-            border-style: solid;
-            border-radius: 5px;
-            border-color: black;
-            color: black;
-            padding: 10px 15px;
-            text-align: center;
-            font-size: 16px;
-        }
-
-            button:hover {
-                background-color: black;
-                color: white;
-            }
 
         input[type=number] {
             padding: 10px;
@@ -50,7 +41,9 @@
         #powerball {
             background-color: red;
         }
-
+        button{
+            margin:auto;
+        }
         td {
             margin: .25em;
             padding: 10px;
@@ -60,115 +53,141 @@
             border-radius: 100px;
         }
     </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Pages/Styles/LotteryStyleSheet.css" type="text/css" />
 </head>
 <body>
-    <header>
-        <h1>
-            Welcome to the ticket store!
-        </h1>
-    </header>
+
     <main>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Snow Lotto</a>
+   
+            <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/Store?handler=NumberPick">Buy Tickets<span class="sr-only">Store</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-page-handler="GoToStore">Employees</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+
         <form method="post">
-            <label for="name">Lucky Participant Name:</label>
-            <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
-
-            <h2>
-                How do you want to acquire your winner tickets?
+            <h2 style="text-align:center;  font-size:10vw">
+                Get on your way to winning!
             </h2>
-            <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
-            <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+            <div class="centerMe">
+                <label for="name" style="font-weight:bold;">Enter Your Name:</label>
+                <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
+            </div>
+            <h2 style="text-align:center;">Pick how you want your numbers</h2>
+            <div class="centerMe">
+                <button class="btn btn-secondary" style="object-position:center; margin-top: 10px;" type="submit" asp-page-handler="NumberPick">My Lucky Number</button>
+            </div>
+            <div class="centerMe">
+                <button class="btn btn-secondary" style="margin-top: 10px;" type="submit" asp-page-handler="QuickPick">Feeling Lucky</button>
+            </div>
         </form>
-
-        @if (Model.Selection == "NumberPick")
-        {
-            <h2>
-                Number Pick
-            </h2>
-            <p>
-                I don't trust computers! If you want something done right, do it yourself.
-            </p>
-
-            <form method="post" asp-page-handler="NumberPickPurchase">
-                @for (int i = 0; i < 5; i++)
-                {
-                    <label for="ticket">Number @(i + 1) :</label>
-                    <input type="number" name="ticket" min="0" max="69" />
-                }
-                <label for="ticket">Powerball:</label>
-                <input id="powerball" type="number" name="ticket" min="0" max="26" />
-                <br />
-                <button type="submit">Let's win that price!</button>
-            </form>
-
-            @if (Model.RecentPurchase == true)
+        <div style="margin: 15%">
+            @if (Model.Selection == "NumberPick")
             {
-                <h2>Last Ticket bought</h2>
+                <h2>
+                    Number Pick
+                </h2>
+                <p>
+                    I don't trust computers! If you want something done right, do it yourself.
+                </p>
+
+                <form method="post" asp-page-handler="NumberPickPurchase">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <label for="ticket">Number @(i + 1) :</label>
+                        <input type="number" name="ticket" min="0" max="69" />
+                    }
+                    <label for="ticket">Powerball:</label>
+                    <input id="powerball" type="number" name="ticket" min="0" max="26" />
+                    <br />
+                    <button class="btn btn-secondary" type="submit">Let's win that price!</button>
+                </form>
+
+                @if (Model.RecentPurchase == true)
+                {
+                    <h2>Last Ticket bought</h2>
+                    <table>
+                        <tr>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <td>@Model.LastTicket[i]</td>
+                            }
+                            <td id="powerball">@Model.LastTicket[5]</td>
+                        </tr>
+                    </table>
+                }
+            }
+
+            @if (Model.Selection == "QuickPick")
+            {
+                <h2>
+                    Quick Pick
+                </h2>
+                <p>
+                    Let the computer do it for me!
+                </p>
+
+                <form method="post" asp-page-handler="QuickPickPurchase">
+                    <label for="numTickets">Purchase 1-1000 random tickets</label>
+                    <input name="numTickets" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
+                    <input type="hidden" value="@Model.PlayerNombre" name="name" />
+                    <br />
+                    <button class="btn btn-secondary" type="submit">Give me them Tickets!</button>
+                </form>
+            }
+            @if (Model.PurchasedTickets?.Any() ?? false)
+            {
                 <table>
                     <tr>
-                        @for (int i = 0; i < 5; i++)
-                        {
-                            <td>@Model.LastTicket[i]</td>
-                        }
-                        <td id="powerball">@Model.LastTicket[5]</td>
+                        <td>Ball1</td>
+                        <td>Ball2</td>
+                        <td>Ball3</td>
+                        <td>Ball4</td>
+                        <td>Ball5</td>
+                        <td>PowerBall</td>
+                        <td>WinLevel</td>
+                        <td>WinAmt$</td>
                     </tr>
+                    @foreach (var x in Model.PurchasedTickets)
+                    {
+                        <tr>
+                            <td>@x.balls[0]</td>
+                            <td>@x.balls[1]</td>
+                            <td>@x.balls[2]</td>
+                            <td>@x.balls[3]</td>
+                            <td>@x.balls[4]</td>
+                            <td>@x.powerBall</td>
+                            @if (x.isGraded)
+                            {
+                                <td>@x.winLevel</td>
+                                <td>@x.winAmtDollars.ToString("c")</td>
+                            }
+                            else
+                            {
+                                <td />
+                                <td />
+                            }
+                        </tr>
+                    }
                 </table>
+                <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
             }
-        }
-
-        @if (Model.Selection == "QuickPick")
-        {
-            <h2>
-                Quick Pick
-            </h2>
-            <p>
-                Let the computer do it for me!
-            </p>
-
-            <form method="post" asp-page-handler="QuickPickPurchase">
-                <label for="numTickets">Purchase 1-1000 random tickets</label>
-                <input name="numTickets" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
-                <input type="hidden" value="@Model.PlayerNombre" name="name" />
-                <br />
-                <button type="submit">Give me them Tickets!</button>
-            </form>
-        }
-        @if (Model.PurchasedTickets?.Any() ?? false)
-        {
-            <table>
-                <tr>
-                    <td>Ball1</td>
-                    <td>Ball2</td>
-                    <td>Ball3</td>
-                    <td>Ball4</td>
-                    <td>Ball5</td>
-                    <td>PowerBall</td>
-                    <td>WinLevel</td>
-                    <td>WinAmt$</td>
-                </tr>
-                @foreach (var x in Model.PurchasedTickets)
-                {
-                    <tr>
-                        <td>@x.balls[0]</td>
-                        <td>@x.balls[1]</td>
-                        <td>@x.balls[2]</td>
-                        <td>@x.balls[3]</td>
-                        <td>@x.balls[4]</td>
-                        <td>@x.powerBall</td>
-                        @if (x.isGraded)
-                        {
-                            <td>@x.winLevel</td>
-                            <td>@x.winAmtDollars.ToString("c")</td>
-                        }
-                        else
-                        {
-                            <td />
-                            <td />
-                        }
-                    </tr>
-                }
-            </table>
-            <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
-        }
+        </div>
     </main>
 </body>
 </html>
