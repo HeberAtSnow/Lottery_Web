@@ -3,16 +3,61 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
 }
+<body>
+    <h1>
+        Welcome to the PowerBall
+    </h1>
 
-<h1>
-    This is the index page.
-</h1>
 
-<h2>
-    Who Are you?
-</h2>
-
-<form method="post">
-    <button type="submit" asp-page-handler="GoToStore">Powerball Player</button>
-    <button type="submit" asp-page-handler="GoToSettings">Company Associate</button>
-</form>
+    <form method="post">
+        <div class="grid">
+            <h2 class="grid3">
+                Who Are you?
+            </h2>
+            <div class="grid1">
+                <button type="submit" asp-page-handler="GoToStore" >Powerball Player</button>
+            </div>
+            <div class="grid2">
+                <button type="submit" asp-page-handler="GoToSettings" >Company Associate</button>
+            </div>
+        </div>
+    </form>
+</body>
+<style>
+    body {
+        background-color: #f26430;
+    }
+    form {
+        background-color: #225560;
+        color: #f3e8ee;
+    }
+    button {
+        width: 75%;
+        background-color: #7a526e;
+        color: #f3e8ee;
+    }
+    .grid {
+        display: grid;
+        height: 90%;
+        margin: 0%;
+        grid-template-columns: 10% auto auto auto 10%;
+    }
+    .grid1 {
+        grid-column: 2;
+        grid-row: 2;
+        padding: 10%;
+        text-align: center;
+    }
+    .grid2 {
+        grid-column: 4;
+        grid-row: 2;
+        padding: 10%;
+        text-align: center;
+    }
+    .grid3 {
+        grid-column: 3;
+        grid-row: 1;
+        padding: 10%;
+        text-align: center;
+    }
+</style>
