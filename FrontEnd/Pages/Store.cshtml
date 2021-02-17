@@ -3,6 +3,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using ClassLib
 @{
+    Layout = "_Layout";
 }
 
 <html>
@@ -15,11 +16,12 @@
         }
 
         body {
+            text-align: center;
             margin: 2em;
             background-color: #ffffc4;
         }
 
-        h1, h2, p, td, label {
+        h1, h2, p, td, input, label {
             font-family: sans-serif;
         }
 
@@ -35,10 +37,23 @@
             font-size: 16px;
         }
 
-            button:hover {
-                background-color: black;
-                color: white;
-            }
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        input[type=text] {
+            text-align: center;
+            margin: 15px;
+            padding: 10px;
+            width: 200px;
+            border-color: black;
+            border-radius: 30px;
+        }
+
+        input[type=text]:hover {
+            background-color: #e6e6e6;
+        }
 
         input[type=number] {
             padding: 10px;
@@ -52,13 +67,21 @@
         }
 
         td {
+            text-align: center;
             margin: .25em;
+            margin-bottom: .5em;
             padding: 10px;
             background-color: white;
             border-collapse: collapse;
             border: 1px solid black;
             border-radius: 100px;
         }
+
+        thead td {
+            color: white;
+            background-color: black;
+        }
+
     </style>
 </head>
 <body>
@@ -69,8 +92,8 @@
     </header>
     <main>
         <form method="post">
-            <label for="name">Lucky Participant Name:</label>
-            <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
+            <label for="name">Lucky Participant Name:</label><br />
+            <input name="name" type="text" value="@Model.PlayerNombre" />
 
             <h2>
                 How do you want to acquire your winner tickets?
@@ -135,37 +158,41 @@
         @if (Model.PurchasedTickets?.Any() ?? false)
         {
             <table>
-                <tr>
-                    <td>Ball1</td>
-                    <td>Ball2</td>
-                    <td>Ball3</td>
-                    <td>Ball4</td>
-                    <td>Ball5</td>
-                    <td>PowerBall</td>
-                    <td>WinLevel</td>
-                    <td>WinAmt$</td>
-                </tr>
-                @foreach (var x in Model.PurchasedTickets)
-                {
+                <thead>
                     <tr>
-                        <td>@x.balls[0]</td>
-                        <td>@x.balls[1]</td>
-                        <td>@x.balls[2]</td>
-                        <td>@x.balls[3]</td>
-                        <td>@x.balls[4]</td>
-                        <td>@x.powerBall</td>
-                        @if (x.isGraded)
-                        {
-                            <td>@x.winLevel</td>
-                            <td>@x.winAmtDollars.ToString("c")</td>
-                        }
-                        else
-                        {
-                            <td />
-                            <td />
-                        }
+                        <td>B1</td>
+                        <td>B2</td>
+                        <td>B3</td>
+                        <td>B4</td>
+                        <td>B5</td>
+                        <td>PB</td>
+                        <td>WinLevel</td>
+                        <td>WinAmt$</td>
                     </tr>
-                }
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.PurchasedTickets)
+                    {
+                        <tr>
+                            <td>@x.balls[0]</td>
+                            <td>@x.balls[1]</td>
+                            <td>@x.balls[2]</td>
+                            <td>@x.balls[3]</td>
+                            <td>@x.balls[4]</td>
+                            <td id="powerball">@x.powerBall</td>
+                            @if (x.isGraded)
+                            {
+                                <td>@x.winLevel</td>
+                                <td>@x.winAmtDollars.ToString("c")</td>
+                            }
+                            else
+                            {
+                                <td />
+                                <td />
+                            }
+                        </tr>
+                    }
+                </tbody>
             </table>
             <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
         }
