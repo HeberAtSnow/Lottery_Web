@@ -91,7 +91,7 @@
         }
 
         .name:hover{
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         @@keyframes jump {
@@ -109,6 +109,14 @@
 
         img{
             border-radius: 30px;
+        }
+
+        .balls {
+            transition: 0.3s all ease
+        }
+
+        .balls:hover{
+            transform: scale(1.05)
         }
     </style>
 </head>
@@ -151,7 +159,7 @@
                 @for (int i = 0; i < 5; i++)
                 {
                     <label for="ticket">Number @(i + 1) :</label>
-                    <input type="number" name="ticket" min="0" max="69" placeholder="1-69" />
+                    <input class="balls" type="number" name="ticket" min="0" max="69" placeholder="1-69" />
                 }
                 <label for="ticket">Powerball:</label>
                 <input id="powerball" type="number" name="ticket" min="0" max="26" placeholder="1-26"/>
@@ -230,7 +238,7 @@
                 <br />
                 <br />
                 <label for="name">Lucky Participant Name:</label>
-                <input name="name" type="text" placeholder="Name" />
+                <input class="name" name="name" type="text" placeholder="Name" />
 
                 <br />
 
