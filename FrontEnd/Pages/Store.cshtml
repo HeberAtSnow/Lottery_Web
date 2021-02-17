@@ -16,29 +16,48 @@
 
         body {
             margin: 2em;
-            background-color: #ffffc4;
+           
         }
 
         h1, h2, p, td, label {
             font-family: sans-serif;
         }
-
-        button {
-            margin: .5em;
-            background-color: #b8b8b8;
-            border-style: solid;
-            border-radius: 5px;
-            border-color: black;
-            color: black;
-            padding: 10px 15px;
+        h1 {
+            text-align: center;
+            font-size: 40px;
+            padding: 10px;
+            background-color: lightgoldenrodyellow;
+            border-bottom: 4px dashed;
+        }
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            padding: 10px;
+            border-bottom: 2px dashed;
+        }
+        p {
             text-align: center;
             font-size: 16px;
         }
+        table{
+            text-align:center;
+        }
 
-            button:hover {
-                background-color: black;
-                color: white;
-            }
+        button {
+            margin: .5em;
+            background-color: lightgoldenrodyellow;
+            border-style: solid;
+            border-radius: 4px;
+            border-color: black;
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 16px;
+            transition: ease-in .5s;
+        }
+
+        button:hover {
+                background-color: lightcoral;
+        }
 
         input[type=number] {
             padding: 10px;
@@ -58,6 +77,9 @@
             border-collapse: collapse;
             border: 1px solid black;
             border-radius: 100px;
+        }
+        form {
+            text-align: center
         }
     </style>
 </head>
@@ -135,16 +157,6 @@
         @if (Model.PurchasedTickets?.Any() ?? false)
         {
             <table>
-                <tr>
-                    <td>Ball1</td>
-                    <td>Ball2</td>
-                    <td>Ball3</td>
-                    <td>Ball4</td>
-                    <td>Ball5</td>
-                    <td>PowerBall</td>
-                    <td>WinLevel</td>
-                    <td>WinAmt$</td>
-                </tr>
                 @foreach (var x in Model.PurchasedTickets)
                 {
                     <tr>
@@ -153,7 +165,7 @@
                         <td>@x.balls[2]</td>
                         <td>@x.balls[3]</td>
                         <td>@x.balls[4]</td>
-                        <td>@x.powerBall</td>
+                        <td id="powerball">@x.powerBall</td>
                         @if (x.isGraded)
                         {
                             <td>@x.winLevel</td>
