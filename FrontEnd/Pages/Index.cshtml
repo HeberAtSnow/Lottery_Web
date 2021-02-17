@@ -58,7 +58,6 @@
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        background-color: #FFF;
         padding: 40px 0px;
         width: 240px;
         height: 200px;
@@ -134,30 +133,40 @@
             -webkit-transform: rotate(40deg);
             transform: rotate(40deg);
         }
+    body {
+        background: url(https://www.txlottery.org/export/sites/lottery/Games/Scratch_Offs/luckzone/images/background_luckzone.png) no-repeat center center fixed;
+        background-size:cover;
+    }
 
 </style>
-<h1 class="content">
-    Welcome to the 
-</h1>
-<div class="crop content">
-    <img src="https://s3-us-gov-west-1.amazonaws.com/mnlottery.cms.assets/Clockwork-Images/powerballlogo.png?mtime=20180716160104&focal=none" alt="powerball" width="270" height="270">
+<html>
+<body>
+    <h1 class="content">
+        Welcome to the
+    </h1>
+    <div class="crop content">
+        <img src="https://s3-us-gov-west-1.amazonaws.com/mnlottery.cms.assets/Clockwork-Images/powerballlogo.png?mtime=20180716160104&focal=none" alt="powerball" width="270" height="270">
 
-</div>
+    </div>
 
 
-<h2 class="content">
-    Who are you?
-</h2>
+    <h2 class="content">
+        Who are you?
+    </h2>
 
-<form method="post" class="buttons">
-    <div class="container">
+    <form method="post" class="buttons">
+        <div class="container">
             <button class="btn effect01" type="submit" asp-page-handler="GoToStore">
                 <span>Lets Play The Powerball!</span>
             </button>
-        <br />
+            <br />
             <button class="btn effect01" type="submit" asp-page-handler="GoToSettings">
                 <span>Administration Page</span>
             </button>
-        
-    </div>
-</form>
+
+        </div>
+    </form>
+</body>
+
+</html>
+
