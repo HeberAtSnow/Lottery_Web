@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LottoMagic</title>
+</head>
+
+<body>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 25% auto 25%;
+            grid-template-rows: 25% 100px auto;
+            grid-template-areas: ". Header ."
+                                ". M ."
+                                "button1 ignore button2"
+                ;
+        }
+        body {
+            background-color: dimgrey;
+        }
+    </style>
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>

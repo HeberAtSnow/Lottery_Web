@@ -2,17 +2,41 @@
 @model FrontEnd.Pages.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+    Layout = "~/Pages/Shared/_IndexLayout.cshtml";
 }
 
-<h1>
+<style>
+    #buttonpowerball {
+        grid-area: button1;
+        justify-content: center;
+    }
+
+    #buttoncompanyassociate {
+        grid-area: button2;
+        justify-self: center;
+    }
+
+    #indexhead {
+        grid-area: Header;
+        justify-self: center;
+    }
+
+    #question {
+        grid-area: M;
+        justify-self: center;
+    }
+</style>
+<h1 id="indexhead">
     This is the index page.
 </h1>
 
-<h2>
+<h2 id="question">
     Who Are you?
 </h2>
 
-<form method="post">
+<form id="buttonpowerball" method="post">
     <button type="submit" asp-page-handler="GoToStore">Powerball Player</button>
-    <button type="submit" asp-page-handler="GoToSettings">Company Associate</button>
+</form>
+<form id="buttoncompanyassociate" method="post">
+<button  type="submit" asp-page-handler="GoToSettings">Company Associate</button>
 </form>

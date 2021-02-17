@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LottoMagic</title>
+    <style>
+
+        /*
+           Palette:
+            F07167 - bittersweet
+            FED9B7 - peach puff
+            FDFCDC - light yellow
+            00AFB9 - Verdigris
+            0081A7 - CG blue
+            5CD9FF - vivid sky blue
+
+        */
+       
+        .container {
+            display: grid;
+            grid-template-columns: 25% auto 25%;
+            grid-template-rows: 25% 100px auto;
+            grid-gap: 2em 1em;
+            grid-template-areas: "header header header" "M M M" "bottom bottom bottom";
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        body {
+            margin: 2em;
+            background-color: #FDFCDC;
+        }
+
+        h1, h2, p, td, label {
+            font-family: sans-serif;
+            color: #00AFB9;
+        }
+
+        header {
+            grid-area: header;
+            justify-self: center;
+            padding: 10px;
+        }
+
+        #pyo {
+            grid-area: bottom;
+            justify-self: center;
+        }
+
+        button {
+            margin: .5em;
+            background-color: #5CD9FF;
+            border-style: solid;
+            border-radius: 5px;
+            border-color: black;
+            color: grey;
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+            button:hover {
+                background-color: black;
+                color: white;
+            }
+
+        input[type=number] {
+            padding: 10px;
+            border-radius: 100px;
+            border-color: black;
+            width: 5%;
+        }
+
+        #powerball {
+            width: 10%;
+            background-color: #F07167;
+        }
+
+
+        td {
+            margin: .25em;
+            padding: 10px;
+            background-color: white;
+            border-collapse: collapse;
+            border: 1px solid black;
+            border-radius: 100px;
+        }
+
+
+        main{
+            grid-area: M;
+            justify-self: center;
+        }
+        #ticketform {
+            display: grid;
+            grid-template-columns: 25% auto 25%;
+            grid-template-rows: auto auto auto;
+            grid-gap: 2em 1em;
+            grid-template-areas: "t t t" "m m m" "b b b";
+        }
+        #nameinput {
+            grid-area: t; 
+            width: 300px;
+            justify-self: center;
+        }
+        #ticketquestion{
+            grid-area: m;
+            justify-self: center;
+        }
+        #numpickbut{
+            grid-area: b;
+            justify-self: start;
+            padding: 2px;
+        }
+        #quickpickbut {
+            grid-area: b;
+            justify-self: end;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body class="container">
+        @RenderBody()
+</body>
+</html>
