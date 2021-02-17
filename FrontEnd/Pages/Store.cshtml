@@ -7,7 +7,18 @@
 
 <html>
 <head>
+    <link rel="stylesheet" href="page.css" type="text/css" />
     <style>
+        h1 {
+            background-image: url(https://nypost.com/wp-content/uploads/sites/2/2019/08/powerball-winner.jpg?quality=80&strip=all);
+            background-color: red;
+            color: black;
+            background-size: auto, auto;
+            font-size: 10em;
+            text-align: center;
+            bottom-margin: 20px;
+        }
+
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -16,7 +27,7 @@
 
         body {
             margin: 2em;
-            background-color: #ffffc4;
+            background-color: white;
         }
 
         h1, h2, p, td, label {
@@ -25,11 +36,11 @@
 
         button {
             margin: .5em;
-            background-color: #b8b8b8;
+            background-color: red;
             border-style: solid;
             border-radius: 5px;
             border-color: black;
-            color: black;
+            color: white;
             padding: 10px 15px;
             text-align: center;
             font-size: 16px;
@@ -42,10 +53,14 @@
 
         input[type=number] {
             padding: 10px;
-            border-radius: 100px;
+            border-radius: 50%;
             border-color: black;
-            width: 5%;
+            text-align: center;
+            height: 50px;
+            width: 50px;
+            box-shadow: inset -6.25px -6.25px 10px rgba(0,0,0,.25);
         }
+
 
         #powerball {
             background-color: red;
@@ -53,11 +68,19 @@
 
         td {
             margin: .25em;
-            padding: 10px;
+            text-align: center;
+            width: 50px;
+            height: 50px;
             background-color: white;
             border-collapse: collapse;
             border: 1px solid black;
-            border-radius: 100px;
+            border-radius: 50%;
+            box-shadow: inset -6.25px -6.25px 10px rgba(0,0,0,.25);
+        }
+
+        #win {
+            background-color: green;
+            color: white;
         }
     </style>
 </head>
@@ -136,14 +159,14 @@
         {
             <table>
                 <tr>
-                    <td>Ball1</td>
-                    <td>Ball2</td>
-                    <td>Ball3</td>
-                    <td>Ball4</td>
-                    <td>Ball5</td>
-                    <td>PowerBall</td>
-                    <td>WinLevel</td>
-                    <td>WinAmt$</td>
+                    <td>Pick <br />#1</td>
+                    <td>Pick <br />#2</td>
+                    <td>Pick <br />#3</td>
+                    <td>Pick <br />#4</td>
+                    <td>Pick <br />#5</td>
+                    <td id="powerball">Power<br />ball</td>
+                    <td>Win<br />Level</td>
+                    <td id="win">Win<br />Amt$</td>
                 </tr>
                 @foreach (var x in Model.PurchasedTickets)
                 {
@@ -153,17 +176,13 @@
                         <td>@x.balls[2]</td>
                         <td>@x.balls[3]</td>
                         <td>@x.balls[4]</td>
-                        <td>@x.powerBall</td>
+                        <td id="powerball">@x.powerBall</td>
                         @if (x.isGraded)
                         {
                             <td>@x.winLevel</td>
-                            <td>@x.winAmtDollars.ToString("c")</td>
+                            <td id="win">@x.winAmtDollars.ToString("c")</td>
                         }
-                        else
-                        {
-                            <td />
-                            <td />
-                        }
+                      
                     </tr>
                 }
             </table>
