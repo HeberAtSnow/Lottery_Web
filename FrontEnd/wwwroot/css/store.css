@@ -1,0 +1,72 @@
+﻿input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+body {
+    text-align: center;
+    margin: 2em;
+    background-color: #ffffc4;
+}
+
+h1, h2, p, td, input, label {
+    font-family: sans-serif;
+}
+
+button {
+    margin: .5em;
+    background-color: #b8b8b8;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: black;
+    color: black;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 16px;
+}
+
+    button:hover {
+        background-color: black;
+        color: white;
+    }
+
+input[type=text] {
+    text-align: center;
+    margin: 15px;
+    padding: 10px;
+    width: 200px;
+    border-color: black;
+    border-radius: 30px;
+}
+
+    input[type=text]:hover {
+        background-color: #e6e6e6;
+    }
+
+input[type=number] {
+    padding: 10px;
+    border-radius: 100px;
+    border-color: black;
+    width: 5%;
+}
+
+#powerball {
+    background-color: red;
+}
+
+td {
+    text-align: center;
+    margin: .25em;
+    margin-bottom: .5em;
+    padding: 10px;
+    background-color: white;
+    border-collapse: collapse;
+    border: 1px solid black;
+    border-radius: 100px;
+}
+
+thead td {
+    color: white;
+    background-color: black;
+}
