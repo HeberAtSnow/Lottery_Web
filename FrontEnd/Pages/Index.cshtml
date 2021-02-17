@@ -6,6 +6,11 @@
 
 
 <style>
+
+    body {
+        margin: 2em;
+        background-color: aqua;
+    }
     .playBtn {
         border-radius: 12px;
         background-color: #fff;
@@ -18,7 +23,7 @@
         font-size: 12px;
         margin: 2px 2px;
         cursor: pointer;
-        width: 100px;
+        width: 150px;
         transition: 0.3s all ease
     }
 
@@ -30,15 +35,19 @@
         }
 </style>
 
-<h1>
-    Welcome!
-</h1>
 
-<h2>
-    Who Are you?
-</h2>
+<body>
 
-<form method="post">
-    <button class="playBtn" type="submit" asp-page-handler="GoToStore">Powerball Player</button>
-    <button class="playBtn" type="submit" asp-page-handler="GoToSettings">Company Associate</button>
-</form>
+    <h1>
+        Welcome!
+    </h1>
+
+    <h2>
+        Who Are you?
+    </h2>
+
+    <form method="post">
+        <button class="playBtn" type="submit" asp-page-handler="GoToStore">Powerball Player</button>
+        <button class="playBtn" type="submit" asp-page-handler="GoToSettings">Company Associate</button>
+    </form>
+</body>
