@@ -16,29 +16,14 @@
 
         body {
             margin: 2em;
-            background-color: #ffffc4;
+            background-color: aqua;
         }
 
         h1, h2, p, td, label {
             font-family: sans-serif;
         }
 
-        button {
-            margin: .5em;
-            background-color: #b8b8b8;
-            border-style: solid;
-            border-radius: 5px;
-            border-color: black;
-            color: black;
-            padding: 10px 15px;
-            text-align: center;
-            font-size: 16px;
-        }
 
-            button:hover {
-                background-color: black;
-                color: white;
-            }
 
         input[type=number] {
             padding: 10px;
@@ -59,21 +44,68 @@
             border: 1px solid black;
             border-radius: 100px;
         }
+
+        .logo {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            transition: 0.3s all ease
+        }
+
+        .logo:hover{
+            transform: scale(1.2)
+        }
+
+        .playBtn {
+            border-radius: 12px;
+            background-color: #fff;
+            border: none;
+            color: #000;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 2px 2px;
+            cursor: pointer;
+            width: 100px;
+            transition: 0.3s all ease
+        }
+
+        .playBtn:hover {
+            background-color: red;
+            color: white;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            transform: scale(1.1);
+        }
+
+        .name {
+            width: 30%;
+            height: 30px;
+            margin: auto auto;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+            padding-left: 30px;
+            font-size: 20px;
+            transition: 0.3s all ease
+            
+        }
+
+        .name:hover{
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>
-            Welcome to the ticket store!
-        </h1>
+        <div class="logo"><img src="http://u.cubeupload.com/Transgirlgogo/download1.jpeg" alt="powerball" width="350"></div>
     </header>
     <main>
-        <h2>
-            How do you want to acquire your winner tickets?
-        </h2>
+
         <form method="post">
-            <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
-            <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+            <button class="playBtn" type="submit" asp-page-handler="NumberPick">Number Pick</button>
+            <button class="playBtn" type="submit" asp-page-handler="QuickPick">Quick Pick</button>
         </form>
 
         @if (Model.Selection == "NumberPick")
@@ -99,18 +131,18 @@
                 @for (int i = 0; i < 5; i++)
                 {
                     <label for="ticket">Number @(i + 1) :</label>
-                    <input type="number" name="ticket" min="0" max="69" />
+                    <input type="number" name="ticket" min="0" max="69" placeholder="1-69" />
                 }
                 <label for="ticket">Powerball:</label>
-                <input id="powerball" type="number" name="ticket" min="0" max="26" />
+                <input id="powerball" type="number" name="ticket" min="0" max="26" placeholder="1-26"/>
                 <br />
                 <br />
                 <label for="name">Lucky Participant Name:</label>
-                <input name="name" type="text" placeholder="Name" />
+                <input class="name"  name="name" type="text" placeholder="Name" />
 
                 <br />
 
-                <button type="submit">Let's win that price!</button>
+                <button class="playBtn" type="submit">Let's win!</button>
             </form>
 
             @if (Model.NumRecentPurchase == true)
@@ -182,7 +214,7 @@
 
                 <br />
 
-                <button type="submit">Give me them Tickets!</button>
+                <button class="playBtn" type="submit">Give me the Tickets!</button>
             </form>
 
             @if (Model.RandRecentPurchase == true)

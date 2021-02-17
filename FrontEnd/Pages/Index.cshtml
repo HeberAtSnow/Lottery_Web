@@ -4,8 +4,34 @@
 @{
 }
 
+
+<style>
+    .playBtn {
+        border-radius: 12px;
+        background-color: #fff;
+        border: none;
+        color: #000;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 2px 2px;
+        cursor: pointer;
+        width: 100px;
+        transition: 0.3s all ease
+    }
+
+        .playBtn:hover {
+            background-color: red;
+            color: white;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            transform: scale(1.1);
+        }
+</style>
+
 <h1>
-    This is the index page.
+    Welcome!
 </h1>
 
 <h2>
@@ -13,6 +39,6 @@
 </h2>
 
 <form method="post">
-    <button type="submit" asp-page-handler="GoToStore">Powerball Player</button>
-    <button type="submit" asp-page-handler="GoToSettings">Company Associate</button>
+    <button class="playBtn" type="submit" asp-page-handler="GoToStore">Powerball Player</button>
+    <button class="playBtn" type="submit" asp-page-handler="GoToSettings">Company Associate</button>
 </form>
