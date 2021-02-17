@@ -30,6 +30,7 @@ namespace FrontEnd
             services.AddMemoryCache();
             services.AddControllers();
             services.AddRazorPages();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FrontEnd", Version = "v1" });
@@ -43,6 +44,7 @@ namespace FrontEnd
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FrontEnd v1"));
             }
