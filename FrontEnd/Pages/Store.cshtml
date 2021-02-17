@@ -7,59 +7,7 @@
 
 <html>
 <head>
-    <style>
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        body {
-            margin: 2em;
-            background-color: #ffffc4;
-        }
-
-        h1, h2, p, td, label {
-            font-family: sans-serif;
-        }
-
-        button {
-            margin: .5em;
-            background-color: #b8b8b8;
-            border-style: solid;
-            border-radius: 5px;
-            border-color: black;
-            color: black;
-            padding: 10px 15px;
-            text-align: center;
-            font-size: 16px;
-        }
-
-            button:hover {
-                background-color: black;
-                color: white;
-            }
-
-        input[type=number] {
-            padding: 10px;
-            border-radius: 100px;
-            border-color: black;
-            width: 5%;
-        }
-
-        #powerball {
-            background-color: red;
-        }
-
-        td {
-            margin: .25em;
-            padding: 10px;
-            background-color: white;
-            border-collapse: collapse;
-            border: 1px solid black;
-            border-radius: 100px;
-        }
-    </style>
+    
 </head>
 <body>
     <header>
@@ -126,7 +74,7 @@
 
             <form method="post" asp-page-handler="QuickPickPurchase">
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
-                <input name="numTickets" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
+                <input id="quickpick" name="numTickets" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
                 <input type="hidden" value="@Model.PlayerNombre" name="name" />
                 <br />
                 <button type="submit">Give me them Tickets!</button>
@@ -172,3 +120,70 @@
     </main>
 </body>
 </html>
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    body {
+        margin: 2em;
+        background-color: #f26430;
+        font-family:cursive;
+    }
+
+    h1, h2, p, td, label {
+        font-family: sans-serif;
+    }
+
+    button {
+        margin: .5em;
+        background-color: #7a526e;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: black;
+        color: #f3e8ee;
+        padding: 10px 15px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+        button:hover {
+            background-color: #493142;
+            color: #f3e8ee;
+        }
+
+    input[type=number] {
+        padding: 10px;
+        border-radius: 25px;
+        border-color: black;
+        width: 50px;
+        height: 50px;
+    }
+
+        input[type=number]#quickpick {
+            padding: 10px;
+            border-radius: 50px;
+            border-color: #e8c547;
+            width: 50px;
+            height: 50px;
+        }
+    input[type=text] {
+        width: 10%;
+        border-radius: 5px;
+    }
+
+    #powerball {
+        background-color: red;
+    }
+
+    td {
+        margin: .25em;
+        padding: 10px;
+        background-color: white;
+        border-collapse: collapse;
+        border: 1px solid black;
+        border-radius: 100px;
+    }
+</style>
