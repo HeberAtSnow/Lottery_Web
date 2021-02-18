@@ -1,5 +1,7 @@
 ﻿@page
 @model FrontEnd.Pages.SettingsModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using ClassLib
 @{
 }
 
@@ -8,13 +10,28 @@
         Run and view stats on the Lottery.
     </h1>
     <form method="post">
-        <label>Reset Lottery for the Next Drawing</label>
-        <button>Reset The Lottery</button>
         <label>Draw the Winning Numbers for this Lottery Period</label>
-        <button>Process Drawing</button>
-        <label>Overal Results from this Lottery Period</label>
-        <button>Lottery Results</button>
+        <button asp-page-handler="ProcessDrawing">Process Drawing</button>
+        <br />
+        <label>Overal Results from this Lottery</label>
+        <button asp-page-handler="LotteryResults">Lottery Results</button>
+        <br />
         <label>Statistics from <b><i>All</i></b> lottery history</label>
-        <button>Historical Stats</button>
+        <button asp-page-handler="HistoricalStats">Historical Stats</button>
+        <br />
+        <label>Reset Lottery for the Next Drawing</label>
+        <button asp-page-handler="ResetLottery">Reset The Lottery</button>
     </form>
+
+    @if (Model.lotteryResults.Count() > 0)
+    {
+        <table>
+            @foreach (var x in Model.lotteryResults)
+            {
+                <tr>
+                </tr>
+            }
+
+        </table>
+    }
 </body>
