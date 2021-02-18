@@ -40,23 +40,15 @@ namespace ClassLib
 
 
         }
-
-        public int Baloo
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public void ClosePeriodSales()
+        public bool ClosePeriodSales()
         {
             if (p.SalesState == TicketSales.OK)
             {
                 p.SalesState = TicketSales.CLOSED;
-                //TODO: kickoff stats?
-
+                return true;
             }
+            else
+                return false;
         }
         public void ResetPeriod()
         {
