@@ -23,7 +23,7 @@
         <button asp-page-handler="ResetLottery">Reset The Lottery</button>
     </form>
 
-    @if (Model.lotteryResults.Count() > 0)
+    @if (Model.lotteryResults?.Count() > 0)
     {
         <table>
             @foreach (var x in Model.lotteryResults)

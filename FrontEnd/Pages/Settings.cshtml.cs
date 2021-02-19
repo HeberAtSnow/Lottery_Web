@@ -30,23 +30,23 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostProcessDrawing()
         {
-            if (lotteryProgram.ClosePeriodSales())
-            {
+            //if (lotteryProgram.ClosePeriodSales())
+            //{
 
-            }
-            if (lotteryProgram.p.DrawWinningTicket())
-            {
+            //}
+            //if (lotteryProgram.p.DrawWinningTicket())
+            //{
 
-            }
-            try
-            {
-                lotteryProgram.p.ComputeWinners();
-            }
-            catch
-            {
+            //}
+            //try
+            //{
+            //    lotteryProgram.p.ComputeWinners();
+            //}
+            //catch
+            //{
 
-            }
-            lotteryResults = lotteryProgram.p.ResultsByWinLevel();
+            //}
+            //lotteryResults = lotteryProgram.p.ResultsByWinLevel();
             return Page();
         }
         public IActionResult OnPostLotteryResults()

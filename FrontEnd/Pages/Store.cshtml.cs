@@ -76,8 +76,8 @@ namespace FrontEnd.Pages
         {
             if (ticket.Length == 6)
             {
-                _cache.Set(cacheRecentPurchaseKey, true);
-                _cache.Set(cacheLastTicketKey, ticket);
+                lp.lv.SellTicket(PlayerNombre, ticket);
+                PurchasedTickets = lp.p.ResultsByPlayer(PlayerNombre);
             }
             return Page();
         }

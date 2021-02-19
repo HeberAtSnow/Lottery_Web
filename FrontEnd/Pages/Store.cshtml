@@ -47,20 +47,6 @@
                 <br />
                 <button type="submit">Let's win that price!</button>
             </form>
-
-            @if (Model.RecentPurchase == true)
-            {
-                <h2>Last Ticket bought</h2>
-                <table>
-                    <tr>
-                        @for (int i = 0; i < 5; i++)
-                        {
-                            <td>@Model.LastTicket[i]</td>
-                        }
-                        <td id="powerball">@Model.LastTicket[5]</td>
-                    </tr>
-                </table>
-            }
         }
 
         @if (Model.Selection == "QuickPick")
