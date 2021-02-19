@@ -57,7 +57,14 @@ namespace FrontEnd.Pages
             PlayerNombre = name;
             if (ticket.Length == 6)
             {
-                lp.lv.SellTicket(name, ticket);
+                try
+                {
+                    lp.lv.SellTicket(name, ticket);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
