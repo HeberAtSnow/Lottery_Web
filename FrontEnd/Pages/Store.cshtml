@@ -59,6 +59,9 @@
             border: 1px solid black;
             border-radius: 100px;
         }
+        #errormsg{
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +75,7 @@
             @if (Model.ParticipantName == null || Model.ParticipantName == "")
             {
             <input type="text" placeholder="Lucky Participant Name:" asp-for="ParticipantName" value="@Model.ParticipantName" />
-            <span asp-validation-for="ParticipantName"></span>
+            <span id="errormsg" asp-validation-for="ParticipantName"></span>
             }
             else
             {

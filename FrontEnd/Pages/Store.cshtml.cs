@@ -105,6 +105,8 @@ namespace FrontEnd.Pages
                 ParticipantName = cachedName;
             }
             cacheSelectionValue = "QuickPick";
+            cachedName = ParticipantName;
+            _cache.Set(cacheNameKey, cachedName, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30)));
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30)));
             _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
             //Doh! I first tried to get just this ticket sales.  Wrong!
@@ -129,6 +131,7 @@ namespace FrontEnd.Pages
             if (ticket.Length == 6)
             {
                 cacheSelectionValue = "NumberPick";
+
                 _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30)));
                 _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
                 if (_cache.TryGetValue(cacheNameKey, out cachedName))
@@ -136,7 +139,8 @@ namespace FrontEnd.Pages
                     ParticipantName = cachedName;
                 }
 
-
+                cachedName = ParticipantName;
+                _cache.Set(cacheNameKey, cachedName, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30)));
                 _cache.Set(cacheRecentPurchaseKey, true);
                 _cache.Set(cacheLastTicketKey, ticket);
                 
