@@ -16,7 +16,7 @@ namespace FrontEnd.Pages
         private LotteryProgram lp;
         public IEnumerable<LotteryTicket> PurchasedTickets;
 
-        [BindProperty, Required]
+        [BindProperty, Required(ErrorMessage ="Sorry, A Participant Name Must Be Entered")]
         public string ParticipantName { get; set; }
 
         public int NumQuickPicks;
