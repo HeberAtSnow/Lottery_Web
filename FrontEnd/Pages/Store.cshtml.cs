@@ -37,6 +37,7 @@ namespace FrontEnd.Pages
             _cache.TryGetValue(cacheRecentPurchaseKey, out recentPurcahse);
             _cache.TryGetValue(cacheLastTicketKey, out _lastTicket);
             _cache.TryGetValue(cacheSelectionKey, out cacheSelectionValue);
+            //PurchasedTickets = lp.p.ResultsByPlayer(PlayerNombre);
         }
 
         public IActionResult OnPostQuickPick(string name)
@@ -44,12 +45,15 @@ namespace FrontEnd.Pages
             PlayerNombre = name;
             cacheSelectionValue = "QuickPick";
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
+            PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
-        public IActionResult OnPostNumberPick()
+        public IActionResult OnPostNumberPick(string name)
         {
+            PlayerNombre = name;
             cacheSelectionValue = "NumberPick";
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
+            PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
 
@@ -72,13 +76,17 @@ namespace FrontEnd.Pages
             return Page();
         }
 
-        public IActionResult OnPostNumberPickPurchase(int [] ticket)
+        public IActionResult OnPostNumberPickPurchase(string name, int ticket0, int ticket1, int ticket2, int ticket3, int ticket4, int ticket5)
         {
-            if (ticket.Length == 6)
+            PlayerNombre = name;
+            int[] sixBalls = new int[] { ticket0, ticket1, ticket2, ticket3, ticket4, ticket5 };
+            lp.lv.SellTicket(name, sixBalls);
+            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            /*if (ticket.Length == 6)
             {
                 _cache.Set(cacheRecentPurchaseKey, true);
                 _cache.Set(cacheLastTicketKey, ticket);
-            }
+            }*/
             return Page();
         }
     }

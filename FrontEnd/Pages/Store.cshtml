@@ -92,7 +92,7 @@
     <main>
         <form method="post">
             <label for="name">Lucky Participant Name:</label>
-            <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
+            <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" required/>
 
             <h2>
                 How do you want to acquire your winner tickets?
@@ -114,12 +114,12 @@
                 @for (int i = 0; i < 5; i++)
                 {
                     <label for="ticket">Number @(i + 1) :</label>
-                    <input type="number" name="ticket" min="0" max="69" />
+                    <input type="number" name="ticket@(i)" min="0" max="69" />
                 }
                 <label for="ticket">Powerball:</label>
-                <input id="powerball" type="number" name="ticket" min="0" max="26" />
+                <input id="powerball" type="number" name="ticket5" min="0" max="26" />
                 <br />
-                <button type="submit">Let's win that price!</button>
+                <button type="submit">Let's win that prize!</button>
             </form>
 
             @if (Model.RecentPurchase == true)
