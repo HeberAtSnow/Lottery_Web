@@ -71,7 +71,7 @@ namespace FrontEnd.Pages
             //What is needed is to get all ticket sales for this player-name
             //PurchasedTickets = lp.lv.SellQuickTickets(name, numTickets);//TODO: replace "x" with playerNobmre
             lp.lv.SellQuickTickets(name, numTickets);
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            PurchasedTickets = lp.p.ResultsByPlayer(PlayerNombre);
             return Page();
         }
 
@@ -82,7 +82,7 @@ namespace FrontEnd.Pages
                 PlayerNombre = name;
                 timePurchased = DateTime.Now;
                 lp.lv.SellTicket(name, ticket);
-                PurchasedTickets = lp.p.ResultsByPlayer(name);
+                PurchasedTickets = lp.p.ResultsByPlayer(PlayerNombre);
             }
             return Page();
         }
