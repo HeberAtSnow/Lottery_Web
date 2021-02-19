@@ -133,18 +133,9 @@
 
 
 
-        <h2>
-            Number Pick
-        </h2>
-        <p>
-            I don't trust computers! If you want something done right, do it yourself.
-        </p>
-
-
-
         <form method="post">
             <label for="name">Lucky Participant Name:</label>
-            <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
+            <input name="name" type="text" placeholder="Name" value="@Model.lotteryPurchaser1.PlayerName" />
 
             <h2>
                 How do you want to acquire your winner tickets?
@@ -153,6 +144,10 @@
             <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
         </form>
 
+        @if (Model.lotteryPurchaser1.incorrectPlayerName)
+        {
+            <p style="color:red;">Name is required!</p>
+        }
 
         @if (Model.Selection == "NumberPick")
         {
@@ -162,6 +157,11 @@
             <p>
                 I don't trust computers! If you want something done right, do it yourself.
             </p>
+
+            @if (Model.lotteryPurchaser1.incorrectPlayerTicket)
+            {
+                <p style="color:red;">Error in the ticket field. Please make sure to enter a number in every cell</p>
+            }
 
             <form method="post" asp-page-handler="NumberPickPurchase">
                 @for (int i = 0; i < 5; i++)
@@ -186,11 +186,8 @@
                 Let the computer do it for me!
             </p>
 
-            @if (Model.incorrectName)
-            {
-                <p style="color:red;">Name is required!</p>
-            }
-            @if (Model.incorrectTicket)
+
+            @if (Model.lotteryPurchaser1.incorrectPlayerTicket)
             {
                 <p style="color:red;">Error in the ticket field. Please try again</p>
             }
@@ -200,32 +197,17 @@
                 <input name="numTickets" type="number" min="0" max="1000" />
                 <br />
                 <br />
-                <br />
-                <label for="name">Lucky Participant Name:</label>
-                <input class="name" name="name" type="text" placeholder="Name" />
 
-                <br />
 
                 <button class="playBtn" type="submit">Give me the Tickets!</button>
             </form>
-
-
         }
 
 
         @if (Model.PurchasedTickets?.Any() ?? false)
         {
             <table>
-                <tr>
-                    <td>Ball1</td>
-                    <td>Ball2</td>
-                    <td>Ball3</td>
-                    <td>Ball4</td>
-                    <td>Ball5</td>
-                    <td>PowerBall</td>
-                    <td>WinLevel</td>
-                    <td>WinAmt$</td>
-                </tr>
+
                 @foreach (var x in Model.PurchasedTickets)
                 {
                     <tr>
@@ -237,7 +219,6 @@
                         <td id="power">@x.powerBall</td>
                         @if (x.isGraded)
                         {
-                            <td>@x.winLevel</td>
                             <td>@x.winAmtDollars.ToString("c")</td>
                         }
                         else

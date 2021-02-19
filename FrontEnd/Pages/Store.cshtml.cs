@@ -11,14 +11,12 @@ namespace FrontEnd.Pages
 {
     public class StoreModel : PageModel
     {
-        private IMemoryCache _cache;
         private LotteryProgram lp;
 
+        public LotteryPurchaser lotteryPurchaser1;
 
         public IEnumerable<LotteryTicket> PurchasedTickets;
 
-
-       
         public bool incorrectName = false;
 
         public bool incorrectTicket = false;
@@ -27,11 +25,11 @@ namespace FrontEnd.Pages
         public int NumQuickPicks;
 
         public string Selection;
-        
 
-        public StoreModel(IMemoryCache cache, LotteryProgram prog)
+
+        public StoreModel(LotteryProgram prog, LotteryPurchaser lotteryPurchaser)
         {
-            _cache = cache;
+            lotteryPurchaser1 = lotteryPurchaser;
             lp = prog;
         }
 
@@ -42,44 +40,91 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostQuickPick(string name)
         {
-            PlayerNombre = name;
-            Selection = "QuickPick";
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            if (name != null)
+            {
+
+                lotteryPurchaser1.PlayerName = name;
+                Selection = "QuickPick";
+                PurchasedTickets = lp.p.ResultsByPlayer(name);
+
+                lotteryPurchaser1.incorrectPlayerName = false;
+            }
+            else
+            {
+                lotteryPurchaser1.incorrectPlayerName = true;
+            }
+
+
 
             return Page();
         }
         public IActionResult OnPostNumberPick(string name)
         {
-            Selection = "NumberPick";
-            PlayerNombre = name;
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            if (name != null)
+            {
+                Selection = "NumberPick";
+                lotteryPurchaser1.PlayerName = name;
+                //PlayerNombre = name;
+                PurchasedTickets = lp.p.ResultsByPlayer(name);
+
+                lotteryPurchaser1.incorrectPlayerName = false;
+
+            }
+            else
+            {
+                lotteryPurchaser1.incorrectPlayerName = true;
+            }
+
+
+
             return Page();
         }
 
-        public IActionResult OnPostQuickPickPurchase(string name, int numTickets)
+        public IActionResult OnPostQuickPickPurchase(int numTickets)
         {
             //START HERE
-
-            PlayerNombre = name;
-            NumQuickPicks = numTickets;
             Selection = "QuickPick";
-          
-            lp.lv.SellQuickTickets(name, numTickets);
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            if (numTickets != 0)
+            {
+                var name = lotteryPurchaser1.PlayerName;
+                NumQuickPicks = numTickets;
+
+
+                lp.lv.SellQuickTickets(name, numTickets);
+                PurchasedTickets = lp.p.ResultsByPlayer(name);
+
+                lotteryPurchaser1.incorrectPlayerTicket = false;
+            }
+            else
+            {
+                lotteryPurchaser1.incorrectPlayerTicket = true;
+            }
+
 
             return Page();
         }
 
-        public IActionResult OnPostNumberPickPurchase(string name, int[] ticket)
+        public IActionResult OnPostNumberPickPurchase(int[] ticket)
         {
-            PlayerNombre = name;
 
             Selection = "NumberPick";
 
-            lp.lv.SellTicket(name, ticket);
+            if (ticket.Length != 0)
+            {
+                var name = lotteryPurchaser1.PlayerName;
 
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
 
+
+                lp.lv.SellTicket(name, ticket);
+
+                PurchasedTickets = lp.p.ResultsByPlayer(name);
+
+                lotteryPurchaser1.incorrectPlayerTicket = false;
+            }
+            else
+            {
+                lotteryPurchaser1.incorrectPlayerTicket = true;
+            }
 
             return Page();
         }
