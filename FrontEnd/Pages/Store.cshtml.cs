@@ -50,26 +50,40 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostQuickPickPurchase(string name,int numTickets)
         {
-            PlayerNombre = name;
-            Selection = "QuickPick";
-            NumQuickPicks = numTickets;
-            lp.lv.SellQuickTickets(name, numTickets);
+            try
+            {
+                PlayerNombre = name;
+                Selection = "QuickPick";
+                NumQuickPicks = numTickets;
+                lp.lv.SellQuickTickets(name, numTickets);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Page();
+            }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
 
         public IActionResult OnPostNumberPickPurchase(string name, int [] ticket)
         {
-            PlayerNombre = name;
-            Selection = "NumberPick";
-            if (ticket.Length == 6)
+            try
             {
+                PlayerNombre = name;
+                Selection = "NumberPick";
+                if (ticket.Length != 6)
+                {
+                    throw new Exception("Ticket length is not six.");
+                }
                 lp.lv.SellTicket(name, ticket);
-                
             }
-           PurchasedTickets = lp.p.ResultsByPlayer(name);
-
-            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Page();
+            }
+            PurchasedTickets = lp.p.ResultsByPlayer(name); 
             return Page();
         }
     }
