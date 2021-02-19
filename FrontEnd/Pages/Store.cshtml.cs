@@ -44,13 +44,15 @@ namespace FrontEnd.Pages
         {
             PlayerNombre = name;
             Selection = "QuickPick";
-          
+            PurchasedTickets = lp.p.ResultsByPlayer(name);
+
             return Page();
         }
         public IActionResult OnPostNumberPick(string name)
         {
             Selection = "NumberPick";
             PlayerNombre = name;
+            PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
 
@@ -61,9 +63,7 @@ namespace FrontEnd.Pages
             PlayerNombre = name;
             NumQuickPicks = numTickets;
             Selection = "QuickPick";
-            //Doh! I first tried to get just this ticket sales.  Wrong!
-            //What is needed is to get all ticket sales for this player-name
-            //PurchasedTickets = lp.lv.SellQuickTickets(name, numTickets);//TODO: replace "x" with playerNobmre
+          
             lp.lv.SellQuickTickets(name, numTickets);
             PurchasedTickets = lp.p.ResultsByPlayer(name);
 
