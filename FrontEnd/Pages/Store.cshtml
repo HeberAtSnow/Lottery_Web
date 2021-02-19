@@ -121,9 +121,9 @@
             transition: 0.3s all ease
         }
 
-        .balls:hover {
-            transform: scale(1.05)
-        }
+            .balls:hover {
+                transform: scale(1.05)
+            }
 
 
         .ticket {
@@ -167,18 +167,20 @@
 
         <form method="post">
             <label for="name">Lucky Participant Name:</label>
-            <input name="name" type="text" placeholder="Name" value="@Model.lotteryPurchaser1.PlayerName" />
+            <input class="name" name="name" type="text" placeholder="Name" value="@Model.lotteryPurchaser1.PlayerName" />
 
             <h2>
                 How do you want to acquire your winner tickets?
             </h2>
-            <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
-            <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+            <button class="playBtn" type="submit" asp-page-handler="NumberPick">Pick By Number</button>
+            <button class="playBtn" type="submit" asp-page-handler="QuickPick">Quick Pick</button>
         </form>
 
         @if (Model.lotteryPurchaser1.incorrectPlayerName)
         {
-            <p style="color:red;">Name is required!</p>
+            <div style="color:black; background-color:red;width:200px;">
+                <p>Name is required!</p>
+            </div>
         }
 
         @if (Model.Selection == "NumberPick")
@@ -192,7 +194,10 @@
 
             @if (Model.lotteryPurchaser1.incorrectPlayerTicket)
             {
-                <p style="color:red;">Error in the ticket field. Please make sure to enter a number in every cell</p>
+                <div style="color:black; background-color:red;width:600px;">
+                    <p>Error in the ticket field. Please make sure to enter a number in every cell</p>
+                </div>
+
             }
 
             <form method="post" asp-page-handler="NumberPickPurchase">
@@ -204,7 +209,9 @@
                 <label for="ticket">Powerball:</label>
                 <input id="powerball" type="number" name="ticket" min="0" max="26" />
                 <br />
-                <button type="submit">Let's win that price!</button>
+                <br />
+                <br />
+                <button class="playBtn" type="submit">Let's win that price!</button>
             </form>
         }
 
@@ -221,12 +228,16 @@
 
             @if (Model.lotteryPurchaser1.incorrectPlayerTicket)
             {
-                <p style="color:red;">Error in the ticket field. Please try again</p>
+                <div style="color:black; background-color:red;width:300px;">
+                    <p>Error in the ticket field. Please try again</p>
+                </div>
+                
             }
 
             <form method="post" asp-page-handler="QuickPickPurchase">
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
                 <input name="numTickets" type="number" min="0" max="1000" />
+                <br />
                 <br />
                 <br />
 
@@ -241,7 +252,7 @@
             <br />
             <br />
 
-            
+
 
             <div class="ticket">
 
@@ -253,7 +264,7 @@
 
                     @foreach (var x in Model.PurchasedTickets)
                     {
-                        <tr style="padding-bottom:5px;">
+                        <tr>
                             <td class="ball">@x.balls[0]</td>
                             <td class="ball">@x.balls[1]</td>
                             <td class="ball">@x.balls[2]</td>
@@ -268,9 +279,9 @@
                             {
 
                             }
-                            
+
                         </tr>
-                        
+
                     }
                 </table>
                 <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>

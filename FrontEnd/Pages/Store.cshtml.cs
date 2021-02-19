@@ -15,6 +15,8 @@ namespace FrontEnd.Pages
 
         public LotteryPurchaser lotteryPurchaser1;
 
+        public LotteryTicket lotteryTicket;
+
         public IEnumerable<LotteryTicket> PurchasedTickets;
 
         public bool incorrectName = false;
@@ -113,11 +115,15 @@ namespace FrontEnd.Pages
             {
                 var name = lotteryPurchaser1.PlayerName;
 
+               
 
+                lotteryTicket = lp.lv.SellTicket(name, ticket);
 
-                lp.lv.SellTicket(name, ticket);
-
-                PurchasedTickets = lp.p.ResultsByPlayer(name);
+                /*if(PurchasedTickets.Contains(lotteryTicket)){
+                    return Page();
+                }*/
+                 PurchasedTickets = lp.p.ResultsByPlayer(name);
+                
 
                 lotteryPurchaser1.incorrectPlayerTicket = false;
             }
