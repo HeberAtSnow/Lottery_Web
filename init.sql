@@ -1,6 +1,6 @@
 ﻿create table period (
 	id serial primary key, 
-	grandprizeamt currency, 
+	grandprizeamt money, 
 	startts timestamptz, 
 	endts timestamptz);
 create table ticketsale (
@@ -14,5 +14,5 @@ create table ticketsale (
 	ball5 int, 
 	powerball int, 
 	winlevel int, 
-	winamount currency, 
+	winamount money, 
 	type text check (type in ('custom','quick')) );
