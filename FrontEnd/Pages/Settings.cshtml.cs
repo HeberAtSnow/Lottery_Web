@@ -12,7 +12,7 @@ namespace FrontEnd.Pages
     public class SettingsModel : PageModel
     {
         private LotteryProgram lotteryProgram;
-        public IEnumerable<LotteryTicket> lotteryResults;
+        public IEnumerable<LotteryTicket> lotteryResults ;
 
         public SettingsModel(LotteryProgram prog)
         {
