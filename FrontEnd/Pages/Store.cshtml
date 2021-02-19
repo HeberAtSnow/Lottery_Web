@@ -16,7 +16,7 @@
 
         body {
             margin: 2em;
-            background-color: #ffffc4;
+            background-color: whitesmoke;
         }
 
         h1, h2, h3, h4, p, td, label {
@@ -34,11 +34,11 @@
 
         button {
             margin: .5em;
-            background-color: #b8b8b8;
+            background-color: red;
             border-style: solid;
             border-radius: 5px;
             border-color: black;
-            color: black;
+            color: white;
             padding: 10px 15px;
             text-align: center;
             font-size: 16px;
@@ -49,19 +49,40 @@
                 color: white;
             }
 
-        input[type=number] {
+        #numberInput {
             padding: 10px;
             border-radius: 100px;
             border-color: black;
-            width: 5%;
+            width: 15%;
+            text-align: center;
+        }
+
+        input[type=text]{
+            margin-left: 50px;
+            border-radius: 100px;
+            height: 35px;
+            text-align: center;
+        }
+        #ball {
+            border: 1px solid black;
+            border-radius: 50%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
         }
 
         #powerball {
+            border: 1px solid black;
+            border-radius: 50%;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            color: white;
             background-color: red;
         }
 
         td {
-            margin-right: 25px;
+            margin-right: 15px;
             text-align: center;
         }
 
@@ -73,6 +94,10 @@
             padding-left: 10px;
             padding-right: 10px;
             text-align: center;
+            box-shadow: 2px 2px black;
+        }
+        #numberPicks{
+            width: 500px;
         }
 
         #powerballTitle {
@@ -84,6 +109,7 @@
             padding-right: 5px;
             text-align: center;
             background-color: red;
+            box-shadow: 2px 2px black;
         }
         #powerPlay1 {
             background-color: black;
@@ -103,11 +129,17 @@
 
         .ticket{
             border: 2px dashed black;
-            width: 17%;
+            width: 65%;
             padding: 1em;
+            background-color: lemonchiffon;
         }
 
         .center{
+            margin-left: auto;
+            margin-right: auto;
+            width: 25%;
+        }
+        .contentCenter {
             margin-left: auto;
             margin-right: auto;
             width: 25%;
@@ -118,7 +150,7 @@
         }
     </style>
 </head>
-<body>
+<body class="contentCenter">
     <header>
         <div>
             <h4>Snow College Lottery</h4>
@@ -133,8 +165,7 @@
     <main>
         <div>
             <form method="post">
-                <label for="name">Lucky Participant Name:</label>
-                <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
+                <input name="name" type="text" placeholder="Enter Name Here" value="@Model.PlayerNombre" required />
 
                 <h2>
                     How do you want to acquire your winner tickets?
@@ -143,6 +174,13 @@
                 <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
             </form>
         </div>
+
+        @if(Model.PurchasedTickets?.Any() ?? false)
+        {
+            <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
+        }
+        
+
         @if (Model.Selection == "NumberPick")
         {
             <h2>
@@ -151,17 +189,31 @@
             <p>
                 I don't trust computers! If you want something done right, do it yourself.
             </p>
-
             <form method="post" asp-page-handler="NumberPickPurchase">
-                @for (int i = 0; i < 5; i++)
-                {
-                    <label for="ticket">Number @(i + 1) :</label>
-                    <input type="number" name="ticket" min="0" max="69" />
-                }
-                <label for="ticket">Powerball:</label>
-                <input id="powerball" type="number" name="ticket" min="0" max="26" />
-                <br />
-                <button type="submit">Let's win that price!</button>
+                <table id="numberPicks">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <tr>
+                            <td>
+                                <label for="ticket">Number @(i + 1) :</label>
+                                <input id="ball" type="number" name="ticket" min="0" max="69" />
+                                <input type="hidden" value="@Model.PlayerNombre" name="name" />
+                            </td>
+                        </tr>                        
+                    }
+                    <tr>
+                        <td>
+                            <label for="ticket">Powerball :</label>
+                            <input id="powerball" type="number" name="ticket" min="0" max="26" />
+                        </td>
+                    </tr>
+                                             
+                </table>  
+
+                <div class="center">
+                    <button type="submit">Let's win that prize!</button>
+                </div>
+                                      
             </form>
 
             @if (Model.RecentPurchase == true)
@@ -190,7 +242,7 @@
 
             <form method="post" asp-page-handler="QuickPickPurchase">
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
-                <input name="numTickets" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
+                <input name="numTickets" id="numberInput" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
                 <input type="hidden" value="@Model.PlayerNombre" name="name" />
                 <br />
                 <button type="submit">Give me them Tickets!</button>
@@ -239,7 +291,7 @@
                     }
                 </table>
             </div>
-            <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
+
         }
     </main>
 </body>

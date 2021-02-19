@@ -47,8 +47,9 @@ namespace FrontEnd.Pages
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
             return Page();
         }
-        public IActionResult OnPostNumberPick()
+        public IActionResult OnPostNumberPick(string name)
         {
+            PlayerNombre = name;
             cacheSelectionValue = "NumberPick";
             _cache.Set(cacheSelectionKey, cacheSelectionValue, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10)));
             return Page();
@@ -74,12 +75,14 @@ namespace FrontEnd.Pages
             return Page();
         }
 
-        public IActionResult OnPostNumberPickPurchase(int [] ticket)
+        public IActionResult OnPostNumberPickPurchase(string name, int [] ticket)
         {
             if (ticket.Length == 6)
             {
-                _cache.Set(cacheRecentPurchaseKey, true);
-                _cache.Set(cacheLastTicketKey, ticket);
+                PlayerNombre = name;
+                timePurchased = DateTime.Now;
+                lp.lv.SellTicket(name, ticket);
+                PurchasedTickets = lp.p.ResultsByPlayer(name);
             }
             return Page();
         }
