@@ -1,4 +1,18 @@
-﻿
+﻿header {
+    background-image: url(https://hips.hearstapps.com/amv-prod-gp.s3.amazonaws.com/gearpatrol/wp-content/uploads/2019/11/Mechanical-Keyboard-Buying-Guide-Gear-Patrol-lead-full.jpg);
+    background-size: auto, auto;
+}
+
+
+
+h1 {
+    color: black;
+    font-size: 3em;
+    text-align: center;
+    bottom-margin: 20px;
+    background: rgba(255,255,255,.3);
+}
+
 .crop {
     width: 270px;
     height: 100px;
