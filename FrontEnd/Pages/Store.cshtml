@@ -49,10 +49,9 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            
         }
 
-     
+
 
         .playBtn {
             border-radius: 12px;
@@ -70,12 +69,12 @@
             transition: 0.3s all ease
         }
 
-        .playBtn:hover {
-            background-color: red;
-            color: white;
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-            transform: scale(1.1);
-        }
+            .playBtn:hover {
+                background-color: red;
+                color: white;
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+                transform: scale(1.1);
+            }
 
         .name {
             width: 30%;
@@ -87,27 +86,34 @@
             padding-left: 30px;
             font-size: 20px;
             transition: 0.3s all ease
-
         }
 
-        .name:hover{
-            transform: scale(1.05);
-        }
+            .name:hover {
+                transform: scale(1.05);
+            }
 
         @@keyframes jump {
-            0%   {transform: translate3d(0,0,0) scale3d(1,1,1);}
-            40%  {transform: translate3d(0,30%,0) scale3d(.6,1.3,1);}
-            100% {transform: translate3d(0,100%,0) scale3d(1.3,.6,1);}
-}
+            0% {
+                transform: translate3d(0,0,0) scale3d(1,1,1);
+            }
+
+            40% {
+                transform: translate3d(0,30%,0) scale3d(.6,1.3,1);
+            }
+
+            100% {
+                transform: translate3d(0,100%,0) scale3d(1.3,.6,1);
+            }
+        }
+
         .jump {
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
             transform-origin: 50% 50%;
             animation: jump .8s linear alternate infinite;
-
         }
 
 
-        img{
+        img {
             border-radius: 30px;
         }
 
@@ -115,8 +121,34 @@
             transition: 0.3s all ease
         }
 
-        .balls:hover{
+        .balls:hover {
             transform: scale(1.05)
+        }
+
+
+        .ticket {
+            border: 2px dashed black;
+            width: 25%;
+            padding: 1em;
+            background-color: lemonchiffon;
+        }
+
+        .center {
+            margin-left: 0;
+            margin-right: auto;
+            width: 25%;
+        }
+
+        .ball {
+            margin: .25em;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-collapse: collapse;
+            border: 1px solid black;
+            border-radius: 60%;
+            box-shadow: inset -6.25px -6.25px 10px rgba(0,0,0,.25);
         }
     </style>
 </head>
@@ -206,30 +238,45 @@
 
         @if (Model.PurchasedTickets?.Any() ?? false)
         {
-            <table>
+            <br />
+            <br />
 
-                @foreach (var x in Model.PurchasedTickets)
-                {
-                    <tr>
-                        <td>@x.balls[0]</td>
-                        <td>@x.balls[1]</td>
-                        <td>@x.balls[2]</td>
-                        <td>@x.balls[3]</td>
-                        <td>@x.balls[4]</td>
-                        <td id="power">@x.powerBall</td>
-                        @if (x.isGraded)
-                        {
-                            <td>@x.winAmtDollars.ToString("c")</td>
-                        }
-                        else
-                        {
-                            <td />
-                            <td />
-                        }
-                    </tr>
-                }
-            </table>
-            <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
+            
+
+            <div class="ticket">
+
+                <p>
+                    Purchased Tickets
+                </p>
+
+                <table class="center">
+
+                    @foreach (var x in Model.PurchasedTickets)
+                    {
+                        <tr style="padding-bottom:5px;">
+                            <td class="ball">@x.balls[0]</td>
+                            <td class="ball">@x.balls[1]</td>
+                            <td class="ball">@x.balls[2]</td>
+                            <td class="ball">@x.balls[3]</td>
+                            <td class="ball">@x.balls[4]</td>
+                            <td class="ball" id="powerball">@x.powerBall</td>
+                            @if (x.isGraded)
+                            {
+                                <td>@x.winAmtDollars.ToString("c")</td>
+                            }
+                            else
+                            {
+
+                            }
+                            
+                        </tr>
+                        
+                    }
+                </table>
+                <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
+
+            </div>
+
         }
 
 
