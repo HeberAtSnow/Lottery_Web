@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{80EBEB30-414E-4FD3-BE5D-2519A5778F41}"
 	ProjectSection(SolutionItems) = preProject
 		Design Document.txt = Design Document.txt
+		init.sql = init.sql
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8E16D441-ECA0-47C4-9E20-32B6161029A1}"
