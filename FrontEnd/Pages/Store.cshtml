@@ -118,11 +118,12 @@
                 }
                 <label for="ticket">Powerball:</label>
                 <input id="powerball" type="number" name="ticket5" min="0" max="26" />
+                <input type="hidden" value="@Model.PlayerNombre" name="name" />
                 <br />
                 <button type="submit">Let's win that prize!</button>
             </form>
 
-            @if (Model.RecentPurchase == true)
+           <!-- @if (Model.RecentPurchase == true)
             {
                 <h2>Last Ticket bought</h2>
                 <table>
@@ -134,7 +135,7 @@
                         <td id="powerball">@Model.LastTicket[5]</td>
                     </tr>
                 </table>
-            }
+            }-->
         }
 
         @if (Model.Selection == "QuickPick")
@@ -156,7 +157,7 @@
         }
         @if (Model.PurchasedTickets?.Any() ?? false)
         {
-            <table>
+            <table style="margin-left: auto; margin-right: auto;">
                 @foreach (var x in Model.PurchasedTickets)
                 {
                     <tr>
