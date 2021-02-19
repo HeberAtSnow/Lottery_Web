@@ -80,7 +80,14 @@ namespace FrontEnd.Pages
         {
             PlayerNombre = name;
             int[] sixBalls = new int[] { ticket0, ticket1, ticket2, ticket3, ticket4, ticket5 };
-            lp.lv.SellTicket(name, sixBalls);
+            try
+            {
+                lp.lv.SellTicket(name, sixBalls);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             /*if (ticket.Length == 6)
             {
