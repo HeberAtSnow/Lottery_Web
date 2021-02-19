@@ -131,10 +131,28 @@
     </header>
     <main>
 
+
+
+        <h2>
+            Number Pick
+        </h2>
+        <p>
+            I don't trust computers! If you want something done right, do it yourself.
+        </p>
+
+
+
         <form method="post">
-            <button class="playBtn" type="submit" asp-page-handler="NumberPick">Number Pick</button>
-            <button class="playBtn" type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+            <label for="name">Lucky Participant Name:</label>
+            <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
+
+            <h2>
+                How do you want to acquire your winner tickets?
+            </h2>
+            <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
+            <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
         </form>
+
 
         @if (Model.Selection == "NumberPick")
         {
@@ -145,73 +163,19 @@
                 I don't trust computers! If you want something done right, do it yourself.
             </p>
 
-            @if (Model.incorrectName)
-            {
-                <p style="color:red;">Name is required!</p>
-            }
-            @if (Model.incorrectTicket)
-            {
-                <p style="color:red;">Error in the ticket field. Please try again</p>
-            }
-
             <form method="post" asp-page-handler="NumberPickPurchase">
-
                 @for (int i = 0; i < 5; i++)
                 {
                     <label for="ticket">Number @(i + 1) :</label>
-                    <input class="balls" type="number" name="ticket" min="0" max="69" placeholder="1-69" />
+                    <input type="number" name="ticket" min="0" max="69" />
                 }
                 <label for="ticket">Powerball:</label>
-                <input id="powerball" type="number" name="ticket" min="0" max="26" placeholder="1-26"/>
+                <input id="powerball" type="number" name="ticket" min="0" max="26" />
                 <br />
-                <br />
-                <label for="name">Lucky Participant Name:</label>
-                <input class="name"  name="name" type="text" placeholder="Name" />
-
-                <br />
-
-                <button class="playBtn" type="submit">Let's win!</button>
+                <button type="submit">Let's win that price!</button>
             </form>
-
-            @if (Model.NumRecentPurchase == true)
-            {
-                <h2>Tickets bought</h2>
-                <table>
-                    <tr>
-                        <td>Ball1</td>
-                        <td>Ball2</td>
-                        <td>Ball3</td>
-                        <td>Ball4</td>
-                        <td>Ball5</td>
-                        <td>PowerBall</td>
-                        <td>WinLevel</td>
-                        <td>WinAmt$</td>
-                    </tr>
-                    @foreach (var x in Model.numlotteryTickets)
-                    {
-                        <tr>
-                            <td>@x.balls[0]</td>
-                            <td>@x.balls[1]</td>
-                            <td>@x.balls[2]</td>
-                            <td>@x.balls[3]</td>
-                            <td>@x.balls[4]</td>
-                            <td id="powerball">@x.powerBall</td>
-                            @if (x.isGraded)
-                            {
-                                <td>@x.winLevel</td>
-                                <td>@x.winAmtDollars.ToString("c")</td>
-                            }
-                            else
-                            {
-                                <td />
-                                <td />
-                            }
-                        </tr>
-                    }
-                </table>
-                <p>Number of purchased tickets: @Model.numlotteryTickets.Count()</p>
-            }
         }
+
 
         @if (Model.Selection == "QuickPick")
         {
@@ -245,47 +209,49 @@
                 <button class="playBtn" type="submit">Give me the Tickets!</button>
             </form>
 
-            @if (Model.RandRecentPurchase == true)
-            {
-                <h2>Tickets bought</h2>
 
-                <table>
-                    <tr>
-                        <td>Ball1</td>
-                        <td>Ball2</td>
-                        <td>Ball3</td>
-                        <td>Ball4</td>
-                        <td>Ball5</td>
-                        <td>PowerBall</td>
-                        <td>WinLevel</td>
-                        <td>WinAmt$</td>
-                    </tr>
-                    @foreach (var x in Model.randlotteryTickets)
-                    {
-                        <tr>
-                            <td>@x.balls[0]</td>
-                            <td>@x.balls[1]</td>
-                            <td>@x.balls[2]</td>
-                            <td>@x.balls[3]</td>
-                            <td>@x.balls[4]</td>
-                            <td id="powerball">@x.powerBall</td>
-
-                            @if (x.isGraded)
-                            {
-                                <td>@x.winLevel</td>
-                                <td>@x.winAmtDollars.ToString("c")</td>
-                            }
-                            else
-                            {
-                                <td />
-                                <td />
-                            }
-                        </tr>
-                    }
-                </table>
-                <p>Number of purchased tickets: @Model.randlotteryTickets.Count()</p>
-            }
         }
+
+
+        @if (Model.PurchasedTickets?.Any() ?? false)
+        {
+            <table>
+                <tr>
+                    <td>Ball1</td>
+                    <td>Ball2</td>
+                    <td>Ball3</td>
+                    <td>Ball4</td>
+                    <td>Ball5</td>
+                    <td>PowerBall</td>
+                    <td>WinLevel</td>
+                    <td>WinAmt$</td>
+                </tr>
+                @foreach (var x in Model.PurchasedTickets)
+                {
+                    <tr>
+                        <td>@x.balls[0]</td>
+                        <td>@x.balls[1]</td>
+                        <td>@x.balls[2]</td>
+                        <td>@x.balls[3]</td>
+                        <td>@x.balls[4]</td>
+                        <td id="power">@x.powerBall</td>
+                        @if (x.isGraded)
+                        {
+                            <td>@x.winLevel</td>
+                            <td>@x.winAmtDollars.ToString("c")</td>
+                        }
+                        else
+                        {
+                            <td />
+                            <td />
+                        }
+                    </tr>
+                }
+            </table>
+            <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
+        }
+
+
     </main>
 </body>
 </html>
