@@ -69,21 +69,36 @@
     </header>
     <main>
         <form method="post">
-            <label for="name">Lucky Participant Name:</label>
-            <input name="name" type="text" placeholder="Name" value="@Model.PlayerNombre" />
+            @if (Model.ParticipantName == null || Model.ParticipantName == "")
+            {
+            <input type="text" placeholder="Lucky Participant Name:" asp-for="ParticipantName" value="@Model.ParticipantName" />
+            <span asp-validation-for="ParticipantName"></span>
+            }
+            else
+            {
+                <p>Current Participant: @Model.ParticipantName</p>
+            }
+            @if (Model.Selection == null || Model.Selection == "")
+            {
 
-            <h2>
-                How do you want to acquire your winner tickets?
-            </h2>
-            <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
-            <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+                <h2>
+                    How do you want to acquire your winner tickets?
+                </h2>
+                <button type="submit" asp-page-handler="NumberPick">Pick By Number</button>
+                <button type="submit" asp-page-handler="QuickPick">Quick Pick</button>
+
+            }
         </form>
+
 
         @if (Model.Selection == "NumberPick")
         {
             <h2>
                 Number Pick
             </h2>
+            <form method="post" asp-page-handler="BackButton">
+                <button type="submit">Maybe Not</button>
+            </form>
             <p>
                 I don't trust computers! If you want something done right, do it yourself.
             </p>
@@ -97,7 +112,7 @@
                 <label for="ticket">Powerball:</label>
                 <input id="powerball" type="number" name="ticket" min="0" max="26" />
                 <br />
-                <button type="submit">Let's win that price!</button>
+                <button type="submit">Let's win that prize!</button>
             </form>
 
             @if (Model.RecentPurchase == true)
@@ -120,31 +135,35 @@
             <h2>
                 Quick Pick
             </h2>
+            <form method="post" asp-page-handler="BackButton">
+                <button type="submit">Ill Do It Myself!</button>
+            </form>
             <p>
                 Let the computer do it for me!
             </p>
 
+
             <form method="post" asp-page-handler="QuickPickPurchase">
                 <label for="numTickets">Purchase 1-1000 random tickets</label>
                 <input name="numTickets" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
-                <input type="hidden" value="@Model.PlayerNombre" name="name" />
+                <input type="hidden" value="@Model.ParticipantName" name="name" />
                 <br />
                 <button type="submit">Give me them Tickets!</button>
             </form>
         }
-        @if (Model.PurchasedTickets?.Any() ?? false)
-        {
-            <table>
-                <tr>
-                    <td>Ball1</td>
-                    <td>Ball2</td>
-                    <td>Ball3</td>
-                    <td>Ball4</td>
-                    <td>Ball5</td>
-                    <td>PowerBall</td>
-                    <td>WinLevel</td>
-                    <td>WinAmt$</td>
-                </tr>
+        <table>
+            <tr>
+                <td>Ball1</td>
+                <td>Ball2</td>
+                <td>Ball3</td>
+                <td>Ball4</td>
+                <td>Ball5</td>
+                <td>PowerBall</td>
+                <td>WinLevel</td>
+                <td>WinAmt$</td>
+            </tr>
+            @if (Model.PurchasedTickets != null)
+            {
                 @foreach (var x in Model.PurchasedTickets)
                 {
                     <tr>
@@ -166,9 +185,17 @@
                         }
                     </tr>
                 }
-            </table>
+            }
+        </table>
+        @if (Model.PurchasedTickets == null)
+        {
+            <p>Number of purchased tickets: 0</p>
+        }
+        else
+        {
             <p>Number of purchased tickets: @Model.PurchasedTickets.Count()</p>
         }
+
     </main>
 </body>
 </html>
