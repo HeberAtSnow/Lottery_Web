@@ -14,7 +14,7 @@
 <body>
     <header>
             <h1>
-                Welcome <br /> to the<br /> ticket store!
+                Welcome <br /> to the<br /> Ticket Store!
             </h1>
     </header>
     <main>
@@ -49,9 +49,11 @@
                     {
                         <label for="ticket">Number @(i + 1) :</label>
                         <input type="number" name="ticket" min="0" max="69" />
+
                     }
                     <label for="ticket">Powerball:</label>
                     <input id="powerball" type="number" name="ticket" min="0" max="26" />
+                    <input type="hidden" value="@Model.PlayerNombre" name="name" />
                     <br />
                     <button type="submit">Let's win that price!</button>
                 </form>
@@ -99,14 +101,14 @@
             <div class="background">
                 <table>
                     <tr>
-                        <td>Pick <br />#1</td>
-                        <td>Pick <br />#2</td>
-                        <td>Pick <br />#3</td>
-                        <td>Pick <br />#4</td>
-                        <td>Pick <br />#5</td>
-                        <td id="powerball">Power<br />ball</td>
-                        <td>Win<br />Level</td>
-                        <td id="win">Win<br />Amt$</td>
+                        <td class="ball">Pick <br />#1</td>
+                        <td class="ball">Pick <br />#2</td>
+                        <td class="ball">Pick <br />#3</td>
+                        <td class="ball">Pick <br />#4</td>
+                        <td class="ball">Pick <br />#5</td>
+                        <td class="ball" id="powerball">Power<br />ball</td>
+                        <td class="ball">Win<br />Level</td>
+                        <td class="ball" id="win">Win<br />Amt$</td>
                     </tr>
                     @foreach (var x in Model.PurchasedTickets)
                     {
