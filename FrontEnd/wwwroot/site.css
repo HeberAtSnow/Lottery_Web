@@ -1,12 +1,16 @@
-﻿h1 {
-    background-image: url(https://nypost.com/wp-content/uploads/sites/2/2019/08/powerball-winner.jpg?quality=80&strip=all);
-    background-color: red;
-    color: black;
+﻿header{
+background-image: url(https://nypost.com/wp-content/uploads/sites/2/2019/08/powerball-winner.jpg?quality=80&strip=all);
     background-size: auto, auto;
+}
+h1 {
+    color: black;
     font-size: 5em;
     text-align: center;
     bottom-margin: 20px;
+    background:rgba(255,255,255,.3);
+    
 }
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
