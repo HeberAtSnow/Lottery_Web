@@ -58,6 +58,7 @@ namespace FrontEnd.Pages
             }
             else
             {
+               
                 lp.lv.SellQuickTickets(name, numTickets);
                 PurchasedTickets = lp.p.ResultsByPlayer(name);
                 return Page();
@@ -69,14 +70,39 @@ namespace FrontEnd.Pages
         {
             if (String.IsNullOrEmpty(name))
             {
+                Console.WriteLine("InvalidName");
                 return Page();
             }
-            int[] TicketSales = new int[] { number1, number2, number3, number4, number5, powerball };
+            int[] TicketSales = new int[] { number1, number2, number3, number4, number5, powerball};
             if (TicketSales.Length == 6)
             {
-                lp.lv.SellTicket(name, TicketSales);
-                PurchasedTickets = lp.p.ResultsByPlayer(name);
+                try
+                {
+                    foreach (LotteryTicket ticket in lp.p.ResultsByPlayer(name))
+                    {
+                        bool duplicate = true;
+                        for (int i = 0; i <= 4; i++)
+                        {
+                            if (ticket.balls[i] == TicketSales[i])
+                            {
+                                duplicate = duplicate & (ticket.balls[i] == TicketSales[i]);
+                            }
+                        }
+                        duplicate = duplicate & (ticket.powerBall == TicketSales[5]);
+                        if (duplicate)
+                        {
+                            throw new ArgumentException("This ticket is duplicated for this player");
+                        }
+                    }
+                    lp.lv.SellTicket(name, TicketSales);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return Page();
+                }
 
+                PurchasedTickets = lp.p.ResultsByPlayer(name);
             }
             return Page();
         }
