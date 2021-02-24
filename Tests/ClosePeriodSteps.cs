@@ -33,7 +33,16 @@ namespace Tests
         public void ThenTheDatabaseWillHaveStatsOfWinningTicketsCountAndLosingTicketsCount(int winCnt, int losCnt)
         {
             var ls = new LotteryStatistics();
-            ls.WriteStatsToDB(context.Get<LotteryPeriod>("period") ).Should().Be(true); //junk evaluation TODO: better assert test
+            var pID = ls.WriteStatsToDB(context.Get<LotteryPeriod>("period"));
+            
+            int winTcntDB; //winning Ticket Count From DB
+            //TODO - read counts from DB
+            winTcntDB.Should().Equals(winCnt); //junk evaluation TODO: better assert test
+            
+            int loseTcntDB; //loosing ticket count from DB
+            //TODO - read counts from DB
+            loseTcntDB.Should().Equals(losCnt); //junk evaluation TODO: better assert test
+            
         }
 
     }

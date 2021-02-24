@@ -22,13 +22,8 @@ namespace ClassLib
             return $"PostgreSQL version: {version}";
         }
 
-        public bool WriteStatsToDB(LotteryPeriod lp)
+        public int WriteStatsToDB(LotteryPeriod lp) //returns periodID assigned in DB
         {
-            //insert into db 
-
-            //int p_id = insert into period (grandprizeamt,startts,endts)
-            //(lp.GrandPrizeAmount, lp.PeriodBeginTS,DateTime.Now) returning id;
-
             var con = new NpgsqlConnection(cs);
             con.Open();
             int periodID;
@@ -37,13 +32,9 @@ namespace ClassLib
             cmd.Parameters.Add(new NpgsqlParameter("gpAmt", lp.GrandPrizeAmount));
             cmd.Parameters.Add(new NpgsqlParameter("bTS", lp.PeriodBeginTS));
             cmd.Parameters.Add(new NpgsqlParameter("eTS", DateTime.Now));
-            periodID = (int)cmd.ExecuteScalar();
+            periodID = (int)cmd.ExecuteScalar(); //PERIOD table 1-record
 
-
-            //insert into db
-            //  each sold ticket information
-            //      first pass using sinle insert
-            //      future - use bulk copy
+            //TODO: use bulk copy
             var unionResult = lp.losingTicketsL.Union(lp.winningTicketsL);
             foreach (var l in unionResult)
             {
@@ -52,10 +43,10 @@ namespace ClassLib
                     "(period_id,ballstring,ball1,ball2,ball3,ball4,ball5,powerball,winlevel,winamount,type) values (" +
                     " :p_id, :bs, :b1, :b2, :b3, :b4, :b5, :bpower, :winL, :wina, :t)", con);
                 cmd2.Parameters.Add(new NpgsqlParameter("p_id", periodID));
-                cmd2.Parameters.Add(new NpgsqlParameter("bs", 
+                cmd2.Parameters.Add(new NpgsqlParameter("bs",
                     l.balls[0].ToString("00") + l.balls[1].ToString("00") +
                     l.balls[2].ToString("00") + l.balls[3].ToString("00") +
-                    l.balls[4].ToString("00") + l.powerBall.ToString("00")  ));
+                    l.balls[4].ToString("00") + l.powerBall.ToString("00")));
                 cmd2.Parameters.Add(new NpgsqlParameter("b1", l.balls[0]));
                 cmd2.Parameters.Add(new NpgsqlParameter("b2", l.balls[1]));
                 cmd2.Parameters.Add(new NpgsqlParameter("b3", l.balls[2]));
@@ -65,12 +56,10 @@ namespace ClassLib
                 cmd2.Parameters.Add(new NpgsqlParameter("winL", l.winLevel));
                 cmd2.Parameters.Add(new NpgsqlParameter("wina", l.winAmtDollars));
                 cmd2.Parameters.Add(new NpgsqlParameter("t", l.Type));
-                cmd2.ExecuteScalar();
-               
-                Console.WriteLine("I want to write this ticket: {0}", l.powerBall);
+                cmd2.ExecuteScalar(); //TICKETSALE table - 1 row per ticket
             }
             con.Close();
-            return true;
+            return periodID;//returns period.id as assigned by identity column in DB
         }
 
 
