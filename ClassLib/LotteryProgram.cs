@@ -9,7 +9,7 @@ namespace ClassLib
 {
     public class LotteryProgram
     {
-        public LotteryPeriod p = new LotteryPeriod();
+        public LotteryPeriod p = new LotteryPeriod(DateTime.Now);
         static int vTicketsToSell = 1000000;
         static int vThreadCount = 3; //VENDOR Thread Count
         public LotteryVendor lv;
@@ -59,6 +59,9 @@ namespace ClassLib
                 //TODO:  increment GrandPrize Amt 
                 //Ready to allow sales again
                 p.SalesState = TicketSales.OK;
+
+                var ls = new LotteryStatistics();
+                ls.WriteStatsToDB(p);
 
             }
             //p = new LotteryPeriod();

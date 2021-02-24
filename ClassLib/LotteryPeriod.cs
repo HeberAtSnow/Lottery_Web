@@ -22,6 +22,12 @@ namespace ClassLib
         public List<LotteryTicket> losingTicketsL = new List<LotteryTicket>();
         private int _salesState;  //change to int
         public ReaderWriterLockSlim soldTicketsLock = new ReaderWriterLockSlim();
+        public DateTime PeriodBeginTS { get; set; }
+
+        public LotteryPeriod(DateTime periodBegints)
+        {
+            this.PeriodBeginTS = DateTime.Now;
+        }
 
         public TicketSales SalesState
         {

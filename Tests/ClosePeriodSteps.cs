@@ -20,7 +20,7 @@ namespace Tests
         public void WhenPeriodIsClosed()
         {
             var ls = new LotteryStatistics();
-            context.Add("connAnswer", ls.testConn());
+            context.Add("connAnswer", ls.TestConn());
         }
         
         [Then(@"DB should answer version")]
@@ -32,7 +32,8 @@ namespace Tests
         [Then(@"the database will have stats of winning tickets count = (.*) and losing tickets count = (.*)")]
         public void ThenTheDatabaseWillHaveStatsOfWinningTicketsCountAndLosingTicketsCount(int winCnt, int losCnt)
         {
-            ScenarioContext.Current.Pending();
+            var ls = new LotteryStatistics();
+            ls.WriteStatsToDB(context.Get<LotteryPeriod>("period") ).Should().Be(true); //junk evaluation TODO: better assert test
         }
 
     }

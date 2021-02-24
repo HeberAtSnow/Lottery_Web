@@ -14,6 +14,7 @@ namespace ClassLib
         public bool isGraded = false;
         public int winLevel; //only use if isGraded is set to true
         public decimal winAmtDollars; //only use if isGraded is set to true
+        public string Type { get; set; }
         
         //static, so new Random() is called only once for the program.
         static Random rnd = new System.Random(System.Environment.TickCount);
