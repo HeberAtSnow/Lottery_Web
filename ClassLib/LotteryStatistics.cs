@@ -62,10 +62,29 @@ namespace ClassLib
             return periodID;//returns period.id as assigned by identity column in DB
         }
 
+        public int DBLoosingTicketCountInPeriod(int pID)
+        {
+            var con = new NpgsqlConnection(cs);
+            con.Open();
+            int periodID;
+            var cmd = new NpgsqlCommand("select count(*) from ticketsale where winlevel=0 and period_id=:periodID", con);
+            cmd.Parameters.Add(new NpgsqlParameter("periodID", pID));
+            int r= Convert.ToInt32(cmd.ExecuteScalar()); //PERIOD count of loosing tickets
+            con.Close();
+            return r;
+        }
 
-
-
-
+        public int DBWinningTicketCountInPeriod(int pID)
+        {
+            var con = new NpgsqlConnection(cs);
+            con.Open();
+            int periodID;
+            var cmd = new NpgsqlCommand("select count(*) from ticketsale where winlevel>0 and period_id=:periodID", con);
+            cmd.Parameters.Add(new NpgsqlParameter("periodID", pID));
+            int r= Convert.ToInt32(cmd.ExecuteScalar()); //PERIOD count of loosing tickets
+            con.Close();
+            return r;
+        }
     }
 
 }

@@ -20,8 +20,8 @@
     Given a ticket was sold to Bob with the numbers 5,2,4,1,3,6
 	When statistics are computed
 	Then the results for Bob should be 
-	| b0 | b1 | b2 | b3 | b4 | pb | winLevel | winAmt   |
-	| 1  | 2  | 3  | 4  | 5  | 6  | 1        | 40000000 |
+	| b0 | b1 | b2 | b3 | b4 | pb | type   | winLevel | winAmt |
+	| 1  | 2  | 3  | 4  | 5  | 6  | custom |1        | 40000000 |
 	
 
   Scenario: Getting player stats by playerName
@@ -35,9 +35,9 @@
 	And Sally should have 1 winning tickets
 	And Bob should have 1 losing tickets
 	And the results for Bob should be 
-	| b0 | b1 | b2 | b3 | b4 | pb | winLevel | winAmt   |
-	| 1  | 2  | 3  | 4  | 5  | 6  | 1        | 40000000 |
-	| 7  | 8  | 9  | 10 | 11 | 12 | 0        | 0        |
+	| b0 | b1 | b2 | b3 | b4 | pb | type   | winLevel | winAmt   |
+	| 1  | 2  | 3  | 4  | 5  | 6  | custom | 1        | 40000000 |
+	| 7  | 8  | 9  | 10 | 11 | 12 | custom |0        | 0        |
 	And the results for Sally should be
-	| b0 | b1 | b2 | b3 | b4 | pb | winLevel | winAmt   |
-	| 1  | 2  | 3  | 4  | 5  | 26  | 2        | 1000000 |
+	| b0 | b1 | b2 | b3 | b4 | pb | type   | winLevel | winAmt |
+	| 1  | 2  | 3  | 4  | 5  | 26 | custom |2        | 1000000 |

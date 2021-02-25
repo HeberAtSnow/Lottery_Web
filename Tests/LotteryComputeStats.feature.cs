@@ -182,6 +182,7 @@ namespace Tests
                             "b3",
                             "b4",
                             "pb",
+                            "type",
                             "winLevel",
                             "winAmt"});
                 table1.AddRow(new string[] {
@@ -191,6 +192,7 @@ namespace Tests
                             "4",
                             "5",
                             "6",
+                            "custom",
                             "1",
                             "40000000"});
 #line 22
@@ -264,6 +266,7 @@ namespace Tests
                             "b3",
                             "b4",
                             "pb",
+                            "type",
                             "winLevel",
                             "winAmt"});
                 table2.AddRow(new string[] {
@@ -273,6 +276,7 @@ namespace Tests
                             "4",
                             "5",
                             "6",
+                            "custom",
                             "1",
                             "40000000"});
                 table2.AddRow(new string[] {
@@ -282,6 +286,7 @@ namespace Tests
                             "10",
                             "11",
                             "12",
+                            "custom",
                             "0",
                             "0"});
 #line 37
@@ -294,6 +299,7 @@ namespace Tests
                             "b3",
                             "b4",
                             "pb",
+                            "type",
                             "winLevel",
                             "winAmt"});
                 table3.AddRow(new string[] {
@@ -303,6 +309,7 @@ namespace Tests
                             "4",
                             "5",
                             "26",
+                            "custom",
                             "2",
                             "1000000"});
 #line 41

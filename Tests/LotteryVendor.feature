@@ -17,7 +17,7 @@ Scenario:  Vendor sells 1 manual ticket
 @3xThreads
 Scenario: Threads sell X tickets each (3x)
 	Given a new period
-	When Three background threads sell 10 tickets each
-	Then the period should have another 30 tickets added to stack
+	When Three background threads sell 1000000 tickets each
+	Then the period should have another 3000000 tickets added to stack
 
 

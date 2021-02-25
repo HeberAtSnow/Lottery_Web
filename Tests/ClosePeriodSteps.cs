@@ -37,11 +37,14 @@ namespace Tests
             
             int winTcntDB; //winning Ticket Count From DB
             //TODO - read counts from DB
+            winTcntDB = ls.DBWinningTicketCountInPeriod(pID);
             winTcntDB.Should().Equals(winCnt); //junk evaluation TODO: better assert test
             
             int loseTcntDB; //loosing ticket count from DB
             //TODO - read counts from DB
+            loseTcntDB = ls.DBLoosingTicketCountInPeriod(pID);
             loseTcntDB.Should().Equals(losCnt); //junk evaluation TODO: better assert test
+
             
         }
 
