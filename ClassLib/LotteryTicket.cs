@@ -17,12 +17,6 @@ namespace ClassLib
         public string Type { get; set; }
 
         [ThreadStatic] static Random rnd;
-        static LotteryTicket()
-        {
-            rnd = new Random();
-        }
-
-
 
         public LotteryTicket() : this("Player Name Anonymous")
         {
