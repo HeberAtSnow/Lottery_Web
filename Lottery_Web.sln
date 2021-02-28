@@ -13,11 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Design Document.txt = Design Document.txt
 		init.sql = init.sql
+		SqlQuery_History_1.sql = SqlQuery_History_1.sql
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8E16D441-ECA0-47C4-9E20-32B6161029A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{224C8E58-4262-403E-9253-9A6C84714131}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{224C8E58-4262-403E-9253-9A6C84714131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

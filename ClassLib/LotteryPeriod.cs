@@ -24,9 +24,10 @@ namespace ClassLib
         public ReaderWriterLockSlim soldTicketsLock = new ReaderWriterLockSlim();
         public DateTime PeriodBeginTS { get; set; }
 
-        public LotteryPeriod(DateTime periodBegints)
+        public LotteryPeriod(decimal grandp)
         {
             this.PeriodBeginTS = DateTime.Now;
+            GrandPrizeAmount = grandp;
         }
 
         public TicketSales SalesState

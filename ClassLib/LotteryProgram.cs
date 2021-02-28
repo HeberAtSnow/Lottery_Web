@@ -9,36 +9,13 @@ namespace ClassLib
 {
     public class LotteryProgram
     {
-        public LotteryPeriod p = new LotteryPeriod(DateTime.Now);
-        static int vTicketsToSell = 1000000;
-        static int vThreadCount = 3; //VENDOR Thread Count
+        public LotteryPeriod p = new LotteryPeriod(40_000_000);//Start at $40M
         public LotteryVendor lv;
 
 
         public LotteryProgram()
         {
-            ////Stopwatch to measure how long N threads take to sell _____ tickets
-            //System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
-            //timer.Start();
-            ////Stopwatch stop
-            //timer.Stop();
-            //Console.WriteLine("Elapsed time for {0} threads is: {1}", vThreadCount, timer.Elapsed);
-            //Console.WriteLine("Array has {0:n0} tickets sold.", p.soldTickets.Count);
-
-            ////Phase 3 - check for winners
-            //Thread thr4 = new Thread(tStatsCompilers);
-            //thr4.Start();
-            //Thread thr5 = new Thread(tStatsCompilers);
-            //thr5.Start();
-            //thr4.Join(); thr5.Join();
-            //Console.WriteLine("Winners are:  GRAND={0:n0} 1st={1:n0}  2nd={2:n0}  3rd={3:n0} 4th={4:n0}" +
-            //    " 5th={5:n0}  6th={6:n0}  7th={7:n0}  8th={8:n0}", p.numGrandPrizeWinners, p.numAlt1Winners, p.numAlt2Winners,
-            //     p.numAlt3Winners, p.numAlt4Winners, p.numAlt5Winners, p.numAlt6Winners, p.numAlt7Winners, p.numAlt8Winners);
-
-            p.GrandPrizeAmount = 40000000;//$40M
             lv = new LotteryVendor(p); //starting with one Vendor 
-
-
         }
         public bool ClosePeriodSales()
         {
@@ -50,30 +27,24 @@ namespace ClassLib
             else
                 return false;
         }
-        public void ResetPeriod()
+        public bool ResetPeriod()
         {
-            if (p.SalesState==TicketSales.CLOSED)
+            if (p.SalesState == TicketSales.CLOSED)
             {
-                //TODO:  Save stats
-                //TODO:  Write stats to DB
-                //TODO:  increment GrandPrize Amt 
-                //Ready to allow sales again
-                p.SalesState = TicketSales.OK;
-
+                //Write stats to DB
                 var ls = new LotteryStatistics();
                 ls.WriteStatsToDB(p);
 
+                //get rid of old period, setup new period
+                //TODO:  increment GrandPrize Amt by max($10M or 10%)
+                p = new LotteryPeriod(p.GrandPrizeAmount += Math.Max(10_000_000, p.GrandPrizeAmount / 10));
+
+                //Ready to allow sales again
+                p.SalesState = TicketSales.OK;
+
+                return true;
             }
-            //p = new LotteryPeriod();
+            else throw new Exception("You can't ResetPeriod() when ticketSales are still ongoing.  ClosePeriodSales first!");
         }
-        
-
-        //static void tStatsCompilers()
-        //{
-        //    LotteryStatistics ls = new LotteryStatistics();
-        //    ls.compileStats(p);
-        //    Console.WriteLine("Thread finished compiling stats");
-        //}
     }
-
 }
