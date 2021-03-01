@@ -5,33 +5,42 @@
 @{
 }
 
-<body>
-    <h1>
-        Run and view stats on the Lottery.
-    </h1>
-    <form method="post">
-        <label>Draw the Winning Numbers for this Lottery Period</label>
-        <button asp-page-handler="ProcessDrawing">Process Drawing</button>
-        <br />
-        <label>Overal Results from this Lottery</label>
-        <button asp-page-handler="LotteryResults">Lottery Results</button>
-        <br />
-        <label>Statistics from <b><i>All</i></b> lottery history</label>
-        <button asp-page-handler="HistoricalStats">Historical Stats</button>
-        <br />
-        <label>Reset Lottery for the Next Drawing</label>
-        <button asp-page-handler="ResetLottery">Reset The Lottery</button>
+<html>
+<head>
+    <link rel="stylesheet" href="~/settings.css" type="text/css" />
+</head>
+<body class="content">
+    <header>
+        <h1>Welcome<br /> to the<br /> Admin page</h1>
+    </header>
+    <br />
+    <form method="get"  asp-page-handler="ResetLottery">
+        <h2>Reset Lottery for next drawing</h2> <br />
+        <button type="submit" class="btn effect01 reset">
+            Reset Lottery
+        </button>
+    </form>
+    <br />
+    <form method="get" action="">
+        <h2>Draw winning numbers</h2> <br />
+        <button class="btn effect01 drawNumbers" type="submit">
+            Process Drawing
+        </button>
+    </form>
+    <br />
+    <form method="get" action="">
+        <h2>Results from current lottery</h2> <br />
+        <button class=" btn effect01 lotteryResults" type="submit">
+            Lottery Results
+        </button>
+    </form>
+    <br />
+    <form method="get" action="">
+        <h2>All lottery statistics</h2> <br />
+        <button class="btn effect01 allStats" type="submit">
+            Historical Stats
+        </button>
     </form>
 
-    @if (Model.lotteryResults?.Count() > 0)
-    {
-        <table>
-            @foreach (var x in Model.lotteryResults)
-            {
-                <tr>
-                </tr>
-            }
-
-        </table>
-    }
 </body>
+</html>

@@ -11,54 +11,23 @@ namespace FrontEnd.Pages
 
     public class SettingsModel : PageModel
     {
-        private LotteryProgram lotteryProgram;
-        public IEnumerable<LotteryTicket> lotteryResults ;
-
-        public SettingsModel(LotteryProgram prog)
+        LotteryProgram lp;
+        //lotteryvendor.lotteryprogram
+        //lotteryprogram has a lottery period
+        public SettingsModel(LotteryProgram lotteryProgram)
         {
-            lotteryProgram = prog;
+            lp = lotteryProgram;
         }
         public void OnGet()
         {
         }
 
-        public IActionResult OnPostResetLottery()
+        public void OnPostResetLottery()
         {
-            lotteryProgram.ResetPeriod();
-            return Page();
+            lp.ResetPeriod();
         }
-
-        public IActionResult OnPostProcessDrawing()
-        {
-            if (lotteryProgram.ClosePeriodSales())
-            {
-
-            }
-            if (lotteryProgram.p.DrawWinningTicket())
-            {
-
-            }
-            try
-            {
-                lotteryProgram.p.ComputeWinners();
-            }
-            catch
-            {
-
-            }
-            lotteryResults = lotteryProgram.p.ResultsByWinLevel();
-            return Page();
-        }
-        public IActionResult OnPostLotteryResults()
-        {
-            lotteryResults = lotteryProgram.p.ResultsByWinLevel();
-            return Page();
-        }
-
-        public IActionResult OnPostHistoricalStats()
-        {
-
-            return Page();
-        }
+        //draw winning numbers
+        //current lottery results
+        //all lottery statistics
     }
 }
