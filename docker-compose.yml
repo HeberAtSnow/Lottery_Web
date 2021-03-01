@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  frontend:
+    image: ${DOCKER_REGISTRY-}frontend
+    build:
+      context: .
+      dockerfile: FrontEnd/Dockerfile
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword  #TODO: - move to secrets file
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - log-volume:/logs 
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+
+volumes:
+    log-volume:
+    pg-data:

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FrontEnd.Pages
 {
+
     public class SettingsModel : PageModel
     {
         LotteryProgram lp;
@@ -20,6 +21,7 @@ namespace FrontEnd.Pages
         public void OnGet()
         {
         }
+
         public void OnPostResetLottery()
         {
             lp.ResetPeriod();

@@ -17,12 +17,18 @@ namespace ClassLib
     public class LotteryPeriod
     {
         int[] winTicket = { 1, 2, 3, 4, 5, 6 }; //Winning Ticket Values
-        //public Stack<LotteryTicket> soldTickets = new Stack<LotteryTicket>();
         public ConcurrentStack<LotteryTicket> soldTickets = new ConcurrentStack<LotteryTicket>();
         public List<LotteryTicket> winningTicketsL = new List<LotteryTicket>();
         public List<LotteryTicket> losingTicketsL = new List<LotteryTicket>();
         private int _salesState;  //change to int
         public ReaderWriterLockSlim soldTicketsLock = new ReaderWriterLockSlim();
+        public DateTime PeriodBeginTS { get; set; }
+
+        public LotteryPeriod(decimal grandp)
+        {
+            this.PeriodBeginTS = DateTime.Now;
+            GrandPrizeAmount = grandp;
+        }
 
         public TicketSales SalesState
         {
@@ -45,12 +51,15 @@ namespace ClassLib
 
         public LotteryTicket WinningTicket { get; set; }
 
-        public void DrawWinningTicket()
+        public bool DrawWinningTicket()
         {
-            //TODO: stop any other 'purchases' from happening
-            //      by changing the state
-
-            WinningTicket = new LotteryTicket("WinningTicket");
+            if (SalesState == TicketSales.CLOSED)
+            {
+                WinningTicket = new LotteryTicket("WinningTicket");
+                return true;
+            }
+            else
+                return false;
         }
 
         public IEnumerable<LotteryTicket> ResultsByPlayer(string playerName)
@@ -95,7 +104,7 @@ namespace ClassLib
             LotteryTicket lt;
             if (SalesState == TicketSales.CLOSED)
             {
-                while (soldTickets.Count > 0)
+                while (!soldTickets.IsEmpty)
                 {
                     try
                     {

@@ -98,6 +98,7 @@ namespace Tests
                 ticket.balls[3] = int.Parse(row["b3"]);
                 ticket.balls[4] = int.Parse(row["b4"]);
                 ticket.powerBall = int.Parse(row["pb"]);
+                ticket.Type = row["type"];
                 ticket.isGraded = true;
                 ticket.Player = inPlayerName;
                 ticket.winLevel = int.Parse(row["winLevel"]);

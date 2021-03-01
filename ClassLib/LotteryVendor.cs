@@ -34,8 +34,7 @@ namespace ClassLib
             if (sellLimit < 1) { throw new System.ArgumentException("Parameter cannot be <1", "sellLimit"); }
             for (int i = 0; i < sellLimit; i++)
             {
-                LotteryTicket t1 = new LotteryTicket();
-                ProcessSale(t1);
+                SellTicket("threadSpawned");
             }
         }
 
@@ -47,12 +46,14 @@ namespace ClassLib
         public LotteryTicket SellTicket(string playerName, int [] sixnums)
         {
             var lt = new LotteryTicket(playerName, sixnums);
+            lt.Type = "custom";
             ProcessSale(lt);
             return lt;
         }
         public LotteryTicket SellTicket(string playerName)
         {
             var lt = new LotteryTicket(playerName);
+            lt.Type = "quick";
             //better concurrency option
             ProcessSale(lt);
             return lt;
