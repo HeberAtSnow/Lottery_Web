@@ -99,11 +99,7 @@ namespace ClassLib
             return pers;
         }
 
-        public IEnumerable<(
-            int id, decimal grandprizeamt, DateTime startts, DateTime endts,
-            long level0, long level1, long level2, long level3, long level4,
-            long level5, long level6, long level7, long level8, long level9)>
-            DBStatsAllPeriods()
+        public IEnumerable<TicketSale> DBStatsOnePeriod(int requestedPeriod)
         {
             var con = new NpgsqlConnection(cs);
             con.Open();
@@ -146,18 +142,70 @@ left outer join winlevel1 on(period.id= winlevel1.period_id)
         left outer join winlevel7 on(period.id = winlevel7.period_id)
         left outer join winlevel8 on(period.id = winlevel8.period_id)
         left outer join winlevel9 on(period.id = winlevel9.period_id)
+where period.id=:req_id
 order by id", con);
+            cmd.Parameters.Add(new NpgsqlParameter("req_id", requestedPeriod));
             var res = cmd.ExecuteReader();
-            List<(
-            int id, decimal grandprizeamt, DateTime startts, DateTime endts,
-            long level0, long level1, long level2, long level3, long level4,
-            long level5, long level6, long level7, long level8, long level9)> result = new List<(
-            int id, decimal grandprizeamt, DateTime startts, DateTime endts,
-            long level0, long level1, long level2, long level3, long level4,
-            long level5, long level6, long level7, long level8, long level9)>();
+            List<TicketSale> result = new List<TicketSale>();
 
             while (res.Read())
-                result.Add(((int)res[0], (decimal)res[1],(DateTime)res[2],(DateTime)res[3],
+                result.Add(new TicketSale((int)res[0], (decimal)res[1], (DateTime)res[2], (DateTime)res[3],
+                    (long?)res[4], (long)res[5], (long)res[6], (long)res[7], (long)res[8],
+                    (long)res[9], (long)res[10], (long)res[11], (long)res[12], (long)res[13]));
+
+            con.Close();
+            return result;
+        }
+
+        public IEnumerable<TicketSale>  DBStatsAllPeriods()
+        {
+            var con = new NpgsqlConnection(cs);
+            con.Open();
+            var cmd = new NpgsqlCommand(
+                @"with winlevel0 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=0 group by period_ID,winlevel),
+winlevel1 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 1 group by period_ID, winlevel),
+winlevel2 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 2 group by period_ID,winlevel),
+winlevel3 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 3 group by period_ID,winlevel),
+winlevel4 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 4 group by period_ID,winlevel),
+winlevel5 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 5 group by period_ID,winlevel),
+winlevel6 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 6 group by period_ID,winlevel),
+winlevel7 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 7 group by period_ID,winlevel),
+winlevel8 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 8 group by period_ID,winlevel),
+winlevel9 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 9 group by period_ID,winlevel)
+select
+    id,
+    grandprizeamt,
+    startts,
+    endts,
+    winlevel0.num level0,
+    coalesce(winlevel1.num,0) level1,
+    coalesce(winlevel2.num,0) level2,
+    coalesce(winlevel3.num,0) level3,
+    coalesce(winlevel4.num,0) level4,
+    coalesce(winlevel5.num,0) level5,
+    coalesce(winlevel6.num,0) level6,
+    coalesce(winlevel7.num,0) level7,
+    coalesce(winlevel8.num,0) level8,
+    coalesce(winlevel9.num,0) level9
+from
+    period
+        left outer
+join winlevel0 on (period.id = winlevel0.period_id)
+left outer join winlevel1 on(period.id= winlevel1.period_id)
+        left outer join winlevel3 on(period.id = winlevel3.period_id)
+        left outer join winlevel4 on(period.id = winlevel4.period_id)
+        left outer join winlevel2 on(period.id = winlevel2.period_id)
+        left outer join winlevel5 on(period.id = winlevel5.period_id)
+        left outer join winlevel6 on(period.id = winlevel6.period_id)
+        left outer join winlevel7 on(period.id = winlevel7.period_id)
+        left outer join winlevel8 on(period.id = winlevel8.period_id)
+        left outer join winlevel9 on(period.id = winlevel9.period_id)
+order by id", con);
+            var res = cmd.ExecuteReader();
+            List<TicketSale> result = new List<TicketSale>();
+
+            while (res.Read())
+                result.Add(new TicketSale((int)res[0], (decimal)res[1],(DateTime)res[2],(DateTime)res[3],
                     (long) res[4],(long)res[5], (long)res[6], (long)res[7], (long)res[8],
                     (long)res[9], (long)res[10],(long)res[11],(long)res[12],(long)res[13]));
 
@@ -165,5 +213,4 @@ order by id", con);
             return result;
         }
     }
-
 }
