@@ -21,9 +21,9 @@ namespace FrontEnd.Pages
             lp = lotteryProgram;
         }
 
-        public void OnGetAfterClose(bool persistor)
+        public void OnGet(bool salesclosed)
         {
-            periodClosed = persistor;
+            periodClosed = salesclosed;
         }
 
         public void OnPostResetLottery()
@@ -45,15 +45,11 @@ namespace FrontEnd.Pages
                 message = "Cannot reset Lottery Period while sales are ongoing, Please process drawing first";
             }
         }
-        
-        public IActionResult OnPostProcessDrawing()
+
+        public IActionResult OnPostProcessRedirect()
         {
-            periodClosed = lp.ClosePeriodSales();
-            return RedirectToPage("./Settings", "AfterClose", new { persistor = periodClosed });
-
+            return RedirectToPage("/ResultDisplay", "ProcessDrawing");
         }
-
-
         //draw winning numbers
         //current lottery results
         //all lottery statistics

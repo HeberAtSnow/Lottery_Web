@@ -5,3 +5,12 @@
 @{
 }
 
+<h1>Results</h1>
+<p>@Model.testBool</p>
+
+@foreach (var ticket in Model.lotteryTickets)
+{
+    <h1>@ticket.Player</h1>
+    <p>@ticket.winAmtDollars</p>
+    <p>@ticket.winLevel</p>
+}
