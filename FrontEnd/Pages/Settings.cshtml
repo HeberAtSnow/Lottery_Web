@@ -14,33 +14,40 @@
         <h1>Welcome<br /> to the<br /> Admin page</h1>
     </header>
     <br />
-    <form method="get"  asp-page-handler="ResetLottery">
+    <form method="post"  asp-page-handler="ResetLottery">
         <h2>Reset Lottery for next drawing</h2> <br />
         <button type="submit" class="btn effect01 reset">
             Reset Lottery
         </button>
     </form>
     <br />
-    <form method="get" action="">
+    <form method="post" asp-page-handler="DrawLottery">
         <h2>Draw winning numbers</h2> <br />
         <button class="btn effect01 drawNumbers" type="submit">
             Process Drawing
         </button>
     </form>
     <br />
-    <form method="get" action="">
+    <form method="post" asp-page-handler="ResultsLottery">
         <h2>Results from current lottery</h2> <br />
         <button class=" btn effect01 lotteryResults" type="submit">
             Lottery Results
         </button>
     </form>
     <br />
-    <form method="get" action="">
+    <form method="post" asp-page-handler="AllStats">
         <h2>All lottery statistics</h2> <br />
         <button class="btn effect01 allStats" type="submit">
             Historical Stats
         </button>
     </form>
+    @if (Model.stats != null)
+    {
+        foreach (var stat in Model.stats)
+        {
+            <p>Hello from stats</p>
+        }
+    }
 
 </body>
 </html>

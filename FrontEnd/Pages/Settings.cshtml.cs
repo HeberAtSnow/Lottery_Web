@@ -12,6 +12,9 @@ namespace FrontEnd.Pages
     public class SettingsModel : PageModel
     {
         LotteryProgram lp;
+        LotteryStatistics ls = new LotteryStatistics();
+        public IEnumerable<TicketSale> stats;
+        public string error;
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
         public SettingsModel(LotteryProgram lotteryProgram)
@@ -24,10 +27,36 @@ namespace FrontEnd.Pages
 
         public void OnPostResetLottery()
         {
+            try { 
             lp.ResetPeriod();
+            }
+            catch
+            {
+                error = "cant reset period when salesa are ok";
+            }
         }
-        //draw winning numbers
-        //current lottery results
-        //all lottery statistics
+        public IActionResult OnPostDrawLottery()
+        {
+            lp.ClosePeriodSales();
+            lp.p.DrawWinningTicket();
+            lp.p.ComputeWinners();
+            return Page();
+        }
+        public IActionResult OnPostResultsLottery()
+        {
+            var lotteryResults = lp.p.ResultsByWinLevel();
+            return Page();
+        }
+        public IActionResult OnPostAllStats()
+        {
+            try { 
+            stats = ls.DBStatsAllPeriods();
+            }
+            catch
+            {
+                error = "failed to get history";
+            }
+            return Page();
+        }
     }
 }
