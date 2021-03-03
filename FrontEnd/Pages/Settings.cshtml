@@ -13,6 +13,10 @@
     <header>
         <h1>Welcome<br /> to the<br /> Admin page</h1>
     </header>
+    @if (Model.msg != "")
+    {
+        <p>@Model.msg</p>
+    }
     <br />
     <form method="post" asp-page-handler="BackToIndex">
         <h2>Go back to index</h2> <br />

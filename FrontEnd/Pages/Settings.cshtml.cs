@@ -15,6 +15,7 @@ namespace FrontEnd.Pages
         LotteryStatistics ls = new LotteryStatistics();
         public IEnumerable<TicketSale> stats;
         public string error;
+        public string msg = "";
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
         public SettingsModel(LotteryProgram lotteryProgram)
@@ -27,13 +28,17 @@ namespace FrontEnd.Pages
 
         public void OnPostResetLottery()
         {
+
             try { 
-            lp.ResetPeriod();
+               var x=lp.ResetPeriod();
+                if (x)
+                    msg = "Reset the period";
             }
             catch
             {
                 error = "cant reset period when salesa are ok";
             }
+            
         }
         public IActionResult OnPostDrawLottery()
         {
