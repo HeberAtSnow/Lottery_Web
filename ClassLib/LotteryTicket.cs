@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLib
 {
-    public class LotteryTicket
+    public class LotteryTicket 
     {
         public int[] balls = new int[5];
         public int powerBall;
@@ -101,5 +101,6 @@ namespace ClassLib
             message = null;
             return true; //all others pass!
         }
+
     }//end LotteryTicket
 }

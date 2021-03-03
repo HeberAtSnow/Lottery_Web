@@ -10,15 +10,15 @@ namespace ConsoleApp1
             var program = new LotteryProgram();
             var vendor = program.lv;
             Console.WriteLine("Time is {0}", DateTime.Now);
-            vendor.StartSimulatedTicketSales(1_000);
+            vendor.StartSimulatedTicketSales(10_000);
             Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
             Console.WriteLine("Time is {0}", DateTime.Now);
 
-            vendor.StartSimulatedTicketSales(1_000);
+            vendor.StartSimulatedTicketSales(10_000);
             Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
             Console.WriteLine("Time is {0}", DateTime.Now);
 
-            vendor.StartSimulatedTicketSales(1_000);
+            vendor.StartSimulatedTicketSales(10_000);
             Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
             Console.WriteLine("Time is {0}", DateTime.Now);
 
@@ -26,6 +26,10 @@ namespace ConsoleApp1
             program.ClosePeriodSales();
             program.p.DrawWinningTicket();
             program.p.ComputeWinners();
+
+            //replicating Tanner
+            var y = program.p.ResultsByPlayer("threadSpawned");
+            var x = program.p.ResultsByWinLevel();
 
             Console.WriteLine("Now I will close the period and save everything to DB {0}", DateTime.Now);
             program.ResetPeriod();

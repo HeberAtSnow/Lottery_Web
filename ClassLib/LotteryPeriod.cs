@@ -74,13 +74,13 @@ namespace ClassLib
                 from w in winningTicketsL
                 where w.Player == playerName
                 orderby w.winLevel ascending
-                orderby w.balls.OrderBy(b => b)
+                orderby (string.Join("", w.balls.Select(b => b.ToString("00"))))
                 select w;
             var losers =
                 from l in losingTicketsL
                 where l.Player == playerName
                 orderby l.winLevel ascending
-                orderby l.balls.OrderBy(b => b)
+                orderby (string.Join("", l.balls.Select(b => b.ToString("00"))))
                 select l;
             return winners.Union(losers);
         }
@@ -89,12 +89,12 @@ namespace ClassLib
             var winners =
                 from w in winningTicketsL
                 orderby w.winLevel ascending
-                orderby w.balls.OrderBy(b => b)
+                orderby (string.Join("", w.balls.Select(b => b.ToString("00"))))
                 select w;
             var losers =
                 from l in losingTicketsL
                 orderby l.winLevel ascending
-                orderby l.balls.OrderBy(b => b)
+                orderby (string.Join("", l.balls.Select(b => b.ToString("00"))))
                 select l;
             return winners.Union(losers);
         }
