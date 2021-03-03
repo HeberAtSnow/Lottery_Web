@@ -86,16 +86,18 @@ namespace ClassLib
         }
         public IEnumerable<LotteryTicket> ResultsByWinLevel()
         {
-            var winners =
-                from w in winningTicketsL
-                orderby w.winLevel ascending
-                orderby w.balls.OrderBy(b => b)
-                select w;
-            var losers =
-                from l in losingTicketsL
-                orderby l.winLevel ascending
-                orderby l.balls.OrderBy(b => b)
-                select l;
+            //var winners =
+            //    from w in winningTicketsL
+            //    orderby w.winLevel ascending
+            //    orderby w.balls.OrderBy(b => b)
+            //    select w;
+            //var losers =
+            //    from l in losingTicketsL
+            //    orderby l.winLevel ascending
+            //    orderby l.balls.OrderBy(b => b)
+            //    select l;
+            var winners = winningTicketsL.OrderBy(w => w.winLevel);
+            var losers = winningTicketsL.OrderBy(l => l.winLevel);
             return winners.Union(losers);
         }
         public void ComputeWinners()
