@@ -1,0 +1,70 @@
+﻿@page
+@model FrontEnd.Pages.HistoricalStatsModel
+@{
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Period ID
+            </th>
+            <th>
+                Starting Date
+            </th>
+            <th>
+                Ending Date
+            </th>
+            <th>
+                Win Level 0
+            </th>
+            <th>
+                Win Level 1
+            </th>
+            <th>
+                Win Level 2
+            </th>
+            <th>
+                Win Level 3
+            </th>
+            <th>
+                Win Level 4
+            </th>
+            <th>
+                Win Level 5
+            </th>
+            <th>
+                Win Level 6
+            </th>
+            <th>
+                Win Level 7
+            </th>
+            <th>
+                Win Level 8
+            </th>
+            <th>
+                Win Level 9
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.Sales)
+        {
+            <tr>
+                <td>@p.id</td>
+                <td>@p.startts</td>
+                <td>@p.endts</td>
+                <td>@p.level0</td>
+                <td>@p.level1</td>
+                <td>@p.level2</td>
+                <td>@p.level3</td>
+                <td>@p.level4</td>
+                <td>@p.level5</td>
+                <td>@p.level6</td>
+                <td>@p.level7</td>
+                <td>@p.level8</td>
+                <td>@p.level9</td>
+            </tr>
+        }
+    </tbody>
+</table>

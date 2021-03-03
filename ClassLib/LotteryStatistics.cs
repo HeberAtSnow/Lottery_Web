@@ -157,46 +157,46 @@ namespace ClassLib
             var con = new NpgsqlConnection(cs);
             con.Open();
             var cmd = new NpgsqlCommand(
-                @"with winlevel0 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=0 group by period_ID,winlevel),
-winlevel1 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 1 group by period_ID, winlevel),
-winlevel2 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 2 group by period_ID,winlevel),
-winlevel3 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 3 group by period_ID,winlevel),
-winlevel4 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 4 group by period_ID,winlevel),
-winlevel5 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 5 group by period_ID,winlevel),
-winlevel6 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 6 group by period_ID,winlevel),
-winlevel7 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 7 group by period_ID,winlevel),
-winlevel8 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 8 group by period_ID,winlevel),
-winlevel9 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 9 group by period_ID,winlevel)
-select
-    id,
-    grandprizeamt,
-    startts,
-    endts,
-    coalesce(winlevel0.num,0) level0,
-    coalesce(winlevel1.num,0) level1,
-    coalesce(winlevel2.num,0) level2,
-    coalesce(winlevel3.num,0) level3,
-    coalesce(winlevel4.num,0) level4,
-    coalesce(winlevel5.num,0) level5,
-    coalesce(winlevel6.num,0) level6,
-    coalesce(winlevel7.num,0) level7,
-    coalesce(winlevel8.num,0) level8,
-    coalesce(winlevel9.num,0) level9
-from
-    period
-        left outer
-join winlevel0 on (period.id = winlevel0.period_id)
-left outer join winlevel1 on(period.id= winlevel1.period_id)
-        left outer join winlevel3 on(period.id = winlevel3.period_id)
-        left outer join winlevel4 on(period.id = winlevel4.period_id)
-        left outer join winlevel2 on(period.id = winlevel2.period_id)
-        left outer join winlevel5 on(period.id = winlevel5.period_id)
-        left outer join winlevel6 on(period.id = winlevel6.period_id)
-        left outer join winlevel7 on(period.id = winlevel7.period_id)
-        left outer join winlevel8 on(period.id = winlevel8.period_id)
-        left outer join winlevel9 on(period.id = winlevel9.period_id)
-where period.id=:req_id
-order by id", con);
+                @"with winlevel0 as (select period_id,winlevel, count(*) num from ticketsale where winlevel=0 group by period_ID,winlevel),
+                winlevel1 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 1 group by period_ID, winlevel),
+                winlevel2 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 2 group by period_ID,winlevel),
+                winlevel3 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 3 group by period_ID,winlevel),
+                winlevel4 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 4 group by period_ID,winlevel),
+                winlevel5 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 5 group by period_ID,winlevel),
+                winlevel6 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 6 group by period_ID,winlevel),
+                winlevel7 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 7 group by period_ID,winlevel),
+                winlevel8 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 8 group by period_ID,winlevel),
+                winlevel9 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 9 group by period_ID,winlevel)
+                select
+                    id,
+                    grandprizeamt,
+                    startts,
+                    endts,
+                    coalesce(winlevel0.num,0) level0,
+                    coalesce(winlevel1.num,0) level1,
+                    coalesce(winlevel2.num,0) level2,
+                    coalesce(winlevel3.num,0) level3,
+                    coalesce(winlevel4.num,0) level4,
+                    coalesce(winlevel5.num,0) level5,
+                    coalesce(winlevel6.num,0) level6,
+                    coalesce(winlevel7.num,0) level7,
+                    coalesce(winlevel8.num,0) level8,
+                    coalesce(winlevel9.num,0) level9
+                from
+                    period
+                        left outer
+                join winlevel0 on (period.id = winlevel0.period_id)
+                left outer join winlevel1 on(period.id= winlevel1.period_id)
+                        left outer join winlevel3 on(period.id = winlevel3.period_id)
+                        left outer join winlevel4 on(period.id = winlevel4.period_id)
+                        left outer join winlevel2 on(period.id = winlevel2.period_id)
+                        left outer join winlevel5 on(period.id = winlevel5.period_id)
+                        left outer join winlevel6 on(period.id = winlevel6.period_id)
+                        left outer join winlevel7 on(period.id = winlevel7.period_id)
+                        left outer join winlevel8 on(period.id = winlevel8.period_id)
+                        left outer join winlevel9 on(period.id = winlevel9.period_id)
+                where period.id=:req_id
+                order by id", con);
             cmd.Parameters.Add(new NpgsqlParameter("req_id", requestedPeriod));
             var res = cmd.ExecuteReader();
             List<TicketSale> result = new List<TicketSale>();
@@ -215,45 +215,45 @@ order by id", con);
             var con = new NpgsqlConnection(cs);
             con.Open();
             var cmd = new NpgsqlCommand(
-                @"with winlevel0 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=0 group by period_ID,winlevel),
-winlevel1 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 1 group by period_ID, winlevel),
-winlevel2 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 2 group by period_ID,winlevel),
-winlevel3 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 3 group by period_ID,winlevel),
-winlevel4 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 4 group by period_ID,winlevel),
-winlevel5 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 5 group by period_ID,winlevel),
-winlevel6 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 6 group by period_ID,winlevel),
-winlevel7 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 7 group by period_ID,winlevel),
-winlevel8 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 8 group by period_ID,winlevel),
-winlevel9 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 9 group by period_ID,winlevel)
-select
-    id,
-    grandprizeamt,
-    startts,
-    endts,
-    coalesce(winlevel0.num,0) level0,
-    coalesce(winlevel1.num,0) level1,
-    coalesce(winlevel2.num,0) level2,
-    coalesce(winlevel3.num,0) level3,
-    coalesce(winlevel4.num,0) level4,
-    coalesce(winlevel5.num,0) level5,
-    coalesce(winlevel6.num,0) level6,
-    coalesce(winlevel7.num,0) level7,
-    coalesce(winlevel8.num,0) level8,
-    coalesce(winlevel9.num,0) level9
-from
-    period
-        left outer
-join winlevel0 on (period.id = winlevel0.period_id)
-left outer join winlevel1 on(period.id= winlevel1.period_id)
-        left outer join winlevel3 on(period.id = winlevel3.period_id)
-        left outer join winlevel4 on(period.id = winlevel4.period_id)
-        left outer join winlevel2 on(period.id = winlevel2.period_id)
-        left outer join winlevel5 on(period.id = winlevel5.period_id)
-        left outer join winlevel6 on(period.id = winlevel6.period_id)
-        left outer join winlevel7 on(period.id = winlevel7.period_id)
-        left outer join winlevel8 on(period.id = winlevel8.period_id)
-        left outer join winlevel9 on(period.id = winlevel9.period_id)
-order by id", con);
+                @"with winlevel0 as (select period_id,winlevel, count(*) num from ticketsale where winlevel=0 group by period_ID,winlevel),
+                winlevel1 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 1 group by period_ID, winlevel),
+                winlevel2 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 2 group by period_ID,winlevel),
+                winlevel3 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 3 group by period_ID,winlevel),
+                winlevel4 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 4 group by period_ID,winlevel),
+                winlevel5 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 5 group by period_ID,winlevel),
+                winlevel6 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 6 group by period_ID,winlevel),
+                winlevel7 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 7 group by period_ID,winlevel),
+                winlevel8 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 8 group by period_ID,winlevel),
+                winlevel9 as (select period_id, winlevel, count(*) num from ticketsale where winlevel = 9 group by period_ID,winlevel)
+                select
+                    id,
+                    grandprizeamt,
+                    startts,
+                    endts,
+                    coalesce(winlevel0.num,0) level0,
+                    coalesce(winlevel1.num,0) level1,
+                    coalesce(winlevel2.num,0) level2,
+                    coalesce(winlevel3.num,0) level3,
+                    coalesce(winlevel4.num,0) level4,
+                    coalesce(winlevel5.num,0) level5,
+                    coalesce(winlevel6.num,0) level6,
+                    coalesce(winlevel7.num,0) level7,
+                    coalesce(winlevel8.num,0) level8,
+                    coalesce(winlevel9.num,0) level9
+                from
+                    period
+                        left outer
+                join winlevel0 on (period.id = winlevel0.period_id)
+                left outer join winlevel1 on(period.id= winlevel1.period_id)
+                        left outer join winlevel3 on(period.id = winlevel3.period_id)
+                        left outer join winlevel4 on(period.id = winlevel4.period_id)
+                        left outer join winlevel2 on(period.id = winlevel2.period_id)
+                        left outer join winlevel5 on(period.id = winlevel5.period_id)
+                        left outer join winlevel6 on(period.id = winlevel6.period_id)
+                        left outer join winlevel7 on(period.id = winlevel7.period_id)
+                        left outer join winlevel8 on(period.id = winlevel8.period_id)
+                        left outer join winlevel9 on(period.id = winlevel9.period_id)
+                order by id", con);
             var res = cmd.ExecuteReader();
             List<TicketSale> result = new List<TicketSale>();
 
