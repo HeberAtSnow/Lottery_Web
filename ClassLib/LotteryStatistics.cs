@@ -22,6 +22,58 @@ namespace ClassLib
             return $"PostgreSQL version: {version}";
         }
 
+        public int WriteStatsBulk(LotteryPeriod lp)
+        {
+            using var con = new NpgsqlConnection(cs);
+            con.Open();
+            int periodID;
+            var cmd = new NpgsqlCommand("insert into period (grandprizeamt,startts,endts)" +
+                "VALUES (:gpAmt, :bTS,:eTS) returning id", con);
+            cmd.Parameters.Add(new NpgsqlParameter("gpAmt", lp.GrandPrizeAmount));
+            cmd.Parameters.Add(new NpgsqlParameter("bTS", lp.PeriodBeginTS));
+            cmd.Parameters.Add(new NpgsqlParameter("eTS", DateTime.Now));
+            periodID = (int)cmd.ExecuteScalar(); //PERIOD table 1-record
+
+            var unionResult = lp.losingTicketsL.Union(lp.winningTicketsL).ToList();
+
+            while (unionResult.Any())
+            {
+                var sqlstr = new StringBuilder("insert into ticketsale " +
+                    "(period_id,ballstring,ball1,ball2,ball3,ball4,ball5,powerball,winlevel,winamount,type) values ");
+                using var cmd2 = new NpgsqlCommand();
+
+                int batchSize = Math.Min(5000, unionResult.Count);
+                foreach (var i in Enumerable.Range(0, batchSize))
+                {
+                    var l = unionResult[i];
+                    sqlstr.Append($"(@pid{i},@bs{1},@b1{i},@b2{i},@b3{i},@b4{i},@b5{i},@bpower{i},@winL{i},@wina{i},@t{i})\n");
+                    cmd2.Parameters.Add(new NpgsqlParameter($"pid{i}", periodID));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"bs{i}",
+                        l.balls[0].ToString("00") + l.balls[1].ToString("00") +
+                        l.balls[2].ToString("00") + l.balls[3].ToString("00") +
+                        l.balls[4].ToString("00") + l.powerBall.ToString("00")));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"b1{i}", l.balls[0]));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"b2{i}", l.balls[1]));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"b3{i}", l.balls[2]));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"b4{i}", l.balls[3]));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"b5{i}", l.balls[4]));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"bpower{i}", l.powerBall));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"winL{i}", l.winLevel));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"wina{i}", l.winAmtDollars));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"t{i}", l.Type));
+                    if (i < batchSize-1) 
+                        sqlstr.Append(",");
+                }
+                cmd2.CommandText = sqlstr.ToString();
+                cmd2.Connection = con;
+                System.IO.File.WriteAllText("c:\\temp\\junk.txt", cmd2.CommandText);
+                cmd2.Prepare();
+                cmd2.ExecuteNonQuery();
+                unionResult.RemoveRange(0, batchSize);
+            }
+            con.Close();
+            return periodID;//returns period.id as assigned by identity column in DB
+        }
         public int WriteStatsToDB(LotteryPeriod lp) //returns periodID assigned in DB
         {
             var con = new NpgsqlConnection(cs);
@@ -157,7 +209,7 @@ order by id", con);
             return result;
         }
 
-        public IEnumerable<TicketSale>  DBStatsAllPeriods()
+        public IEnumerable<TicketSale> DBStatsAllPeriods()
         {
             var con = new NpgsqlConnection(cs);
             con.Open();
@@ -205,9 +257,9 @@ order by id", con);
             List<TicketSale> result = new List<TicketSale>();
 
             while (res.Read())
-                result.Add(new TicketSale((int)res[0], (decimal)res[1],(DateTime)res[2],(DateTime)res[3],
-                    (long) res[4],(long)res[5], (long)res[6], (long)res[7], (long)res[8],
-                    (long)res[9], (long)res[10],(long)res[11],(long)res[12],(long)res[13]));
+                result.Add(new TicketSale((int)res[0], (decimal)res[1], (DateTime)res[2], (DateTime)res[3],
+                    (long)res[4], (long)res[5], (long)res[6], (long)res[7], (long)res[8],
+                    (long)res[9], (long)res[10], (long)res[11], (long)res[12], (long)res[13]));
 
             con.Close();
             return result;
