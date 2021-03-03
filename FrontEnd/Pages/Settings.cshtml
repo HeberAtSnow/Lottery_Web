@@ -14,30 +14,30 @@
         <h1>Welcome<br /> to the<br /> Admin page</h1>
     </header>
     <br />
-    <form method="get"  asp-page-handler="ResetLottery">
+    <form method="post">
         <h2>Reset Lottery for next drawing</h2> <br />
-        <button type="submit" class="btn effect01 reset">
+        <button type="submit" class="btn effect01 reset" asp-page-handler="ResetLottery">
             Reset Lottery
         </button>
     </form>
     <br />
-    <form method="get" action="">
+    <form method="post">
         <h2>Draw winning numbers</h2> <br />
-        <button class="btn effect01 drawNumbers" type="submit">
+        <button class="btn effect01 drawNumbers" type="submit" asp-page-handler="DrawWinningTicket">
             Process Drawing
         </button>
     </form>
     <br />
-    <form method="get" action="">
+    <form method="post">
         <h2>Results from current lottery</h2> <br />
-        <button class=" btn effect01 lotteryResults" type="submit">
+        <button class=" btn effect01 lotteryResults" type="submit" asp-page-handler="GetLotteryResults">
             Lottery Results
         </button>
     </form>
     <br />
-    <form method="get" action="">
+    <form method="post">
         <h2>All lottery statistics</h2> <br />
-        <button class="btn effect01 allStats" type="submit">
+        <button class="btn effect01 allStats" type="submit" asp-page-handler="GetLotteryStats">
             Historical Stats
         </button>
     </form>

@@ -14,6 +14,10 @@ namespace FrontEnd.Pages
         LotteryProgram lp;
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
+        
+        public IEnumerable<LotteryTicket> WinningTickets;
+        public IEnumerable<TicketSale> PurchasedTickets;
+
         public SettingsModel(LotteryProgram lotteryProgram)
         {
             lp = lotteryProgram;
@@ -29,5 +33,17 @@ namespace FrontEnd.Pages
         //draw winning numbers
         //current lottery results
         //all lottery statistics
+
+        public void OnPostDrawWinningTickets()
+        {
+            //lp.ClosePeriodSales();
+            lp.p.DrawWinningTicket();
+            lp.p.ComputeWinners();
+        }
+        public void OnPostGetLotteryResults()
+        {
+            WinningTickets = lp.p.ResultsByWinLevel();
+            //return RedirectToPage("./LotteryResults");
+        }
     }
 }
