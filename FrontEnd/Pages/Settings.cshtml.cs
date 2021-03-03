@@ -58,5 +58,9 @@ namespace FrontEnd.Pages
             }
             return Page();
         }
+        public IActionResult OnPostBackToIndex()
+        {
+            return RedirectToPage("./Index");
+        }
     }
 }

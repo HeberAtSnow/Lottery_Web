@@ -14,7 +14,14 @@
         <h1>Welcome<br /> to the<br /> Admin page</h1>
     </header>
     <br />
-    <form method="post"  asp-page-handler="ResetLottery">
+    <form method="post" asp-page-handler="BackToIndex">
+        <h2>Go back to index</h2> <br />
+        <button type="submit" class="btn effect01 reset">
+           Index
+        </button>
+    </form>
+    <br />
+    <form method="post" asp-page-handler="ResetLottery">
         <h2>Reset Lottery for next drawing</h2> <br />
         <button type="submit" class="btn effect01 reset">
             Reset Lottery
