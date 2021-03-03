@@ -1,0 +1,16 @@
+03/03/2021 14:13:19 -07:00 Application Starting.
+03/03/2021 14:23:31 -07:00 Application Starting.
+03/03/2021 14:23:34 -07:00 went to Administration page {time}
+03/03/2021 14:23:39 -07:00 clicked ResetLottery
+03/03/2021 14:23:39 -07:00 cant reset period when salesa are ok
+03/03/2021 14:23:43 -07:00 clicked DrawLottery
+03/03/2021 14:23:45 -07:00 clicked ResetLottery
+03/03/2021 14:23:49 -07:00 clicked ResetLottery
+03/03/2021 14:23:50 -07:00 cant reset period when salesa are ok
+03/03/2021 14:23:50 -07:00 clicked ResetLottery
+03/03/2021 14:23:50 -07:00 clicked ResetLottery
+03/03/2021 14:23:52 -07:00 clicked ResetLottery
+03/03/2021 14:23:53 -07:00 cant reset period when salesa are ok
+03/03/2021 14:23:54 -07:00 cant reset period when salesa are ok
+03/03/2021 14:23:54 -07:00 cant reset period when salesa are ok
+03/03/2021 14:23:56 -07:00 cant reset period when salesa are ok
