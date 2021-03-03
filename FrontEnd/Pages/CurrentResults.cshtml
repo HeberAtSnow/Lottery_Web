@@ -1,0 +1,16 @@
+﻿@page
+@model FrontEnd.Pages.CurrentResultsModel
+@{
+}
+
+<table>
+    @foreach (var t in Model.Results)
+    {
+        <tr>
+            @foreach (var num in t.balls)
+            {
+                <td>@num</td>
+            }
+        </tr>
+    }
+</table>
