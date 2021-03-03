@@ -8,7 +8,7 @@ namespace ClassLib
         public decimal grandprizeamt;
         public DateTime startts;
         public DateTime endts;
-        public long? level0;
+        public long level0;
         public long level1;
         public long level2;
         public long level3;
@@ -19,7 +19,7 @@ namespace ClassLib
         public long level8;
         public long level9;
 
-        public TicketSale(int id, decimal grandprizeamt, DateTime startts, DateTime endts, long? level0, long level1, long level2, long level3, long level4, long level5, long level6, long level7, long level8, long level9)
+        public TicketSale(int id, decimal grandprizeamt, DateTime startts, DateTime endts, long level0, long level1, long level2, long level3, long level4, long level5, long level6, long level7, long level8, long level9)
         {
             this.id = id;
             this.grandprizeamt = grandprizeamt;
@@ -76,7 +76,7 @@ namespace ClassLib
             return hash.ToHashCode();
         }
 
-        public void Deconstruct(out int id, out decimal grandprizeamt, out DateTime startts, out DateTime endts, out long? level0, out long level1, out long level2, out long level3, out long level4, out long level5, out long level6, out long level7, out long level8, out long level9)
+        public void Deconstruct(out int id, out decimal grandprizeamt, out DateTime startts, out DateTime endts, out long level0, out long level1, out long level2, out long level3, out long level4, out long level5, out long level6, out long level7, out long level8, out long level9)
         {
             id = this.id;
             grandprizeamt = this.grandprizeamt;
@@ -94,12 +94,12 @@ namespace ClassLib
             level9 = this.level9;
         }
 
-        public static implicit operator (int id, decimal grandprizeamt, DateTime startts, DateTime endts, long? level0, long level1, long level2, long level3, long level4, long level5, long level6, long level7, long level8, long level9)(TicketSale value)
+        public static implicit operator (int id, decimal grandprizeamt, DateTime startts, DateTime endts, long level0, long level1, long level2, long level3, long level4, long level5, long level6, long level7, long level8, long level9)(TicketSale value)
         {
             return (value.id, value.grandprizeamt, value.startts, value.endts, value.level0, value.level1, value.level2, value.level3, value.level4, value.level5, value.level6, value.level7, value.level8, value.level9);
         }
 
-        public static implicit operator TicketSale((int id, decimal grandprizeamt, DateTime startts, DateTime endts, long? level0, long level1, long level2, long level3, long level4, long level5, long level6, long level7, long level8, long level9) value)
+        public static implicit operator TicketSale((int id, decimal grandprizeamt, DateTime startts, DateTime endts, long level0, long level1, long level2, long level3, long level4, long level5, long level6, long level7, long level8, long level9) value)
         {
             return new TicketSale(value.id, value.grandprizeamt, value.startts, value.endts, value.level0, value.level1, value.level2, value.level3, value.level4, value.level5, value.level6, value.level7, value.level8, value.level9);
         }

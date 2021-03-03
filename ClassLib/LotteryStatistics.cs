@@ -202,7 +202,7 @@ order by id", con);
 
             while (res.Read())
                 result.Add(new TicketSale((int)res[0], (decimal)res[1], (DateTime)res[2], (DateTime)res[3],
-                    (long?)res[4], (long)res[5], (long)res[6], (long)res[7], (long)res[8],
+                    (long)res[4], (long)res[5], (long)res[6], (long)res[7], (long)res[8],
                     (long)res[9], (long)res[10], (long)res[11], (long)res[12], (long)res[13]));
 
             con.Close();
@@ -229,7 +229,7 @@ select
     grandprizeamt,
     startts,
     endts,
-    winlevel0.num level0,
+    coalesce(winlevel0.num,0) level0,
     coalesce(winlevel1.num,0) level1,
     coalesce(winlevel2.num,0) level2,
     coalesce(winlevel3.num,0) level3,
