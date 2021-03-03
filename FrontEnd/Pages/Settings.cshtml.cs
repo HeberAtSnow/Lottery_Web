@@ -12,6 +12,7 @@ namespace FrontEnd.Pages
     public class SettingsModel : PageModel
     {
         LotteryProgram lp;
+        LotteryStatistics lotteryStatistics = new LotteryStatistics();
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
         public SettingsModel(LotteryProgram lotteryProgram)
@@ -22,9 +23,48 @@ namespace FrontEnd.Pages
         {
         }
 
-        public void OnPostResetLottery()
+        public IActionResult OnPostResetLottery()
         {
-            lp.ResetPeriod();
+            try
+            {
+                lp.ResetPeriod();
+                return Page();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Page();
+            }
+
+        }
+        public IActionResult OnPostDrawWinningNumbers()
+        {
+            try
+            {
+                lp.ClosePeriodSales();
+                lp.p.DrawWinningTicket();
+                lp.p.ComputeWinners();
+                return RedirectToPage("./Winners",lp.p.winningTicketsL);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Page();
+            }
+        }
+
+        public IActionResult OnPostGetStatistics()
+        {
+            try
+            {
+                return RedirectToPage("./Stats", lotteryStatistics.DBStatsAllPeriods());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Page();
+            }
+
         }
         //draw winning numbers
         //current lottery results

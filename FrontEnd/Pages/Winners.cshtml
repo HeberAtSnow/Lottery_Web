@@ -1,0 +1,22 @@
+﻿@page
+@model FrontEnd.Pages.WinnersModel
+@{
+}
+<h1>Winning tickets</h1>
+  @foreach (var x in Model.ticketList)
+    {
+        <tr>
+            <td>@x.balls[0]</td>
+            <td>@x.balls[1]</td>
+            <td>@x.balls[2]</td>
+            <td>@x.balls[3]</td>
+            <td>@x.balls[4]</td>
+            <td id="powerball">@x.powerBall</td>
+            @if (x.isGraded)
+            {
+                <td>@x.winLevel</td>
+                <td id="win">@x.winAmtDollars.ToString("c")</td>
+            }
+
+        </tr>
+    }
