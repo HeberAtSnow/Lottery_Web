@@ -12,6 +12,7 @@ namespace FrontEnd.Pages
     public class SettingsModel : PageModel
     {
         LotteryProgram lp;
+        
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
         public SettingsModel(LotteryProgram lotteryProgram)
@@ -26,6 +27,16 @@ namespace FrontEnd.Pages
         {
             lp.ResetPeriod();
         }
+
+        public IActionResult OnPostGoToResult()
+        {
+            lp.ClosePeriodSales();
+            return RedirectToPage("./Results");
+        }
+
+      
+
+        
         //draw winning numbers
         //current lottery results
         //all lottery statistics
