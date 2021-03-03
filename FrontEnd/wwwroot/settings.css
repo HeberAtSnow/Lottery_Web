@@ -88,6 +88,15 @@ body {
     .btn:hover {
         text-decoration: none;
     }
+.messages {
+    color: red !important;
+    padding: 15px !important;
+    margin: 20px !important;
+    background-color: orange;
+    border: 1px solid;
+}
+
+
 
 /*btn_background*/
 .effect01 {
@@ -143,7 +152,9 @@ body {
         transform: rotate(40deg);
     }
 
+
 body {
     background: url(https://www.txlottery.org/export/sites/lottery/Games/Scratch_Offs/luckzone/images/background_luckzone.png) no-repeat center center fixed;
     background-size: cover;
 }
+
