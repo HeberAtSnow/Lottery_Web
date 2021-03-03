@@ -27,6 +27,10 @@ namespace ConsoleApp1
             program.p.DrawWinningTicket();
             program.p.ComputeWinners();
 
+            //replicating Tanner
+            var y = program.p.ResultsByPlayer("threadSpawned");
+            var x = program.p.ResultsByWinLevel();
+
             Console.WriteLine("Now I will close the period and save everything to DB {0}", DateTime.Now);
             program.ResetPeriod();
 
