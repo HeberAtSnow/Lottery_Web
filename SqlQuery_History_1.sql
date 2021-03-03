@@ -1,5 +1,5 @@
 ﻿--This file is for Documentation / architecture planning only.
---The 'real' copy is to be found in the LotteryStatics.cs 
+--The 'real' copy is to be found in the LotteryStatics.cs
 --but this file is for formatting/testing purposes
 
 --get history of a single period
@@ -9,9 +9,9 @@
 with winlevels as (
 	select period_id,winlevel, count(*) num from ticketsale group by period_ID,winlevel
 )
-select 
+select
 	id,grandprizeamt,startts,endts,winlevels.winlevel,winlevels.num
-from 
+from
 	period inner join winlevels on (period.id=winlevels.period_id)
 order by id
 
@@ -19,9 +19,9 @@ order by id
 with winlevels as (
 	select period_id,winlevel, count(*) num from ticketsale group by period_ID,winlevel
 )
-select 
+select
 	id,grandprizeamt,startts,endts,winlevels.winlevel,winlevels.num
-from 
+from
 	period inner join winlevels on (period.id=winlevels.period_id)
 	where period.id=4--:pid
 order by id
@@ -37,7 +37,7 @@ winlevel6 as (	select period_id,winlevel, count(*) num from ticketsale where win
 winlevel7 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=7 group by period_ID,winlevel),
 winlevel8 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=8 group by period_ID,winlevel),
 winlevel9 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=9 group by period_ID,winlevel)
-select 
+select
 	id,
 	grandprizeamt,
 	startts,
@@ -52,8 +52,8 @@ select
 	winlevel7.num level7,
 	winlevel8.num level8,
 	winlevel9.num level9
-from 
-	period 
+from
+	period
 		left outer join winlevel0 on (period.id=winlevel0.period_id)
 		left outer join winlevel1 on (period.id=winlevel1.period_id)
 		left outer join winlevel3 on (period.id=winlevel3.period_id)

@@ -27,14 +27,14 @@ Class purposes:
 		SellQuickTicket(s,num)
 		purchaseTickets(p,int)  --ThreadSafe way of purchasing mass tickets
 - LotteryTicket
-		
+
 
 		flag for threads to sell tickets ->   if that is OK
 			then ticket sales are OK  (push ahoy!)
-			else  -  if thread doing mass sales - he dies 
+			else  -  if thread doing mass sales - he dies
 			      - if http request - returns 408...  in wrong state
 
-		ResetPeriod (...after stats.  set flat to sellisOK)	 
+		ResetPeriod (...after stats.  set flat to sellisOK)
 
 
 
