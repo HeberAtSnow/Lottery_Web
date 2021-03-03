@@ -75,6 +75,7 @@ namespace ClassLib
             return periodID;//returns period.id as assigned by identity column in DB
         }
         public int WriteStatsToDB(LotteryPeriod lp) //returns periodID assigned in DB
+            /////////////////DEPRECATED - Let's get rid of this method before springbreak!
         {
             var con = new NpgsqlConnection(cs);
             con.Open();

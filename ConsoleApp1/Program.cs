@@ -10,15 +10,15 @@ namespace ConsoleApp1
             var program = new LotteryProgram();
             var vendor = program.lv;
             Console.WriteLine("Time is {0}", DateTime.Now);
-            vendor.StartSimulatedTicketSales(1_000);
+            vendor.StartSimulatedTicketSales(10_000);
             Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
             Console.WriteLine("Time is {0}", DateTime.Now);
 
-            vendor.StartSimulatedTicketSales(1_000);
+            vendor.StartSimulatedTicketSales(10_000);
             Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
             Console.WriteLine("Time is {0}", DateTime.Now);
 
-            vendor.StartSimulatedTicketSales(1_000);
+            vendor.StartSimulatedTicketSales(10_000);
             Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
             Console.WriteLine("Time is {0}", DateTime.Now);
 
