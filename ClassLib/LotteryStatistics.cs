@@ -61,12 +61,12 @@ namespace ClassLib
                     cmd2.Parameters.Add(new NpgsqlParameter($"winL{i}", l.winLevel));
                     cmd2.Parameters.Add(new NpgsqlParameter($"wina{i}", l.winAmtDollars));
                     cmd2.Parameters.Add(new NpgsqlParameter($"t{i}", l.Type));
-                    if (i < batchSize-1) 
+                    if (i < batchSize-1)
                         sqlstr.Append(",");
                 }
                 cmd2.CommandText = sqlstr.ToString();
                 cmd2.Connection = con;
-                System.IO.File.WriteAllText("c:\\temp\\junk.txt", cmd2.CommandText);
+                //System.IO.File.WriteAllText("c:\\temp\\junk.txt", cmd2.CommandText);
                 cmd2.Prepare();
                 cmd2.ExecuteNonQuery();
                 unionResult.RemoveRange(0, batchSize);
@@ -74,7 +74,7 @@ namespace ClassLib
             con.Close();
             return periodID;//returns period.id as assigned by identity column in DB
         }
-        public int WriteStatsToDB(LotteryPeriod lp) //returns periodID assigned in DB
+        /*public int WriteStatsToDB(LotteryPeriod lp) //returns periodID assigned in DB
             /////////////////DEPRECATED - Let's get rid of this method before springbreak!
         {
             var con = new NpgsqlConnection(cs);
@@ -113,7 +113,7 @@ namespace ClassLib
             }
             con.Close();
             return periodID;//returns period.id as assigned by identity column in DB
-        }
+        }*/
 
         public int DBLoosingTicketCountInPeriod(int pID)
         {

@@ -30,7 +30,7 @@ namespace FrontEnd.Pages
 
         public void OnGet()
         {
-            
+
         }
 
         public IActionResult OnPostQuickPick(string name)
@@ -83,7 +83,7 @@ namespace FrontEnd.Pages
                 Console.WriteLine(e.Message);
                 return Page();
             }
-            PurchasedTickets = lp.p.ResultsByPlayer(name); 
+            PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
     }

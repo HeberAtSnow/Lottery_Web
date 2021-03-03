@@ -22,7 +22,7 @@ namespace Tests
             var ls = new LotteryStatistics();
             context.Add("connAnswer", ls.TestConn());
         }
-        
+
         [Then(@"DB should answer version")]
         public void ThenDBShouldAnswerVersion()
         {
@@ -33,19 +33,19 @@ namespace Tests
         public void ThenTheDatabaseWillHaveStatsOfWinningTicketsCountAndLosingTicketsCount(int winCnt, int losCnt)
         {
             var ls = new LotteryStatistics();
-            var pID = ls.WriteStatsToDB(context.Get<LotteryPeriod>("period"));
-            
+            var pID = ls.WriteStatsBulk(context.Get<LotteryPeriod>("period"));
+
             int winTcntDB; //winning Ticket Count From DB
             //TODO - read counts from DB
             winTcntDB = ls.DBWinningTicketCountInPeriod(pID);
             winTcntDB.Should().Equals(winCnt); //junk evaluation TODO: better assert test
-            
+
             int loseTcntDB; //loosing ticket count from DB
             //TODO - read counts from DB
             loseTcntDB = ls.DBLoosingTicketCountInPeriod(pID);
             loseTcntDB.Should().Equals(losCnt); //junk evaluation TODO: better assert test
 
-            
+
         }
 
     }

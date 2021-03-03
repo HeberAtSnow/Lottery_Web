@@ -12,10 +12,13 @@ namespace FrontEnd.Pages
     public class SettingsModel : PageModel
     {
         LotteryProgram lp;
-   
+
         private readonly LotteryStatistics lotteryStatistics;
         public IEnumerable<LotteryTicket> WinLotteryTickets;
+        public IEnumerable<TicketSale> WinSaleTickets;
+
         public IEnumerable<TicketSale> ticketSales;
+        public IEnumerable<(int periodid, DateTime started)> LotteryPeriods;
 
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
@@ -42,13 +45,20 @@ namespace FrontEnd.Pages
         //current lottery results
         public void OnPostLotteryResults()
         {
+            LotteryPeriods = lotteryStatistics.DBPeriodsInHistory();
+
             WinLotteryTickets = lp.p.ResultsByWinLevel();
+
+            var list = LotteryPeriods.ToList();
+
+            WinSaleTickets = lotteryStatistics.DBStatsOnePeriod(list.Last().periodid);
+
         }
 
         //all lottery statistics
         public void OnPostLotteryStats()
         {
-            lotteryStatistics.DBPeriodsInHistory();
+
 
             ticketSales = lotteryStatistics.DBStatsAllPeriods();
 
