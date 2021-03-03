@@ -1,0 +1,83 @@
+﻿@page 
+@model FrontEnd.Pages.LotteryResultsModel
+@{
+}
+
+<html>
+<head>
+    <style>
+        .ticket {
+            border: 2px dashed black;
+            width: 65%;
+            padding: 1em;
+            background-color: lemonchiffon;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            width: 25%;
+        }
+
+        #powerball {
+            border: 1px solid black;
+            border-radius: 50%;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            color: white;
+            background-color: red;
+        }
+
+        #picks {
+            padding-right: 20px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="~/site.css" type="text/css" />
+</head>
+
+<body>
+    <header>
+        <h1>Lottery Results</h1>
+    </header>
+
+    <div class="background">
+        <div class="ticket">
+            <table class="center">
+                <tr>
+                    <td id="picks"></td>
+                    <td id="picks"></td>
+                    <td id="picks"></td>
+                    <td id="picks"></td>
+                    <td id="picks"></td>
+                    <td>PWR</td>
+                </tr>
+                @foreach (var ticket in Model.lotteryTicekts)
+                {
+                    <tr>
+                        <td id="picks">@ticket.balls[0]</td>
+                        <td id="picks">@ticket.balls[1]</td>
+                        <td id="picks">@ticket.balls[2]</td>
+                        <td id="picks">@ticket.balls[3]</td>
+                        <td id="picks">@ticket.balls[4]</td>
+                        <td id="powerBall"><font color="white">@ticket.powerBall</font></td>
+                        @if (ticket.isGraded)
+                        {
+                            <td>@ticket.winLevel</td>
+                            <td>@ticket.winAmtDollars.ToString("c")</td>
+                        }
+                        else
+                        {
+                            <td />
+                            <td />
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>
+

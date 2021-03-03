@@ -1,0 +1,84 @@
+﻿@page
+@model FrontEnd.Pages.HistoricalStatsModel
+@{
+}
+
+<html>
+<head>
+    <style>
+        .ticket {
+            border: 2px dashed black;
+            width: 65%;
+            padding: 1em;
+            background-color: lemonchiffon;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            width: 25%;
+        }
+
+        #powerball {
+            border: 1px solid black;
+            border-radius: 50%;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            color: white;
+            background-color: red;
+        }
+
+        #picks {
+            padding-right: 20px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="~/site.css" type="text/css" />
+</head>
+
+<body>
+    <header>
+        <h1>Historical Stats</h1>
+    </header>
+
+    <div class="background">
+        <div class="ticket">
+            <table class="center">
+                <tr>
+                    <td id="picks">ID</td>
+                    <td id="picks">Level 0</td>
+                    <td id="picks">Level 1</td>
+                    <td id="picks">Level 2</td>
+                    <td id="picks">Level 3</td>
+                    <td id="picks">Level 4</td>
+                    <td id="picks">Level 5</td>
+                    <td id="picks">Level 6</td>
+                    <td id="picks">Level 7</td>
+                    <td id="picks">Level 8</td>
+                    <td id="picks">Level 9</td>
+                    <td id="picks">Grand Prize Amount</td>
+                </tr>
+                @foreach (var sales in Model.ticketSales)
+                {
+                    <tr>
+                        <td id="picks">@sales.id</td>
+                        <td id="picks">@sales.level0</td>
+                        <td id="picks">@sales.level1</td>
+                        <td id="picks">@sales.level2</td>
+                        <td id="picks">@sales.level3</td>
+                        <td id="picks">@sales.level4</td>
+                        <td id="picks">@sales.level5</td>
+                        <td id="picks">@sales.level6</td>
+                        <td id="picks">@sales.level7</td>
+                        <td id="picks">@sales.level8</td>
+                        <td id="picks">@sales.level9</td>
+                        <td id="picks">@sales.grandprizeamt</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
