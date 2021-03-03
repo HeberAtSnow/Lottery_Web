@@ -10,10 +10,15 @@ namespace FrontEnd.Pages
 {
     public class WinnersModel : PageModel
     {
+        LotteryProgram lp;
         public IEnumerable<LotteryTicket> ticketList;
-        public void OnGet(List<LotteryTicket> _ticketList)
+        public WinnersModel(LotteryProgram lotteryProgram)
         {
-            ticketList = _ticketList;
+            lp = lotteryProgram;
+        }
+        public void OnGet()
+        {
+            ticketList = lp.p.winningTicketsL.OrderByDescending(t => t.winAmtDollars);
         }
     }
 }
