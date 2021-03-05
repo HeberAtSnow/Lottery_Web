@@ -1,17 +1,4 @@
-2021-03-05 07:16:20.227 -07:00 [INF] Performance is really good today ;-)
-2021-03-05 07:23:59.437 -07:00 [INF] Performance is really good today ;-)
-2021-03-05 07:24:06.492 -07:00 [INF] I made it to store page
-2021-03-05 07:24:35.747 -07:00 [INF] I made it to store page
-2021-03-05 07:24:37.783 -07:00 [INF] I made it to store page
-2021-03-05 07:24:42.096 -07:00 [INF] I made it to store page
-2021-03-05 07:29:32.803 -07:00 [INF] Performance is really good today ;-)
-2021-03-05 07:34:58.072 -07:00 [INF] Performance is really good today ;-)
-2021-03-05 07:35:20.719 -07:00 [INF] Performance is really good today ;-)
-2021-03-05 07:36:47.720 -07:00 [INF] Performance is really good today ;-)
-2021-03-05 07:42:57.463 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 07:45:32.039 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 07:48:58.254 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 07:51:43.436 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 07:54:34.297 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 07:55:28.812 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 07:59:28.049 -07:00 [INF] Starting the performace counter for the Front End
+2021-03-05 10:05:20.092 -07:00 [INF] Starting the performace counter for the Front End
+2021-03-05 10:22:12.688 -07:00 [INF] Starting the performace counter for the Front End
+2021-03-05 10:24:22.869 -07:00 [INF] Starting the performace counter for the Front End
+2021-03-05 10:27:02.880 -07:00 [INF] Starting the performace counter for the Front End
