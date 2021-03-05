@@ -84,7 +84,7 @@ namespace FrontEnd.Pages
             }
             catch (Exception e)
             {
-                logger.LogInformation("user with name: {name} clicked on Quick Pick to purchase {numTickets} tickets, but request was failed", name, numTickets);
+                logger.LogError("user with name: {name} clicked on Quick Pick to purchase {numTickets} tickets, but request was failed", name, numTickets);
                 Console.WriteLine(e.Message);
                 return Page();
             }
@@ -115,7 +115,7 @@ namespace FrontEnd.Pages
             }
             catch (Exception e)
             {
-                logger.LogInformation("user with name: {name} clicked on Quick Pick to purchase {tickets} tickets, but request was failed", name, string.Join(",", ticket));
+                logger.LogError("user with name: {name} clicked on Quick Pick to purchase {tickets} tickets, but request was failed", name, string.Join(",", ticket));
                 Console.WriteLine(e.Message);
                 return Page();
             }

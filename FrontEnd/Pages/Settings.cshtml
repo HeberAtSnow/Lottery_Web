@@ -95,9 +95,9 @@
 
     Sales in current Period
 
-    @if (Model.WinSaleTickets?.Any() ?? false)
+    @if (Model.CurrPeriodWinTickets?.Any() ?? false)
     {
-        <h2 class="background">Number of periods: @Model.WinSaleTickets.Count()</h2>
+        <h2 class="background">Number of periods: @Model.CurrPeriodWinTickets.Count()</h2>
         <div class="background">
             <table>
                 <tr>
@@ -118,7 +118,7 @@
 
 
                 </tr>
-                @foreach (var x in Model.WinSaleTickets)
+                @foreach (var x in Model.CurrPeriodWinTickets)
                 {
                     <tr>
                         <td>@x.grandprizeamt</td>
