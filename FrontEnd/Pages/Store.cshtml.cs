@@ -7,11 +7,13 @@ using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
     public class StoreModel : PageModel
     {
+        private readonly ILogger<StoreModel> _logger;
         private LotteryProgram lp;
         public IEnumerable<LotteryTicket> PurchasedTickets;
         [Required]
@@ -23,14 +25,15 @@ namespace FrontEnd.Pages
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurchase;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<StoreModel> logger)
         {
             lp = prog;
+            _logger = logger;
         }
 
         public void OnGet()
         {
-            
+            _logger.LogInformation("Store Page was loaded");
         }
 
         public IActionResult OnPostQuickPick(string name)
@@ -38,6 +41,7 @@ namespace FrontEnd.Pages
             PlayerNombre = name;
             Selection = "QuickPick";
             PurchasedTickets = lp.p.ResultsByPlayer(name);
+            _logger.LogInformation($"{name} selected quick picks");
             return Page();
         }
         public IActionResult OnPostNumberPick(string name)
@@ -45,6 +49,7 @@ namespace FrontEnd.Pages
             PlayerNombre = name;
             Selection = "NumberPick";
             PurchasedTickets = lp.p.ResultsByPlayer(name);
+            _logger.LogInformation($"{name} selected Number picks");
             return Page();
         }
 
@@ -60,8 +65,10 @@ namespace FrontEnd.Pages
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                _logger.LogWarning($"{name} selected quick picks and was unable to purchase");
                 return Page();
             }
+            _logger.LogInformation($"{name} selected quick picks and purchased {numTickets} ticket(s)");
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
@@ -81,8 +88,10 @@ namespace FrontEnd.Pages
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                _logger.LogWarning($"{name} selected Number picks and was unable to purchase");
                 return Page();
             }
+            _logger.LogInformation($"{name} selected Number picks and successfully purchased a ticket");
             PurchasedTickets = lp.p.ResultsByPlayer(name); 
             return Page();
         }
