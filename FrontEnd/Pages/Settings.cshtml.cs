@@ -26,6 +26,25 @@ namespace FrontEnd.Pages
         {
             lp.ResetPeriod();
         }
+
+        public void OnPostProcessDrawing()
+        {
+            lp.ClosePeriodSales();
+            lp.p.DrawWinningTicket();
+            lp.p.ComputeWinners();
+        }
+        public IActionResult OnPostLotteryResults()
+        {
+            var results = lp.p.ResultsByWinLevel();
+            return RedirectToPage("./LotteryResults", results);
+        }
+
+        public IActionResult OnPostHistoricalStats()
+        {
+            LotteryStatistics ls = new LotteryStatistics();
+            var results = ls.DBStatsAllPeriods();
+            return RedirectToPage("./HistoricalStats", results);
+        }
         //draw winning numbers
         //current lottery results
         //all lottery statistics
