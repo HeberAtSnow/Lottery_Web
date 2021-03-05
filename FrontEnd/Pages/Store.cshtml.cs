@@ -36,37 +36,60 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostQuickPick(string name)
         {
-            logger.LogDebug("Quick Pick was selected");
-            logger.LogDebug($"Player name: {name}");
-            PlayerNombre = name;
             Selection = "QuickPick";
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                logger.LogError("Name is empty or null");
+                return Page();
+            }
+
+            logger.LogInformation($"{name} clicked Quick Picks");
+
+            PlayerNombre = name;
+            
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
         public IActionResult OnPostNumberPick(string name)
         {
-            logger.LogDebug("Number Pick was selected");
-            logger.LogDebug($"Player name: {name}");
-            PlayerNombre = name;
             Selection = "NumberPick";
+            PlayerNombre = name;
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                logger.LogError("Name is empty or null");
+                return Page();
+            }
+
+            logger.LogInformation($"{name} clicked Number Picks");
+
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
 
         public IActionResult OnPostQuickPickPurchase(string name,int numTickets)
         {
-            
+            logger.LogInformation($"{name} clicked give me them tickets");
+
             try
             {
                 PlayerNombre = name;
                 Selection = "QuickPick";
                 NumQuickPicks = numTickets;
+
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    logger.LogError("Name is empty or null");
+                    return Page();
+                }
+
                 lp.lv.SellQuickTickets(name, numTickets);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                logger.LogWarning($"Unable to sell {numTickets} tickets to player {name}");
+                logger.LogError($"Unable to sell {numTickets} tickets to player {name}");
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
@@ -76,6 +99,7 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostNumberPickPurchase(string name, int [] ticket)
         {
+            logger.LogInformation($"{name} clicked purchase number pick");
             try
             {
                 PlayerNombre = name;
@@ -84,16 +108,23 @@ namespace FrontEnd.Pages
                 {
                     throw new Exception("Ticket length is not six.");
                 }
+
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    logger.LogError("Name is empty or null");
+                    return Page();
+                }
+
                 lp.lv.SellTicket(name, ticket);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                logger.LogWarning($"Unable to sell ticket {ticket.ToString()} to player {name}");
+                logger.LogError($"Unable to sell ticket {ticket} to player {name}");
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
-            logger.LogDebug($"Ticket {ticket.ToString()} was sold successfully to {name}");
+            logger.LogDebug($"Ticket {ticket} was sold successfully to {name}");
             return Page();
         }
     }
