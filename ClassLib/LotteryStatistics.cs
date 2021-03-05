@@ -39,14 +39,14 @@ namespace ClassLib
             while (unionResult.Any())
             {
                 var sqlstr = new StringBuilder("insert into ticketsale " +
-                    "(period_id,ballstring,ball1,ball2,ball3,ball4,ball5,powerball,winlevel,winamount,type) values ");
+                    "(period_id,ballstring,ball1,ball2,ball3,ball4,ball5,powerball,winlevel,winamount,type, player) values ");
                 using var cmd2 = new NpgsqlCommand();
 
                 int batchSize = Math.Min(5000, unionResult.Count);
                 foreach (var i in Enumerable.Range(0, batchSize))
                 {
                     var l = unionResult[i];
-                    sqlstr.Append($"(@pid{i},@bs{1},@b1{i},@b2{i},@b3{i},@b4{i},@b5{i},@bpower{i},@winL{i},@wina{i},@t{i})\n");
+                    sqlstr.Append($"(@pid{i},@bs{1},@b1{i},@b2{i},@b3{i},@b4{i},@b5{i},@bpower{i},@winL{i},@wina{i},@t{i},@pn{i})\n");
                     cmd2.Parameters.Add(new NpgsqlParameter($"pid{i}", periodID));
                     cmd2.Parameters.Add(new NpgsqlParameter($"bs{i}",
                         l.balls[0].ToString("00") + l.balls[1].ToString("00") +
@@ -61,6 +61,7 @@ namespace ClassLib
                     cmd2.Parameters.Add(new NpgsqlParameter($"winL{i}", l.winLevel));
                     cmd2.Parameters.Add(new NpgsqlParameter($"wina{i}", l.winAmtDollars));
                     cmd2.Parameters.Add(new NpgsqlParameter($"t{i}", l.Type));
+                    cmd2.Parameters.Add(new NpgsqlParameter($"pn{i}", l.Player));
                     if (i < batchSize-1)
                         sqlstr.Append(",");
                 }
