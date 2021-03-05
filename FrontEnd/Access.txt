@@ -1,0 +1,25 @@
+03/05/2021 07:41:45 -07:00 Application Starting.
+03/05/2021 07:41:53 -07:00 went to Administration page 03/05/2021 07:41:52
+03/05/2021 07:41:54 -07:00 Returning to index
+03/05/2021 07:41:56 -07:00 went to Administration page 03/05/2021 07:41:56
+03/05/2021 07:41:57 -07:00 clicked DrawLottery
+03/05/2021 07:41:57 -07:00 DrawLottery took 00:00:00.0037089 to process
+03/05/2021 07:42:01 -07:00 clicked ResetLottery
+03/05/2021 07:42:06 -07:00 cant reset period when salesa are ok
+03/05/2021 07:42:10 -07:00 Clicke on get all stats
+03/05/2021 07:42:14 -07:00 failed to get history
+03/05/2021 07:57:38 -07:00 Application Starting.
+03/05/2021 07:57:42 -07:00 went to Administration page 03/05/2021 07:57:42
+03/05/2021 07:57:44 -07:00 Returning to index
+03/05/2021 07:57:59 -07:00 Application Starting.
+03/05/2021 07:58:04 -07:00 went to Administration page 03/05/2021 07:58:04
+03/05/2021 07:58:05 -07:00 clicked ResetLottery
+03/05/2021 07:58:05 -07:00 cant reset period when salesa are ok
+03/05/2021 07:58:07 -07:00 clicked ResetLottery
+03/05/2021 07:58:08 -07:00 cant reset period when salesa are ok
+03/05/2021 07:58:10 -07:00 clicked ResetLottery
+03/05/2021 07:58:10 -07:00 cant reset period when salesa are ok
+03/05/2021 07:58:12 -07:00 clicked ResetLottery
+03/05/2021 07:58:12 -07:00 cant reset period when salesa are ok
+03/05/2021 07:58:14 -07:00 clicked ResetLottery
+03/05/2021 07:58:14 -07:00 cant reset period when salesa are ok

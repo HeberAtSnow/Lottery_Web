@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Serilog.Expressions" Version="1.0.0" />
+    <PackageReference Include="Serilog.Filters.Expressions" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ClassLib\ClassLib.csproj" />
   </ItemGroup>
 
