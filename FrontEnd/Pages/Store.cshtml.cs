@@ -7,12 +7,14 @@ using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
     public class StoreModel : PageModel
     {
         private LotteryProgram lp;
+        private readonly ILogger<StoreModel> logger;
         public IEnumerable<LotteryTicket> PurchasedTickets;
         [Required]
         public string PlayerNombre;
@@ -23,18 +25,20 @@ namespace FrontEnd.Pages
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurchase;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<StoreModel> logger)
         {
             lp = prog;
+            this.logger = logger;
         }
 
         public void OnGet()
         {
-            
+            logger.LogInformation("entered the lottery store");
         }
 
         public IActionResult OnPostQuickPick(string name)
         {
+            logger.LogInformation("clicked on Quick Pick. The Users name is {name}", name);
             PlayerNombre = name;
             Selection = "QuickPick";
             PurchasedTickets = lp.p.ResultsByPlayer(name);
@@ -42,6 +46,7 @@ namespace FrontEnd.Pages
         }
         public IActionResult OnPostNumberPick(string name)
         {
+            logger.LogInformation("clicked on Number Pick. The Users name is {name}", name);
             PlayerNombre = name;
             Selection = "NumberPick";
             PurchasedTickets = lp.p.ResultsByPlayer(name);
@@ -50,6 +55,9 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostQuickPickPurchase(string name,int numTickets)
         {
+
+            logger.LogInformation("clicked on Quick Pick buy tikets. The Users name is {name}, they tried to buy {numTickets}", name, numTickets);
+            var startTime = DateTime.Now;
             try
             {
                 PlayerNombre = name;
@@ -59,15 +67,19 @@ namespace FrontEnd.Pages
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                logger.LogError(e.Message);
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
+            var endTime = DateTime.Now;
+            var elapsed = endTime -startTime;
+            logger.LogInformation("the time to purchas {numTickets} in a quick pick was {elapsed}", numTickets, elapsed);
             return Page();
         }
 
         public IActionResult OnPostNumberPickPurchase(string name, int [] ticket)
         {
+            logger.LogInformation("clicked on number Pick buy tikets. The Users name is {name}", name);
             try
             {
                 PlayerNombre = name;
@@ -80,10 +92,18 @@ namespace FrontEnd.Pages
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                logger.LogError(e.Message);
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name); 
+            if(PurchasedTickets.Count()==0 || PurchasedTickets == null)
+            {
+                logger.LogWarning("no purchased tickets");
+            }
+            else
+            {
+                logger.LogInformation("succeful purchase of ticket");
+            }
             return Page();
         }
     }

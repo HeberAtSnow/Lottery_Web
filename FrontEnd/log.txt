@@ -105,3 +105,40 @@
 03/04/2021 19:55:13 -07:00 failed to get history
 03/04/2021 19:55:14 -07:00 cant reset period when salesa are ok
 03/04/2021 19:55:17 -07:00 Returning to index
+03/04/2021 19:59:43 -07:00 Application Starting.
+03/04/2021 19:59:46 -07:00 entered the lottery store
+03/04/2021 19:59:52 -07:00 clicked on Number Pick. The Users name is "Kaydon Rydge Stubbs"
+03/04/2021 20:00:06 -07:00 clicked on Quick Pick. The Users name is "Kaydon Rydge Stubbs"
+03/04/2021 20:04:24 -07:00 Application Starting.
+03/04/2021 20:04:27 -07:00 went to Administration page 03/04/2021 20:04:27
+03/04/2021 20:04:29 -07:00 Returning to index
+03/04/2021 20:04:29 -07:00 entered the lottery store
+03/04/2021 20:04:37 -07:00 clicked on Quick Pick. The Users name is "Kaydon Rydge Stubbs"
+03/04/2021 20:04:42 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 100
+03/04/2021 20:04:42 -07:00 the time to purchas 100 in a quick pick was 03/04/2021 20:04:42
+03/04/2021 20:05:18 -07:00 Application Starting.
+03/04/2021 20:05:21 -07:00 entered the lottery store
+03/04/2021 20:05:24 -07:00 clicked on Quick Pick. The Users name is "Kaydon Rydge Stubbs"
+03/04/2021 20:05:29 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 100
+03/04/2021 20:05:29 -07:00 the time to purchas 100 in a quick pick was 00:00:00.0011462
+03/04/2021 20:05:37 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 1000
+03/04/2021 20:05:37 -07:00 the time to purchas 1000 in a quick pick was 00:00:00.0006626
+03/04/2021 20:05:45 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 1000
+03/04/2021 20:05:45 -07:00 the time to purchas 1000 in a quick pick was 00:00:00.0006451
+03/04/2021 20:05:48 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 1000
+03/04/2021 20:05:48 -07:00 the time to purchas 1000 in a quick pick was 00:00:00.0006420
+03/04/2021 20:05:50 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 1000
+03/04/2021 20:05:50 -07:00 the time to purchas 1000 in a quick pick was 00:00:00.0004755
+03/04/2021 20:05:59 -07:00 clicked on Number Pick. The Users name is "Kaydon Rydge Stubbs"
+03/04/2021 20:09:09 -07:00 Application Starting.
+03/04/2021 20:09:20 -07:00 entered the lottery store
+03/04/2021 20:09:23 -07:00 clicked on Number Pick. The Users name is "Kaydon Rydge Stubbs"
+03/04/2021 20:09:32 -07:00 clicked on number Pick buy tikets. The Users name is "Kaydon Rydge Stubbs"
+03/04/2021 20:09:32 -07:00 succeful purchase of ticket
+03/04/2021 20:09:38 -07:00 clicked on Quick Pick. The Users name is "Kaydon Rydge Stubbs"
+03/04/2021 20:09:41 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 0
+03/04/2021 20:09:41 -07:00 the time to purchas 0 in a quick pick was 00:00:00.0001356
+03/04/2021 20:09:52 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 0
+03/04/2021 20:09:52 -07:00 the time to purchas 0 in a quick pick was 00:00:00.0000184
+03/04/2021 20:10:01 -07:00 clicked on Quick Pick buy tikets. The Users name is "Kaydon Rydge Stubbs", they tried to buy 1000
+03/04/2021 20:10:01 -07:00 the time to purchas 1000 in a quick pick was 00:00:00.0013559
