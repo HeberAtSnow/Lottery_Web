@@ -1,0 +1,17 @@
+2021-03-05 07:29:41.394 -07:00 [INF] I made it to store page
+2021-03-05 07:29:45.156 -07:00 [INF] I made it to store page
+2021-03-05 07:29:49.503 -07:00 [INF] I made it to store page
+2021-03-05 07:36:59.956 -07:00 [INF] I made it to store page
+2021-03-05 07:37:02.818 -07:00 [INF] I made it to store page
+2021-03-05 07:37:06.647 -07:00 [INF] I made it to store page
+2021-03-05 07:37:12.464 -07:00 [INF] I made it to store page
+2021-03-05 07:43:03.208 -07:00 [INF] I made it to store page
+2021-03-05 07:43:06.172 -07:00 [INF] I made it to store page
+2021-03-05 07:43:11.986 -07:00 [INF] I made it to store page
+2021-03-05 07:44:26.682 -07:00 [INF] I made it to store page
+2021-03-05 07:45:41.166 -07:00 [INF] I made it to store page
+2021-03-05 07:45:53.352 -07:00 [INF] I made it to store page
+2021-03-05 07:49:02.732 -07:00 [INF] I made it to store page
+2021-03-05 07:51:48.129 -07:00 [INF] In the store page
+2021-03-05 07:54:38.518 -07:00 [INF] In the store page
+2021-03-05 07:55:33.020 -07:00 [INF] In the store page

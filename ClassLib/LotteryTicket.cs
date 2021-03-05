@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +19,28 @@ namespace ClassLib
         public decimal winAmtDollars; //only use if isGraded is set to true
         public string Type { get; set; }
 
+        private readonly Logger performancecounter;
+
+
         [ThreadStatic] static Random rnd;
 
         public LotteryTicket() : this("Player Name Anonymous")
         {
+            using (var performanceCounters = new LoggerConfiguration().WriteTo.File(@"SharedAppPerformance.txt").CreateLogger())
+            {
+                performanceCounters.Information("I made it to store page");
+                this.performancecounter = performanceCounters;
+            }
+
+            
         }
+
+
         public LotteryTicket(String PlayerName)
         { //RULE: first 5 balls are 1-69 inclusive, no duplicates in balls 1-5
           //RULE: 6th ball is 1-26 inclusive
+
+
             if (rnd == null)
             {
                 rnd = new Random();
@@ -59,6 +76,7 @@ namespace ClassLib
         }
         public LotteryTicket(String PlayerName, int[] sixBalls)
         {
+            performancecounter.Information("Hey I made it to shared library");
             if (sixBalls.Length != 6)
             {
                 throw new ArgumentException("The 'sixBalls' parameter must include 5 numbers + Powerball (total of 6 numbers", "sixBalls");

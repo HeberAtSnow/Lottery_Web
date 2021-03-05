@@ -1,0 +1,195 @@
+03/05/2021 07:06:20 FrontEnd is Starting.
+03/05/2021 07:06:25 HTTP "GET" "/Index" responded 200 in 344.2016 ms
+03/05/2021 07:16:20 FrontEnd is Starting.
+03/05/2021 07:16:25 HTTP "GET" "/Index" responded 200 in 355.6000 ms
+03/05/2021 07:16:34 HTTP "POST" "/?handler=GoToStore" responded 302 in 27.8355 ms
+03/05/2021 07:16:34 HTTP "GET" "/Store" responded 500 in 47.4669 ms
+System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Logging.Logger`1[FrontEnd.Pages.StoreModel]' while attempting to activate 'FrontEnd.Pages.StoreModel'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method29(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageModelActivatorProvider.<>c__DisplayClass1_0.<CreateActivator>b__0(PageContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageModelFactoryProvider.<>c__DisplayClass3_0.<CreateModelFactory>b__0(PageContext pageContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.CreateInstance()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+03/05/2021 07:16:34 An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'Microsoft.Extensions.Logging.Logger`1[FrontEnd.Pages.StoreModel]' while attempting to activate 'FrontEnd.Pages.StoreModel'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method29(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageModelActivatorProvider.<>c__DisplayClass1_0.<CreateActivator>b__0(PageContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.DefaultPageModelFactoryProvider.<>c__DisplayClass3_0.<CreateModelFactory>b__0(PageContext pageContext)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.CreateInstance()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+03/05/2021 07:24:00 FrontEnd is Starting.
+03/05/2021 07:24:04 HTTP "GET" "/Index" responded 200 in 368.3913 ms
+03/05/2021 07:24:06 HTTP "POST" "/?handler=GoToStore" responded 302 in 19.9398 ms
+03/05/2021 07:24:06 User entered the lottery store page
+03/05/2021 07:24:06 HTTP "GET" "/Store" responded 200 in 97.6906 ms
+03/05/2021 07:24:35 user with name: " Maksad Annamuradov" clicked on Number Pick
+03/05/2021 07:24:35 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:24:35 user with name: " Maksad Annamuradov" successfuly purchased numbePick tickets
+03/05/2021 07:24:35 HTTP "POST" "/Store?handler=NumberPick" responded 200 in 89.6009 ms
+03/05/2021 07:24:37 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:24:37 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:24:37 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 19.3524 ms
+03/05/2021 07:24:42 user with name: " Maksad Annamuradov" clicked on Quick Pick to purchase 10 tickets
+03/05/2021 07:24:42 user with name: " Maksad Annamuradov" successfuly purchased 10 quickPick tickets
+03/05/2021 07:24:42 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:24:42 HTTP "POST" "/Store?handler=QuickPickPurchase" responded 200 in 29.3035 ms
+03/05/2021 07:29:33 FrontEnd is Starting.
+03/05/2021 07:29:36 HTTP "GET" "/Index" responded 200 in 142.7403 ms
+03/05/2021 07:29:41 HTTP "POST" "/?handler=GoToStore" responded 302 in 9.3567 ms
+03/05/2021 07:29:41 User entered the lottery store page
+03/05/2021 07:29:41 HTTP "GET" "/Store" responded 200 in 31.9883 ms
+03/05/2021 07:29:45 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:29:45 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:29:45 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 29.4095 ms
+03/05/2021 07:29:49 user with name: " Maksad Annamuradov" clicked on Quick Pick to purchase 50 tickets
+03/05/2021 07:29:49 user with name: " Maksad Annamuradov" successfuly purchased 50 quickPick tickets
+03/05/2021 07:29:49 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:29:49 HTTP "POST" "/Store?handler=QuickPickPurchase" responded 200 in 19.9592 ms
+03/05/2021 07:36:48 FrontEnd is Starting.
+03/05/2021 07:36:50 HTTP "GET" "/Index" responded 200 in 153.7740 ms
+03/05/2021 07:36:59 HTTP "POST" "/?handler=GoToStore" responded 302 in 9.5422 ms
+03/05/2021 07:36:59 User entered the lottery store page
+03/05/2021 07:36:59 HTTP "GET" "/Store" responded 200 in 34.3654 ms
+03/05/2021 07:37:02 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:37:02 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:37:02 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 28.7655 ms
+03/05/2021 07:37:06 user with name: " Maksad Annamuradov" clicked on Quick Pick to purchase 50 tickets
+03/05/2021 07:37:06 user with name: " Maksad Annamuradov" successfuly purchased 50 quickPick tickets
+03/05/2021 07:37:06 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:37:06 HTTP "POST" "/Store?handler=QuickPickPurchase" responded 200 in 17.3188 ms
+03/05/2021 07:37:11 HTTP "GET" "/" responded 200 in 1.2321 ms
+03/05/2021 07:37:12 HTTP "POST" "/?handler=GoToStore" responded 302 in 0.5732 ms
+03/05/2021 07:37:12 User entered the lottery store page
+03/05/2021 07:37:12 HTTP "GET" "/Store" responded 200 in 2.1424 ms
+03/05/2021 07:37:18 HTTP "GET" "/" responded 200 in 0.9699 ms
+03/05/2021 07:37:22 HTTP "POST" "/?handler=GoToSettings" responded 302 in 1.3392 ms
+03/05/2021 07:37:22 Somebody went to Administration page 03/05/2021 07:37:22
+03/05/2021 07:37:22 HTTP "GET" "/Settings" responded 200 in 15.1581 ms
+03/05/2021 07:37:30 Somebody clicked DrawLottery
+03/05/2021 07:37:30 ClosePeriodSales took 00:00:00.0073513 to process
+03/05/2021 07:37:30 DrawWinningTickets took 00:00:00.0109856 to process
+03/05/2021 07:37:30 ComputeWinners took 00:00:00.0142603 to process
+03/05/2021 07:37:30 To finish DrawWinningTickets in total took 00:00:00.0154917 to process
+03/05/2021 07:37:30 HTTP "POST" "/Settings?handler=DrawWinningTickets" responded 200 in 22.2491 ms
+03/05/2021 07:37:35 clicked Lottery Results
+03/05/2021 07:37:35  time to complete results of the WinningLottery Tickets took 00:00:00.0006239
+03/05/2021 07:37:35 Winner Lottery count: 50
+03/05/2021 07:37:37  time to complete results of the Current Period Winning Lottery Tickets took 00:00:01.2549623
+03/05/2021 07:37:37 Winner Lottery count is: 1 in period with id 18
+03/05/2021 07:37:37 HTTP "POST" "/Settings?handler=LotteryResults" responded 200 in 1272.3596 ms
+03/05/2021 07:37:43 Clicked button to get all lottery results
+03/05/2021 07:37:44 To get the all stats in all periods took 00:00:00.8295333
+03/05/2021 07:37:44 website returned 18 ticker sale periods
+03/05/2021 07:37:44 HTTP "POST" "/Settings?handler=LotteryStats" responded 200 in 837.8580 ms
+03/05/2021 07:42:57 FrontEnd is Starting.
+03/05/2021 07:43:00 HTTP "GET" "/Index" responded 200 in 144.3115 ms
+03/05/2021 07:43:03 HTTP "POST" "/?handler=GoToStore" responded 302 in 10.0296 ms
+03/05/2021 07:43:03 User entered the lottery store page
+03/05/2021 07:43:03 HTTP "GET" "/Store" responded 200 in 37.5861 ms
+03/05/2021 07:43:06 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:43:06 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:43:06 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 28.8533 ms
+03/05/2021 07:43:11 user with name: " Maksad Annamuradov" clicked on Quick Pick to purchase 50 tickets
+03/05/2021 07:43:11 user with name: " Maksad Annamuradov" successfuly purchased 50 quickPick tickets
+03/05/2021 07:43:11 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:43:12 HTTP "POST" "/Store?handler=QuickPickPurchase" responded 200 in 19.8007 ms
+03/05/2021 07:44:36 user with name: " Maksad Annamuradov" clicked on Number Pick
+03/05/2021 07:44:45 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:44:47 user with name: " Maksad Annamuradov" successfuly purchased numbePick tickets
+03/05/2021 07:44:47 HTTP "POST" "/Store?handler=NumberPick" responded 200 in 28377.0965 ms
+03/05/2021 07:45:32 FrontEnd is Starting.
+03/05/2021 07:45:34 HTTP "GET" "/Index" responded 200 in 149.8860 ms
+03/05/2021 07:45:37 HTTP "POST" "/?handler=GoToStore" responded 302 in 11.3736 ms
+03/05/2021 07:45:46 User entered the lottery store page
+03/05/2021 07:45:47 HTTP "GET" "/Store" responded 200 in 10023.7770 ms
+03/05/2021 07:45:53 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:46:05 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:46:05 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 15552.4247 ms
+03/05/2021 07:48:58 FrontEnd is Starting.
+03/05/2021 07:49:01 HTTP "GET" "/Index" responded 200 in 150.4898 ms
+03/05/2021 07:49:02 HTTP "POST" "/?handler=GoToStore" responded 302 in 8.0199 ms
+03/05/2021 07:49:02 User entered the lottery store page
+03/05/2021 07:49:02 HTTP "GET" "/Store" responded 200 in 33.5986 ms
+03/05/2021 07:49:05 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:49:09 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:49:10 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 5500.9697 ms
+03/05/2021 07:51:43 FrontEnd is Starting.
+03/05/2021 07:51:46 HTTP "GET" "/Index" responded 200 in 205.4792 ms
+03/05/2021 07:51:48 HTTP "POST" "/?handler=GoToStore" responded 302 in 7.3898 ms
+03/05/2021 07:51:48 User entered the lottery store page
+03/05/2021 07:51:48 HTTP "GET" "/Store" responded 200 in 37.5198 ms
+03/05/2021 07:51:51 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:51:54 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:51:54 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 3083.4272 ms
+03/05/2021 07:51:59 user with name: " Maksad Annamuradov" clicked on Quick Pick to purchase 5 tickets
+03/05/2021 07:51:59 user with name: " Maksad Annamuradov" successfuly purchased 5 quickPick tickets
+03/05/2021 07:51:59 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:51:59 HTTP "POST" "/Store?handler=QuickPickPurchase" responded 200 in 11.3038 ms
+03/05/2021 07:54:34 FrontEnd is Starting.
+03/05/2021 07:54:37 HTTP "GET" "/Index" responded 200 in 164.4284 ms
+03/05/2021 07:54:38 HTTP "POST" "/?handler=GoToStore" responded 302 in 8.9795 ms
+03/05/2021 07:54:38 User entered the lottery store page
+03/05/2021 07:54:38 HTTP "GET" "/Store" responded 200 in 41.7827 ms
+03/05/2021 07:54:40 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:54:40 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:54:40 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 29.6197 ms
+03/05/2021 07:54:45 user with name: " Maksad Annamuradov" clicked on Quick Pick to purchase 50 tickets
+03/05/2021 07:54:45 user with name: " Maksad Annamuradov" successfuly purchased 50 quickPick tickets
+03/05/2021 07:54:45 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:54:45 HTTP "POST" "/Store?handler=QuickPickPurchase" responded 200 in 11.7880 ms
+03/05/2021 07:55:29 FrontEnd is Starting.
+03/05/2021 07:55:31 HTTP "GET" "/Index" responded 200 in 148.1700 ms
+03/05/2021 07:55:32 HTTP "POST" "/?handler=GoToStore" responded 302 in 7.7955 ms
+03/05/2021 07:55:33 User entered the lottery store page
+03/05/2021 07:55:33 HTTP "GET" "/Store" responded 200 in 37.5420 ms
+03/05/2021 07:55:35 user with name: " Maksad Annamuradov" clicked on Quick Pick
+03/05/2021 07:55:35 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:55:35 HTTP "POST" "/Store?handler=QuickPick" responded 200 in 30.7580 ms
+03/05/2021 07:55:38 user with name: " Maksad Annamuradov" clicked on Quick Pick to purchase 5 tickets
+03/05/2021 07:55:38 user with name: " Maksad Annamuradov" successfuly purchased 5 quickPick tickets
+03/05/2021 07:55:38 user with name: " Maksad Annamuradov" called on getting player results
+03/05/2021 07:55:38 HTTP "POST" "/Store?handler=QuickPickPurchase" responded 200 in 11.0727 ms
+03/05/2021 07:59:28 FrontEnd is Starting.
+03/05/2021 07:59:31 HTTP "GET" "/Index" responded 200 in 181.8098 ms
+03/05/2021 07:59:34 HTTP "POST" "/?handler=GoToSettings" responded 302 in 13.6543 ms
+03/05/2021 07:59:34 Somebody went to Administration page 03/05/2021 07:59:34
+03/05/2021 07:59:34 HTTP "GET" "/Settings" responded 200 in 32.8557 ms
+03/05/2021 07:59:38 Somebody clicked DrawLottery
+03/05/2021 07:59:38 ClosePeriodSales took 00:00:00.0021626 to process
+03/05/2021 07:59:38 DrawWinningTickets took 00:00:00.0052090 to process
+03/05/2021 07:59:38 ComputeWinners took 00:00:00.0070997 to process
+03/05/2021 07:59:38 To finish DrawWinningTickets in total took 00:00:00.0083926 to process
+03/05/2021 07:59:38 HTTP "POST" "/Settings?handler=DrawWinningTickets" responded 200 in 11.7341 ms
+03/05/2021 07:59:42 clicked Lottery Results
+03/05/2021 07:59:42  time to complete results of the WinningLottery Tickets took 00:00:00.0005914
+03/05/2021 07:59:42 Winner Lottery count: 0
+03/05/2021 07:59:45  time to complete results of the Current Period Winning Lottery Tickets took 00:00:02.3951224
+03/05/2021 07:59:45 Winner Lottery count is: 1 in period with id 25
+03/05/2021 07:59:45 HTTP "POST" "/Settings?handler=LotteryResults" responded 200 in 2407.4631 ms
+03/05/2021 07:59:51 Clicked button to get all lottery results
+03/05/2021 07:59:53 To get the all stats in all periods took 00:00:01.2903870
+03/05/2021 07:59:53 website returned 25 ticker sale periods
+03/05/2021 07:59:53 HTTP "POST" "/Settings?handler=LotteryStats" responded 200 in 1300.9819 ms

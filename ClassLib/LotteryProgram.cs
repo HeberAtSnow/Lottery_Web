@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Serilog;
+using Serilog.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,15 +9,25 @@ using System.Threading.Tasks;
 
 namespace ClassLib
 {
+
     public class LotteryProgram
     {
         public LotteryPeriod p = new LotteryPeriod(40_000_000);//Start at $40M
         public LotteryVendor lv;
 
+        private readonly Logger performancecounter;
+
 
         public LotteryProgram()
         {
             lv = new LotteryVendor(p); //starting with one Vendor 
+
+            using (var performanceCounters = new LoggerConfiguration().WriteTo.File(@"SharedAppPerformance.txt").CreateLogger())
+            {
+                performanceCounters.Information("I made it to LotteryProgram page");
+                performancecounter = performanceCounters;
+            }
+
         }
         public bool ClosePeriodSales()
         {

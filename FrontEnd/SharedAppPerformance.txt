@@ -1,0 +1,16 @@
+2021-03-05 07:36:59.955 -07:00 [INF] I made it to LotteryPeriod
+2021-03-05 07:36:59.956 -07:00 [INF] I made it to LotteryProgram page
+2021-03-05 07:43:03.204 -07:00 [INF] I made it to LotteryPeriod
+2021-03-05 07:43:03.205 -07:00 [INF] I made it to LotteryProgram page
+2021-03-05 07:45:37.032 -07:00 [INF] I made it to LotteryPeriod
+2021-03-05 07:45:37.033 -07:00 [INF] I made it to LotteryProgram page
+2021-03-05 07:49:02.731 -07:00 [INF] I made it to LotteryPeriod
+2021-03-05 07:49:02.731 -07:00 [INF] I made it to LotteryProgram page
+2021-03-05 07:51:48.126 -07:00 [INF] I made it to LotteryPeriod
+2021-03-05 07:51:48.127 -07:00 [INF] I made it to LotteryProgram page
+2021-03-05 07:54:38.516 -07:00 [INF] I made it to LotteryPeriod
+2021-03-05 07:54:38.517 -07:00 [INF] I made it to LotteryProgram page
+2021-03-05 07:55:33.018 -07:00 [INF] I made it to LotteryPeriod
+2021-03-05 07:55:33.019 -07:00 [INF] I made it to LotteryProgram page
+2021-03-05 07:59:34.259 -07:00 [INF] I made it to LotteryPeriod
+2021-03-05 07:59:34.260 -07:00 [INF] I made it to LotteryProgram page

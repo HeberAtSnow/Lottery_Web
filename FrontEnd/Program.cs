@@ -18,10 +18,19 @@ namespace FrontEnd
                         .AddJsonFile("appsettings.json")
                         .Build();
 
+            using (var performanceCounters = new LoggerConfiguration().WriteTo.File(@"performance.txt").CreateLogger())
+            {
+                performanceCounters.Information("Starting the performace counter for the Front End");
+
+                // Your app runs, then disposal of `performanceCounters` flushes any buffers
+            }
+
             //Initialize Logger
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config)
                 .CreateLogger();
+
+
             try
             {
                 Log.Information("FrontEnd is Starting.");
