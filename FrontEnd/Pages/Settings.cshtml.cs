@@ -46,10 +46,6 @@ namespace FrontEnd.Pages
             }
         }
 
-        public IActionResult OnPostProcessRedirect()
-        {
-            return RedirectToPage("/ResultDisplay", "ProcessDrawing");
-        }
         //draw winning numbers
         //current lottery results
         //all lottery statistics
