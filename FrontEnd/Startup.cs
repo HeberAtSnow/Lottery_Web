@@ -12,21 +12,30 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using FrontEnd.Services;
+using Serilog;
 
 namespace FrontEnd
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+
+        public Startup(IConfiguration configuration, IPerformanceLogger performanceLogger)
         {
             Configuration = configuration;
+            _performanceLogger = performanceLogger;
         }
-
+        private readonly IPerformanceLogger _performanceLogger;
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IPerformanceLogger performanceLogger = new PerformanceLogger(new LoggerConfiguration()
+             .MinimumLevel.Debug()
+             .WriteTo.File("Logs/AppPerformance.log")
+             .CreateLogger());
+            services.AddSingleton(performanceLogger);
             services.AddMemoryCache();
             services.AddControllers();
             services.AddRazorPages();
