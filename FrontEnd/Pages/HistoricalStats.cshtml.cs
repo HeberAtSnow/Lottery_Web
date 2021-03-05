@@ -13,11 +13,11 @@ namespace FrontEnd.Pages
     public class HistoricalStatsModel : PageModel
     {
         private readonly LotteryStatistics LotteryStatistics;
-        private readonly ILogger logger;
+        private readonly ILogger<HistoricalStatsModel> logger;
 
         public IEnumerable<TicketSale> Sales { get; private set; }
         
-        public HistoricalStatsModel(LotteryStatistics lotteryStatistics, ILogger logger)
+        public HistoricalStatsModel(LotteryStatistics lotteryStatistics, ILogger<HistoricalStatsModel> logger)
         {
             LotteryStatistics = lotteryStatistics;
             this.logger = logger;
@@ -32,14 +32,18 @@ namespace FrontEnd.Pages
             try
             {
                 Sales = LotteryStatistics.DBStatsAllPeriods();
+                stopwatch.Stop();
+
+                logger.LogDebug($"Historical stats were loaded. Elapsed time: {stopwatch.ElapsedMilliseconds}");
             }
             catch
             {
                 logger.LogError("Failed to retreive historical stats");
             }
-            stopwatch.Stop();
-
-            logger.LogDebug($"Historical stats were loaded. Elapsed time: {stopwatch.ElapsedMilliseconds}");
+            finally
+            {
+                Sales = new List<TicketSale>();
+            }
         }
     }
 }

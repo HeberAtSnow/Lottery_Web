@@ -12,12 +12,12 @@ namespace FrontEnd.Pages
 {
     public class CurrentResultsModel : PageModel
     {
-        private readonly ILogger logger;
+        private readonly ILogger<CurrentResultsModel> logger;
 
         public LotteryProgram LotteryProgram { get; }
         public IEnumerable<LotteryTicket> Results { get; set; }
 
-        public CurrentResultsModel(LotteryProgram lotteryProgram, ILogger logger)
+        public CurrentResultsModel(LotteryProgram lotteryProgram, ILogger<CurrentResultsModel> logger)
         {
             LotteryProgram = lotteryProgram;
             this.logger = logger;

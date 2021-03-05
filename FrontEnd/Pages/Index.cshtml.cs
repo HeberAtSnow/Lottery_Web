@@ -10,9 +10,9 @@ namespace FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger logger;
+        private readonly ILogger<IndexModel> logger;
 
-        public IndexModel(ILogger logger)
+        public IndexModel(ILogger<IndexModel> logger)
         {
             this.logger = logger;
         }

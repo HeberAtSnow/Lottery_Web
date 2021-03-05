@@ -14,11 +14,11 @@ namespace FrontEnd.Pages
     public class SettingsModel : PageModel
     {
         LotteryProgram lp;
-        private readonly ILogger logger;
+        private readonly ILogger<SettingsModel> logger;
 
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
-        public SettingsModel(LotteryProgram lotteryProgram, ILogger logger)
+        public SettingsModel(LotteryProgram lotteryProgram, ILogger<SettingsModel> logger)
         {
             lp = lotteryProgram;
             this.logger = logger;

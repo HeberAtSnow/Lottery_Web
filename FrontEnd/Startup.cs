@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace FrontEnd
 {
@@ -27,7 +28,6 @@ namespace FrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMemoryCache();
             services.AddControllers();
             services.AddRazorPages();
             services.AddSwaggerGen(c =>
@@ -50,6 +50,8 @@ namespace FrontEnd
 
             app.UseStaticFiles();
             //app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

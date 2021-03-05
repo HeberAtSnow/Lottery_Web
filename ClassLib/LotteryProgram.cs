@@ -11,22 +11,20 @@ namespace ClassLib
 {
     public class LotteryProgram
     {
-        private readonly ILogger logger;
         public LotteryPeriod p = new LotteryPeriod(40_000_000);//Start at $40M
         public LotteryVendor lv;
 
 
-        public LotteryProgram(ILogger logger)
+        public LotteryProgram()
         {
             lv = new LotteryVendor(p); //starting with one Vendor 
-            this.logger = logger;
         }
         public bool ClosePeriodSales()
         {
             if (p.SalesState == TicketSales.OK)
             {
                 p.SalesState = TicketSales.CLOSED;
-                logger.LogInformation("Period was closed succesfully");
+                //logger.LogInformation("Period was closed succesfully");
                 return true;
             }
             else
@@ -39,7 +37,7 @@ namespace ClassLib
                 var stopwatch = new Stopwatch();
                 var ls = new LotteryStatistics();
 
-                logger.LogInformation("Writing current stats to database");
+                //logger.LogInformation("Writing current stats to database");
                 stopwatch.Start();
 
                 try
@@ -48,11 +46,11 @@ namespace ClassLib
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError("Failed to write current stats to the database");
+                    //logger.LogError("Failed to write current stats to the database");
                     throw new Exception("Failed to write to database");
                 }
                 stopwatch.Stop();
-                logger.LogInformation($"Done writing to the database. Time elapsed: {stopwatch.ElapsedMilliseconds}");
+                //logger.LogInformation($"Done writing to the database. Time elapsed: {stopwatch.ElapsedMilliseconds}");
 
                 //get rid of old period, setup new period
                 //TODO:  increment GrandPrize Amt by max($10M or 10%)
@@ -60,7 +58,7 @@ namespace ClassLib
 
                 //Ready to allow sales again
                 p.SalesState = TicketSales.OK;
-                logger.LogInformation("New period is now open.");
+                //logger.LogInformation("New period is now open.");
 
                 return true;
             }

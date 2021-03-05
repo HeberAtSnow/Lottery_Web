@@ -13,19 +13,17 @@ namespace FrontEnd.Pages
 {
     public class StoreModel : PageModel
     {
-        private readonly ILogger logger;
+        private readonly ILogger<StoreModel> logger;
         private LotteryProgram lp;
         public IEnumerable<LotteryTicket> PurchasedTickets;
         [Required]
         public string PlayerNombre;
         public int NumQuickPicks;
         private int[] _lastTicket;
-        private bool recentPurchase;
         public string Selection;
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
-        public bool RecentPurchase => recentPurchase;
 
-        public StoreModel(ILogger logger,LotteryProgram prog)
+        public StoreModel(ILogger<StoreModel> logger,LotteryProgram prog)
         {
             this.logger = logger;
             lp = prog;
