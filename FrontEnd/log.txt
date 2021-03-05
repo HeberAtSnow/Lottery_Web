@@ -14,3 +14,94 @@
 03/03/2021 14:23:54 -07:00 cant reset period when salesa are ok
 03/03/2021 14:23:54 -07:00 cant reset period when salesa are ok
 03/03/2021 14:23:56 -07:00 cant reset period when salesa are ok
+03/04/2021 07:29:07 -07:00 Application Starting.
+03/04/2021 07:29:11 -07:00 went to Administration page {time}
+03/04/2021 07:29:14 -07:00 clicked DrawLottery
+03/04/2021 07:29:14 -07:00 DrawLottery took { time } to process
+03/04/2021 07:29:40 -07:00 Application Starting.
+03/04/2021 07:29:43 -07:00 went to Administration page {time}
+03/04/2021 07:29:44 -07:00 clicked DrawLottery
+03/04/2021 07:29:44 -07:00 DrawLottery took 00:00:00.0048405 to process
+03/04/2021 07:30:58 -07:00 Application Starting.
+03/04/2021 07:31:02 -07:00 went to Administration page 03/04/2021 07:31:02
+03/04/2021 07:31:03 -07:00 clicked DrawLottery
+03/04/2021 07:31:03 -07:00 DrawLottery took 00:00:00.0045013 to process
+03/04/2021 07:36:16 -07:00 Application Starting.
+03/04/2021 07:36:19 -07:00 went to Administration page 03/04/2021 07:36:19
+03/04/2021 07:36:26 -07:00 clicked ResetLottery
+03/04/2021 07:36:26 -07:00 cant reset period when salesa are ok
+03/04/2021 07:36:28 -07:00 clicked DrawLottery
+03/04/2021 07:36:28 -07:00 DrawLottery took 00:00:00.0041759 to process
+03/04/2021 07:36:33 -07:00 clicked ResetLottery
+03/04/2021 07:36:36 -07:00 clicked ResetLottery
+03/04/2021 07:36:36 -07:00 clicked ResetLottery
+03/04/2021 07:36:37 -07:00 cant reset period when salesa are ok
+03/04/2021 07:36:37 -07:00 clicked ResetLottery
+03/04/2021 07:36:40 -07:00 clicked DrawLottery
+03/04/2021 07:36:40 -07:00 DrawLottery took 00:00:00.0019947 to process
+03/04/2021 07:36:40 -07:00 cant reset period when salesa are ok
+03/04/2021 07:36:40 -07:00 cant reset period when salesa are ok
+03/04/2021 07:36:41 -07:00 cant reset period when salesa are ok
+03/04/2021 07:36:44 -07:00 clicked ResetLottery
+03/04/2021 07:36:48 -07:00 cant reset period when salesa are ok
+03/04/2021 13:54:10 -07:00 Application Starting.
+03/04/2021 13:54:47 -07:00 went to Administration page 03/04/2021 13:54:47
+03/04/2021 13:55:21 -07:00 clicked DrawLottery
+03/04/2021 13:55:21 -07:00 DrawLottery took 00:00:00.0051375 to process
+03/04/2021 13:55:34 -07:00 clicked ResetLottery
+03/04/2021 13:55:39 -07:00 cant reset period when salesa are ok
+03/04/2021 13:55:53 -07:00 went to Administration page 03/04/2021 13:55:53
+03/04/2021 19:45:57 -07:00 Application Starting.
+03/04/2021 19:46:36 -07:00 went to Administration page 03/04/2021 19:46:36
+03/04/2021 19:46:48 -07:00 went to Administration page 03/04/2021 19:46:48
+03/04/2021 19:46:51 -07:00 went to Administration page 03/04/2021 19:46:51
+03/04/2021 19:46:54 -07:00 clicked ResetLottery
+03/04/2021 19:46:54 -07:00 cant reset period when salesa are ok
+03/04/2021 19:46:56 -07:00 clicked DrawLottery
+03/04/2021 19:46:56 -07:00 DrawLottery took 00:00:00.0039709 to process
+03/04/2021 19:47:21 -07:00 clicked Result lottery
+03/04/2021 19:47:21 -07:00  time to complete results of the lotter 00:00:00.0010779
+03/04/2021 19:47:31 -07:00 clicked ResetLottery
+03/04/2021 19:47:35 -07:00 cant reset period when salesa are ok
+03/04/2021 19:48:30 -07:00 Application Starting.
+03/04/2021 19:48:33 -07:00 went to Administration page 03/04/2021 19:48:33
+03/04/2021 19:48:35 -07:00 clicked DrawLottery
+03/04/2021 19:48:35 -07:00 DrawLottery took 00:00:00.0043345 to process
+03/04/2021 19:48:43 -07:00 clicked Result lottery
+03/04/2021 19:48:43 -07:00  time to complete results of the lotter 00:00:00.0006704
+03/04/2021 19:48:43 -07:00 lottery count = 0
+03/04/2021 19:53:35 -07:00 Application Starting.
+03/04/2021 19:53:39 -07:00 went to Administration page 03/04/2021 19:53:39
+03/04/2021 19:53:42 -07:00 clicked Result lottery
+03/04/2021 19:53:42 -07:00  time to complete results of the lotter 00:00:00.0006725
+03/04/2021 19:53:42 -07:00 lottery count = 0
+03/04/2021 19:53:44 -07:00 clicked Result lottery
+03/04/2021 19:53:44 -07:00  time to complete results of the lotter 00:00:00.0000143
+03/04/2021 19:53:44 -07:00 lottery count = 0
+03/04/2021 19:53:52 -07:00 clicked Result lottery
+03/04/2021 19:53:52 -07:00  time to complete results of the lotter 00:00:00.0000111
+03/04/2021 19:53:52 -07:00 lottery count = 0
+03/04/2021 19:53:55 -07:00 clicked DrawLottery
+03/04/2021 19:53:55 -07:00 DrawLottery took 00:00:00.0041622 to process
+03/04/2021 19:54:04 -07:00 clicked Result lottery
+03/04/2021 19:54:04 -07:00  time to complete results of the lotter 00:00:00.0000109
+03/04/2021 19:54:04 -07:00 lottery count = 0
+03/04/2021 19:54:07 -07:00 Clicke on get all stats
+03/04/2021 19:54:11 -07:00 failed to get history
+03/04/2021 19:54:56 -07:00 Application Starting.
+03/04/2021 19:54:59 -07:00 went to Administration page 03/04/2021 19:54:59
+03/04/2021 19:55:01 -07:00 Returning to index
+03/04/2021 19:55:02 -07:00 went to Administration page 03/04/2021 19:55:02
+03/04/2021 19:55:04 -07:00 clicked DrawLottery
+03/04/2021 19:55:04 -07:00 DrawLottery took 00:00:00.0041383 to process
+03/04/2021 19:55:06 -07:00 clicked Result lottery
+03/04/2021 19:55:06 -07:00  time to complete results of the lotter 00:00:00.0006584
+03/04/2021 19:55:06 -07:00 lottery count = 0
+03/04/2021 19:55:07 -07:00 clicked Result lottery
+03/04/2021 19:55:07 -07:00  time to complete results of the lotter 00:00:00.0000126
+03/04/2021 19:55:07 -07:00 lottery count = 0
+03/04/2021 19:55:09 -07:00 Clicke on get all stats
+03/04/2021 19:55:10 -07:00 clicked ResetLottery
+03/04/2021 19:55:13 -07:00 failed to get history
+03/04/2021 19:55:14 -07:00 cant reset period when salesa are ok
+03/04/2021 19:55:17 -07:00 Returning to index
