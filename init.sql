@@ -6,6 +6,7 @@
 create table ticketsale (
 	id serial primary key, 
 	period_id int references period(id), 
+	player text,
 	ballstring text, 
 	ball1 int, 
 	ball2 int, 

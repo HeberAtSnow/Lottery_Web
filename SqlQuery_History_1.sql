@@ -1,15 +1,15 @@
 ﻿--get PROFITABILITY of ALL closed periods
 with 
-winlevel0 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=0 group by period_ID,winlevel),
-winlevel1 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=1 group by period_ID,winlevel),
-winlevel2 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=2 group by period_ID,winlevel),
-winlevel3 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=3 group by period_ID,winlevel),
-winlevel4 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=4 group by period_ID,winlevel),
-winlevel5 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=5 group by period_ID,winlevel),
-winlevel6 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=6 group by period_ID,winlevel),
-winlevel7 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=7 group by period_ID,winlevel),
-winlevel8 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=8 group by period_ID,winlevel),
-winlevel9 as (	select period_id,winlevel, coalesce(count(*),0) num from ticketsale where winlevel=9 group by period_ID,winlevel)
+winlevel0 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=0 group by period_ID,winlevel),
+winlevel1 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=1 group by period_ID,winlevel),
+winlevel2 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=2 group by period_ID,winlevel),
+winlevel3 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=3 group by period_ID,winlevel),
+winlevel4 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=4 group by period_ID,winlevel),
+winlevel5 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=5 group by period_ID,winlevel),
+winlevel6 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=6 group by period_ID,winlevel),
+winlevel7 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=7 group by period_ID,winlevel),
+winlevel8 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=8 group by period_ID,winlevel),
+winlevel9 as (	select period_id,winlevel, count(*) num from ticketsale where winlevel=9 group by period_ID,winlevel)
 select
 	period.id Period,
 	to_char(
