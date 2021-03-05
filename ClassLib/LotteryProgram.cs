@@ -33,8 +33,7 @@ namespace ClassLib
             {
                 //Write stats to DB
                 var ls = new LotteryStatistics();
-                //ls.WriteStatsToDB(p);
-                ls.WriteStatsBulk(p);
+                ls.WriteStatsToDB(p);
 
                 //get rid of old period, setup new period
                 //TODO:  increment GrandPrize Amt by max($10M or 10%)

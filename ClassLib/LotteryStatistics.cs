@@ -22,7 +22,7 @@ namespace ClassLib
             return $"PostgreSQL version: {version}";
         }
 
-        public int WriteStatsBulk(LotteryPeriod lp)
+        public int WriteStatsToDB(LotteryPeriod lp)
         {
             using var con = new NpgsqlConnection(cs);
             con.Open();
@@ -39,14 +39,14 @@ namespace ClassLib
             while (unionResult.Any())
             {
                 var sqlstr = new StringBuilder("insert into ticketsale " +
-                    "(period_id,ballstring,ball1,ball2,ball3,ball4,ball5,powerball,winlevel,winamount,type) values ");
+                    "(period_id,ballstring,ball1,ball2,ball3,ball4,ball5,powerball,winlevel,winamount,type,player) values ");
                 using var cmd2 = new NpgsqlCommand();
 
                 int batchSize = Math.Min(5000, unionResult.Count);
                 foreach (var i in Enumerable.Range(0, batchSize))
                 {
                     var l = unionResult[i];
-                    sqlstr.Append($"(@pid{i},@bs{1},@b1{i},@b2{i},@b3{i},@b4{i},@b5{i},@bpower{i},@winL{i},@wina{i},@t{i})\n");
+                    sqlstr.Append($"(@pid{i},@bs{1},@b1{i},@b2{i},@b3{i},@b4{i},@b5{i},@bpower{i},@winL{i},@wina{i},@t{i},@pn{i})\n");
                     cmd2.Parameters.Add(new NpgsqlParameter($"pid{i}", periodID));
                     cmd2.Parameters.Add(new NpgsqlParameter($"bs{i}",
                         l.balls[0].ToString("00") + l.balls[1].ToString("00") +
@@ -61,12 +61,13 @@ namespace ClassLib
                     cmd2.Parameters.Add(new NpgsqlParameter($"winL{i}", l.winLevel));
                     cmd2.Parameters.Add(new NpgsqlParameter($"wina{i}", l.winAmtDollars));
                     cmd2.Parameters.Add(new NpgsqlParameter($"t{i}", l.Type));
-                    if (i < batchSize-1) 
+                    cmd2.Parameters.Add(new NpgsqlParameter($"pn{i}", l.Player));
+
+                    if (i < batchSize - 1)
                         sqlstr.Append(",");
                 }
                 cmd2.CommandText = sqlstr.ToString();
                 cmd2.Connection = con;
-                System.IO.File.WriteAllText("c:\\temp\\junk.txt", cmd2.CommandText);
                 cmd2.Prepare();
                 cmd2.ExecuteNonQuery();
                 unionResult.RemoveRange(0, batchSize);
@@ -74,47 +75,6 @@ namespace ClassLib
             con.Close();
             return periodID;//returns period.id as assigned by identity column in DB
         }
-        public int WriteStatsToDB(LotteryPeriod lp) //returns periodID assigned in DB
-            /////////////////DEPRECATED - Let's get rid of this method before springbreak!
-        {
-            var con = new NpgsqlConnection(cs);
-            con.Open();
-            int periodID;
-            var cmd = new NpgsqlCommand("insert into period (grandprizeamt,startts,endts)" +
-                "VALUES (:gpAmt, :bTS,:eTS) returning id", con);
-            cmd.Parameters.Add(new NpgsqlParameter("gpAmt", lp.GrandPrizeAmount));
-            cmd.Parameters.Add(new NpgsqlParameter("bTS", lp.PeriodBeginTS));
-            cmd.Parameters.Add(new NpgsqlParameter("eTS", DateTime.Now));
-            periodID = (int)cmd.ExecuteScalar(); //PERIOD table 1-record
-
-            //TODO: use bulk copy
-            var unionResult = lp.losingTicketsL.Union(lp.winningTicketsL);
-            foreach (var l in unionResult)
-            {
-                var cmd2 = new NpgsqlCommand(
-                    "insert into ticketsale " +
-                    "(period_id,ballstring,ball1,ball2,ball3,ball4,ball5,powerball,winlevel,winamount,type) values (" +
-                    " :p_id, :bs, :b1, :b2, :b3, :b4, :b5, :bpower, :winL, :wina, :t)", con);
-                cmd2.Parameters.Add(new NpgsqlParameter("p_id", periodID));
-                cmd2.Parameters.Add(new NpgsqlParameter("bs",
-                    l.balls[0].ToString("00") + l.balls[1].ToString("00") +
-                    l.balls[2].ToString("00") + l.balls[3].ToString("00") +
-                    l.balls[4].ToString("00") + l.powerBall.ToString("00")));
-                cmd2.Parameters.Add(new NpgsqlParameter("b1", l.balls[0]));
-                cmd2.Parameters.Add(new NpgsqlParameter("b2", l.balls[1]));
-                cmd2.Parameters.Add(new NpgsqlParameter("b3", l.balls[2]));
-                cmd2.Parameters.Add(new NpgsqlParameter("b4", l.balls[3]));
-                cmd2.Parameters.Add(new NpgsqlParameter("b5", l.balls[4]));
-                cmd2.Parameters.Add(new NpgsqlParameter("bpower", l.powerBall));
-                cmd2.Parameters.Add(new NpgsqlParameter("winL", l.winLevel));
-                cmd2.Parameters.Add(new NpgsqlParameter("wina", l.winAmtDollars));
-                cmd2.Parameters.Add(new NpgsqlParameter("t", l.Type));
-                cmd2.ExecuteScalar(); //TICKETSALE table - 1 row per ticket
-            }
-            con.Close();
-            return periodID;//returns period.id as assigned by identity column in DB
-        }
-
         public int DBLoosingTicketCountInPeriod(int pID)
         {
             var con = new NpgsqlConnection(cs);
