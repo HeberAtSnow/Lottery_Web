@@ -42,7 +42,7 @@ namespace FrontEnd.Pages
             }
             catch (Exception ex)
             {
-                message = "Cannot reset Lottery Period while sales are ongoing, Please process drawing first";
+                message = ex.Message;
             }
         }
 

@@ -7,12 +7,14 @@ using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
     public class StoreModel : PageModel
     {
         private LotteryProgram lp;
+        private ILogger<StoreModel> _logger;
         public IEnumerable<LotteryTicket> PurchasedTickets;
         [Required]
         public string PlayerNombre;
@@ -23,9 +25,10 @@ namespace FrontEnd.Pages
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurchase;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<StoreModel> logger)
         {
             lp = prog;
+            _logger = logger;
         }
 
         public void OnGet()
@@ -59,6 +62,7 @@ namespace FrontEnd.Pages
             }
             catch (Exception e)
             {
+               
                 Console.WriteLine(e.Message);
                 return Page();
             }
@@ -80,6 +84,14 @@ namespace FrontEnd.Pages
             }
             catch (Exception e)
             {
+                if(e.Message != null)
+                {
+                    _logger.LogError("User:"+ name + "Error:" + e.Message);
+                }
+                else
+                {
+                    _logger.LogError("User:" + name + "has tried to purchase a ticket while SaleState is: CLOSED");
+                }
                 Console.WriteLine(e.Message);
                 return Page();
             }

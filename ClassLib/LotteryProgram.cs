@@ -45,7 +45,7 @@ namespace ClassLib
 
                 return true;
             }
-            else throw new Exception("You can't ResetPeriod() when ticketSales are still ongoing.  ClosePeriodSales first!");
+            else throw new Exception("Cannot reset Lottery Period while sales are ongoing, Please process drawing first");
         }
     }
 }
