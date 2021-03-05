@@ -3,7 +3,7 @@
   "Serilog": {
     "Using": [],
     "MinimumLevel": {
-      "Default": "Information",
+      "Default": "Verbose",
       "Override": {
         "Microsoft": "Warning",
         "System": "Warning"
@@ -11,11 +11,11 @@
     },
     "Enrich": [ "FromLogContext", "WithMachineName", "WithProcessId", "WithThreadId" ],
     "WriteTo": [
-      { "Name": "Console" },
+      { "Name": "ColoredConsole" },
       {
         "Name": "File",
         "Args": {
-          "path": "C:\\Users\\koolm\\source\\repos\\Lottery_Web5\\Logs\\Access.json",
+          "path": "C:\\Users\\koolm\\source\\repos\\Lottery_Web5\\Logs\\PerformanceLogs.json",
           "formatter": "Serilog.Formatting.Json.JsonFormatter, Serilog"
 
         }

@@ -22,6 +22,16 @@ namespace FrontEnd
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
+            //tried to make a second logger, apparently it's not as easy to make it write to two files as
+            //it's made out to be. The performancesettings.json 
+            //var configuration2 = new ConfigurationBuilder()
+            //   .AddJsonFile("performancesettings.json")
+            //   .Build();
+
+            //Log.PerfLogger = new LoggerConfiguration()
+            //    .ReadFrom.Configuration(configuration2)
+            //    .CreateLogger();
+
             try
             {
                 Log.Information("Starting up the application using serilog");
@@ -39,6 +49,7 @@ namespace FrontEnd
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+            .UseSerilog();
     }
 }

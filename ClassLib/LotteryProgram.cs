@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,10 +13,11 @@ namespace ClassLib
     {
         public LotteryPeriod p = new LotteryPeriod(40_000_000);//Start at $40M
         public LotteryVendor lv;
+        private readonly ILogger<LotteryProgram> _logger;
 
-
-        public LotteryProgram()
+        public LotteryProgram(ILogger<LotteryProgram> logger)
         {
+            _logger = logger;
             lv = new LotteryVendor(p); //starting with one Vendor 
         }
         public bool ClosePeriodSales()
@@ -29,11 +32,23 @@ namespace ClassLib
         }
         public bool ResetPeriod()
         {
+            var elapsedTime = new Stopwatch();
+            elapsedTime.Start();
+            _logger.LogInformation("Writing stats to database.");
+
             if (p.SalesState == TicketSales.CLOSED)
             {
                 //Write stats to DB
                 var ls = new LotteryStatistics();
-                ls.WriteStatsToDB(p);
+                try
+                {
+                    ls.WriteStatsToDB(p);
+                }
+                catch(Exception ex)
+                {
+                    _logger.LogError($"Failed to write to the database. Exception: {ex}");
+                }
+               
 
                 //get rid of old period, setup new period
                 //TODO:  increment GrandPrize Amt by max($10M or 10%)

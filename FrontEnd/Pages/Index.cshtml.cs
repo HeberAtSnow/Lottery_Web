@@ -17,7 +17,7 @@ namespace FrontEnd.Pages
         }
         public void OnGet()
         {
-
+            _logger.LogInformation("Index page loaded");
         }
 
         public IActionResult OnPostGoToStore()
