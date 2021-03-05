@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
@@ -14,16 +15,20 @@ namespace FrontEnd.Pages
         LotteryProgram lp;
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
-        public SettingsModel(LotteryProgram lotteryProgram)
+        private readonly ILogger<IndexModel> _logger;
+        public SettingsModel(LotteryProgram lotteryProgram, ILogger<IndexModel> logger)
         {
             lp = lotteryProgram;
+            _logger = logger;
         }
         public void OnGet()
         {
+          
         }
 
         public void OnPostResetLottery()
         {
+
             lp.ResetPeriod();
         }
         //draw winning numbers
