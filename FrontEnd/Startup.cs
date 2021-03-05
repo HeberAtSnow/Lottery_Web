@@ -36,6 +36,7 @@ namespace FrontEnd
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FrontEnd", Version = "v1" });
             });
             services.AddSingleton<LotteryProgram>();
+            services.AddTransient<LotteryStatistics>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

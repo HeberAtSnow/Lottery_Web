@@ -83,6 +83,7 @@ namespace ClassLib
                 orderby (string.Join("", l.balls.Select(b => b.ToString("00"))))
                 select l;
             return winners.Union(losers);
+
         }
         public IEnumerable<LotteryTicket> ResultsByWinLevel()
         {
