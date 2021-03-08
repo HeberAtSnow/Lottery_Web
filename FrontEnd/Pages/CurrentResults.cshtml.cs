@@ -32,7 +32,7 @@ namespace FrontEnd.Pages
             Results = LotteryProgram.p.ResultsByWinLevel();
             stopwatch.Stop();
 
-            logger.LogDebug($"Loaded Results by win level for current period. Elapesed time: {stopwatch.ElapsedMilliseconds}");
+            logger.LogDebug("{File}: Loaded Results by win level for current period. Elapesed time: {Time}", "[PRF]", stopwatch.ElapsedMilliseconds);
         }
     }
 }

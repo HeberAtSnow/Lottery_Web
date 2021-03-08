@@ -32,7 +32,7 @@ namespace FrontEnd.Pages
         {
             var stopwatch = new Stopwatch();
 
-            logger.LogInformation("Lottery is being reseted");
+            logger.LogInformation("{File}: Lottery is being reseted", "[PRF]");
 
             stopwatch.Start();
 
@@ -42,13 +42,13 @@ namespace FrontEnd.Pages
             }
             catch (Exception ex)
             {
-                logger.LogError("Unable to reset lottery");
+                logger.LogError("{File}: Unable to reset lottery", "[PRF]");
                 return RedirectToPage();
             }
 
             stopwatch.Stop();
 
-            logger.LogInformation($"Lottery was reseted, elapsed time: {stopwatch.ElapsedMilliseconds}");
+            logger.LogInformation("{File}: Lottery was reseted. Elapsed time: {Time}:", "[PRF]", stopwatch.ElapsedMilliseconds);
 
             return RedirectToPage();
         }
@@ -57,7 +57,7 @@ namespace FrontEnd.Pages
         public IActionResult OnPostDrawWinners()
         {
             var stopWatch = new Stopwatch();
-            logger.LogInformation("Drawing Process Has started");
+            logger.LogInformation("{File}: Drawing Process Has started", "[PRF]");
 
             stopWatch.Start();
 
@@ -69,13 +69,13 @@ namespace FrontEnd.Pages
             }
             catch (Exception ex)
             {
-                logger.LogError("Unable to draw winners");
+                logger.LogError("{File}: Unable to draw winners", "[PRF]");
                 return RedirectToPage();
             }
 
             stopWatch.Stop();
 
-            logger.LogInformation($"Winners were drawn succesfully. Elapsed time: {stopWatch.ElapsedMilliseconds}");
+            logger.LogInformation("{File}: Winners were drawn succesfully. Elapsed time: {time}", "[PRF]", stopWatch.ElapsedMilliseconds);
 
             return RedirectToPage();
         }

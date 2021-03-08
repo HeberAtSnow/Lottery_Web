@@ -24,10 +24,12 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostGoToStore()
         {
+            logger.LogDebug("Store button was clicked");
             return RedirectToPage("./Store");
         }
         public IActionResult OnPostGoToSettings()
         {
+            logger.LogDebug("Settings button was clicked");
             return RedirectToPage("./Settings");
         }
     }

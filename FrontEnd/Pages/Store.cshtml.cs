@@ -40,11 +40,11 @@ namespace FrontEnd.Pages
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                logger.LogError("Name is empty or null");
+                logger.LogWarning("Name is empty or null");
                 return Page();
             }
 
-            logger.LogInformation($"{name} clicked Quick Picks");
+            logger.LogDebug($"{name} clicked Quick Picks");
 
             PlayerNombre = name;
             
@@ -58,11 +58,11 @@ namespace FrontEnd.Pages
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                logger.LogError("Name is empty or null");
+                logger.LogWarning("Name is empty or null");
                 return Page();
             }
 
-            logger.LogInformation($"{name} clicked Number Picks");
+            logger.LogDebug($"{name} clicked Number Picks");
 
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
@@ -70,7 +70,7 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostQuickPickPurchase(string name,int numTickets)
         {
-            logger.LogInformation($"{name} clicked give me them tickets");
+            logger.LogDebug($"{name} clicked give me them tickets");
 
             try
             {
@@ -80,7 +80,7 @@ namespace FrontEnd.Pages
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
-                    logger.LogError("Name is empty or null");
+                    logger.LogWarning("Name is empty or null");
                     return Page();
                 }
 
@@ -99,7 +99,7 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostNumberPickPurchase(string name, int [] ticket)
         {
-            logger.LogInformation($"{name} clicked purchase number pick");
+            logger.LogDebug($"{name} clicked purchase number pick");
             try
             {
                 PlayerNombre = name;
@@ -111,7 +111,7 @@ namespace FrontEnd.Pages
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
-                    logger.LogError("Name is empty or null");
+                    logger.LogWarning("Name is empty or null");
                     return Page();
                 }
 

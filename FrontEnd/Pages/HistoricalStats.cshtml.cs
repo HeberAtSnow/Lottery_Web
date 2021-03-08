@@ -34,11 +34,11 @@ namespace FrontEnd.Pages
                 Sales = LotteryStatistics.DBStatsAllPeriods();
                 stopwatch.Stop();
 
-                logger.LogDebug($"Historical stats were loaded. Elapsed time: {stopwatch.ElapsedMilliseconds}");
+                logger.LogDebug($"PRF: Historical stats were loaded. Elapsed time: {stopwatch.ElapsedMilliseconds}");
             }
             catch
             {
-                logger.LogError("Failed to retreive historical stats");
+                logger.LogError("PRF: Failed to retreive historical stats");
             }
             finally
             {
