@@ -25,7 +25,7 @@ namespace FrontEnd.Pages
         }
         public void OnGet()
         {
-            logger.LogDebug("Settings page was loaded");
+            logger.LogDebug("{File}: Settings page was loaded", "[ACC]");
         }
 
         public IActionResult OnPostResetLottery()

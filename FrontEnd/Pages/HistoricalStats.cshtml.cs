@@ -26,7 +26,7 @@ namespace FrontEnd.Pages
         public void OnGet()
         {
             var stopwatch = new Stopwatch();
-            logger.LogDebug("Historical stats page was loaded");
+            logger.LogDebug("{File}: Historical stats page was loaded", "[ACC]");
 
             stopwatch.Start();
             try
@@ -34,11 +34,11 @@ namespace FrontEnd.Pages
                 Sales = LotteryStatistics.DBStatsAllPeriods();
                 stopwatch.Stop();
 
-                logger.LogDebug($"PRF: Historical stats were loaded. Elapsed time: {stopwatch.ElapsedMilliseconds}");
+                logger.LogDebug("{File}: Historical stats were loaded. Elapsed time: {Time}", "[PRF]", stopwatch.ElapsedMilliseconds);
             }
             catch
             {
-                logger.LogError("PRF: Failed to retreive historical stats");
+                logger.LogError("{File}: Failed to retreive historical stats", "[ACC]");
             }
             finally
             {

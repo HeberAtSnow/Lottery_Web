@@ -19,17 +19,17 @@ namespace FrontEnd.Pages
 
         public void OnGet()
         {
-            logger.LogDebug("Index page was loaded");
+            logger.LogDebug("{File}: Index page was loaded", "[ACC]");
         }
 
         public IActionResult OnPostGoToStore()
         {
-            logger.LogDebug("Store button was clicked");
+            logger.LogDebug("{File}: Store button was clicked", "[ACC]");
             return RedirectToPage("./Store");
         }
         public IActionResult OnPostGoToSettings()
         {
-            logger.LogDebug("Settings button was clicked");
+            logger.LogDebug("{File}: Settings button was clicked", "[ACC]");
             return RedirectToPage("./Settings");
         }
     }

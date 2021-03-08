@@ -26,7 +26,7 @@ namespace FrontEnd.Pages
         public void OnGet()
         {
             var stopwatch = new Stopwatch();
-            logger.LogDebug("Results page was loaded");
+            logger.LogDebug("{File}: Results page was loaded", "[ACC]");
             
             stopwatch.Start();
             Results = LotteryProgram.p.ResultsByWinLevel();
