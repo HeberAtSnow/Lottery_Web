@@ -97,7 +97,7 @@ namespace ClassLib
             //    orderby l.balls.OrderBy(b => b)
             //    select l;
             var winners = winningTicketsL.OrderBy(w => w.winLevel);
-            var losers = winningTicketsL.OrderBy(l => l.winLevel);
+            var losers = losingTicketsL.OrderBy(l => l.winLevel);
             return winners.Union(losers);
         }
         public void ComputeWinners()

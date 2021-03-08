@@ -10,20 +10,21 @@ namespace FrontEnd.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<IndexModel> EnvironmentLogger;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
-            _logger = logger;
+            EnvironmentLogger = logger;
         }
         public void OnGet()
         {
+            EnvironmentLogger.LogInformation("Index page accessed @" + DateTime.Now);
         }
 
         public IActionResult OnPostGoToStore()
         {
-            _logger.LogInformation("Store button clicked.");
-            _logger.LogInformation("User entered Store @" + DateTime.Now);
+            EnvironmentLogger.LogInformation("Store button clicked.");
+            EnvironmentLogger.LogInformation("User entered Store @" + DateTime.Now);
             return RedirectToPage("./Store");
         }
         public IActionResult OnPostGoToSettings()

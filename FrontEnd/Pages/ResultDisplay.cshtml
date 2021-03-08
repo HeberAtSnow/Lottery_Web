@@ -6,11 +6,28 @@
 }
 
 <h1>Results</h1>
-<p>@Model.testBool</p>
 
-@foreach (var ticket in Model.lotteryTickets)
+
+<form method="post" asp-page-handler="ReturnToSettings">
+    <button class=" btn effect01 lotteryResults" type="submit">
+        Return
+    </button>
+</form>
+
+@if (Model.historyBool == false)
 {
-    <h1>@ticket.Player</h1>
-    <p>@ticket.winAmtDollars</p>
-    <p>@ticket.winLevel</p>
+    <h2>For Lottery Period starting at: @Model.LotteryPeriodTS</h2>
+    @foreach (var ticket in Model.lotteryTickets)
+    {
+        <h3>@ticket.Player</h3>
+        <p>@ticket.winAmtDollars</p>
+        <p>@ticket.winLevel</p>
+    }
 }
+else
+{
+    <h1>Historical Stats not implemented</h1>
+}
+
+
+
