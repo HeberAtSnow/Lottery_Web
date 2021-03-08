@@ -33,7 +33,7 @@ namespace FrontEnd.Pages
 
             //_logger.LogInformation($"It took {elapseTime} to get the results by win level");
             var elapsedTime = new Stopwatch();
-            _logger.LogInformation("Historical stats page loaded");
+            _logger.LogInformation("{Performance}: Lottery Results page loaded", "Access");
 
 
 
@@ -45,11 +45,11 @@ namespace FrontEnd.Pages
 
 
 
-                _logger.LogInformation($"Historical stats were loaded in {elapsedTime.ElapsedMilliseconds}");
+                _logger.LogDebug("{Performance}: Lottery Results were loaded in {elapsedTime} milliseconds","Performance", elapsedTime.ElapsedMilliseconds);
             }
             catch
             {
-                _logger.LogError("Failed to retreive historical stats");
+                _logger.LogError("{Performance}: Failed to retreive Lottery Results", "Performance");
             }
             finally
             {

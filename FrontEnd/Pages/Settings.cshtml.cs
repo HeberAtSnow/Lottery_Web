@@ -25,14 +25,14 @@ namespace FrontEnd.Pages
         }
         public void OnGet()
         {
-            _logger.LogInformation("Setting page successfully loaded");
+            _logger.LogDebug("{Performance}: Setting page successfully loaded", "Access");
           
         }
     
         public IActionResult OnPostResetLottery()
         {
             var elapsedTime = new Stopwatch();
-            _logger.LogInformation("The reset lottery button has been clicked");
+            _logger.LogDebug("{Performance}: The reset lottery button has been clicked", "Access");
             elapsedTime.Start();
             try
             {   
@@ -40,11 +40,11 @@ namespace FrontEnd.Pages
             }
             catch(Exception ex)
             {
-                _logger.LogError($"Lottery failed to reset, exception: {ex}");
+                _logger.LogError("{Performance}: Lottery failed to reset, exception: {ex}", "Performance", ex);
                 return Page();
             }
             elapsedTime.Stop();
-            _logger.LogInformation($"Lottery successfully reset, it took {elapsedTime.ElapsedMilliseconds} milliseconds");
+            _logger.LogDebug("{Performance}: Lottery successfully reset, it took {elapsedTime} milliseconds", "Performance", elapsedTime.ElapsedMilliseconds);
             return Page();
         }
         //draw winning numbers
@@ -52,7 +52,8 @@ namespace FrontEnd.Pages
         {
             var elapsedTime = new Stopwatch();
             elapsedTime.Start();
-            _logger.LogInformation("Clicked draw winning numbers");
+            _logger.LogDebug("{Performance}: Clicked draw winning numbers, started drawing numbers.", "Performance");
+            _logger.LogDebug("{Performance}: Clicked draw winning numbers, started drawing numbers.", "Access");
             try
             {
                 lp.ClosePeriodSales();
@@ -61,11 +62,11 @@ namespace FrontEnd.Pages
             }
             catch(Exception ex)
             {
-                _logger.LogError($"Failed to draw winning numbers. Exception {ex}");
+                _logger.LogError("{Performance}: Failed to draw winning numbers. Exception {ex}", "Performance", ex);
                 return Page();
             }
             elapsedTime.Stop();
-            _logger.LogInformation($"Lottery successfully reset in {elapsedTime.ElapsedMilliseconds} milliseconds");
+            _logger.LogDebug("{Performance}: Lottery successfully reset in {elapsedTime} milliseconds", "Performance", elapsedTime.ElapsedMilliseconds);
            
             return Page();
             
@@ -74,12 +75,13 @@ namespace FrontEnd.Pages
         public IActionResult OnPostGoToResults()
         {
 
-            _logger.LogInformation("Clicked on the lottery results button.");
-                return RedirectToPage("./LotteryResults");
+            _logger.LogDebug("{Performance}: Clicked on the lottery results button.", "Access");
+
+             return RedirectToPage("./LotteryResults");
         }
         //all lottery statistics
         public IActionResult OnPostLotteryStatistics() {
-            _logger.LogInformation("Clicked on the lottery statistics button.");
+            _logger.LogDebug("{Performance}: Clicked on the lottery statistics button.", "Access");
             return Page();
         }
     }

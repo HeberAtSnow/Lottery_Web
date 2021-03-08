@@ -24,7 +24,7 @@ namespace FrontEnd.Pages
         public void OnGet() {
 
             var elapsedTime = new Stopwatch();
-            _logger.LogInformation("Historical stats page loaded");
+            _logger.LogDebug("{Performance}: Historical stats page loaded", "Access");
 
 
 
@@ -36,11 +36,11 @@ namespace FrontEnd.Pages
 
 
 
-                _logger.LogInformation($"Historical stats were loaded in {elapsedTime.ElapsedMilliseconds}");
+                _logger.LogDebug("{Performance}: Historical stats were loaded in {elapsedTime.ElapsedMilliseconds}","Performance");
             }
             catch
             {
-                _logger.LogError("Failed to retreive historical stats");
+                _logger.LogError("{Performance}: Failed to retreive historical stats", "Performance");
             }
             finally
             {

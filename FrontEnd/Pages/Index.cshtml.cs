@@ -17,17 +17,17 @@ namespace FrontEnd.Pages
         }
         public void OnGet()
         {
-            _logger.LogInformation("Index page loaded");
+            _logger.LogDebug("{Performance}: Index page loaded", "Access");
         }
 
         public IActionResult OnPostGoToStore()
         {
-            _logger.LogInformation("Clicked on store page");
+            _logger.LogDebug("{Performance}: Clicked on store page", "Access");
             return RedirectToPage("./Store");
         }
         public IActionResult OnPostGoToSettings()
         {
-            _logger.LogInformation("Clicked on administration page");
+            _logger.LogDebug("{Performance}: Clicked on administration page", "Access");
             return RedirectToPage("./Settings");
         }
     }

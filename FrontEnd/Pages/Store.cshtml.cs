@@ -33,20 +33,20 @@ namespace FrontEnd.Pages
 
         public void OnGet()
         {
-            
+            _logger.LogDebug("{Performance}: Store page was loaded", "Access");
         }
 
         public IActionResult OnPostQuickPick(string name)
         {
-            _logger.LogDebug($"{name} clicked on the quickpick button");
+            _logger.LogDebug("{Performance}: {name} clicked on the quickpick button", "Access", name);
             if (string.IsNullOrWhiteSpace(name))
             {
-                _logger.LogWarning("Name is empty or null");
+                _logger.LogWarning("{Performance}: Name is empty or null", "Access");
                 return Page();
             }
             else
             {
-                _logger.LogInformation($"Player Name:{name}");
+                _logger.LogDebug("{Performance}: Player Name:{name}", "Access", name);
             }
             PlayerNombre = name;
             Selection = "QuickPick";
@@ -55,15 +55,15 @@ namespace FrontEnd.Pages
         }
         public IActionResult OnPostNumberPick(string name)
         {
-            _logger.LogDebug($"{name} clicked on the number pick button button");
+            _logger.LogDebug("{Performance}: {name} clicked on the number pick button button", "Access", name);
             if (string.IsNullOrWhiteSpace(name))
             {
-                _logger.LogWarning("Name is empty or null");
+                _logger.LogWarning("{Performance}: Name is empty or null", "Access");
                 return Page();
             }
             else
             {
-                _logger.LogInformation($"Player Name:{name}");
+                _logger.LogDebug("{Performance}: Player Name:{name}", "Access", name);
             }
             PlayerNombre = name;
             Selection = "NumberPick";
@@ -81,22 +81,22 @@ namespace FrontEnd.Pages
                 lp.lv.SellQuickTickets(name, numTickets);
                 if (string.IsNullOrWhiteSpace(name))
                 {
-                    _logger.LogWarning("Name is empty or null");
+                    _logger.LogWarning("{Performance}: Name is empty or null", "Access");
                     return Page();
                 }
                 else
                 {
-                    _logger.LogInformation($"Player Name:{name}");
+                    _logger.LogDebug("{Performance}: Player Name:{name}", "Access", name);
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                _logger.LogError($"Unable to sell {numTickets} ToString player {name}");
+                _logger.LogError("{Performance}: Unable to sell {numTickets} ToString player {name}", "Access", numTickets, name);
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
-            _logger.LogInformation($"{name} purchased {numTickets} quickpick tickets");
+            _logger.LogInformation("{Performance}: {name} purchased {numTickets} quickpick tickets", "Access", name, numTickets);
             return Page();
         }
 
@@ -113,22 +113,22 @@ namespace FrontEnd.Pages
                 lp.lv.SellTicket(name, ticket);
                 if (string.IsNullOrWhiteSpace(name))
                 {
-                    _logger.LogWarning("Name is empty or null");
+                    _logger.LogWarning("{Performance}: Name is empty or null", "Access");
                     return Page();
                 }
                 else
                 {
-                    _logger.LogInformation($"Player Name:{name}");
+                    _logger.LogDebug("{Performance}: Player Name:{name}", "Access", name);
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError($"Unable to sell number pick ticket {ticket.ToString()} to player {name}");
+                _logger.LogError("{Performance}: Unable to sell number pick ticket {ticket} to player {name}", "Access", ticket.ToString(), name );
                 Console.WriteLine(e.Message);
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
-            _logger.LogInformation(name + " has successfully purchased a number pick ticket");
+            _logger.LogDebug("{Performance}: {name} has successfully purchased a number pick ticket", "Access", name);
             return Page();
         }
     }
