@@ -28,11 +28,11 @@ namespace FrontEnd.Pages
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurchase;
 
-        public Logger performancecounter = new LoggerConfiguration().WriteTo.File(@"AppPerformance.txt").CreateLogger();
+
 
         public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<StoreModel> logger)
         {
-            performancecounter.Information("In the store page");
+        
             lp = prog;
             this.logger = logger;
          
@@ -46,9 +46,7 @@ namespace FrontEnd.Pages
 
         public IEnumerable<LotteryTicket> getPlayerResults(string name)
         {
-            performancecounter.Verbose("Calling getPlayerResults");
-            performancecounter.Warning("Calling getPlayerResults");
-            performancecounter.Write(LogEventLevel.Fatal, "Calling getPlayerResults");
+         
 
             logger.LogInformation("user with name: {name} called on getting player results", name);
             return lp.p.ResultsByPlayer(name);
@@ -57,7 +55,7 @@ namespace FrontEnd.Pages
         public IActionResult OnPostQuickPick(string name)
         {
 
-            performancecounter.Information("Calling QuickPick");
+           
 
             logger.LogInformation("user with name: {name} clicked on Quick Pick", name);
 

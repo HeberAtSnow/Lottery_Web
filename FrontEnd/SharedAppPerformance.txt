@@ -1,8 +1,0 @@
-2021-03-05 10:05:24.871 -07:00 [INF] I made it to LotteryPeriod
-2021-03-05 10:05:24.878 -07:00 [INF] I made it to LotteryProgram page
-2021-03-05 10:22:18.120 -07:00 [INF] I made it to LotteryPeriod
-2021-03-05 10:22:18.126 -07:00 [INF] I made it to LotteryProgram page
-2021-03-05 10:25:01.022 -07:00 [INF] I made it to LotteryPeriod
-2021-03-05 10:25:01.030 -07:00 [INF] I made it to LotteryProgram page
-2021-03-05 10:27:08.142 -07:00 [INF] I made it to LotteryPeriod
-2021-03-05 10:27:08.148 -07:00 [INF] I made it to LotteryProgram page

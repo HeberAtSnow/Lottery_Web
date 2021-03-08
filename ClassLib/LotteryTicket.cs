@@ -19,20 +19,12 @@ namespace ClassLib
         public decimal winAmtDollars; //only use if isGraded is set to true
         public string Type { get; set; }
 
-        private readonly Logger performancecounter;
-
 
         [ThreadStatic] static Random rnd;
 
         public LotteryTicket() : this("Player Name Anonymous")
         {
-            using (var performanceCounters = new LoggerConfiguration().WriteTo.File(@"SharedAppPerformance.txt").CreateLogger())
-            {
-                performanceCounters.Information("I made it to store page");
-                this.performancecounter = performanceCounters;
-            }
-
-            
+         
         }
 
 
@@ -76,7 +68,7 @@ namespace ClassLib
         }
         public LotteryTicket(String PlayerName, int[] sixBalls)
         {
-            performancecounter.Information("Hey I made it to shared library");
+            
             if (sixBalls.Length != 6)
             {
                 throw new ArgumentException("The 'sixBalls' parameter must include 5 numbers + Powerball (total of 6 numbers", "sixBalls");

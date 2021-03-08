@@ -26,18 +26,9 @@ namespace ClassLib
         public ReaderWriterLockSlim soldTicketsLock = new ReaderWriterLockSlim();
         public DateTime PeriodBeginTS { get; set; }
 
-        public Logger performancecounter;
-
 
         public LotteryPeriod(decimal grandp)
         {
-            using (var performanceCounters = new LoggerConfiguration().WriteTo.File(@"SharedAppPerformance.txt").CreateLogger())
-            {
-                performanceCounters.Information("I made it to LotteryPeriod");
-                performancecounter = performanceCounters;
-            }
-
-            this.PeriodBeginTS = DateTime.Now;
             GrandPrizeAmount = grandp;
         }
 
@@ -75,7 +66,7 @@ namespace ClassLib
 
         public IEnumerable<LotteryTicket> ResultsByPlayer(string playerName)
         {
-            performancecounter.Information("I made it to Results by player Name");
+           
 
             if (SalesState == TicketSales.OK)
             {
@@ -113,7 +104,7 @@ namespace ClassLib
         }
         public void ComputeWinners()
         {
-            performancecounter.Information("I am in compute winners");
+           
             //TODO: ensure the state is set to ONLY let this work if drawing has started/ended
             LotteryTicket lt;
             if (SalesState == TicketSales.CLOSED)
@@ -167,7 +158,7 @@ namespace ClassLib
         }
         public void CheckWinningTicket(LotteryTicket lt)
         {
-            performancecounter.Information("I am in CheckWinning tickets winners");
+           
 
 
             int whiteMatches = NumberMatchingWhiteBalls(lt);

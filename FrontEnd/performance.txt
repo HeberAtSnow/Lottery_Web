@@ -1,4 +1,0 @@
-2021-03-05 10:05:20.092 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 10:22:12.688 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 10:24:22.869 -07:00 [INF] Starting the performace counter for the Front End
-2021-03-05 10:27:02.880 -07:00 [INF] Starting the performace counter for the Front End

@@ -1,4 +1,0 @@
-2021-03-05 10:05:24.885 -07:00 [INF] In the store page
-2021-03-05 10:22:18.134 -07:00 [INF] In the store page
-2021-03-05 10:25:01.038 -07:00 [INF] In the store page
-2021-03-05 10:27:30.109 -07:00 [INF] In the store page
