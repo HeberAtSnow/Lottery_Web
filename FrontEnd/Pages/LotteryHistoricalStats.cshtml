@@ -1,0 +1,46 @@
+﻿@page
+@model FrontEnd.Pages.LotteryHistoricalStatsModel
+@{
+}
+<table>
+    <thead>
+        <tr>
+            <th>Period ID</th>
+            <th>Starting Date</th>
+            <th>Ending Date</th>
+            <th>Win Level 1</th>
+            <th>Win Level 2</th>
+            <th>Win Level 3</th>
+            <th>Win Level 4</th>
+            <th>Win Level 5</th>
+            <th>Win Level 6</th>
+            <th>Win Level 7</th>
+            <th>Win Level 8</th>
+            <th>Win Level 9</th>
+            <th>Win Level 10</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var s in Model.Sales)
+        {
+            <tr>
+
+                <td>@s.id</td>
+                <td>@s.startts</td>
+                <td>@s.endts</td>
+                <td>@s.level0</td>
+                <td>@s.level1</td>
+                <td>@s.level2</td>
+                <td>@s.level3</td>
+                <td>@s.level4</td>
+                <td>@s.level5</td>
+                <td>@s.level6</td>
+                <td>@s.level7</td>
+                <td>@s.level8</td>
+                <td>@s.level9</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
