@@ -20,7 +20,6 @@ namespace FrontEnd.Pages
         public void OnGet()
         {
                 Sales = lotteryStats.DBStatsAllPeriods();
-
         }
     }
 }
