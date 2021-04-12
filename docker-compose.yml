@@ -19,7 +19,18 @@ services:
     ports:
       - 5432:5432
 
+  
+  seq:
+    image: datalust/seq:latest
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 8081:80
+    volumes:
+      - seq-data:/data 
+
 
 volumes:
     log-volume:
     pg-data:
+    seq-data:
