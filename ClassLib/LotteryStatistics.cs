@@ -9,7 +9,7 @@ namespace ClassLib
 {
     public class LotteryStatistics
     {
-        public string cs = "Host=localhost;Username=postgres;Password=mysecretpassword;Database=postgres";
+        public string cs = "Host=kubernetes.docker.internal;Username=postgres;Password=mysecretpassword;Database=postgres";
 
         public string TestConn()
         {

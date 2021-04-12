@@ -1,0 +1,20 @@
+﻿@page
+@model FrontEnd.Pages.LotteryResultsModel
+@{
+}
+@if (@Model.results != null)
+{
+<table>
+    @foreach (var t in @Model.results)
+    {
+        <tr>
+            @foreach (var num in t.balls)
+            {
+                <td>@num</td>
+            }
+        </tr>
+    }
+</table>
+}
+else { 
+<h1>We do not have any results to show.</h1>}

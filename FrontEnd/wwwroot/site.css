@@ -1,20 +1,28 @@
 ﻿table {
-    border-style: dashed;
+    border-style: none;
+    text-align: center;
+    margin: auto;
 }
 
+.welcome{
+    padding:1%;
+    width:auto;
+}
 
-
-header{
-background-image: url(https://nypost.com/wp-content/uploads/sites/2/2019/08/powerball-winner.jpg?quality=80&strip=all);
-    background-size: auto, auto;
+header {
+    text-align: center;
+    margin:auto;
+    min-width:45%;
+    width: 50%;
 }
 
 h1 {
-    color: black;
-    font-size: 4em;
+    color: midnightblue;
+    font-size: 3em;
     text-align: center;
-    bottom-margin: 20px;
-    background:rgba(255,255,255,.3);
+    background:orange;
+    width:100%;
+    padding:1%;
     
 }
 
@@ -26,7 +34,8 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-    margin: 2em;
+    padding: 2em;
+    margin: 4em;
     background-color: white;
     background: url(https://image.freepik.com/free-vector/lottery-background-with-place-text_1420-241.jpg) no-repeat center center fixed;
     background-size: cover;
@@ -81,6 +90,8 @@ td{
     border: 1px solid black;
     border-radius: 50%;
     box-shadow: inset -6.25px -6.25px 10px rgba(0,0,0,.25);
+    padding-bottom: 1em;
+    padding: 1%;
 }
 
 #win {
@@ -93,6 +104,7 @@ h2 {
 }
 
 .background {
-    background: rgba(255, 255, 255, 0.45);
+    background: rgb(0,0,0,.3);
+    text-align: center;
 }
 
