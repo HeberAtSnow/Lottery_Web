@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +10,17 @@ namespace ClassLib
 {
     public class LotteryProgram
     {
+        private readonly ILogger<LotteryProgram> logger;
+
         public LotteryPeriod Period = new LotteryPeriod(40_000_000);//Start at $40M
         public LotteryVendor Vendor;
 
-
-        public LotteryProgram()
+        public LotteryProgram(ILogger<LotteryProgram> logger)
         {
             Vendor = new LotteryVendor(Period); //starting with one Vendor
+            this.logger = logger;
         }
+
         public bool ClosePeriodSales()
         {
             if (Period.SalesState == TicketSales.OK)

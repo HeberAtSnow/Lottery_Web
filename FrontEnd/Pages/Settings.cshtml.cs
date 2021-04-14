@@ -5,29 +5,54 @@ using System.Threading.Tasks;
 using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
 
     public class SettingsModel : PageModel
     {
-        LotteryProgram lp;
-        //lotteryvendor.lotteryprogram
-        //lotteryprogram has a lottery period
-        public SettingsModel(LotteryProgram lotteryProgram)
+        private readonly LotteryProgram LotteryProgram;
+        private readonly ILogger<SettingsModel> logger;
+
+        public SettingsModel(LotteryProgram lotteryProgram, ILogger<SettingsModel> logger)
         {
-            lp = lotteryProgram;
+            LotteryProgram = lotteryProgram;
+            this.logger = logger;
         }
+
         public void OnGet()
         {
         }
 
-        public void OnPostResetLottery()
+        public IActionResult OnPostResetLottery()
         {
-            lp.ResetPeriod();
+            try
+            {
+                LotteryProgram.ResetPeriod();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToPage();
+            }
+
+            return RedirectToPage();
         }
-        //draw winning numbers
-        //current lottery results
-        //all lottery statistics
+
+        public IActionResult OnPostDrawWinners()
+        {
+            try
+            {
+                LotteryProgram.ClosePeriodSales();
+                LotteryProgram.Period.DrawWinningTicket();
+                LotteryProgram.Period.ComputeWinners();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToPage();
+            }
+
+            return RedirectToPage();
+        }
     }
 }
