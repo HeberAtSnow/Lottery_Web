@@ -20,17 +20,6 @@ namespace FrontEnd.Pages
         public void OnGet()
         {
             _logger.LogInformation("You are in the Index page");
-
-            try
-            {
-
-
-            }
-            catch (Exception ex)
-            {
-
-                _logger.LogError(ex, "We caught an exception");
-            }
         }
 
         public IActionResult OnPostGoToStore()

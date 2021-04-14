@@ -2,10 +2,10 @@
 @model FrontEnd.Pages.LotteryResultsModel
 @{
 }
-@if (@Model.results != null)
+@if (@Model.WinLotteryTickets != null)
 {
 <table>
-    @foreach (var t in @Model.results)
+    @foreach (var t in @Model.WinLotteryTickets)
     {
         <tr>
             @foreach (var num in t.balls)

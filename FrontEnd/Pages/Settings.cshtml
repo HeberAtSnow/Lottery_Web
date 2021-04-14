@@ -30,118 +30,19 @@
         <br />
 
         <h2>Results from current lottery</h2> <br />
-        <button class=" btn effect01 lotteryResults" asp-page-handler="LotteryResults">
+        <button class=" btn effect01 lotteryResults" asp-page="./LotteryResults">
             Lottery Results
         </button>
 
         <br />
 
         <h2>All lottery statistics</h2> <br />
-        <button class="btn effect01 allStats" asp-page-handler="LotteryStats">
+        <button class="btn effect01 allStats" asp-page="./LotteryHistoricalStats">
             Historical Stats
         </button>
     </form>
 
 
-    @if (Model.ticketSales?.Any() ?? false)
-    {
-        <h2 class="background">Number of periods: @Model.ticketSales.Count()</h2>
-        <div class="background">
-            <table>
-                <tr>
-                    <td>Grand Prize <br /></td>
-                    <td>Started <br /></td>
-                    <td>Ended <br /></td>
-                    <td>Lvel0 <br /></td>
-                    <td>Lvel1 <br /></td>
-                    <td>Lvel2 <br /></td>
-                    <td>Lvel3 <br /></td>
-                    <td>Lvel4 <br /></td>
-                    <td>Lvel5 <br /></td>
-                    <td>Lvel6 <br /></td>
-                    <td>Lvel7 <br /></td>
-                    <td>Lvel8 <br /></td>
-                    <td>Lvel9 <br /></td>
-
-
-
-                </tr>
-                @foreach (var x in Model.ticketSales)
-                {
-                    <tr>
-                        <td>@x.grandprizeamt</td>
-                        <td>@x.startts</td>
-                        <td>@x.endts</td>
-                        <td>@x.level0</td>
-                        <td>@x.level1</td>
-                        <td>@x.level2</td>
-                        <td>@x.level3</td>
-                        <td>@x.level4</td>
-                        <td>@x.level5</td>
-                        <td>@x.level6</td>
-
-                        <td>@x.level7</td>
-                        <td>@x.level8</td>
-                        <td>@x.level9</td>
-
-                    </tr>
-                }
-            </table>
-
-        </div>
-    }
-
-
-
-    Sales in current Period
-
-    @if (Model.CurrPeriodWinTickets?.Any() ?? false)
-    {
-        <h2 class="background">Number of periods: @Model.CurrPeriodWinTickets.Count()</h2>
-        <div class="background">
-            <table>
-                <tr>
-                    <td>Grand Prize <br /></td>
-                    <td>Started <br /></td>
-                    <td>Ended <br /></td>
-                    <td>Lvel0 <br /></td>
-                    <td>Lvel1 <br /></td>
-                    <td>Lvel2 <br /></td>
-                    <td>Lvel3 <br /></td>
-                    <td>Lvel4 <br /></td>
-                    <td>Lvel5 <br /></td>
-                    <td>Lvel6 <br /></td>
-                    <td>Lvel7 <br /></td>
-                    <td>Lvel8 <br /></td>
-                    <td>Lvel9 <br /></td>
-
-
-
-                </tr>
-                @foreach (var x in Model.CurrPeriodWinTickets)
-                {
-                    <tr>
-                        <td>@x.grandprizeamt</td>
-                        <td>@x.startts</td>
-                        <td>@x.endts</td>
-                        <td>@x.level0</td>
-                        <td>@x.level1</td>
-                        <td>@x.level2</td>
-                        <td>@x.level3</td>
-                        <td>@x.level4</td>
-                        <td>@x.level5</td>
-                        <td>@x.level6</td>
-
-                        <td>@x.level7</td>
-                        <td>@x.level8</td>
-                        <td>@x.level9</td>
-
-                    </tr>
-                }
-            </table>
-
-        </div>
-    }
-
+   
 </body>
 </html>

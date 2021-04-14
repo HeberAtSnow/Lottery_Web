@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
@@ -12,14 +13,20 @@ namespace FrontEnd.Pages
     {
         private readonly LotteryStatistics lotteryStats;
         public IEnumerable<TicketSale> Sales { get; private set; }
-        public LotteryHistoricalStatsModel(LotteryStatistics lotteryStatistics)
+
+        private readonly ILogger<LotteryHistoricalStatsModel> _logger;
+
+
+
+        public LotteryHistoricalStatsModel(LotteryStatistics lotteryStatistics, ILogger<LotteryHistoricalStatsModel> logger)
         {
-            
+            _logger = logger;
             lotteryStats = lotteryStatistics;
         }
-        public void OnGet()
+        public void OnPost()
         {
-                Sales = lotteryStats.DBStatsAllPeriods();
+            _logger.LogInformation("LotteryHistoricalStats page was called");
+            Sales = lotteryStats.DBStatsAllPeriods();
         }
     }
 }
