@@ -24,8 +24,8 @@ namespace Tests
         public void GivenANewPeriod()
         {
             var program = new LotteryProgram();
-            context.Add("period", program.p);
-            context.Add("vendor", program.lv);
+            context.Add("period", program.Period);
+            context.Add("vendor", program.Vendor);
             context.Add("program", program);
         }
 

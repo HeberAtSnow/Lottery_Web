@@ -7,44 +7,48 @@ using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
     public class StoreModel : PageModel
     {
-        private LotteryProgram lp;
+        private readonly LotteryProgram LotteryProgram;
+        private readonly ILogger<StoreModel> logger;
+
         public IEnumerable<LotteryTicket> PurchasedTickets;
+
         [Required]
         public string PlayerNombre;
         public int NumQuickPicks;
-        private int[] _lastTicket;
-        private bool recentPurchase;
         public string Selection;
-        public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
-        public bool RecentPurchase => recentPurchase;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(LotteryProgram prog, ILogger<StoreModel> logger)
         {
-            lp = prog;
+            LotteryProgram = prog;
+            this.logger = logger;
         }
 
         public void OnGet()
         {
-            
+
         }
 
         public IActionResult OnPostQuickPick(string name)
         {
             PlayerNombre = name;
             Selection = "QuickPick";
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
+
+            logger.LogDebug("[{prefix}]: Retrieving {num} tickets for user {name}.");
+
             return Page();
         }
         public IActionResult OnPostNumberPick(string name)
         {
             PlayerNombre = name;
             Selection = "NumberPick";
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
             return Page();
         }
 
@@ -55,14 +59,14 @@ namespace FrontEnd.Pages
                 PlayerNombre = name;
                 Selection = "QuickPick";
                 NumQuickPicks = numTickets;
-                lp.lv.SellQuickTickets(name, numTickets);
+                LotteryProgram.Vendor.SellQuickTickets(name, numTickets);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return Page();
             }
-            PurchasedTickets = lp.p.ResultsByPlayer(name);
+            PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
             return Page();
         }
 
@@ -76,14 +80,15 @@ namespace FrontEnd.Pages
                 {
                     throw new Exception("Ticket length is not six.");
                 }
-                lp.lv.SellTicket(name, ticket);
+                LotteryProgram.Vendor.SellTicket(name, ticket);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return Page();
             }
-            PurchasedTickets = lp.p.ResultsByPlayer(name); 
+
+            PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
             return Page();
         }
     }

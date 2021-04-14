@@ -12,11 +12,12 @@ namespace FrontEnd.Pages
     {
         private readonly LotteryStatistics lotteryStats;
         public IEnumerable<TicketSale> Sales { get; private set; }
+
         public LotteryHistoricalStatsModel(LotteryStatistics lotteryStatistics)
         {
-            
             lotteryStats = lotteryStatistics;
         }
+
         public void OnGet()
         {
                 Sales = lotteryStats.DBStatsAllPeriods();

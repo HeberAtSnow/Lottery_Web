@@ -9,19 +9,19 @@ namespace ClassLib
 {
     public class LotteryProgram
     {
-        public LotteryPeriod p = new LotteryPeriod(40_000_000);//Start at $40M
-        public LotteryVendor lv;
+        public LotteryPeriod Period = new LotteryPeriod(40_000_000);//Start at $40M
+        public LotteryVendor Vendor;
 
 
         public LotteryProgram()
         {
-            lv = new LotteryVendor(p); //starting with one Vendor 
+            Vendor = new LotteryVendor(Period); //starting with one Vendor
         }
         public bool ClosePeriodSales()
         {
-            if (p.SalesState == TicketSales.OK)
+            if (Period.SalesState == TicketSales.OK)
             {
-                p.SalesState = TicketSales.CLOSED;
+                Period.SalesState = TicketSales.CLOSED;
                 return true;
             }
             else
@@ -29,18 +29,18 @@ namespace ClassLib
         }
         public bool ResetPeriod()
         {
-            if (p.SalesState == TicketSales.CLOSED)
+            if (Period.SalesState == TicketSales.CLOSED)
             {
                 //Write stats to DB
                 var ls = new LotteryStatistics();
-                ls.WriteStatsToDB(p);
+                ls.WriteStatsToDB(Period);
 
                 //get rid of old period, setup new period
                 //TODO:  increment GrandPrize Amt by max($10M or 10%)
-                p = new LotteryPeriod(p.GrandPrizeAmount += Math.Max(10_000_000, p.GrandPrizeAmount / 10));
+                Period = new LotteryPeriod(Period.GrandPrizeAmount += Math.Max(10_000_000, Period.GrandPrizeAmount / 10));
 
                 //Ready to allow sales again
-                p.SalesState = TicketSales.OK;
+                Period.SalesState = TicketSales.OK;
 
                 return true;
             }

@@ -8,28 +8,28 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             var program = new LotteryProgram();
-            var vendor = program.lv;
+            var vendor = program.Vendor;
             Console.WriteLine("Time is {0}", DateTime.Now);
             vendor.StartSimulatedTicketSales(10_000);
-            Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
-            Console.WriteLine("Time is {0}", DateTime.Now);
-
-            vendor.StartSimulatedTicketSales(10_000);
-            Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
+            Console.WriteLine("Tickets sold: {0}", program.Period.soldTickets.Count);
             Console.WriteLine("Time is {0}", DateTime.Now);
 
             vendor.StartSimulatedTicketSales(10_000);
-            Console.WriteLine("Tickets sold: {0}", program.p.soldTickets.Count);
+            Console.WriteLine("Tickets sold: {0}", program.Period.soldTickets.Count);
+            Console.WriteLine("Time is {0}", DateTime.Now);
+
+            vendor.StartSimulatedTicketSales(10_000);
+            Console.WriteLine("Tickets sold: {0}", program.Period.soldTickets.Count);
             Console.WriteLine("Time is {0}", DateTime.Now);
 
             Console.WriteLine("Now I will Process the drawing {0}",DateTime.Now);
             program.ClosePeriodSales();
-            program.p.DrawWinningTicket();
-            program.p.ComputeWinners();
+            program.Period.DrawWinningTicket();
+            program.Period.ComputeWinners();
 
             //replicating Tanner
-            var y = program.p.ResultsByPlayer("threadSpawned");
-            var x = program.p.ResultsByWinLevel();
+            var y = program.Period.ResultsByPlayer("threadSpawned");
+            var x = program.Period.ResultsByWinLevel();
 
             Console.WriteLine("Now I will close the period and save everything to DB {0}", DateTime.Now);
             program.ResetPeriod();

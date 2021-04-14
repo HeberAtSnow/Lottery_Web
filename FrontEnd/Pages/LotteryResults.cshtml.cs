@@ -10,19 +10,17 @@ namespace FrontEnd.Pages
 {
     public class LotteryResultsModel : PageModel
     {
-        LotteryProgram lp { get; }
+        LotteryProgram LotteryProgram { get; }
         public IEnumerable<LotteryTicket> results { get; set; }
 
 
         public LotteryResultsModel(LotteryProgram lotteryProgram )
         {
-            lp = lotteryProgram;
-
+            LotteryProgram = lotteryProgram;
         }
         public void OnGet()
         {
-                results = lp.p.ResultsByWinLevel();
-       
+             results = LotteryProgram.Period.ResultsByWinLevel();
         }
     }
 }

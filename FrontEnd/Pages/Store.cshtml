@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    
+
     <link rel="stylesheet" href="~/site.css" type="text/css" />
 </head>
 <body>
@@ -59,21 +59,6 @@
                         <button type="submit">Let's win that price!</button>
                     </form>
                 </div>
-                @if (Model.RecentPurchase == true)
-                {
-                    <div class="">
-                        <h2>Last Ticket bought</h2>
-                        <table>
-                            <tr>
-                                @for (int i = 0; i < 5; i++)
-                                {
-                                    <td>@Model.LastTicket[i]</td>
-                                }
-                                <td id="powerball">@Model.LastTicket[5]</td>
-                            </tr>
-                        </table>
-                    </div>
-                }
             }
 
             @if (Model.Selection == "QuickPick")
