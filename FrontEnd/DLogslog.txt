@@ -1,0 +1,3 @@
+04/14/2021 14:57:22 +00:00 Application Starting.
+04/14/2021 14:57:23 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+04/14/2021 14:57:23 +00:00 No XML encryptor configured. Key {e5d6cb5e-d8bb-418e-848f-516845c82765} may be persisted to storage in unencrypted form.
