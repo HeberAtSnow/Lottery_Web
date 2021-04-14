@@ -10,28 +10,26 @@ namespace ClassLib
 {
     public class LotteryProgram
     {
-        private readonly ILogger<LotteryProgram> logger;
-
         public LotteryPeriod Period = new LotteryPeriod(40_000_000);//Start at $40M
         public LotteryVendor Vendor;
 
-        public LotteryProgram(ILogger<LotteryProgram> logger)
+        public LotteryProgram()
         {
             Vendor = new LotteryVendor(Period); //starting with one Vendor
-            this.logger = logger;
         }
 
-        public bool ClosePeriodSales()
+        public void ClosePeriodSales()
         {
             if (Period.SalesState == TicketSales.OK)
             {
                 Period.SalesState = TicketSales.CLOSED;
-                return true;
             }
             else
-                return false;
+            {
+                throw new Exception("Cannot close period. Period is already closed.");
+            }
         }
-        public bool ResetPeriod()
+        public void ResetPeriod()
         {
             if (Period.SalesState == TicketSales.CLOSED)
             {
@@ -45,10 +43,11 @@ namespace ClassLib
 
                 //Ready to allow sales again
                 Period.SalesState = TicketSales.OK;
-
-                return true;
             }
-            else throw new Exception("You can't ResetPeriod() when ticketSales are still ongoing.  ClosePeriodSales first!");
+            else
+            {
+                throw new Exception("You can't Reset Period when ticketSales are still ongoing.  ClosePeriodSales first!");
+            }
         }
     }
 }

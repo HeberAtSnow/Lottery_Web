@@ -34,7 +34,7 @@ namespace Tests
             var nums = numbers.Split(',').Select(n => int.Parse(n)).ToArray();
             vendor.SellTicket(playerName, nums);
         }
-        
+
         [When(@"statistics are computed")]
         public void WhenStatisticsAreComputed()
         {
@@ -58,7 +58,7 @@ namespace Tests
             var p = context.Get<LotteryPeriod>("period");
             p.losingTicketsL.Count().Should().Be(p0);
         }
-        
+
         [Then(@"(.*) should have (.*) winning tickets")]
         public void ThenPlayerNameShouldHaveNWinningTickets(string inPlayerName, int qty)
         {

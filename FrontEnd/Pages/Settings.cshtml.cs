@@ -30,9 +30,15 @@ namespace FrontEnd.Pages
             try
             {
                 LotteryProgram.ResetPeriod();
+
+                logger.LogInformation("[{prefix}]: Lottery period has been successfully restarted.",
+                    LogPrefix.AdminFunc);
             }
             catch (Exception ex)
             {
+                logger.LogError("[{prefix}]: Failed to restart current lottery period. Reason: {ex}.",
+                    LogPrefix.AdminFunc, ex);
+
                 return RedirectToPage();
             }
 
@@ -46,9 +52,15 @@ namespace FrontEnd.Pages
                 LotteryProgram.ClosePeriodSales();
                 LotteryProgram.Period.DrawWinningTicket();
                 LotteryProgram.Period.ComputeWinners();
+
+                logger.LogInformation("[{prefix}]: Winners for current period were successfully drawn.",
+                    LogPrefix.AdminFunc);
             }
             catch (Exception ex)
             {
+                logger.LogError("[{prefix}]: Failed to draw winners for current period. Reason: {ex}.",
+                    LogPrefix.AdminFunc, ex);
+
                 return RedirectToPage();
             }
 

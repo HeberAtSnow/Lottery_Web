@@ -51,15 +51,16 @@ namespace ClassLib
 
         public LotteryTicket WinningTicket { get; set; }
 
-        public bool DrawWinningTicket()
+        public void DrawWinningTicket()
         {
             if (SalesState == TicketSales.CLOSED)
             {
                 WinningTicket = new LotteryTicket("WinningTicket");
-                return true;
             }
             else
-                return false;
+            {
+                throw new Exception("Cannot draw winners. Sale state is not closed.");
+            }
         }
 
         public IEnumerable<LotteryTicket> ResultsByPlayer(string playerName)
@@ -126,7 +127,7 @@ namespace ClassLib
                     {
                         //"All sold tickets have been 'computed'"
                         break;
-                    }//leave the while 
+                    }//leave the while
                 }
 
             }
