@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace FrontEnd
 {
@@ -52,6 +53,9 @@ namespace FrontEnd
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+
+            app.UseSerilogRequestLogging();   //Log the page requests
 
             app.UseAuthorization();
 
