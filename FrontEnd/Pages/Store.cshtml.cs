@@ -46,13 +46,13 @@ namespace FrontEnd.Pages
         }
         public IActionResult OnPostNumberPick(string name)
         {
-            PlayerNombre = name;
+            PlayerNombre = name ?? "Anonymous";
             Selection = "NumberPick";
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
             return Page();
         }
 
-        public IActionResult OnPostQuickPickPurchase(string name,int numTickets)
+        public IActionResult OnPostQuickPickPurchase(string name, int numTickets)
         {
             try
             {
@@ -60,10 +60,15 @@ namespace FrontEnd.Pages
                 Selection = "QuickPick";
                 NumQuickPicks = numTickets;
                 LotteryProgram.Vendor.SellQuickTickets(name, numTickets);
+
+                logger.LogDebug("[{prefix}]: Successfully sold {num} quick pick tickets to user {name}.",
+                    LogPrefix.StoreFunc, numTickets, name);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
+                logger.LogWarning("[{prefix}]: Failed to sell tickets to user {name}. Reason: {ex}.",
+                    LogPrefix.StoreFunc, name, ex);
+
                 return Page();
             }
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
@@ -76,15 +81,17 @@ namespace FrontEnd.Pages
             {
                 PlayerNombre = name;
                 Selection = "NumberPick";
-                if (ticket.Length != 6)
-                {
-                    throw new Exception("Ticket length is not six.");
-                }
+
                 LotteryProgram.Vendor.SellTicket(name, ticket);
+
+                logger.LogDebug("[{prefix}]: Successfully sold 1 number pick ticket to user {user}.",
+                    LogPrefix.StoreFunc, name);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
+                logger.LogWarning("[{prefix}]: Failed to sell tickets to user {name}. Reason: {ex}.",
+                    LogPrefix.StoreFunc, name, ex);
+
                 return Page();
             }
 
