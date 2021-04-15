@@ -36,7 +36,7 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostQuickPick(string name)
         {
-            PlayerNombre = name;
+            PlayerNombre = name ?? "Anonymous";
             Selection = "QuickPick";
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
 
@@ -56,7 +56,7 @@ namespace FrontEnd.Pages
         {
             try
             {
-                PlayerNombre = name;
+                PlayerNombre = name ?? "Anonymous";
                 Selection = "QuickPick";
                 NumQuickPicks = numTickets;
                 LotteryProgram.Vendor.SellQuickTickets(name, numTickets);
@@ -79,7 +79,7 @@ namespace FrontEnd.Pages
         {
             try
             {
-                PlayerNombre = name;
+                PlayerNombre = name ?? "Anonymous";
                 Selection = "NumberPick";
 
                 LotteryProgram.Vendor.SellTicket(name, ticket);
