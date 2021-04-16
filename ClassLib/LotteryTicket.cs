@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLib
 {
-    public class LotteryTicket 
+    public class LotteryTicket
     {
         public int[] balls = new int[5];
         public int powerBall;
@@ -73,7 +73,7 @@ namespace ClassLib
             if (! isValidTicket(out string message))
             {
                 throw new ArgumentException(message);
-            }                
+            }
         }
         private  bool isValidTicket(out string message)
         {

@@ -55,16 +55,41 @@ namespace FrontEnd.Pages
 
                 logger.LogInformation("[{prefix}]: Winners for current period were successfully drawn.",
                     LogPrefix.AdminFunc);
+
+                var totalRev = GetRevenueForThisPeriod();
+                logger.LogInformation("[{prefix}]: A total of ${amount} was collected during this lottery period.",
+                    LogPrefix.Business, totalRev);
+
+                var totalProfit = GetProfitForThisPeriod();
+                logger.LogInformation("[{prefix}]: The total profit for this lottery period was ${amount}",
+                    LogPrefix.Business, totalProfit);
+
+                var totalLoss = totalRev - totalProfit;
+                logger.LogInformation("[{prefix}]: The total amount paid to winners of this period was ${amount}",
+                    LogPrefix.Business, totalLoss);
             }
             catch (Exception ex)
             {
                 logger.LogError("[{prefix}]: Failed to draw winners for current period. Reason: {ex}.",
                     LogPrefix.AdminFunc, ex);
 
-                return RedirectToPage();
+                return RedirectToPage("./Error");
             }
 
             return RedirectToPage();
+        }
+
+        private decimal GetRevenueForThisPeriod()
+        {
+            var totalTickets = LotteryProgram.Period.ResultsByWinLevel().Count();
+            return totalTickets * 2;
+        }
+
+        private decimal GetProfitForThisPeriod()
+        {
+            var rev = GetRevenueForThisPeriod();
+            var loss = LotteryProgram.Period.winningTicketsL.Sum(t => t.winAmtDollars);
+            return rev - loss;
         }
     }
 }

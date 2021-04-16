@@ -12,5 +12,6 @@ namespace ClassLib
         public const string AdminFunc = "Admin-Functionality";
         public const string Stats = "Statistics";
         public const string Startup = "Startup";
+        public const string Business = "Business";
     }
 }
