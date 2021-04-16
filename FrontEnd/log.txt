@@ -1,0 +1,27 @@
+04/16/2021 01:55:52 +00:00 Application Starting.
+04/16/2021 01:55:53 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+04/16/2021 01:55:53 +00:00 No XML encryptor configured. Key {28b64297-5140-4548-b626-476efa7cc789} may be persisted to storage in unencrypted form.
+04/16/2021 01:56:55 +00:00 Application Starting.
+04/16/2021 01:56:56 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+04/16/2021 01:58:18 +00:00 Application Starting.
+04/16/2021 01:58:19 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+04/16/2021 02:02:56 +00:00 Application Starting.
+04/16/2021 02:02:57 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+04/16/2021 02:06:26 +00:00 Application Starting.
+04/16/2021 02:06:27 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+04/16/2021 02:06:27 +00:00 No XML encryptor configured. Key {ea56b9d4-9abd-4fa8-9b19-707b91e53dd4} may be persisted to storage in unencrypted form.
+04/16/2021 02:06:49 +00:00 HTTP "GET" "/" responded 200 in 196.0765 ms
+04/16/2021 02:07:24 +00:00 Application Starting.
+04/16/2021 02:07:25 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+04/16/2021 02:08:16 +00:00 An exception was thrown while deserializing the token.
+Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException: The antiforgery token could not be decrypted.
+ ---> System.Security.Cryptography.CryptographicException: The key {87b303a7-b350-4381-aef5-b13371a83154} was not found in the key ring.
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.UnprotectCore(Byte[] protectedData, Boolean allowOperationsOnRevokedKeys, UnprotectStatus& status)
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.DangerousUnprotect(Byte[] protectedData, Boolean ignoreRevocationErrors, Boolean& requiresMigration, Boolean& wasRevoked)
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.Unprotect(Byte[] protectedData)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenSerializer.Deserialize(String serializedToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenSerializer.Deserialize(String serializedToken)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery.GetCookieTokenDoesNotThrow(HttpContext httpContext)
+04/16/2021 02:08:16 +00:00 HTTP "GET" "/" responded 200 in 289.2454 ms
+04/16/2021 02:08:17 +00:00 HTTP "GET" "/favicon.ico" responded 404 in 3.5330 ms
