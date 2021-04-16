@@ -7,12 +7,14 @@ using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Serilog;
 
 namespace FrontEnd.Pages
 {
     public class StoreModel : PageModel
     {
         private LotteryProgram lp;
+        private readonly ILogger logger;
         public IEnumerable<LotteryTicket> PurchasedTickets;
         [Required]
         public string PlayerNombre;
@@ -23,9 +25,10 @@ namespace FrontEnd.Pages
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurchase;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(IMemoryCache cache, LotteryProgram prog, ILogger logger)
         {
             lp = prog;
+            this.logger = logger;
         }
 
         public void OnGet()
@@ -37,6 +40,7 @@ namespace FrontEnd.Pages
         {
             PlayerNombre = name;
             Selection = "QuickPick";
+            logger.Information("{name} chose {Selection} on {date}", name, Selection, DateTime.Now);
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
@@ -44,6 +48,7 @@ namespace FrontEnd.Pages
         {
             PlayerNombre = name;
             Selection = "NumberPick";
+            logger.Information("{name} chose {Selection} on {date}", name, Selection, DateTime.Now);
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
         }
@@ -55,14 +60,17 @@ namespace FrontEnd.Pages
                 PlayerNombre = name;
                 Selection = "QuickPick";
                 NumQuickPicks = numTickets;
+                logger.Information("{name} chose {Selection}  to buy {num} on {date}", name, Selection,NumQuickPicks, DateTime.Now);
                 lp.lv.SellQuickTickets(name, numTickets);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                logger.Warning(e.ToString());
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
+            logger.Information("{count} of purchased tickets", PurchasedTickets.Count());
             return Page();
         }
 
@@ -81,6 +89,7 @@ namespace FrontEnd.Pages
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                logger.Warning(e.ToString());
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name); 
