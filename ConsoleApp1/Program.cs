@@ -43,7 +43,7 @@ namespace ConsoleApp1
             //Note: The OS is using almost 10G of memory for 65M tickets.
             //  on my laptop with 16G, I stop at 63M tickets and it can complete in 50 seconds
             //  If, I chose 90M tickets, I don't finish because I force the OS to swap memory fiercely
-            //      PREVENT MEMORY HOG - DON'T SELL TO MANY TICKETS for your memory
+            //      PREVENT MEMORY HOG - DON'T SELL TOO MANY TICKETS for your memory
         }
     }
 }
