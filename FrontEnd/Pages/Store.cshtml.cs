@@ -7,11 +7,13 @@ using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
     public class StoreModel : PageModel
     {
+        private readonly ILogger<IndexModel> _logger;
         private LotteryProgram lp;
         public IEnumerable<LotteryTicket> PurchasedTickets;
         [Required]
@@ -23,14 +25,15 @@ namespace FrontEnd.Pages
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurchase;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<IndexModel> logger)
         {
             lp = prog;
+            _logger = logger;
         }
 
         public void OnGet()
         {
-            
+            _logger.LogDebug("Store page has successfully loaded");
         }
 
         public IActionResult OnPostQuickPick(string name)
@@ -52,17 +55,23 @@ namespace FrontEnd.Pages
         {
             try
             {
+                _logger.LogInformation($"{name} Asked for a QuickPick");
+                
                 PlayerNombre = name;
                 Selection = "QuickPick";
                 NumQuickPicks = numTickets;
+                _logger.LogDebug($"{name} Asked for a QuickPick of {numTickets}");
                 lp.lv.SellQuickTickets(name, numTickets);
             }
             catch (Exception e)
             {
+                _logger.LogDebug("Quick Pick Purchase threw an exception");
                 Console.WriteLine(e.Message);
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
+            _logger.LogDebug($"{name} successfully got tickets");
+            _logger.LogInformation($"{name} successfully got tickets");
             return Page();
         }
 
@@ -80,6 +89,7 @@ namespace FrontEnd.Pages
             }
             catch (Exception e)
             {
+                _logger.LogDebug($"An error occured while posting tickets from a Quick Pick Purchase");
                 Console.WriteLine(e.Message);
                 return Page();
             }
