@@ -7,6 +7,8 @@ using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
+using SerilogTimings;
 
 namespace FrontEnd.Pages
 {
@@ -22,15 +24,17 @@ namespace FrontEnd.Pages
         public string Selection;
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurchase;
+        private readonly ILogger<StoreModel> _logger;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<StoreModel> logger)
         {
+            _logger = logger;
             lp = prog;
         }
 
         public void OnGet()
         {
-            
+            _logger.LogTrace("The Store page was loaded");
         }
 
         public IActionResult OnPostQuickPick(string name)
@@ -38,6 +42,7 @@ namespace FrontEnd.Pages
             PlayerNombre = name;
             Selection = "QuickPick";
             PurchasedTickets = lp.p.ResultsByPlayer(name);
+            _logger.LogTrace($"The customer {name} selected quick picks");
             return Page();
         }
         public IActionResult OnPostNumberPick(string name)
@@ -45,6 +50,7 @@ namespace FrontEnd.Pages
             PlayerNombre = name;
             Selection = "NumberPick";
             PurchasedTickets = lp.p.ResultsByPlayer(name);
+            _logger.LogTrace($"The customer {name} selected number picks");
             return Page();
         }
 
@@ -55,11 +61,16 @@ namespace FrontEnd.Pages
                 PlayerNombre = name;
                 Selection = "QuickPick";
                 NumQuickPicks = numTickets;
-                lp.lv.SellQuickTickets(name, numTickets);
+                using(Operation.Time($"Player {name} attempted to purchase {numTickets}"))
+                {
+                    lp.lv.SellQuickTickets(name, numTickets);
+                }
+                
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                _logger.LogError($"Player {name} was not able to purchase tickets with exception {e.Message}");
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
@@ -76,11 +87,16 @@ namespace FrontEnd.Pages
                 {
                     throw new Exception("Ticket length is not six.");
                 }
-                lp.lv.SellTicket(name, ticket);
+                using (Operation.Time($"Player {name} attempted to purchase ticket with own chosen numbers"))
+                {
+                    lp.lv.SellTicket(name, ticket);
+                }
+                    
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                _logger.LogWarning($"Player {name} was not able to purchase tickets with exception {e.Message}");
                 return Page();
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name); 

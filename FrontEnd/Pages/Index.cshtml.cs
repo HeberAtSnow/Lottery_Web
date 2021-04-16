@@ -24,12 +24,12 @@ namespace FrontEnd.Pages
 
         public IActionResult OnPostGoToStore()
         {
-            _logger.LogInformation("Page 2 was loaded");
+            
             return RedirectToPage("./Store");
         }
         public IActionResult OnPostGoToSettings()
         {
-            _logger.LogInformation("Page 2 was loaded");
+           
             return RedirectToPage("./Settings");
         }
     }
