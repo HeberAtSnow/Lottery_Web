@@ -1,33 +1,94 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
+
+
 
 namespace FrontEnd.Pages
 {
+
+
 
     public class SettingsModel : PageModel
     {
         LotteryProgram lp;
         //lotteryvendor.lotteryprogram
         //lotteryprogram has a lottery period
-        public SettingsModel(LotteryProgram lotteryProgram)
+        private readonly ILogger<IndexModel> _logger;
+
+
+
+        public SettingsModel(LotteryProgram lotteryProgram, ILogger<IndexModel> logger)
         {
             lp = lotteryProgram;
+            _logger = logger;
         }
         public void OnGet()
         {
+            _logger.LogInformation("Winlevel: {Winlevel} DollarAmount: {Dollaramount}", lp.p.WinningTicket.winLevel, lp.p.WinningTicket.winAmtDollars);
         }
 
-        public void OnPostResetLottery()
+
+
+        public IActionResult OnPostResetLottery()
         {
-            lp.ResetPeriod();
+            try
+            {
+                if (lp.ResetPeriod())
+                {
+                    _logger.LogInformation("{prefix}: {period} started", Prefixes.lotteryPeriod, lp.p.PeriodBeginTS);
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("{prefix}: unable to close {period} due to error: {message}", Prefixes.lotteryPeriod,lp.p.PeriodBeginTS,ex.Message);
+            }
+                return Page();
         }
         //draw winning numbers
+        public IActionResult OnPostDrawWinningNumbers()
+        {
+            try
+            {
+                if (lp.ClosePeriodSales())
+                {
+                    if (lp.p.DrawWinningTicket())
+                    {
+                        lp.p.ComputeWinners();
+                        _logger.LogInformation("{prefix}: sucessfully processed tickets for period: {period}", Prefixes.process, lp.p.PeriodBeginTS);
+                    }
+                    else
+                    {
+                        _logger.LogWarning("{prefix}: Attempted to draw winning tickets without closing current period: {period} while state was: {state}", Prefixes.process, lp.p.PeriodBeginTS, lp.p.SalesState);
+                    }
+                }
+                else
+                {
+                    _logger.LogWarning("{prefix}: Attempted to close period sales for period: {period} while state was: {state}", Prefixes.process, lp.p.PeriodBeginTS, lp.p.SalesState);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("{prefix}: unable to compute winners for period: {period} due to error: {message}", Prefixes.process, lp.p.PeriodBeginTS, ex.Message);
+            }
+            _logger.LogInformation("{prefix}: period: {period} contained {winningtickets} winning tickets", Prefixes.process, lp.p.PeriodBeginTS,lp.p.winningTicketsL.Count);
+            return Page();
+        }
         //current lottery results
+        public IActionResult OnPostGoToResults()
+        {
+            return RedirectToPage("./LotteryResults");
+        }
         //all lottery statistics
+        public IActionResult OnPostLotteryStatistics()
+        {
+            return Page();
+        }
     }
 }

@@ -7,6 +7,7 @@ using ClassLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
 {
@@ -22,10 +23,12 @@ namespace FrontEnd.Pages
         public string Selection;
         public int[] LastTicket => _lastTicket ?? (_lastTicket = new int[6]);
         public bool RecentPurchase => recentPurchase;
+        private readonly ILogger<IndexModel> _logger;
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog)
+        public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<IndexModel> logger)
         {
             lp = prog;
+            _logger = logger;
         }
 
         public void OnGet()
@@ -55,12 +58,23 @@ namespace FrontEnd.Pages
                 PlayerNombre = name;
                 Selection = "QuickPick";
                 NumQuickPicks = numTickets;
-                lp.lv.SellQuickTickets(name, numTickets);
+                if(NumQuickPicks > 0)
+                {
+                    if (lp.lv.SellQuickTickets(name, numTickets))
+                    {
+                        _logger.LogInformation("{prefix}: {player} bought {number} ticket(s) of type: {type}", Prefixes.purchase, PlayerNombre, NumQuickPicks, Selection);
+                    }
+                }
+                else
+                {
+                    _logger.LogWarning("{prefix}: {player} attempted to buy {number} ticket(s) of type: {type}", Prefixes.purchase, PlayerNombre, NumQuickPicks, Selection);
+                    return Page();
+                }
+
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
-                return Page();
+                _logger.LogError("{prefix}: {player} unable to purchase tickets due to error: {message}", Prefixes.purchase, PlayerNombre, ex.Message);
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name);
             return Page();
@@ -76,12 +90,13 @@ namespace FrontEnd.Pages
                 {
                     throw new Exception("Ticket length is not six.");
                 }
-                lp.lv.SellTicket(name, ticket);
+                var TicketLog = lp.lv.SellTicket(name, ticket);
+
+                _logger.LogInformation("{prefix}: {player} bought {number} ticket(s) of type: {type}", Prefixes.purchase, TicketLog.Player, 1 , Selection);            
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
-                return Page();
+                _logger.LogError("{prefix}: {player} unable to purchase tickets due to error: {message}", Prefixes.purchase, PlayerNombre, ex.Message);
             }
             PurchasedTickets = lp.p.ResultsByPlayer(name); 
             return Page();
