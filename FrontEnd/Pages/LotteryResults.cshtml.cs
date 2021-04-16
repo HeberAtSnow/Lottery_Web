@@ -19,13 +19,14 @@ namespace FrontEnd.Pages
         
         public IEnumerable<LotteryTicket> WinLotteryTickets;
         public IEnumerable<TicketSale> CurrPeriodWinTickets;
+        private readonly LotteryStatistics lotteryStatistics;
 
         public IEnumerable<TicketSale> ticketSales;
         public IEnumerable<(int periodid, DateTime started)> LotteryPeriods;
 
-        public LotteryResultsModel(LotteryProgram lotteryProgram, LotteryStatistics lotteryStatistics, ILogger<LotteryResultsModel> logger)
+        public LotteryResultsModel(LotteryProgram lotteryProgram, LotteryStatistics _lotteryStatistics, ILogger<LotteryResultsModel> logger)
         {
-        
+            lotteryStatistics = _lotteryStatistics;
             lp = lotteryProgram;
             _logger = logger;
         }
@@ -39,7 +40,7 @@ namespace FrontEnd.Pages
         {
 
             _logger.LogInformation("clicked Lottery Results");
-
+            var startTime = DateTime.Now;
 
             WinLotteryTickets = lp.p.ResultsByWinLevel();
 
@@ -54,7 +55,7 @@ namespace FrontEnd.Pages
                 _logger.LogInformation("Winner Lottery count: {count}", WinLotteryTickets.Count());
             }
 
-           /* startTime = DateTime.Now;
+            startTime = DateTime.Now;
 
             LotteryPeriods = lotteryStatistics.DBPeriodsInHistory();
             var list = LotteryPeriods.ToList();
@@ -70,7 +71,7 @@ namespace FrontEnd.Pages
             else
             {
                 _logger.LogInformation("Winner Lottery count is: {count} in period with id {periodid}", CurrPeriodWinTickets.Count(), list.Last().periodid);
-            }*/
+            }
 
         }
     }

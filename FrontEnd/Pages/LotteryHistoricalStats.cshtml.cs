@@ -16,7 +16,7 @@ namespace FrontEnd.Pages
 
         private readonly ILogger<LotteryHistoricalStatsModel> _logger;
 
-
+        public string ResetErrorMessage = "";
 
         public LotteryHistoricalStatsModel(LotteryStatistics lotteryStatistics, ILogger<LotteryHistoricalStatsModel> logger)
         {
@@ -25,8 +25,29 @@ namespace FrontEnd.Pages
         }
         public void OnPost()
         {
-            _logger.LogInformation("LotteryHistoricalStats page was called");
-            Sales = lotteryStats.DBStatsAllPeriods();
+            _logger.LogInformation("Clicked button to get all lottery results");
+            try
+            {
+                var startTime = DateTime.Now;
+                Sales = lotteryStats.DBStatsAllPeriods();
+
+                _logger.LogInformation("To get the all stats in all periods took {elapsed}", DateTime.Now - startTime);
+
+                if (Sales == null)
+                {
+                    _logger.LogWarning("There is not ticket sale period history");
+                }
+                else
+                {
+                    _logger.LogInformation("website returned {count} ticker sale periods", Sales.Count());
+                }
+            }
+            catch
+            {
+                ResetErrorMessage = "failed to get all periods history";
+                _logger.LogWarning(ResetErrorMessage);
+            }
+
         }
     }
 }
