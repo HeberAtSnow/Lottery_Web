@@ -57,15 +57,15 @@ namespace FrontEnd.Pages
                     LogPrefix.AdminFunc);
 
                 var totalRev = GetRevenueForThisPeriod();
-                logger.LogInformation("[{prefix}]: A total of ${amount} was collected during this lottery period.",
+                logger.LogInformation("[{prefix}]: The total revenue for this period was ${totalRev}",
                     LogPrefix.Business, totalRev);
 
                 var totalProfit = GetProfitForThisPeriod();
-                logger.LogInformation("[{prefix}]: The total profit for this lottery period was ${amount}",
+                logger.LogInformation("[{prefix}]: The total profit for this lottery period was ${totalProfit}",
                     LogPrefix.Business, totalProfit);
 
                 var totalLoss = totalRev - totalProfit;
-                logger.LogInformation("[{prefix}]: The total amount paid to winners of this period was ${amount}",
+                logger.LogInformation("[{prefix}]: The total amount paid to winners of this period was ${totalLoss}",
                     LogPrefix.Business, totalLoss);
             }
             catch (Exception ex)

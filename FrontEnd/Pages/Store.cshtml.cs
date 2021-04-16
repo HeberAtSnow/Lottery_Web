@@ -66,8 +66,8 @@ namespace FrontEnd.Pages
                 NumQuickPicks = numTickets;
                 LotteryProgram.Vendor.SellQuickTickets(name, numTickets);
 
-                logger.LogDebug("[{prefix}]: Successfully sold {num} quick pick tickets to user {name}.",
-                    LogPrefix.StoreFunc, numTickets, name);
+                logger.LogDebug("[{prefix}]: Successfully sold {ticketsSold} {type} tickets to user {name}.",
+                    LogPrefix.StoreFunc, numTickets, Selection, name);
             }
             catch (Exception ex)
             {
@@ -89,8 +89,8 @@ namespace FrontEnd.Pages
 
                 LotteryProgram.Vendor.SellTicket(name, ticket);
 
-                logger.LogDebug("[{prefix}]: Successfully sold 1 number pick ticket to user {user}.",
-                    LogPrefix.StoreFunc, name);
+                logger.LogDebug("[{prefix}]: Successfully sold {ticketsSold} {type} ticket to user {user}.",
+                    LogPrefix.StoreFunc, 1, Selection, name);
             }
             catch (Exception ex)
             {
