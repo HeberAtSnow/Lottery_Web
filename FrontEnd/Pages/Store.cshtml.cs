@@ -40,7 +40,8 @@ namespace FrontEnd.Pages
             Selection = "QuickPick";
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
 
-            logger.LogDebug("[{prefix}]: Retrieving {num} tickets for user {name}.");
+            logger.LogDebug("[{prefix}]: Retrieving {num} tickets for user {name}.",
+                LogPrefix.StoreFunc, PurchasedTickets.Count(), name);
 
             return Page();
         }
@@ -49,6 +50,10 @@ namespace FrontEnd.Pages
             PlayerNombre = name ?? "Anonymous";
             Selection = "NumberPick";
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
+
+            logger.LogDebug("[{prefix}]: Retrieving {num} tickets for user {name}.",
+                LogPrefix.StoreFunc, PurchasedTickets.Count(), name);
+
             return Page();
         }
 
