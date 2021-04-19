@@ -46,8 +46,8 @@ namespace FrontEnd.Pages
             Selection = "QuickPick";
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
 
-            logger.LogDebug("[{prefix}]: Retrieving {num} tickets for user {name}.",
-                LogPrefix.StoreFunc, PurchasedTickets.Count(), name);
+            LoggerStuff.LogDebug(logger, minLogLevel,
+                $"[{LogPrefix.StoreFunc}]: Retrieving {PurchasedTickets.Count()} tickets for user {name}.");
 
             return Page();
         }
@@ -57,8 +57,8 @@ namespace FrontEnd.Pages
             Selection = "NumberPick";
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
 
-            logger.LogDebug("[{prefix}]: Retrieving {num} tickets for user {name}.",
-                LogPrefix.StoreFunc, PurchasedTickets.Count(), name);
+            LoggerStuff.LogDebug(logger, minLogLevel,
+                $"[{LogPrefix.StoreFunc}]: Retrieving {PurchasedTickets.Count()} tickets for user {name}.");
 
             return Page();
         }
@@ -108,38 +108,6 @@ namespace FrontEnd.Pages
 
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
             return Page();
-        }
-
-        private void logDebug(string message)
-        {
-            if (minLogLevel <= (int)LogLevel.Debug)
-            {
-                logger.LogDebug(message);
-            }
-        }
-
-        private void logInformation(string message)
-        {
-            if (minLogLevel <= (int)LogLevel.Information)
-            {
-                logger.LogInformation(message);
-            }
-        }
-
-        private void logWarning(string message, Exception ex = null)
-        {
-            if (minLogLevel <= (int)LogLevel.Warning)
-            {
-                logger.LogWarning(message, ex);
-            }
-        }
-
-        private void logError(string message, Exception ex = null)
-        {
-            if (minLogLevel <= (int)LogLevel.Error)
-            {
-                logger.LogError(message, ex);
-            }
         }
     }
 }
