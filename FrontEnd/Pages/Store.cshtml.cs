@@ -14,6 +14,7 @@ namespace FrontEnd.Pages
     public class StoreModel : PageModel
     {
         private readonly ILogger<StoreModel> _logger;
+        private readonly ILoggingService _loggingService;
 
         private LotteryProgram lp;
         public IEnumerable<LotteryTicket> PurchasedTickets;
@@ -27,10 +28,12 @@ namespace FrontEnd.Pages
         public bool RecentPurchase => recentPurchase;
 
 
-        public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<StoreModel> logger)
+        public StoreModel(IMemoryCache cache,LotteryProgram prog, ILogger<StoreModel> logger, ILoggingService loggingSerice)
         {
             lp = prog;
             _logger = logger;
+            _loggingService = loggingSerice;
+            _loggingService.SetLoggingLevel("Warning");
         }
 
 
@@ -43,7 +46,6 @@ namespace FrontEnd.Pages
         public void OnGet()
         {
             _logger.LogInformation("You are in the Store page");
-
         }
 
         public IActionResult OnPostQuickPick(string name)

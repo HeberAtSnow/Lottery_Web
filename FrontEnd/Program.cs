@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Core;
 
 namespace FrontEnd
 {
@@ -19,9 +20,15 @@ namespace FrontEnd
                .AddJsonFile("appsettings.json")
                .Build();
 
+
+            //LoggingLevelSwitch loggingLevelSwitch = new LoggingLevelSwitch();
+
+
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .CreateLogger();
+                    .ReadFrom.Configuration(configuration)
+                    .MinimumLevel.ControlledBy(Startup.loggingLevelSwitch)
+                    .Enrich.FromLogContext()
+                    .CreateLogger();
             try
             {
                 Log.Information("Application Starting up");
