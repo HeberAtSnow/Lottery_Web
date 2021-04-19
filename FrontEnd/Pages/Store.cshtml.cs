@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using ClassLib;
+using FrontEnd.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace FrontEnd.Pages
@@ -15,6 +17,8 @@ namespace FrontEnd.Pages
     {
         private readonly LotteryProgram LotteryProgram;
         private readonly ILogger<StoreModel> logger;
+        private readonly IConfiguration configuration;
+        private readonly int minLogLevel;
 
         public IEnumerable<LotteryTicket> PurchasedTickets;
 
@@ -23,10 +27,12 @@ namespace FrontEnd.Pages
         public int NumQuickPicks;
         public string Selection;
 
-        public StoreModel(LotteryProgram prog, ILogger<StoreModel> logger)
+        public StoreModel(LotteryProgram prog, ILogger<StoreModel> logger, IConfiguration configuration)
         {
             LotteryProgram = prog;
             this.logger = logger;
+            this.configuration = configuration;
+            minLogLevel = (int)Enum.Parse(typeof(LogLevel), configuration[SourceContext.Store] ?? "None");
         }
 
         public void OnGet()
@@ -102,6 +108,38 @@ namespace FrontEnd.Pages
 
             PurchasedTickets = LotteryProgram.Period.ResultsByPlayer(name);
             return Page();
+        }
+
+        private void logDebug(string message)
+        {
+            if (minLogLevel <= (int)LogLevel.Debug)
+            {
+                logger.LogDebug(message);
+            }
+        }
+
+        private void logInformation(string message)
+        {
+            if (minLogLevel <= (int)LogLevel.Information)
+            {
+                logger.LogInformation(message);
+            }
+        }
+
+        private void logWarning(string message, Exception ex = null)
+        {
+            if (minLogLevel <= (int)LogLevel.Warning)
+            {
+                logger.LogWarning(message, ex);
+            }
+        }
+
+        private void logError(string message, Exception ex = null)
+        {
+            if (minLogLevel <= (int)LogLevel.Error)
+            {
+                logger.LogError(message, ex);
+            }
         }
     }
 }
