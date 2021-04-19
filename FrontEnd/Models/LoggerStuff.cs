@@ -28,7 +28,7 @@ namespace FrontEnd.Models
         {
             if (minLogLevel <= (int)LogLevel.Warning)
             {
-                logger.LogWarning(message, ex);
+                logger.LogWarning(ex, message);
             }
         }
 
@@ -36,7 +36,7 @@ namespace FrontEnd.Models
         {
             if (minLogLevel <= (int)LogLevel.Error)
             {
-                logger.LogError(message, ex);
+                logger.LogError(ex, message);
             }
         }
     }

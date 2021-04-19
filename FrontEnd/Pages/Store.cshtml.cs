@@ -72,13 +72,14 @@ namespace FrontEnd.Pages
                 NumQuickPicks = numTickets;
                 LotteryProgram.Vendor.SellQuickTickets(name, numTickets);
 
-                logger.LogDebug("[{prefix}]: Successfully sold {ticketsSold} {type} tickets to user {name}.",
-                    LogPrefix.StoreFunc, numTickets, Selection, name);
+                LoggerStuff.LogDebug(logger, minLogLevel,
+                    $"[{LogPrefix.StoreFunc}]: Successfully sold {numTickets} {Selection} tickets to user {name}.");
             }
             catch (Exception ex)
             {
-                logger.LogWarning("[{prefix}]: Failed to sell tickets to user {name}. Reason: {ex}.",
-                    LogPrefix.StoreFunc, name, ex);
+                LoggerStuff.LogWarning(logger, minLogLevel,
+                    $"[{LogPrefix.StoreFunc}]: Failed to sell tickets to user {name}.",
+                    ex);
 
                 return Page();
             }
@@ -95,13 +96,14 @@ namespace FrontEnd.Pages
 
                 LotteryProgram.Vendor.SellTicket(name, ticket);
 
-                logger.LogDebug("[{prefix}]: Successfully sold {ticketsSold} {type} ticket to user {user}.",
-                    LogPrefix.StoreFunc, 1, Selection, name);
+                LoggerStuff.LogDebug(logger, minLogLevel,
+                    $"[{LogPrefix.StoreFunc}]: Successfully sold {1} {Selection} tickets to user {name}.");
             }
             catch (Exception ex)
             {
-                logger.LogWarning("[{prefix}]: Failed to sell tickets to user {name}. Reason: {ex}.",
-                    LogPrefix.StoreFunc, name, ex);
+                LoggerStuff.LogWarning(logger, minLogLevel,
+                    $"[{LogPrefix.StoreFunc}]: Failed to sell tickets to user {name}.",
+                    ex);
 
                 return Page();
             }
