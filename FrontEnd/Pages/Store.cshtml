@@ -13,9 +13,14 @@
 <body>
     <header>
 
-            <h1>
-                Welcome to the Ticket Store!
-            </h1>
+        <h1>
+            Welcome to the Ticket Store!
+        </h1>
+
+        <br />
+
+        <button type="submit" class="btn reset"><a asp-page="/Index">Home</a></button>
+        <br />
 
     </header>
     <main>
@@ -75,7 +80,7 @@
                         <input name="numTickets" type="number" min="0" max="1000" value="@Model.NumQuickPicks" />
                         <input type="hidden" value="@Model.PlayerNombre" name="name" />
                         <br />
-                        <button type="submit">Give me them Tickets!</button>
+                        <button type="submit">Give me the Tickets!</button>
                     </form>
                 </div>
             }
